@@ -1,0 +1,13 @@
+[project]
+name = "kimura"
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = [
+    "pandas",
+    "requests",
+]
+
+[project.scripts]
+import-all = "scripts.import_all:main"
+fetch = "scripts.fetch:main"
+build-dashboard = "scripts.build_dashboard:main"

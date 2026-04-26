@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2083 ETF モニタリング</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="ETF監視">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <meta name="theme-color" content="#1a1a2e">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f5f7fa; color: #222; }
+
+    header {
+      background: #1a1a2e;
+      color: #fff;
+      padding: 16px 24px;
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+    }
+    header h1 { font-size: 1.2rem; font-weight: 700; }
+    header .meta { font-size: 0.8rem; color: #aaa; }
+
+    main { max-width: 1200px; margin: 0 auto; padding: 24px 16px; display: grid; gap: 24px; }
+
+    .card {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      padding: 20px 24px;
+    }
+    .card h2 { font-size: 1rem; font-weight: 600; margin-bottom: 16px; color: #333; }
+
+    /* 日付セレクタ */
+    .date-selector { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .date-selector label { font-size: 0.85rem; color: #555; }
+    .date-selector select {
+      padding: 6px 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      background: #fafafa;
+    }
+
+    /* 変動サマリ */
+    .change-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 600px) { .change-grid { grid-template-columns: 1fr; } }
+    .change-section h3 { font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; padding: 4px 8px; border-radius: 4px; }
+    .tag-new    h3 { background: #e8f5e9; color: #2e7d32; }
+    .tag-remove h3 { background: #fce4ec; color: #c62828; }
+    .tag-up     h3 { background: #e3f2fd; color: #1565c0; }
+    .tag-down   h3 { background: #fff3e0; color: #e65100; }
+    .change-list { list-style: none; }
+    .change-list li {
+      font-size: 0.82rem;
+      padding: 4px 0;
+      border-bottom: 1px solid #f0f0f0;
+      display: flex;
+      justify-content: space-between;
+    }
+    .change-list li:last-child { border-bottom: none; }
+    .ticker { font-weight: 600; color: #555; min-width: 50px; }
+    .delta-pos { color: #1565c0; }
+    .delta-neg { color: #e65100; }
+    .empty { color: #bbb; font-size: 0.8rem; font-style: italic; }
+
+    /* グラフ */
+    .chart-container { position: relative; height: 380px; }
+
+    /* テーブル */
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+    thead th {
+      text-align: left;
+      padding: 8px 12px;
+      background: #f0f4f8;
+      color: #555;
+      font-weight: 600;
+      position: sticky;
+      top: 0;
+    }
+    tbody tr:hover { background: #f9fafb; }
+    tbody td { padding: 7px 12px; border-bottom: 1px solid #f0f0f0; }
+    .badge-new {
+      background: #e8f5e9;
+      color: #2e7d32;
+      font-size: 0.7rem;
+      padding: 1px 5px;
+      border-radius: 3px;
+      margin-left: 4px;
+    }
+
+    #no-data { text-align: center; padding: 60px; color: #999; }
+    .subtitle { font-size: 0.75rem; font-weight: 400; color: #888; margin-left: 8px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>2083 NEXT FUNDS Japan Growth Equity Active ETF</h1>
+    <span class="meta" id="generated-at"></span>
+  </header>
+
+  <main id="app">
+    <div id="no-data">データを読み込み中...</div>
+  </main>
+
+  <script src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js');
+    }
+  </script>
+</body>
+</html>
