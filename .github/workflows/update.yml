@@ -1,0 +1,38 @@
+name: ETF Data Update
+
+on:
+  schedule:
+    - cron: '0 23 * * 0-4'  # 日本時間 毎朝8時（UTC 23時、月〜金）
+  workflow_dispatch:          # 手動実行ボタン
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install uv
+        run: pip install uv
+
+      - name: Install dependencies
+        run: uv sync
+        working-directory: .
+
+      - name: Fetch latest data & rebuild dashboard
+        run: uv run python -m scripts.fetch
+        working-directory: .
+
+      - name: Commit & push if updated
+        run: |
+          git config user.email "github-actions@github.com"
+          git config user.name "github-actions"
+          git add app/data/dashboard.json db/etf.db data/raw/
+          git diff --cached --quiet || git commit -m "update ETF data $(date +'%Y-%m-%d')"
+          git push
