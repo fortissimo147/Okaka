@@ -1,5 +1,6 @@
 let DATA = null;
 let chart = null;
+let tickerChart = null;
 
 const COLORS = [
   "#2196F3","#E91E63","#4CAF50","#FF9800","#9C27B0",
@@ -346,16 +347,41 @@ function showTickerData(ticker) {
     return;
   }
 
-  const rows = entry.series.filter(s => s.shares != null || s.ratio != null);
+  const allSeries = entry.series;
+  const rows = allSeries.filter(s => s.shares != null);
   const hasPrice = rows.some(s => s.price != null);
 
+  // 売買イベント判定
+  const events = [];
+  for (let i = 1; i < allSeries.length; i++) {
+    const prev = allSeries[i - 1];
+    const curr = allSeries[i];
+    const ps = prev.shares, cs = curr.shares;
+    if ((ps == null || ps === 0) && cs > 0) {
+      events.push({ date: curr.date, type: 'new',      icon: 'N', color: '#2e7d32',
+        delta: cs,       pct: null,               price: curr.price, amount: curr.price ? cs * curr.price : null });
+    } else if (ps > 0 && cs != null && cs > ps) {
+      const d = cs - ps;
+      events.push({ date: curr.date, type: 'buyup',    icon: '↑', color: '#1565c0',
+        delta: d,        pct: d / ps * 100,        price: curr.price, amount: curr.price ? d * curr.price : null });
+    } else if (ps > 0 && cs != null && cs > 0 && cs < ps) {
+      const d = cs - ps;
+      events.push({ date: curr.date, type: 'sell',     icon: '↓', color: '#e65100',
+        delta: d,        pct: d / ps * 100,        price: curr.price, amount: curr.price ? Math.abs(d) * curr.price : null });
+    } else if (ps > 0 && (cs == null || cs === 0)) {
+      events.push({ date: prev.date, type: 'fullsell', icon: '✕', color: '#c62828',
+        delta: -ps,      pct: -100,               price: prev.price, amount: prev.price ? ps * prev.price : null });
+    }
+  }
+
+  // テーブル行生成
   const bodyRows = rows.map((s, i) => {
     const prev = i > 0 ? rows[i - 1] : null;
     const dShares = (s.shares != null && prev?.shares != null) ? s.shares - prev.shares : null;
     const dRatio  = (s.ratio  != null && prev?.ratio  != null) ? s.ratio  - prev.ratio  : null;
     const cls = dShares == null ? "" : dShares > 0 ? "delta-pos" : dShares < 0 ? "delta-neg" : "";
-    const fmtD = (v, decimals) => v == null ? "—"
-      : `<span class="${cls}">${v >= 0 ? "+" : ""}${decimals === 0 ? v.toLocaleString() : v.toFixed(decimals)}</span>`;
+    const fmtD = (v, dec) => v == null ? "—"
+      : `<span class="${cls}">${v >= 0 ? "+" : ""}${dec === 0 ? v.toLocaleString() : v.toFixed(dec)}</span>`;
     return `<tr>
       <td>${s.date}</td>
       <td>${s.shares != null ? s.shares.toLocaleString() : "—"}</td>
@@ -371,6 +397,9 @@ function showTickerData(ticker) {
       <span class="ticker" style="font-size:1.1rem">${ticker}</span>
       <span style="margin-left:8px;font-size:1rem;color:#333">${entry.name}</span>
     </div>
+    <div style="position:relative;height:260px;margin-bottom:44px">
+      <canvas id="ticker-chart"></canvas>
+    </div>
     <div class="table-wrap"><table>
       <thead><tr>
         <th>日付</th><th>保有株数</th><th>保有比率 (%)</th>
@@ -379,6 +408,108 @@ function showTickerData(ticker) {
       </tr></thead>
       <tbody>${bodyRows}</tbody>
     </table></div>`;
+
+  // Chart.js カスタムプラグイン
+  const labels = allSeries.map(s => s.date);
+  const tradeMarkerPlugin = {
+    id: 'tradeMarkers',
+    afterDraw(chart) {
+      const ctx = chart.ctx;
+      const xAxis = chart.scales.x;
+      const yAxis = chart.scales.y;
+      const bottomY = yAxis.bottom;
+      const topY = yAxis.top;
+      events.forEach(ev => {
+        const xIdx = labels.indexOf(ev.date);
+        if (xIdx < 0) return;
+        const x = xAxis.getPixelForTick(xIdx);
+        ctx.save();
+        ctx.setLineDash([4, 4]);
+        ctx.strokeStyle = ev.color + '88';
+        ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(x, topY); ctx.lineTo(x, bottomY); ctx.stroke();
+        const iconY = bottomY + 20;
+        ev.iconX = x; ev.iconY = iconY;
+        ctx.setLineDash([]);
+        ctx.fillStyle = ev.color;
+        ctx.beginPath(); ctx.arc(x, iconY, 10, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = '#fff';
+        ctx.font = 'bold 11px sans-serif';
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText(ev.icon, x, iconY);
+        ctx.restore();
+      });
+    }
+  };
+
+  if (tickerChart) tickerChart.destroy();
+  const canvas = document.getElementById("ticker-chart");
+  const TYPE_LABEL = { new: '新規買い入れ', buyup: '買い増し', sell: '売却', fullsell: '全売却' };
+  tickerChart = new Chart(canvas, {
+    type: "line",
+    data: {
+      labels,
+      datasets: [{
+        label: `${ticker} ${entry.name}`,
+        data: allSeries.map(s => s.ratio),
+        borderColor: "#1565c0",
+        backgroundColor: "rgba(21,101,192,0.08)",
+        tension: 0.2,
+        pointRadius: 3,
+        fill: true,
+        spanGaps: true,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      layout: { padding: { bottom: 40 } },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            afterBody(items) {
+              if (!items.length) return [];
+              const ev = events.find(e => e.date === items[0].label);
+              if (!ev) return [];
+              const sign = ev.delta >= 0 ? '+' : '';
+              const pctStr = ev.pct != null ? ` (${ev.pct >= 0 ? '+' : ''}${ev.pct.toFixed(1)}%)` : '';
+              const lines = [`【${TYPE_LABEL[ev.type]}】`, `${sign}${ev.delta.toLocaleString()}株${pctStr}`];
+              if (ev.amount != null) lines.push(`売買金額目安: ¥${Math.round(ev.amount).toLocaleString()}`);
+              return lines;
+            }
+          }
+        }
+      },
+      scales: {
+        x: { ticks: { maxTicksLimit: 10, font: { size: 10 } } },
+        y: { title: { display: true, text: '保有比率 (%)' }, ticks: { font: { size: 10 } } }
+      }
+    },
+    plugins: [tradeMarkerPlugin]
+  });
+
+  // アイコンホバー → カスタムツールチップ
+  const tooltip = document.getElementById("trade-tooltip");
+  canvas.addEventListener('mousemove', e => {
+    const rect = canvas.getBoundingClientRect();
+    const mx = e.clientX - rect.left, my = e.clientY - rect.top;
+    let found = false;
+    events.forEach(ev => {
+      if (ev.iconX == null) return;
+      if (Math.sqrt((mx - ev.iconX) ** 2 + (my - ev.iconY) ** 2) < 12) {
+        found = true;
+        const sign = ev.delta >= 0 ? '+' : '';
+        const pctStr = ev.pct != null ? ` (${ev.pct >= 0 ? '+' : ''}${ev.pct.toFixed(1)}%)` : '';
+        tooltip.innerHTML = `📅 ${ev.date}<br>━━━━━━━━━━<br>${ev.icon} ${TYPE_LABEL[ev.type]}<br>${sign}${ev.delta.toLocaleString()}株${pctStr}${ev.amount != null ? `<br>売買金額: ¥${Math.round(ev.amount).toLocaleString()}` : ''}`;
+        tooltip.style.display = 'block';
+        tooltip.style.left = (e.clientX + 16) + 'px';
+        tooltip.style.top = (e.clientY - 8) + 'px';
+      }
+    });
+    if (!found) tooltip.style.display = 'none';
+  });
+  canvas.addEventListener('mouseleave', () => { tooltip.style.display = 'none'; });
 }
 
 load();

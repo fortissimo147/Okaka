@@ -154,9 +154,25 @@
     }
     .suggestion-item:hover { background: #f0f4f8; }
     .suggestion-ticker { font-weight: 600; color: #555; min-width: 50px; }
+
+    #trade-tooltip {
+      position: fixed;
+      background: #1a1a2e;
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      pointer-events: none;
+      display: none;
+      z-index: 999;
+      line-height: 1.8;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      max-width: 220px;
+    }
   </style>
 </head>
 <body>
+  <div id="trade-tooltip"></div>
   <nav class="sidebar">
     <a href="#section-changes">銘柄変動サマリ</a>
     <a href="#section-timeseries">時系列チャート</a>
