@@ -43,9 +43,28 @@ def fetch_missing_names(tickers: list[str], existing: dict) -> dict:
     return result
 
 
+def _maybe_refresh_names():
+    """company_names.jsonの最終更新が7日以上前なら東証CSVを再取得する。"""
+    import time
+    from scripts.fetch_names import fetch_tse_names, update_names_cache
+    if NAMES_FILE.exists():
+        age_days = (time.time() - NAMES_FILE.stat().st_mtime) / 86400
+        if age_days < 7:
+            return
+        print(f"company_names.json が {age_days:.0f}日前のため東証CSVを再取得します...")
+    else:
+        print("company_names.json が存在しないため東証CSVを取得します...")
+    try:
+        tse_names = fetch_tse_names()
+        update_names_cache(tse_names)
+    except Exception as e:
+        print(f"  東証CSV取得失敗（スキップ）: {e}")
+
+
 def build():
     init_db()
     APP_DATA.mkdir(parents=True, exist_ok=True)
+    _maybe_refresh_names()
 
     with get_conn() as conn:
         dates = [
@@ -56,7 +75,7 @@ def build():
 
         if not dates:
             out = {"dates": [], "changes": [], "timeseries": [], "latest": []}
-            (APP_DATA / "dashboard.json").write_text(json.dumps(out, ensure_ascii=False, indent=2))
+            (APP_DATA / "dashboard.json").write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")
             return
 
         # 全データ取得
@@ -309,7 +328,7 @@ def build():
         "trading_analysis": trading_analysis,
     }
 
-    (APP_DATA / "dashboard.json").write_text(json.dumps(out, ensure_ascii=False, indent=2))
+    (APP_DATA / "dashboard.json").write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"dashboard.json を生成しました ({len(dates)} 日分, {len(timeseries)} 銘柄の時系列)")
 
     _build_standalone(out)

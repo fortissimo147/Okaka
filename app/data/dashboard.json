@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-03T01:46:04.936699",
+  "generated_at": "2026-05-03T01:54:54.622763",
   "dates": [
     "2026-02-24",
     "2026-03-06",
@@ -35,202 +35,202 @@
       "new": [
         {
           "ticker": "1605",
-          "name": "Inpex Corporation",
+          "name": "ＩＮＰＥＸ",
           "ratio": 1.1163
         }
       ],
       "removed": [
         {
           "ticker": "3110",
-          "name": "Nitto Boseki Co., Ltd."
+          "name": "日東紡績"
         }
       ],
       "increased": [
         {
           "ticker": "8306",
-          "name": "Mitsubishi UFJ Financial Group, Inc.",
+          "name": "三菱ＵＦＪフィナンシャル・グループ",
           "delta": 970.0,
           "shares": 10700.0,
           "ratio": 1.061
         },
         {
           "ticker": "9697",
-          "name": "Capcom Co., Ltd.",
+          "name": "カプコン",
           "delta": 725.0,
           "shares": 6600.0,
           "ratio": 0.7901
         },
         {
           "ticker": "4063",
-          "name": "Shin-Etsu Chemical Co., Ltd.",
+          "name": "信越化学工業",
           "delta": 545.45,
           "shares": 7100.0,
           "ratio": 1.6026
         },
         {
           "ticker": "4686",
-          "name": "JustSystems Corporation",
+          "name": "ジャストシステム",
           "delta": 226.67,
           "shares": 4900.0,
           "ratio": 0.6084
         },
         {
           "ticker": "6951",
-          "name": "JEOL Ltd.",
+          "name": "日本電子",
           "delta": 223.81,
           "shares": 6800.0,
           "ratio": 1.5869
         },
         {
           "ticker": "5631",
-          "name": "The Japan Steel Works, Ltd.",
+          "name": "日本製鋼所",
           "delta": 125.0,
           "shares": 7200.0,
           "ratio": 2.4357
         },
         {
           "ticker": "6750",
-          "name": "Elecom Co., Ltd.",
+          "name": "エレコム",
           "delta": 110.2,
           "shares": 10300.0,
           "ratio": 0.649
         },
         {
           "ticker": "4684",
-          "name": "OBIC Co.,Ltd.",
+          "name": "オービック",
           "delta": 100.0,
           "shares": 7000.0,
           "ratio": 1.0258
         },
         {
           "ticker": "6981",
-          "name": "Murata Manufacturing Co., Ltd.",
+          "name": "村田製作所",
           "delta": 77.63,
           "shares": 27000.0,
           "ratio": 3.7276
         },
         {
           "ticker": "5991",
-          "name": "NHK Spring Co., Ltd.",
+          "name": "日本発條",
           "delta": 54.9,
           "shares": 7900.0,
           "ratio": 0.7931
         },
         {
           "ticker": "2001",
-          "name": "Nippn Corporation",
+          "name": "ニップン",
           "delta": 35.06,
           "shares": 10400.0,
           "ratio": 1.0467
         },
         {
           "ticker": "3064",
-          "name": "MonotaRO Co., Ltd.",
+          "name": "ＭｏｎｏｔａＲＯ",
           "delta": 33.5,
           "shares": 26700.0,
           "ratio": 1.8586
         },
         {
           "ticker": "9983",
-          "name": "Fast Retailing Co., Ltd.",
+          "name": "ファーストリテイリング",
           "delta": 33.33,
           "shares": 400.0,
           "ratio": 0.9333
         },
         {
           "ticker": "6134",
-          "name": "Fuji Corporation",
+          "name": "ＦＵＪＩ",
           "delta": 31.25,
           "shares": 2100.0,
           "ratio": 0.4299
         },
         {
           "ticker": "285A",
-          "name": "KIOXIA HOLDINGS CORPORATION",
+          "name": "キオクシアホールディングス",
           "delta": 28.57,
           "shares": 1800.0,
           "ratio": 1.3247
         },
         {
           "ticker": "7730",
-          "name": "Mani, Inc.",
+          "name": "マニー",
           "delta": 25.79,
           "shares": 20000.0,
           "ratio": 1.1427
         },
         {
           "ticker": "4046",
-          "name": "Osaka Soda Co., Ltd.",
+          "name": "大阪ソーダ",
           "delta": 24.03,
           "shares": 16000.0,
           "ratio": 1.2176
         },
         {
           "ticker": "6504",
-          "name": "Fuji Electric Co., Ltd.",
+          "name": "富士電機",
           "delta": 24.0,
           "shares": 6200.0,
           "ratio": 2.7277
         },
         {
           "ticker": "8111",
-          "name": "Goldwin Inc.",
+          "name": "ゴールドウイン",
           "delta": 22.22,
           "shares": 22000.0,
           "ratio": 1.8488
         },
         {
           "ticker": "8830",
-          "name": "Sumitomo Realty & Development Co., Ltd.",
+          "name": "住友不動産",
           "delta": 19.2,
           "shares": 14900.0,
           "ratio": 2.6875
         },
         {
           "ticker": "7741",
-          "name": "HOYA Corporation",
+          "name": "ＨＯＹＡ",
           "delta": 18.18,
           "shares": 2600.0,
           "ratio": 2.6525
         },
         {
           "ticker": "3891",
-          "name": "Nippon Kodoshi Corporation",
+          "name": "ニッポン高度紙工業",
           "delta": 17.76,
           "shares": 12600.0,
           "ratio": 1.93
         },
         {
           "ticker": "4516",
-          "name": "Nippon Shinyaku Co., Ltd.",
+          "name": "日本新薬",
           "delta": 14.46,
           "shares": 9500.0,
           "ratio": 1.689
         },
         {
           "ticker": "8053",
-          "name": "Sumitomo Corporation",
+          "name": "住友商事",
           "delta": 9.57,
           "shares": 10300.0,
           "ratio": 2.223
         },
         {
           "ticker": "7366",
-          "name": "LITALICO Inc.",
+          "name": "ＬＩＴＡＬＩＣＯ",
           "delta": 9.55,
           "shares": 17200.0,
           "ratio": 0.8181
         },
         {
           "ticker": "4536",
-          "name": "Santen Pharmaceutical Co., Ltd.",
+          "name": "参天製薬",
           "delta": 7.72,
           "shares": 33500.0,
           "ratio": 1.9694
         },
         {
           "ticker": "8750",
-          "name": "Daiichi Life Group, Inc.",
+          "name": "第一生命ホールディングス",
           "delta": 3.95,
           "shares": 15800.0,
           "ratio": 0.8727
@@ -239,140 +239,140 @@
       "decreased": [
         {
           "ticker": "7911",
-          "name": "TOPPAN Holdings Inc.",
+          "name": "ＴＯＰＰＡＮホールディングス",
           "delta": -78.95,
           "shares": 1600.0,
           "ratio": 0.3086
         },
         {
           "ticker": "8035",
-          "name": "Tokyo Electron Limited",
+          "name": "東京エレクトロン",
           "delta": -75.0,
           "shares": 100.0,
           "ratio": 0.1513
         },
         {
           "ticker": "5801",
-          "name": "Furukawa Electric Co., Ltd.",
+          "name": "古河電気工業",
           "delta": -67.92,
           "shares": 1700.0,
           "ratio": 1.7544
         },
         {
           "ticker": "6871",
-          "name": "Micronics Japan Co., Ltd.",
+          "name": "日本マイクロニクス",
           "delta": -60.0,
           "shares": 200.0,
           "ratio": 0.0804
         },
         {
           "ticker": "8015",
-          "name": "Toyota Tsusho Corporation",
+          "name": "豊田通商",
           "delta": -60.0,
           "shares": 1800.0,
           "ratio": 0.4214
         },
         {
           "ticker": "5802",
-          "name": "Sumitomo Electric Industries, Ltd.",
+          "name": "住友電気工業",
           "delta": -59.65,
           "shares": 2300.0,
           "ratio": 0.8318
         },
         {
           "ticker": "4617",
-          "name": "Chugoku Marine Paints, Ltd.",
+          "name": "中国塗料",
           "delta": -56.25,
           "shares": 1400.0,
           "ratio": 0.2007
         },
         {
           "ticker": "6754",
-          "name": "Anritsu Corporation",
+          "name": "アンリツ",
           "delta": -56.14,
           "shares": 5000.0,
           "ratio": 0.5484
         },
         {
           "ticker": "4022",
-          "name": "Rasa Industries, Ltd.",
+          "name": "ラサ工業",
           "delta": -54.84,
           "shares": 2800.0,
           "ratio": 0.9512
         },
         {
           "ticker": "4461",
-          "name": "DKS Co. Ltd.",
+          "name": "第一工業製薬",
           "delta": -50.0,
           "shares": 1700.0,
           "ratio": 0.6675
         },
         {
           "ticker": "8766",
-          "name": "Tokio Marine Holdings, Inc.",
+          "name": "東京海上ホールディングス",
           "delta": -34.78,
           "shares": 1500.0,
           "ratio": 0.3367
         },
         {
           "ticker": "6331",
-          "name": "Mitsubishi Kakoki Kaisha, Ltd.",
+          "name": "三菱化工機",
           "delta": -32.43,
           "shares": 2500.0,
           "ratio": 0.3009
         },
         {
           "ticker": "6301",
-          "name": "Komatsu Ltd.",
+          "name": "小松製作所",
           "delta": -26.09,
           "shares": 1700.0,
           "ratio": 0.4397
         },
         {
           "ticker": "7532",
-          "name": "Pan Pacific International Holdings Corporation",
+          "name": "パン・パシフィック・インターナショナルホールディングス",
           "delta": -18.1,
           "shares": 71500.0,
           "ratio": 2.6531
         },
         {
           "ticker": "6845",
-          "name": "Azbil Corporation",
+          "name": "アズビル",
           "delta": -17.36,
           "shares": 30000.0,
           "ratio": 1.5428
         },
         {
           "ticker": "7747",
-          "name": "Asahi Intecc Co., Ltd.",
+          "name": "朝日インテック",
           "delta": -16.22,
           "shares": 9300.0,
           "ratio": 1.0823
         },
         {
           "ticker": "7936",
-          "name": "ASICS Corporation",
+          "name": "アシックス",
           "delta": -10.78,
           "shares": 18200.0,
           "ratio": 3.0088
         },
         {
           "ticker": "7203",
-          "name": "Toyota Motor Corporation",
+          "name": "トヨタ自動車",
           "delta": -10.34,
           "shares": 59800.0,
           "ratio": 7.5469
         },
         {
           "ticker": "6758",
-          "name": "Sony Group Corporation",
+          "name": "ソニーグループ",
           "delta": -5.98,
           "shares": 28300.0,
           "ratio": 3.4679
         },
         {
           "ticker": "7182",
-          "name": "JAPAN POST BANK Co., Ltd.",
+          "name": "ゆうちょ銀行",
           "delta": -2.3,
           "shares": 8500.0,
           "ratio": 0.8786
@@ -384,214 +384,214 @@
       "new": [
         {
           "ticker": "4812",
-          "name": "Dentsu Soken Inc.",
+          "name": "電通総研",
           "ratio": 0.9962
         },
         {
           "ticker": "5803",
-          "name": "Fujikura Ltd.",
+          "name": "フジクラ",
           "ratio": 2.8321
         },
         {
           "ticker": "6954",
-          "name": "Fanuc Corporation",
+          "name": "ファナック",
           "ratio": 1.0954
         },
         {
           "ticker": "9735",
-          "name": "SECOM CO., LTD.",
+          "name": "セコム",
           "ratio": 1.5189
         }
       ],
       "removed": [
         {
           "ticker": "6871",
-          "name": "Micronics Japan Co., Ltd."
+          "name": "日本マイクロニクス"
         },
         {
           "ticker": "7911",
-          "name": "TOPPAN Holdings Inc."
+          "name": "ＴＯＰＰＡＮホールディングス"
         }
       ],
       "increased": [
         {
           "ticker": "8035",
-          "name": "Tokyo Electron Limited",
+          "name": "東京エレクトロン",
           "delta": 2100.0,
           "shares": 2200.0,
           "ratio": 3.0972
         },
         {
           "ticker": "6146",
-          "name": "Disco Corporation",
+          "name": "ディスコ",
           "delta": 700.0,
           "shares": 800.0,
           "ratio": 1.8754
         },
         {
           "ticker": "4519",
-          "name": "Chugai Pharmaceutical Co., Ltd.",
+          "name": "中外製薬",
           "delta": 292.31,
           "shares": 5100.0,
           "ratio": 1.4971
         },
         {
           "ticker": "5801",
-          "name": "Furukawa Electric Co., Ltd.",
+          "name": "古河電気工業",
           "delta": 117.65,
           "shares": 3700.0,
           "ratio": 4.1397
         },
         {
           "ticker": "9983",
-          "name": "Fast Retailing Co., Ltd.",
+          "name": "ファーストリテイリング",
           "delta": 100.0,
           "shares": 800.0,
           "ratio": 1.7193
         },
         {
           "ticker": "6361",
-          "name": "Ebara Corporation",
+          "name": "荏原製作所",
           "delta": 93.75,
           "shares": 3100.0,
           "ratio": 0.4998
         },
         {
           "ticker": "4461",
-          "name": "DKS Co. Ltd.",
+          "name": "第一工業製薬",
           "delta": 82.35,
           "shares": 3100.0,
           "ratio": 0.869
         },
         {
           "ticker": "4022",
-          "name": "Rasa Industries, Ltd.",
+          "name": "ラサ工業",
           "delta": 53.57,
           "shares": 4300.0,
           "ratio": 1.1994
         },
         {
           "ticker": "8766",
-          "name": "Tokio Marine Holdings, Inc.",
+          "name": "東京海上ホールディングス",
           "delta": 46.67,
           "shares": 2200.0,
           "ratio": 0.5798
         },
         {
           "ticker": "6981",
-          "name": "Murata Manufacturing Co., Ltd.",
+          "name": "村田製作所",
           "delta": 46.3,
           "shares": 39500.0,
           "ratio": 5.1081
         },
         {
           "ticker": "3064",
-          "name": "MonotaRO Co., Ltd.",
+          "name": "ＭｏｎｏｔａＲＯ",
           "delta": 33.33,
           "shares": 35600.0,
           "ratio": 2.2048
         },
         {
           "ticker": "8015",
-          "name": "Toyota Tsusho Corporation",
+          "name": "豊田通商",
           "delta": 27.78,
           "shares": 2300.0,
           "ratio": 0.4965
         },
         {
           "ticker": "5802",
-          "name": "Sumitomo Electric Industries, Ltd.",
+          "name": "住友電気工業",
           "delta": 26.09,
           "shares": 2900.0,
           "ratio": 0.9957
         },
         {
           "ticker": "4666",
-          "name": "PARK24 Co., Ltd.",
+          "name": "パーク２４",
           "delta": 23.66,
           "shares": 23000.0,
           "ratio": 1.6042
         },
         {
           "ticker": "7832",
-          "name": "BANDAI NAMCO Holdings Inc.",
+          "name": "バンダイナムコホールディングス",
           "delta": 21.43,
           "shares": 13600.0,
           "ratio": 1.8943
         },
         {
           "ticker": "3891",
-          "name": "Nippon Kodoshi Corporation",
+          "name": "ニッポン高度紙工業",
           "delta": 11.11,
           "shares": 14000.0,
           "ratio": 1.8333
         },
         {
           "ticker": "9697",
-          "name": "Capcom Co., Ltd.",
+          "name": "カプコン",
           "delta": 9.09,
           "shares": 7200.0,
           "ratio": 0.8266
         },
         {
           "ticker": "4046",
-          "name": "Osaka Soda Co., Ltd.",
+          "name": "大阪ソーダ",
           "delta": 8.12,
           "shares": 17300.0,
           "ratio": 1.1021
         },
         {
           "ticker": "8053",
-          "name": "Sumitomo Corporation",
+          "name": "住友商事",
           "delta": 6.8,
           "shares": 11000.0,
           "ratio": 2.2494
         },
         {
           "ticker": "6098",
-          "name": "Recruit Holdings Co., Ltd.",
+          "name": "リクルートホールディングス",
           "delta": 5.26,
           "shares": 22000.0,
           "ratio": 4.89
         },
         {
           "ticker": "8830",
-          "name": "Sumitomo Realty & Development Co., Ltd.",
+          "name": "住友不動産",
           "delta": 4.7,
           "shares": 15600.0,
           "ratio": 2.4856
         },
         {
           "ticker": "6951",
-          "name": "JEOL Ltd.",
+          "name": "日本電子",
           "delta": 4.41,
           "shares": 7100.0,
           "ratio": 1.4649
         },
         {
           "ticker": "6504",
-          "name": "Fuji Electric Co., Ltd.",
+          "name": "富士電機",
           "delta": 3.23,
           "shares": 6400.0,
           "ratio": 2.5432
         },
         {
           "ticker": "5631",
-          "name": "The Japan Steel Works, Ltd.",
+          "name": "日本製鋼所",
           "delta": 2.78,
           "shares": 7400.0,
           "ratio": 2.4375
         },
         {
           "ticker": "8111",
-          "name": "Goldwin Inc.",
+          "name": "ゴールドウイン",
           "delta": 1.82,
           "shares": 22400.0,
           "ratio": 1.7732
         },
         {
           "ticker": "7203",
-          "name": "Toyota Motor Corporation",
+          "name": "トヨタ自動車",
           "delta": 1.17,
           "shares": 60500.0,
           "ratio": 7.1199
@@ -600,196 +600,196 @@
       "decreased": [
         {
           "ticker": "6869",
-          "name": "Sysmex Corporation",
+          "name": "シスメックス",
           "delta": -91.06,
           "shares": 1100.0,
           "ratio": 0.0522
         },
         {
           "ticker": "4684",
-          "name": "OBIC Co.,Ltd.",
+          "name": "オービック",
           "delta": -78.57,
           "shares": 1500.0,
           "ratio": 0.2003
         },
         {
           "ticker": "5334",
-          "name": "Niterra Co., Ltd.",
+          "name": "日本特殊陶業",
           "delta": -76.92,
           "shares": 600.0,
           "ratio": 0.1609
         },
         {
           "ticker": "7366",
-          "name": "LITALICO Inc.",
+          "name": "ＬＩＴＡＬＩＣＯ",
           "delta": -68.02,
           "shares": 5500.0,
           "ratio": 0.2356
         },
         {
           "ticker": "9433",
-          "name": "KDDI Corporation",
+          "name": "ＫＤＤＩ",
           "delta": -67.65,
           "shares": 2200.0,
           "ratio": 0.2071
         },
         {
           "ticker": "6331",
-          "name": "Mitsubishi Kakoki Kaisha, Ltd.",
+          "name": "三菱化工機",
           "delta": -64.0,
           "shares": 900.0,
           "ratio": 0.0989
         },
         {
           "ticker": "7936",
-          "name": "ASICS Corporation",
+          "name": "アシックス",
           "delta": -63.19,
           "shares": 6700.0,
           "ratio": 1.0154
         },
         {
           "ticker": "7532",
-          "name": "Pan Pacific International Holdings Corporation",
+          "name": "パン・パシフィック・インターナショナルホールディングス",
           "delta": -58.46,
           "shares": 29700.0,
           "ratio": 1.0016
         },
         {
           "ticker": "7747",
-          "name": "Asahi Intecc Co., Ltd.",
+          "name": "朝日インテック",
           "delta": -58.06,
           "shares": 3900.0,
           "ratio": 0.4442
         },
         {
           "ticker": "4568",
-          "name": "Daiichi Sankyo Company, Limited",
+          "name": "第一三共",
           "delta": -50.17,
           "shares": 14500.0,
           "ratio": 1.4478
         },
         {
           "ticker": "8750",
-          "name": "Daiichi Life Group, Inc.",
+          "name": "第一生命ホールディングス",
           "delta": -48.1,
           "shares": 8200.0,
           "ratio": 0.4096
         },
         {
           "ticker": "6501",
-          "name": "Hitachi, Ltd.",
+          "name": "日立製作所",
           "delta": -46.15,
           "shares": 700.0,
           "ratio": 0.1157
         },
         {
           "ticker": "7846",
-          "name": "Pilot Corporation",
+          "name": "パイロットコーポレーション",
           "delta": -41.54,
           "shares": 7600.0,
           "ratio": 1.2711
         },
         {
           "ticker": "4536",
-          "name": "Santen Pharmaceutical Co., Ltd.",
+          "name": "参天製薬",
           "delta": -40.9,
           "shares": 19800.0,
           "ratio": 1.2087
         },
         {
           "ticker": "6301",
-          "name": "Komatsu Ltd.",
+          "name": "小松製作所",
           "delta": -35.29,
           "shares": 1100.0,
           "ratio": 0.2458
         },
         {
           "ticker": "7182",
-          "name": "JAPAN POST BANK Co., Ltd.",
+          "name": "ゆうちょ銀行",
           "delta": -34.12,
           "shares": 5600.0,
           "ratio": 0.5122
         },
         {
           "ticker": "8306",
-          "name": "Mitsubishi UFJ Financial Group, Inc.",
+          "name": "三菱ＵＦＪフィナンシャル・グループ",
           "delta": -28.04,
           "shares": 7700.0,
           "ratio": 0.7223
         },
         {
           "ticker": "7741",
-          "name": "HOYA Corporation",
+          "name": "ＨＯＹＡ",
           "delta": -26.92,
           "shares": 1900.0,
           "ratio": 1.8539
         },
         {
           "ticker": "6845",
-          "name": "Azbil Corporation",
+          "name": "アズビル",
           "delta": -24.33,
           "shares": 22700.0,
           "ratio": 1.1153
         },
         {
           "ticker": "2001",
-          "name": "Nippn Corporation",
+          "name": "ニップン",
           "delta": -24.04,
           "shares": 7900.0,
           "ratio": 0.7565
         },
         {
           "ticker": "7202",
-          "name": "Isuzu Motors Limited",
+          "name": "いすゞ自動車",
           "delta": -22.12,
           "shares": 8100.0,
           "ratio": 0.6484
         },
         {
           "ticker": "6367",
-          "name": "Daikin Industries,Ltd.",
+          "name": "ダイキン工業",
           "delta": -21.43,
           "shares": 4400.0,
           "ratio": 3.1347
         },
         {
           "ticker": "4516",
-          "name": "Nippon Shinyaku Co., Ltd.",
+          "name": "日本新薬",
           "delta": -17.89,
           "shares": 7800.0,
           "ratio": 1.4338
         },
         {
           "ticker": "7730",
-          "name": "Mani, Inc.",
+          "name": "マニー",
           "delta": -10.5,
           "shares": 17900.0,
           "ratio": 0.9588
         },
         {
           "ticker": "3382",
-          "name": "Seven & i Holdings Co., Ltd.",
+          "name": "セブン＆アイ・ホールディングス",
           "delta": -9.93,
           "shares": 39000.0,
           "ratio": 2.8455
         },
         {
           "ticker": "9830",
-          "name": "Trusco Nakayama Corporation",
+          "name": "トラスコ中山",
           "delta": -9.38,
           "shares": 8700.0,
           "ratio": 0.7059
         },
         {
           "ticker": "1605",
-          "name": "Inpex Corporation",
+          "name": "ＩＮＰＥＸ",
           "delta": -6.76,
           "shares": 6900.0,
           "ratio": 1.1234
         },
         {
           "ticker": "4063",
-          "name": "Shin-Etsu Chemical Co., Ltd.",
+          "name": "信越化学工業",
           "delta": -5.63,
           "shares": 6700.0,
           "ratio": 1.4641
@@ -803,56 +803,56 @@
       "increased": [
         {
           "ticker": "5803",
-          "name": "Fujikura Ltd.",
+          "name": "フジクラ",
           "delta": 603.45,
           "shares": 20399.9592,
           "ratio": 3.2883
         },
         {
           "ticker": "4022",
-          "name": "Rasa Industries, Ltd.",
+          "name": "ラサ工業",
           "delta": 458.14,
           "shares": 24000.0,
           "ratio": 1.3389
         },
         {
           "ticker": "5801",
-          "name": "Furukawa Electric Co., Ltd.",
+          "name": "古河電気工業",
           "delta": 21.62,
           "shares": 4500.0,
           "ratio": 4.8616
         },
         {
           "ticker": "6954",
-          "name": "Fanuc Corporation",
+          "name": "ファナック",
           "delta": 18.52,
           "shares": 6400.0,
           "ratio": 1.2775
         },
         {
           "ticker": "4461",
-          "name": "DKS Co. Ltd.",
+          "name": "第一工業製薬",
           "delta": 16.13,
           "shares": 3600.0,
           "ratio": 0.9859
         },
         {
           "ticker": "6504",
-          "name": "Fuji Electric Co., Ltd.",
+          "name": "富士電機",
           "delta": 9.38,
           "shares": 7000.0,
           "ratio": 2.788
         },
         {
           "ticker": "8053",
-          "name": "Sumitomo Corporation",
+          "name": "住友商事",
           "delta": 9.09,
           "shares": 12000.0,
           "ratio": 2.4979
         },
         {
           "ticker": "3891",
-          "name": "Nippon Kodoshi Corporation",
+          "name": "ニッポン高度紙工業",
           "delta": 5.0,
           "shares": 14700.0,
           "ratio": 1.9018
@@ -861,63 +861,63 @@
       "decreased": [
         {
           "ticker": "285A",
-          "name": "KIOXIA HOLDINGS CORPORATION",
+          "name": "キオクシアホールディングス",
           "delta": -55.56,
           "shares": 800.0,
           "ratio": 0.5701
         },
         {
           "ticker": "9433",
-          "name": "KDDI Corporation",
+          "name": "ＫＤＤＩ",
           "delta": -50.0,
           "shares": 1100.0,
           "ratio": 0.1038
         },
         {
           "ticker": "7730",
-          "name": "Mani, Inc.",
+          "name": "マニー",
           "delta": -22.91,
           "shares": 13800.0,
           "ratio": 0.7661
         },
         {
           "ticker": "2001",
-          "name": "Nippn Corporation",
+          "name": "ニップン",
           "delta": -20.25,
           "shares": 6300.0,
           "ratio": 0.6058
         },
         {
           "ticker": "3382",
-          "name": "Seven & i Holdings Co., Ltd.",
+          "name": "セブン＆アイ・ホールディングス",
           "delta": -19.74,
           "shares": 31300.0,
           "ratio": 2.34
         },
         {
           "ticker": "4536",
-          "name": "Santen Pharmaceutical Co., Ltd.",
+          "name": "参天製薬",
           "delta": -15.66,
           "shares": 16700.0,
           "ratio": 1.038
         },
         {
           "ticker": "1605",
-          "name": "Inpex Corporation",
+          "name": "ＩＮＰＥＸ",
           "delta": -13.04,
           "shares": 6000.0,
           "ratio": 1.0336
         },
         {
           "ticker": "9697",
-          "name": "Capcom Co., Ltd.",
+          "name": "カプコン",
           "delta": -11.11,
           "shares": 6400.0,
           "ratio": 0.7621
         },
         {
           "ticker": "4812",
-          "name": "Dentsu Soken Inc.",
+          "name": "電通総研",
           "delta": -10.88,
           "shares": 13100.0,
           "ratio": 0.9151
@@ -931,49 +931,49 @@
       "increased": [
         {
           "ticker": "5802",
-          "name": "Sumitomo Electric Industries, Ltd.",
+          "name": "住友電気工業",
           "delta": 31.03,
           "shares": 3800.0,
           "ratio": 1.2259
         },
         {
           "ticker": "7202",
-          "name": "Isuzu Motors Limited",
+          "name": "いすゞ自動車",
           "delta": 16.05,
           "shares": 9400.0,
           "ratio": 0.7465
         },
         {
           "ticker": "6146",
-          "name": "Disco Corporation",
+          "name": "ディスコ",
           "delta": 12.5,
           "shares": 900.0,
           "ratio": 2.0727
         },
         {
           "ticker": "5631",
-          "name": "The Japan Steel Works, Ltd.",
+          "name": "日本製鋼所",
           "delta": 6.76,
           "shares": 7900.0,
           "ratio": 2.4936
         },
         {
           "ticker": "8053",
-          "name": "Sumitomo Corporation",
+          "name": "住友商事",
           "delta": 3.33,
           "shares": 12400.0,
           "ratio": 2.601
         },
         {
           "ticker": "5803",
-          "name": "Fujikura Ltd.",
+          "name": "フジクラ",
           "delta": 2.45,
           "shares": 20900.0,
           "ratio": 3.3749
         },
         {
           "ticker": "6981",
-          "name": "Murata Manufacturing Co., Ltd.",
+          "name": "村田製作所",
           "delta": 1.52,
           "shares": 40100.0,
           "ratio": 5.0796
@@ -982,21 +982,21 @@
       "decreased": [
         {
           "ticker": "4536",
-          "name": "Santen Pharmaceutical Co., Ltd.",
+          "name": "参天製薬",
           "delta": -23.95,
           "shares": 12700.0,
           "ratio": 0.8039
         },
         {
           "ticker": "3382",
-          "name": "Seven & i Holdings Co., Ltd.",
+          "name": "セブン＆アイ・ホールディングス",
           "delta": -18.53,
           "shares": 25500.0,
           "ratio": 1.9524
         },
         {
           "ticker": "7532",
-          "name": "Pan Pacific International Holdings Corporation",
+          "name": "パン・パシフィック・インターナショナルホールディングス",
           "delta": -15.15,
           "shares": 25200.0,
           "ratio": 0.896
@@ -1011,14 +1011,14 @@
       "decreased": [
         {
           "ticker": "5801",
-          "name": "Furukawa Electric Co., Ltd.",
+          "name": "古河電気工業",
           "delta": -46.67,
           "shares": 2400.0,
           "ratio": 2.6016
         },
         {
           "ticker": "8830",
-          "name": "Sumitomo Realty & Development Co., Ltd.",
+          "name": "住友不動産",
           "delta": -39.1,
           "shares": 9500.0,
           "ratio": 1.5713
@@ -1030,7 +1030,7 @@
       "new": [
         {
           "ticker": "6857",
-          "name": "Advantest Corporation",
+          "name": "アドバンテスト",
           "ratio": 0.4671
         }
       ],
@@ -1038,77 +1038,77 @@
       "increased": [
         {
           "ticker": "7182",
-          "name": "JAPAN POST BANK Co., Ltd.",
+          "name": "ゆうちょ銀行",
           "delta": 233.93,
           "shares": 18700.0,
           "ratio": 1.7531
         },
         {
           "ticker": "6134",
-          "name": "Fuji Corporation",
+          "name": "ＦＵＪＩ",
           "delta": 66.67,
           "shares": 3500.0,
           "ratio": 0.6071
         },
         {
           "ticker": "6361",
-          "name": "Ebara Corporation",
+          "name": "荏原製作所",
           "delta": 61.29,
           "shares": 5000.0,
           "ratio": 0.7875
         },
         {
           "ticker": "8766",
-          "name": "Tokio Marine Holdings, Inc.",
+          "name": "東京海上ホールディングス",
           "delta": 50.0,
           "shares": 3300.0,
           "ratio": 0.8552
         },
         {
           "ticker": "4461",
-          "name": "DKS Co. Ltd.",
+          "name": "第一工業製薬",
           "delta": 33.33,
           "shares": 4800.0,
           "ratio": 1.3087
         },
         {
           "ticker": "5802",
-          "name": "Sumitomo Electric Industries, Ltd.",
+          "name": "住友電気工業",
           "delta": 31.58,
           "shares": 5000.0,
           "ratio": 1.6035
         },
         {
           "ticker": "8306",
-          "name": "Mitsubishi UFJ Financial Group, Inc.",
+          "name": "三菱ＵＦＪフィナンシャル・グループ",
           "delta": 27.27,
           "shares": 9800.0,
           "ratio": 0.9521
         },
         {
           "ticker": "6954",
-          "name": "Fanuc Corporation",
+          "name": "ファナック",
           "delta": 18.75,
           "shares": 7600.0,
           "ratio": 1.4981
         },
         {
           "ticker": "4022",
-          "name": "Rasa Industries, Ltd.",
+          "name": "ラサ工業",
           "delta": 13.75,
           "shares": 27300.0,
           "ratio": 1.534
         },
         {
           "ticker": "3064",
-          "name": "MonotaRO Co., Ltd.",
+          "name": "ＭｏｎｏｔａＲＯ",
           "delta": 12.08,
           "shares": 39900.0,
           "ratio": 2.4139
         },
         {
           "ticker": "8053",
-          "name": "Sumitomo Corporation",
+          "name": "住友商事",
           "delta": 6.45,
           "shares": 13200.0,
           "ratio": 2.8234
@@ -1117,63 +1117,63 @@
       "decreased": [
         {
           "ticker": "4812",
-          "name": "Dentsu Soken Inc.",
+          "name": "電通総研",
           "delta": -33.59,
           "shares": 8700.0,
           "ratio": 0.6087
         },
         {
           "ticker": "7747",
-          "name": "Asahi Intecc Co., Ltd.",
+          "name": "朝日インテック",
           "delta": -23.08,
           "shares": 3000.0,
           "ratio": 0.3638
         },
         {
           "ticker": "7532",
-          "name": "Pan Pacific International Holdings Corporation",
+          "name": "パン・パシフィック・インターナショナルホールディングス",
           "delta": -17.46,
           "shares": 20800.0,
           "ratio": 0.707
         },
         {
           "ticker": "4536",
-          "name": "Santen Pharmaceutical Co., Ltd.",
+          "name": "参天製薬",
           "delta": -13.39,
           "shares": 11000.0,
           "ratio": 0.7037
         },
         {
           "ticker": "4088",
-          "name": "Air Water Inc.",
+          "name": "エア・ウォーター",
           "delta": -10.0,
           "shares": 9900.0,
           "ratio": 0.7536
         },
         {
           "ticker": "9735",
-          "name": "SECOM CO., LTD.",
+          "name": "セコム",
           "delta": -9.46,
           "shares": 6700.0,
           "ratio": 1.4037
         },
         {
           "ticker": "7846",
-          "name": "Pilot Corporation",
+          "name": "パイロットコーポレーション",
           "delta": -9.21,
           "shares": 6900.0,
           "ratio": 1.1627
         },
         {
           "ticker": "8111",
-          "name": "Goldwin Inc.",
+          "name": "ゴールドウイン",
           "delta": -8.04,
           "shares": 20600.0,
           "ratio": 1.6151
         },
         {
           "ticker": "4516",
-          "name": "Nippon Shinyaku Co., Ltd.",
+          "name": "日本新薬",
           "delta": -5.13,
           "shares": 7400.0,
           "ratio": 1.3777
@@ -1193,13 +1193,13 @@
       "removed": [
         {
           "ticker": "6869",
-          "name": "Sysmex Corporation"
+          "name": "シスメックス"
         }
       ],
       "increased": [
         {
           "ticker": "3064",
-          "name": "MonotaRO Co., Ltd.",
+          "name": "ＭｏｎｏｔａＲＯ",
           "delta": 15.29,
           "shares": 46000.0,
           "ratio": 2.846
@@ -1208,70 +1208,70 @@
       "decreased": [
         {
           "ticker": "4812",
-          "name": "Dentsu Soken Inc.",
+          "name": "電通総研",
           "delta": -33.33,
           "shares": 5800.0,
           "ratio": 0.4103
         },
         {
           "ticker": "9735",
-          "name": "SECOM CO., LTD.",
+          "name": "セコム",
           "delta": -17.91,
           "shares": 5500.0,
           "ratio": 1.1852
         },
         {
           "ticker": "8111",
-          "name": "Goldwin Inc.",
+          "name": "ゴールドウイン",
           "delta": -16.5,
           "shares": 17200.0,
           "ratio": 1.3281
         },
         {
           "ticker": "2001",
-          "name": "Nippn Corporation",
+          "name": "ニップン",
           "delta": -15.87,
           "shares": 5300.0,
           "ratio": 0.5139
         },
         {
           "ticker": "7846",
-          "name": "Pilot Corporation",
+          "name": "パイロットコーポレーション",
           "delta": -11.59,
           "shares": 6100.0,
           "ratio": 1.0448
         },
         {
           "ticker": "4088",
-          "name": "Air Water Inc.",
+          "name": "エア・ウォーター",
           "delta": -10.1,
           "shares": 8900.0,
           "ratio": 0.6888
         },
         {
           "ticker": "5801",
-          "name": "Furukawa Electric Co., Ltd.",
+          "name": "古河電気工業",
           "delta": -8.33,
           "shares": 2200.0,
           "ratio": 2.7718
         },
         {
           "ticker": "6951",
-          "name": "JEOL Ltd.",
+          "name": "日本電子",
           "delta": -7.04,
           "shares": 6600.0,
           "ratio": 1.4115
         },
         {
           "ticker": "4516",
-          "name": "Nippon Shinyaku Co., Ltd.",
+          "name": "日本新薬",
           "delta": -6.76,
           "shares": 6900.0,
           "ratio": 1.2897
         },
         {
           "ticker": "4063",
-          "name": "Shin-Etsu Chemical Co., Ltd.",
+          "name": "信越化学工業",
           "delta": -5.97,
           "shares": 6300.0,
           "ratio": 1.4301
@@ -1285,49 +1285,49 @@
       "increased": [
         {
           "ticker": "7182",
-          "name": "JAPAN POST BANK Co., Ltd.",
+          "name": "ゆうちょ銀行",
           "delta": 34.76,
           "shares": 25200.0,
           "ratio": 2.3123
         },
         {
           "ticker": "8750",
-          "name": "Daiichi Life Group, Inc.",
+          "name": "第一生命ホールディングス",
           "delta": 29.27,
           "shares": 10600.0,
           "ratio": 0.5327
         },
         {
           "ticker": "6361",
-          "name": "Ebara Corporation",
+          "name": "荏原製作所",
           "delta": 18.0,
           "shares": 5900.0,
           "ratio": 0.9254
         },
         {
           "ticker": "4461",
-          "name": "DKS Co. Ltd.",
+          "name": "第一工業製薬",
           "delta": 16.67,
           "shares": 5600.0,
           "ratio": 1.5657
         },
         {
           "ticker": "3064",
-          "name": "MonotaRO Co., Ltd.",
+          "name": "ＭｏｎｏｔａＲＯ",
           "delta": 13.04,
           "shares": 52000.0,
           "ratio": 3.1293
         },
         {
           "ticker": "4022",
-          "name": "Rasa Industries, Ltd.",
+          "name": "ラサ工業",
           "delta": 3.66,
           "shares": 28300.0,
           "ratio": 1.5933
         },
         {
           "ticker": "3891",
-          "name": "Nippon Kodoshi Corporation",
+          "name": "ニッポン高度紙工業",
           "delta": 2.04,
           "shares": 15000.0,
           "ratio": 1.9618
@@ -1336,7 +1336,7 @@
       "decreased": [
         {
           "ticker": "5801",
-          "name": "Furukawa Electric Co., Ltd.",
+          "name": "古河電気工業",
           "delta": -13.64,
           "shares": 1900.0,
           "ratio": 2.4553
@@ -1357,7 +1357,7 @@
       "increased": [
         {
           "ticker": "8015",
-          "name": "Toyota Tsusho Corporation",
+          "name": "豊田通商",
           "delta": 100.0,
           "shares": 4600.0,
           "ratio": 0.9902
@@ -1366,7 +1366,7 @@
       "decreased": [
         {
           "ticker": "5801",
-          "name": "Furukawa Electric Co., Ltd.",
+          "name": "古河電気工業",
           "delta": -31.58,
           "shares": 1300.0,
           "ratio": 1.856
@@ -1378,7 +1378,7 @@
       "new": [
         {
           "ticker": "6278",
-          "name": "Union Tool Co.",
+          "name": "ユニオンツール",
           "ratio": 0.2762
         }
       ],
@@ -1386,7 +1386,7 @@
       "increased": [
         {
           "ticker": "8750",
-          "name": "Daiichi Life Group, Inc.",
+          "name": "第一生命ホールディングス",
           "delta": 51.89,
           "shares": 16100.0,
           "ratio": 0.812
@@ -1395,21 +1395,21 @@
       "decreased": [
         {
           "ticker": "6845",
-          "name": "Azbil Corporation",
+          "name": "アズビル",
           "delta": -36.56,
           "shares": 14400.0,
           "ratio": 0.7176
         },
         {
           "ticker": "5801",
-          "name": "Furukawa Electric Co., Ltd.",
+          "name": "古河電気工業",
           "delta": -23.08,
           "shares": 1000.0,
           "ratio": 1.5045
         },
         {
           "ticker": "5803",
-          "name": "Fujikura Ltd.",
+          "name": "フジクラ",
           "delta": -8.13,
           "shares": 19200.0,
           "ratio": 3.2536
@@ -1423,14 +1423,14 @@
       "increased": [
         {
           "ticker": "4022",
-          "name": "Rasa Industries, Ltd.",
+          "name": "ラサ工業",
           "delta": 12.72,
           "shares": 31900.0,
           "ratio": 1.8105
         },
         {
           "ticker": "5802",
-          "name": "Sumitomo Electric Industries, Ltd.",
+          "name": "住友電気工業",
           "delta": 12.0,
           "shares": 5600.0,
           "ratio": 1.9839
@@ -1439,14 +1439,14 @@
       "decreased": [
         {
           "ticker": "5801",
-          "name": "Furukawa Electric Co., Ltd.",
+          "name": "古河電気工業",
           "delta": -20.0,
           "shares": 800.0,
           "ratio": 1.2269
         },
         {
           "ticker": "5803",
-          "name": "Fujikura Ltd.",
+          "name": "フジクラ",
           "delta": -14.58,
           "shares": 16400.0,
           "ratio": 3.0916
@@ -1460,35 +1460,35 @@
       "increased": [
         {
           "ticker": "5802",
-          "name": "Sumitomo Electric Industries, Ltd.",
+          "name": "住友電気工業",
           "delta": 21.43,
           "shares": 6800.0,
           "ratio": 2.2442
         },
         {
           "ticker": "5631",
-          "name": "The Japan Steel Works, Ltd.",
+          "name": "日本製鋼所",
           "delta": 18.99,
           "shares": 9400.0,
           "ratio": 3.0435
         },
         {
           "ticker": "9735",
-          "name": "SECOM CO., LTD.",
+          "name": "セコム",
           "delta": 18.18,
           "shares": 6500.0,
           "ratio": 1.3075
         },
         {
           "ticker": "3064",
-          "name": "MonotaRO Co., Ltd.",
+          "name": "ＭｏｎｏｔａＲＯ",
           "delta": 17.69,
           "shares": 61200.0,
           "ratio": 3.6423
         },
         {
           "ticker": "9983",
-          "name": "Fast Retailing Co., Ltd.",
+          "name": "ファーストリテイリング",
           "delta": 12.5,
           "shares": 900.0,
           "ratio": 2.2458
@@ -1497,14 +1497,14 @@
       "decreased": [
         {
           "ticker": "4536",
-          "name": "Santen Pharmaceutical Co., Ltd.",
+          "name": "参天製薬",
           "delta": -38.18,
           "shares": 6800.0,
           "ratio": 0.4083
         },
         {
           "ticker": "5803",
-          "name": "Fujikura Ltd.",
+          "name": "フジクラ",
           "delta": -11.59,
           "shares": 14500.0,
           "ratio": 2.7471
@@ -1517,35 +1517,35 @@
       "removed": [
         {
           "ticker": "4536",
-          "name": "Santen Pharmaceutical Co., Ltd."
+          "name": "参天製薬"
         },
         {
           "ticker": "4617",
-          "name": "Chugoku Marine Paints, Ltd."
+          "name": "中国塗料"
         },
         {
           "ticker": "4812",
-          "name": "Dentsu Soken Inc."
+          "name": "電通総研"
         }
       ],
       "increased": [
         {
           "ticker": "6857",
-          "name": "Advantest Corporation",
+          "name": "アドバンテスト",
           "delta": 83.33,
           "shares": 1100.0,
           "ratio": 1.0129
         },
         {
           "ticker": "3891",
-          "name": "Nippon Kodoshi Corporation",
+          "name": "ニッポン高度紙工業",
           "delta": 11.33,
           "shares": 16700.0,
           "ratio": 2.4462
         },
         {
           "ticker": "6981",
-          "name": "Murata Manufacturing Co., Ltd.",
+          "name": "村田製作所",
           "delta": 5.99,
           "shares": 42500.0,
           "ratio": 6.2745
@@ -1554,56 +1554,56 @@
       "decreased": [
         {
           "ticker": "6383",
-          "name": "Daifuku Co., Ltd.",
+          "name": "ダイフク",
           "delta": -73.68,
           "shares": 500.0,
           "ratio": 0.1122
         },
         {
           "ticker": "8001",
-          "name": "ITOCHU Corporation",
+          "name": "伊藤忠商事",
           "delta": -69.23,
           "shares": 1600.0,
           "ratio": 0.1083
         },
         {
           "ticker": "4046",
-          "name": "Osaka Soda Co., Ltd.",
+          "name": "大阪ソーダ",
           "delta": -61.85,
           "shares": 6600.0,
           "ratio": 0.4263
         },
         {
           "ticker": "4519",
-          "name": "Chugai Pharmaceutical Co., Ltd.",
+          "name": "中外製薬",
           "delta": -56.86,
           "shares": 2200.0,
           "ratio": 0.6392
         },
         {
           "ticker": "6845",
-          "name": "Azbil Corporation",
+          "name": "アズビル",
           "delta": -40.97,
           "shares": 8500.0,
           "ratio": 0.4276
         },
         {
           "ticker": "6367",
-          "name": "Daikin Industries,Ltd.",
+          "name": "ダイキン工業",
           "delta": -29.55,
           "shares": 3100.0,
           "ratio": 2.1663
         },
         {
           "ticker": "6361",
-          "name": "Ebara Corporation",
+          "name": "荏原製作所",
           "delta": -28.81,
           "shares": 4200.0,
           "ratio": 0.7407
         },
         {
           "ticker": "7741",
-          "name": "HOYA Corporation",
+          "name": "ＨＯＹＡ",
           "delta": -26.32,
           "shares": 1400.0,
           "ratio": 1.4037
@@ -1615,7 +1615,7 @@
       "new": [
         {
           "ticker": "6976",
-          "name": "Taiyo Yuden Co., Ltd.",
+          "name": "太陽誘電",
           "ratio": 1.512
         }
       ],
@@ -1623,77 +1623,77 @@
       "increased": [
         {
           "ticker": "3923",
-          "name": "Rakus Co., Ltd.",
+          "name": "ラクス",
           "delta": 1700.0,
           "shares": 7200.0,
           "ratio": 0.2032
         },
         {
           "ticker": "9433",
-          "name": "KDDI Corporation",
+          "name": "ＫＤＤＩ",
           "delta": 427.27,
           "shares": 5800.0,
           "ratio": 0.5001
         },
         {
           "ticker": "4071",
-          "name": "Plus Alpha Consulting Co.,Ltd.",
+          "name": "プラスアルファ・コンサルティング",
           "delta": 383.33,
           "shares": 2900.0,
           "ratio": 0.2013
         },
         {
           "ticker": "4684",
-          "name": "OBIC Co.,Ltd.",
+          "name": "オービック",
           "delta": 146.67,
           "shares": 3700.0,
           "ratio": 0.5002
         },
         {
           "ticker": "7747",
-          "name": "Asahi Intecc Co., Ltd.",
+          "name": "朝日インテック",
           "delta": 100.0,
           "shares": 6000.0,
           "ratio": 0.7051
         },
         {
           "ticker": "7366",
-          "name": "LITALICO Inc.",
+          "name": "ＬＩＴＡＬＩＣＯ",
           "delta": 56.36,
           "shares": 8600.0,
           "ratio": 0.3524
         },
         {
           "ticker": "1605",
-          "name": "Inpex Corporation",
+          "name": "ＩＮＰＥＸ",
           "delta": 51.67,
           "shares": 9100.0,
           "ratio": 1.2019
         },
         {
           "ticker": "8766",
-          "name": "Tokio Marine Holdings, Inc.",
+          "name": "東京海上ホールディングス",
           "delta": 36.36,
           "shares": 4500.0,
           "ratio": 1.0069
         },
         {
           "ticker": "9735",
-          "name": "SECOM CO., LTD.",
+          "name": "セコム",
           "delta": 26.15,
           "shares": 8200.0,
           "ratio": 1.6204
         },
         {
           "ticker": "7846",
-          "name": "Pilot Corporation",
+          "name": "パイロットコーポレーション",
           "delta": 9.84,
           "shares": 6700.0,
           "ratio": 1.0669
         },
         {
           "ticker": "3064",
-          "name": "MonotaRO Co., Ltd.",
+          "name": "ＭｏｎｏｔａＲＯ",
           "delta": 9.8,
           "shares": 67200.0,
           "ratio": 4.055
@@ -1702,7 +1702,7 @@
       "decreased": [
         {
           "ticker": "285A",
-          "name": "KIOXIA HOLDINGS CORPORATION",
+          "name": "キオクシアホールディングス",
           "delta": -75.0,
           "shares": 200.0,
           "ratio": 0.2122
@@ -1716,21 +1716,21 @@
       "increased": [
         {
           "ticker": "6857",
-          "name": "Advantest Corporation",
+          "name": "アドバンテスト",
           "delta": 27.27,
           "shares": 1400.0,
           "ratio": 1.2849
         },
         {
           "ticker": "4568",
-          "name": "Daiichi Sankyo Company, Limited",
+          "name": "第一三共",
           "delta": 26.9,
           "shares": 18400.0,
           "ratio": 1.7044
         },
         {
           "ticker": "6146",
-          "name": "Disco Corporation",
+          "name": "ディスコ",
           "delta": 11.11,
           "shares": 1000.0,
           "ratio": 2.3416
@@ -1739,28 +1739,28 @@
       "decreased": [
         {
           "ticker": "5801",
-          "name": "Furukawa Electric Co., Ltd.",
+          "name": "古河電気工業",
           "delta": -37.5,
           "shares": 500.0,
           "ratio": 0.733
         },
         {
           "ticker": "4046",
-          "name": "Osaka Soda Co., Ltd.",
+          "name": "大阪ソーダ",
           "delta": -22.73,
           "shares": 5100.0,
           "ratio": 0.3102
         },
         {
           "ticker": "5803",
-          "name": "Fujikura Ltd.",
+          "name": "フジクラ",
           "delta": -11.03,
           "shares": 12900.0,
           "ratio": 2.4614
         },
         {
           "ticker": "6367",
-          "name": "Daikin Industries,Ltd.",
+          "name": "ダイキン工業",
           "delta": -6.45,
           "shares": 2900.0,
           "ratio": 2.054
@@ -1774,7 +1774,7 @@
       "increased": [
         {
           "ticker": "9735",
-          "name": "SECOM CO., LTD.",
+          "name": "セコム",
           "delta": 12.2,
           "shares": 9200.0,
           "ratio": 1.8723
@@ -1783,63 +1783,63 @@
       "decreased": [
         {
           "ticker": "4046",
-          "name": "Osaka Soda Co., Ltd.",
+          "name": "大阪ソーダ",
           "delta": -50.98,
           "shares": 2500.0,
           "ratio": 0.1607
         },
         {
           "ticker": "285A",
-          "name": "KIOXIA HOLDINGS CORPORATION",
+          "name": "キオクシアホールディングス",
           "delta": -50.0,
           "shares": 100.0,
           "ratio": 0.1025
         },
         {
           "ticker": "5803",
-          "name": "Fujikura Ltd.",
+          "name": "フジクラ",
           "delta": -48.84,
           "shares": 6600.0,
           "ratio": 1.2769
         },
         {
           "ticker": "9697",
-          "name": "Capcom Co., Ltd.",
+          "name": "カプコン",
           "delta": -45.31,
           "shares": 3500.0,
           "ratio": 0.4312
         },
         {
           "ticker": "6754",
-          "name": "Anritsu Corporation",
+          "name": "アンリツ",
           "delta": -44.0,
           "shares": 2800.0,
           "ratio": 0.3214
         },
         {
           "ticker": "5801",
-          "name": "Furukawa Electric Co., Ltd.",
+          "name": "古河電気工業",
           "delta": -40.0,
           "shares": 300.0,
           "ratio": 0.4529
         },
         {
           "ticker": "6134",
-          "name": "Fuji Corporation",
+          "name": "ＦＵＪＩ",
           "delta": -34.29,
           "shares": 2300.0,
           "ratio": 0.4369
         },
         {
           "ticker": "6367",
-          "name": "Daikin Industries,Ltd.",
+          "name": "ダイキン工業",
           "delta": -24.14,
           "shares": 2200.0,
           "ratio": 1.5745
         },
         {
           "ticker": "6951",
-          "name": "JEOL Ltd.",
+          "name": "日本電子",
           "delta": -22.73,
           "shares": 5100.0,
           "ratio": 1.0446
@@ -1853,63 +1853,63 @@
       "increased": [
         {
           "ticker": "1605",
-          "name": "Inpex Corporation",
+          "name": "ＩＮＰＥＸ",
           "delta": 69.23,
           "shares": 15400.0,
           "ratio": 1.9305
         },
         {
           "ticker": "8766",
-          "name": "Tokio Marine Holdings, Inc.",
+          "name": "東京海上ホールディングス",
           "delta": 44.44,
           "shares": 6500.0,
           "ratio": 1.5213
         },
         {
           "ticker": "7936",
-          "name": "ASICS Corporation",
+          "name": "アシックス",
           "delta": 41.79,
           "shares": 9500.0,
           "ratio": 1.4283
         },
         {
           "ticker": "8750",
-          "name": "Daiichi Life Group, Inc.",
+          "name": "第一生命ホールディングス",
           "delta": 33.54,
           "shares": 21500.0,
           "ratio": 1.0232
         },
         {
           "ticker": "5991",
-          "name": "NHK Spring Co., Ltd.",
+          "name": "日本発條",
           "delta": 16.46,
           "shares": 9200.0,
           "ratio": 0.7707
         },
         {
           "ticker": "4568",
-          "name": "Daiichi Sankyo Company, Limited",
+          "name": "第一三共",
           "delta": 14.13,
           "shares": 21000.0,
           "ratio": 2.0551
         },
         {
           "ticker": "9735",
-          "name": "SECOM CO., LTD.",
+          "name": "セコム",
           "delta": 7.61,
           "shares": 9900.0,
           "ratio": 1.9409
         },
         {
           "ticker": "7182",
-          "name": "JAPAN POST BANK Co., Ltd.",
+          "name": "ゆうちょ銀行",
           "delta": 4.76,
           "shares": 26400.0,
           "ratio": 2.3338
         },
         {
           "ticker": "3064",
-          "name": "MonotaRO Co., Ltd.",
+          "name": "ＭｏｎｏｔａＲＯ",
           "delta": 2.98,
           "shares": 69200.0,
           "ratio": 4.1738
@@ -1918,7 +1918,7 @@
       "decreased": [
         {
           "ticker": "5803",
-          "name": "Fujikura Ltd.",
+          "name": "フジクラ",
           "delta": -31.82,
           "shares": 4500.0,
           "ratio": 0.8116
@@ -1932,28 +1932,28 @@
       "increased": [
         {
           "ticker": "7936",
-          "name": "ASICS Corporation",
+          "name": "アシックス",
           "delta": 35.79,
           "shares": 12900.0,
           "ratio": 2.0092
         },
         {
           "ticker": "1605",
-          "name": "Inpex Corporation",
+          "name": "ＩＮＰＥＸ",
           "delta": 25.32,
           "shares": 19300.0,
           "ratio": 2.5042
         },
         {
           "ticker": "6758",
-          "name": "Sony Group Corporation",
+          "name": "ソニーグループ",
           "delta": 8.83,
           "shares": 30800.0,
           "ratio": 3.5092
         },
         {
           "ticker": "9735",
-          "name": "SECOM CO., LTD.",
+          "name": "セコム",
           "delta": 8.08,
           "shares": 10700.0,
           "ratio": 2.1166
@@ -1962,84 +1962,84 @@
       "decreased": [
         {
           "ticker": "6361",
-          "name": "Ebara Corporation",
+          "name": "荏原製作所",
           "delta": -85.71,
           "shares": 600.0,
           "ratio": 0.1119
         },
         {
           "ticker": "6951",
-          "name": "JEOL Ltd.",
+          "name": "日本電子",
           "delta": -80.39,
           "shares": 1000.0,
           "ratio": 0.2203
         },
         {
           "ticker": "9697",
-          "name": "Capcom Co., Ltd.",
+          "name": "カプコン",
           "delta": -48.57,
           "shares": 1800.0,
           "ratio": 0.2147
         },
         {
           "ticker": "6954",
-          "name": "Fanuc Corporation",
+          "name": "ファナック",
           "delta": -35.53,
           "shares": 4900.0,
           "ratio": 1.0873
         },
         {
           "ticker": "9983",
-          "name": "Fast Retailing Co., Ltd.",
+          "name": "ファーストリテイリング",
           "delta": -33.33,
           "shares": 600.0,
           "ratio": 1.4664
         },
         {
           "ticker": "6367",
-          "name": "Daikin Industries,Ltd.",
+          "name": "ダイキン工業",
           "delta": -31.82,
           "shares": 1500.0,
           "ratio": 1.0856
         },
         {
           "ticker": "4613",
-          "name": "Kansai Paint Co., Ltd.",
+          "name": "関西ペイント",
           "delta": -31.25,
           "shares": 3300.0,
           "ratio": 0.2687
         },
         {
           "ticker": "8035",
-          "name": "Tokyo Electron Limited",
+          "name": "東京エレクトロン",
           "delta": -27.27,
           "shares": 1600.0,
           "ratio": 2.4812
         },
         {
           "ticker": "5803",
-          "name": "Fujikura Ltd.",
+          "name": "フジクラ",
           "delta": -22.22,
           "shares": 3500.0,
           "ratio": 0.7139
         },
         {
           "ticker": "6976",
-          "name": "Taiyo Yuden Co., Ltd.",
+          "name": "太陽誘電",
           "delta": -21.52,
           "shares": 6200.0,
           "ratio": 1.3236
         },
         {
           "ticker": "7741",
-          "name": "HOYA Corporation",
+          "name": "ＨＯＹＡ",
           "delta": -21.43,
           "shares": 1100.0,
           "ratio": 1.075
         },
         {
           "ticker": "3891",
-          "name": "Nippon Kodoshi Corporation",
+          "name": "ニッポン高度紙工業",
           "delta": -9.58,
           "shares": 15100.0,
           "ratio": 2.3056
@@ -2053,7 +2053,7 @@
       "increased": [
         {
           "ticker": "1605",
-          "name": "Inpex Corporation",
+          "name": "ＩＮＰＥＸ",
           "delta": 11.92,
           "shares": 21600.0,
           "ratio": 3.0347
@@ -2062,56 +2062,56 @@
       "decreased": [
         {
           "ticker": "6146",
-          "name": "Disco Corporation",
+          "name": "ディスコ",
           "delta": -40.0,
           "shares": 600.0,
           "ratio": 1.5292
         },
         {
           "ticker": "5801",
-          "name": "Furukawa Electric Co., Ltd.",
+          "name": "古河電気工業",
           "delta": -33.33,
           "shares": 200.0,
           "ratio": 0.3011
         },
         {
           "ticker": "7741",
-          "name": "HOYA Corporation",
+          "name": "ＨＯＹＡ",
           "delta": -27.27,
           "shares": 800.0,
           "ratio": 0.8069
         },
         {
           "ticker": "5803",
-          "name": "Fujikura Ltd.",
+          "name": "フジクラ",
           "delta": -22.86,
           "shares": 2700.0,
           "ratio": 0.5632
         },
         {
           "ticker": "6951",
-          "name": "JEOL Ltd.",
+          "name": "日本電子",
           "delta": -20.0,
           "shares": 800.0,
           "ratio": 0.1823
         },
         {
           "ticker": "5802",
-          "name": "Sumitomo Electric Industries, Ltd.",
+          "name": "住友電気工業",
           "delta": -19.12,
           "shares": 5500.0,
           "ratio": 1.9868
         },
         {
           "ticker": "3891",
-          "name": "Nippon Kodoshi Corporation",
+          "name": "ニッポン高度紙工業",
           "delta": -9.27,
           "shares": 13700.0,
           "ratio": 2.1557
         },
         {
           "ticker": "6098",
-          "name": "Recruit Holdings Co., Ltd.",
+          "name": "リクルートホールディングス",
           "delta": -7.73,
           "shares": 20300.0,
           "ratio": 5.4333
@@ -2125,35 +2125,35 @@
       "increased": [
         {
           "ticker": "9433",
-          "name": "KDDI Corporation",
+          "name": "ＫＤＤＩ",
           "delta": 106.9,
           "shares": 12000.0,
           "ratio": 1.0701
         },
         {
           "ticker": "7747",
-          "name": "Asahi Intecc Co., Ltd.",
+          "name": "朝日インテック",
           "delta": 43.33,
           "shares": 8600.0,
           "ratio": 1.0031
         },
         {
           "ticker": "4063",
-          "name": "Shin-Etsu Chemical Co., Ltd.",
+          "name": "信越化学工業",
           "delta": 14.29,
           "shares": 7200.0,
           "ratio": 1.6941
         },
         {
           "ticker": "7936",
-          "name": "ASICS Corporation",
+          "name": "アシックス",
           "delta": 8.53,
           "shares": 14000.0,
           "ratio": 2.1484
         },
         {
           "ticker": "7182",
-          "name": "JAPAN POST BANK Co., Ltd.",
+          "name": "ゆうちょ銀行",
           "delta": 7.58,
           "shares": 28400.0,
           "ratio": 2.4782
@@ -2162,7 +2162,7 @@
       "decreased": [
         {
           "ticker": "3891",
-          "name": "Nippon Kodoshi Corporation",
+          "name": "ニッポン高度紙工業",
           "delta": -5.11,
           "shares": 13000.0,
           "ratio": 2.3276
@@ -2176,49 +2176,49 @@
       "increased": [
         {
           "ticker": "6134",
-          "name": "Fuji Corporation",
+          "name": "ＦＵＪＩ",
           "delta": 213.04,
           "shares": 7200.0,
           "ratio": 1.4501
         },
         {
           "ticker": "4686",
-          "name": "JustSystems Corporation",
+          "name": "ジャストシステム",
           "delta": 34.69,
           "shares": 6600.0,
           "ratio": 0.8237
         },
         {
           "ticker": "7730",
-          "name": "Mani, Inc.",
+          "name": "マニー",
           "delta": 31.88,
           "shares": 18200.0,
           "ratio": 1.061
         },
         {
           "ticker": "7936",
-          "name": "ASICS Corporation",
+          "name": "アシックス",
           "delta": 19.29,
           "shares": 16700.0,
           "ratio": 2.5258
         },
         {
           "ticker": "8766",
-          "name": "Tokio Marine Holdings, Inc.",
+          "name": "東京海上ホールディングス",
           "delta": 13.85,
           "shares": 7400.0,
           "ratio": 1.7906
         },
         {
           "ticker": "7747",
-          "name": "Asahi Intecc Co., Ltd.",
+          "name": "朝日インテック",
           "delta": 10.47,
           "shares": 9500.0,
           "ratio": 1.063
         },
         {
           "ticker": "6758",
-          "name": "Sony Group Corporation",
+          "name": "ソニーグループ",
           "delta": 3.9,
           "shares": 32000.0,
           "ratio": 3.4457
@@ -2227,14 +2227,14 @@
       "decreased": [
         {
           "ticker": "6146",
-          "name": "Disco Corporation",
+          "name": "ディスコ",
           "delta": -16.67,
           "shares": 500.0,
           "ratio": 1.284
         },
         {
           "ticker": "8035",
-          "name": "Tokyo Electron Limited",
+          "name": "東京エレクトロン",
           "delta": -12.5,
           "shares": 1400.0,
           "ratio": 2.2272
@@ -2248,14 +2248,14 @@
       "increased": [
         {
           "ticker": "4519",
-          "name": "Chugai Pharmaceutical Co., Ltd.",
+          "name": "中外製薬",
           "delta": 77.27,
           "shares": 3900.0,
           "ratio": 1.0418
         },
         {
           "ticker": "7730",
-          "name": "Mani, Inc.",
+          "name": "マニー",
           "delta": 12.64,
           "shares": 20500.0,
           "ratio": 1.1704
@@ -2264,21 +2264,21 @@
       "decreased": [
         {
           "ticker": "6857",
-          "name": "Advantest Corporation",
+          "name": "アドバンテスト",
           "delta": -71.43,
           "shares": 400.0,
           "ratio": 0.4003
         },
         {
           "ticker": "5801",
-          "name": "Furukawa Electric Co., Ltd.",
+          "name": "古河電気工業",
           "delta": -50.0,
           "shares": 100.0,
           "ratio": 0.1443
         },
         {
           "ticker": "5803",
-          "name": "Fujikura Ltd.",
+          "name": "フジクラ",
           "delta": -22.22,
           "shares": 2100.0,
           "ratio": 0.4438
@@ -2292,21 +2292,21 @@
       "increased": [
         {
           "ticker": "6845",
-          "name": "Azbil Corporation",
+          "name": "アズビル",
           "delta": 32.94,
           "shares": 11300.0,
           "ratio": 0.5296
         },
         {
           "ticker": "6134",
-          "name": "Fuji Corporation",
+          "name": "ＦＵＪＩ",
           "delta": 29.17,
           "shares": 9300.0,
           "ratio": 1.8974
         },
         {
           "ticker": "7936",
-          "name": "ASICS Corporation",
+          "name": "アシックス",
           "delta": 5.99,
           "shares": 17700.0,
           "ratio": 2.6376
@@ -2318,7 +2318,7 @@
   "timeseries": [
     {
       "ticker": "6981",
-      "name": "Murata Manufacturing Co., Ltd.",
+      "name": "村田製作所",
       "series": [
         {
           "date": "2026-02-24",
@@ -2480,7 +2480,7 @@
     },
     {
       "ticker": "7203",
-      "name": "Toyota Motor Corporation",
+      "name": "トヨタ自動車",
       "series": [
         {
           "date": "2026-02-24",
@@ -2642,7 +2642,7 @@
     },
     {
       "ticker": "6098",
-      "name": "Recruit Holdings Co., Ltd.",
+      "name": "リクルートホールディングス",
       "series": [
         {
           "date": "2026-02-24",
@@ -2804,7 +2804,7 @@
     },
     {
       "ticker": "3064",
-      "name": "MonotaRO Co., Ltd.",
+      "name": "ＭｏｎｏｔａＲＯ",
       "series": [
         {
           "date": "2026-02-24",
@@ -2966,7 +2966,7 @@
     },
     {
       "ticker": "6758",
-      "name": "Sony Group Corporation",
+      "name": "ソニーグループ",
       "series": [
         {
           "date": "2026-02-24",
@@ -3128,7 +3128,7 @@
     },
     {
       "ticker": "6504",
-      "name": "Fuji Electric Co., Ltd.",
+      "name": "富士電機",
       "series": [
         {
           "date": "2026-02-24",
@@ -3290,7 +3290,7 @@
     },
     {
       "ticker": "1605",
-      "name": "Inpex Corporation",
+      "name": "ＩＮＰＥＸ",
       "series": [
         {
           "date": "2026-02-24",
@@ -3452,7 +3452,7 @@
     },
     {
       "ticker": "5631",
-      "name": "The Japan Steel Works, Ltd.",
+      "name": "日本製鋼所",
       "series": [
         {
           "date": "2026-02-24",
@@ -3614,7 +3614,7 @@
     },
     {
       "ticker": "3891",
-      "name": "Nippon Kodoshi Corporation",
+      "name": "ニッポン高度紙工業",
       "series": [
         {
           "date": "2026-02-24",
@@ -3776,7 +3776,7 @@
     },
     {
       "ticker": "7936",
-      "name": "ASICS Corporation",
+      "name": "アシックス",
       "series": [
         {
           "date": "2026-02-24",
@@ -3938,7 +3938,7 @@
     },
     {
       "ticker": "8053",
-      "name": "Sumitomo Corporation",
+      "name": "住友商事",
       "series": [
         {
           "date": "2026-02-24",
@@ -4100,7 +4100,7 @@
     },
     {
       "ticker": "7182",
-      "name": "JAPAN POST BANK Co., Ltd.",
+      "name": "ゆうちょ銀行",
       "series": [
         {
           "date": "2026-02-24",
@@ -4262,7 +4262,7 @@
     },
     {
       "ticker": "4022",
-      "name": "Rasa Industries, Ltd.",
+      "name": "ラサ工業",
       "series": [
         {
           "date": "2026-02-24",
@@ -4424,7 +4424,7 @@
     },
     {
       "ticker": "8035",
-      "name": "Tokyo Electron Limited",
+      "name": "東京エレクトロン",
       "series": [
         {
           "date": "2026-02-24",
@@ -4586,7 +4586,7 @@
     },
     {
       "ticker": "9735",
-      "name": "SECOM CO., LTD.",
+      "name": "セコム",
       "series": [
         {
           "date": "2026-02-24",
@@ -4748,7 +4748,7 @@
     },
     {
       "ticker": "6134",
-      "name": "Fuji Corporation",
+      "name": "ＦＵＪＩ",
       "series": [
         {
           "date": "2026-02-24",
@@ -4910,7 +4910,7 @@
     },
     {
       "ticker": "5802",
-      "name": "Sumitomo Electric Industries, Ltd.",
+      "name": "住友電気工業",
       "series": [
         {
           "date": "2026-02-24",
@@ -5072,7 +5072,7 @@
     },
     {
       "ticker": "4568",
-      "name": "Daiichi Sankyo Company, Limited",
+      "name": "第一三共",
       "series": [
         {
           "date": "2026-02-24",
@@ -5234,7 +5234,7 @@
     },
     {
       "ticker": "8766",
-      "name": "Tokio Marine Holdings, Inc.",
+      "name": "東京海上ホールディングス",
       "series": [
         {
           "date": "2026-02-24",
@@ -5396,7 +5396,7 @@
     },
     {
       "ticker": "4063",
-      "name": "Shin-Etsu Chemical Co., Ltd.",
+      "name": "信越化学工業",
       "series": [
         {
           "date": "2026-02-24",
@@ -5560,7 +5560,7 @@
   "latest": [
     {
       "ticker": "6981",
-      "name": "Murata Manufacturing Co., Ltd.",
+      "name": "村田製作所",
       "ratio": 7.3677,
       "shares": 42500.0,
       "delta": 0.4474,
@@ -5568,7 +5568,7 @@
     },
     {
       "ticker": "7203",
-      "name": "Toyota Motor Corporation",
+      "name": "トヨタ自動車",
       "ratio": 6.1493,
       "shares": 60500.0,
       "delta": -0.1848,
@@ -5576,7 +5576,7 @@
     },
     {
       "ticker": "6098",
-      "name": "Recruit Holdings Co., Ltd.",
+      "name": "リクルートホールディングス",
       "ratio": 4.9846,
       "shares": 20300.0,
       "delta": -0.1129,
@@ -5584,7 +5584,7 @@
     },
     {
       "ticker": "3064",
-      "name": "MonotaRO Co., Ltd.",
+      "name": "ＭｏｎｏｔａＲＯ",
       "ratio": 4.323,
       "shares": 69200.0,
       "delta": -0.0433,
@@ -5592,7 +5592,7 @@
     },
     {
       "ticker": "6758",
-      "name": "Sony Group Corporation",
+      "name": "ソニーグループ",
       "ratio": 3.3494,
       "shares": 32000.0,
       "delta": -0.1322,
@@ -5600,7 +5600,7 @@
     },
     {
       "ticker": "6504",
-      "name": "Fuji Electric Co., Ltd.",
+      "name": "富士電機",
       "ratio": 3.0797,
       "shares": 7000.0,
       "delta": 0.1006,
@@ -5608,7 +5608,7 @@
     },
     {
       "ticker": "1605",
-      "name": "Inpex Corporation",
+      "name": "ＩＮＰＥＸ",
       "ratio": 3.0139,
       "shares": 21600.0,
       "delta": 0.0178,
@@ -5616,7 +5616,7 @@
     },
     {
       "ticker": "5631",
-      "name": "The Japan Steel Works, Ltd.",
+      "name": "日本製鋼所",
       "ratio": 2.999,
       "shares": 9400.0,
       "delta": -0.0875,
@@ -5624,7 +5624,7 @@
     },
     {
       "ticker": "3891",
-      "name": "Nippon Kodoshi Corporation",
+      "name": "ニッポン高度紙工業",
       "ratio": 2.7799,
       "shares": 13000.0,
       "delta": -0.0279,
@@ -5632,7 +5632,7 @@
     },
     {
       "ticker": "7936",
-      "name": "ASICS Corporation",
+      "name": "アシックス",
       "ratio": 2.6376,
       "shares": 17700.0,
       "delta": 0.079,
@@ -5640,7 +5640,7 @@
     },
     {
       "ticker": "8053",
-      "name": "Sumitomo Corporation",
+      "name": "住友商事",
       "ratio": 2.5919,
       "shares": 13200.0,
       "delta": 0.0158,
@@ -5648,7 +5648,7 @@
     },
     {
       "ticker": "7182",
-      "name": "JAPAN POST BANK Co., Ltd.",
+      "name": "ゆうちょ銀行",
       "ratio": 2.5677,
       "shares": 28400.0,
       "delta": -0.0087,
@@ -5656,7 +5656,7 @@
     },
     {
       "ticker": "4022",
-      "name": "Rasa Industries, Ltd.",
+      "name": "ラサ工業",
       "ratio": 2.2824,
       "shares": 31900.0,
       "delta": 0.0287,
@@ -5664,7 +5664,7 @@
     },
     {
       "ticker": "8035",
-      "name": "Tokyo Electron Limited",
+      "name": "東京エレクトロン",
       "ratio": 2.0895,
       "shares": 1400.0,
       "delta": -0.0371,
@@ -5672,7 +5672,7 @@
     },
     {
       "ticker": "9735",
-      "name": "SECOM CO., LTD.",
+      "name": "セコム",
       "ratio": 2.065,
       "shares": 10700.0,
       "delta": -0.0078,
@@ -5680,7 +5680,7 @@
     },
     {
       "ticker": "6134",
-      "name": "Fuji Corporation",
+      "name": "ＦＵＪＩ",
       "ratio": 1.8974,
       "shares": 9300.0,
       "delta": 0.4288,
@@ -5688,7 +5688,7 @@
     },
     {
       "ticker": "5802",
-      "name": "Sumitomo Electric Industries, Ltd.",
+      "name": "住友電気工業",
       "ratio": 1.8844,
       "shares": 5500.0,
       "delta": -0.0011,
@@ -5696,7 +5696,7 @@
     },
     {
       "ticker": "4568",
-      "name": "Daiichi Sankyo Company, Limited",
+      "name": "第一三共",
       "ratio": 1.8277,
       "shares": 21000.0,
       "delta": -0.0449,
@@ -5704,7 +5704,7 @@
     },
     {
       "ticker": "8766",
-      "name": "Tokio Marine Holdings, Inc.",
+      "name": "東京海上ホールディングス",
       "ratio": 1.7919,
       "shares": 7400.0,
       "delta": -0.01,
@@ -5712,7 +5712,7 @@
     },
     {
       "ticker": "4063",
-      "name": "Shin-Etsu Chemical Co., Ltd.",
+      "name": "信越化学工業",
       "ratio": 1.7541,
       "shares": 7200.0,
       "delta": 0.0389,
@@ -5720,7 +5720,7 @@
     },
     {
       "ticker": "7832",
-      "name": "BANDAI NAMCO Holdings Inc.",
+      "name": "バンダイナムコホールディングス",
       "ratio": 1.6567,
       "shares": 13600.0,
       "delta": -0.0458,
@@ -5728,7 +5728,7 @@
     },
     {
       "ticker": "3382",
-      "name": "Seven & i Holdings Co., Ltd.",
+      "name": "セブン＆アイ・ホールディングス",
       "ratio": 1.6042,
       "shares": 25500.0,
       "delta": -0.043,
@@ -5736,7 +5736,7 @@
     },
     {
       "ticker": "4461",
-      "name": "DKS Co. Ltd.",
+      "name": "第一工業製薬",
       "ratio": 1.5778,
       "shares": 5600.0,
       "delta": 0.0122,
@@ -5744,7 +5744,7 @@
     },
     {
       "ticker": "8830",
-      "name": "Sumitomo Realty & Development Co., Ltd.",
+      "name": "住友不動産",
       "ratio": 1.5469,
       "shares": 9500.0,
       "delta": 0.0214,
@@ -5752,7 +5752,7 @@
     },
     {
       "ticker": "9983",
-      "name": "Fast Retailing Co., Ltd.",
+      "name": "ファーストリテイリング",
       "ratio": 1.4846,
       "shares": 600.0,
       "delta": 0.0076,
@@ -5760,7 +5760,7 @@
     },
     {
       "ticker": "4666",
-      "name": "PARK24 Co., Ltd.",
+      "name": "パーク２４",
       "ratio": 1.4136,
       "shares": 23000.0,
       "delta": -0.0535,
@@ -5768,7 +5768,7 @@
     },
     {
       "ticker": "6976",
-      "name": "Taiyo Yuden Co., Ltd.",
+      "name": "太陽誘電",
       "ratio": 1.3325,
       "shares": 6200.0,
       "delta": -0.0412,
@@ -5776,7 +5776,7 @@
     },
     {
       "ticker": "8111",
-      "name": "Goldwin Inc.",
+      "name": "ゴールドウイン",
       "ratio": 1.2688,
       "shares": 17200.0,
       "delta": -0.019,
@@ -5784,7 +5784,7 @@
     },
     {
       "ticker": "6146",
-      "name": "Disco Corporation",
+      "name": "ディスコ",
       "ratio": 1.2442,
       "shares": 500.0,
       "delta": -0.0416,
@@ -5792,7 +5792,7 @@
     },
     {
       "ticker": "6861",
-      "name": "Keyence Corporation",
+      "name": "キーエンス",
       "ratio": 1.1986,
       "shares": 500.0,
       "delta": -0.0428,
@@ -5800,7 +5800,7 @@
     },
     {
       "ticker": "7730",
-      "name": "Mani, Inc.",
+      "name": "マニー",
       "ratio": 1.178,
       "shares": 20500.0,
       "delta": 0.0076,
@@ -5808,7 +5808,7 @@
     },
     {
       "ticker": "6954",
-      "name": "Fanuc Corporation",
+      "name": "ファナック",
       "ratio": 1.1327,
       "shares": 4900.0,
       "delta": -0.0148,
@@ -5816,7 +5816,7 @@
     },
     {
       "ticker": "4516",
-      "name": "Nippon Shinyaku Co., Ltd.",
+      "name": "日本新薬",
       "ratio": 1.1113,
       "shares": 6900.0,
       "delta": -0.0236,
@@ -5824,7 +5824,7 @@
     },
     {
       "ticker": "6367",
-      "name": "Daikin Industries,Ltd.",
+      "name": "ダイキン工業",
       "ratio": 1.1078,
       "shares": 1500.0,
       "delta": 0.0044,
@@ -5832,7 +5832,7 @@
     },
     {
       "ticker": "7846",
-      "name": "Pilot Corporation",
+      "name": "パイロットコーポレーション",
       "ratio": 1.0791,
       "shares": 6700.0,
       "delta": -0.0125,
@@ -5840,7 +5840,7 @@
     },
     {
       "ticker": "4519",
-      "name": "Chugai Pharmaceutical Co., Ltd.",
+      "name": "中外製薬",
       "ratio": 1.0642,
       "shares": 3900.0,
       "delta": 0.0224,
@@ -5848,7 +5848,7 @@
     },
     {
       "ticker": "7747",
-      "name": "Asahi Intecc Co., Ltd.",
+      "name": "朝日インテック",
       "ratio": 1.0534,
       "shares": 9500.0,
       "delta": -0.0377,
@@ -5856,7 +5856,7 @@
     },
     {
       "ticker": "9433",
-      "name": "KDDI Corporation",
+      "name": "ＫＤＤＩ",
       "ratio": 1.042,
       "shares": 12000.0,
       "delta": 0.0006,
@@ -5864,7 +5864,7 @@
     },
     {
       "ticker": "8750",
-      "name": "Daiichi Life Group, Inc.",
+      "name": "第一生命ホールディングス",
       "ratio": 1.041,
       "shares": 21500.0,
       "delta": -0.0035,
@@ -5872,7 +5872,7 @@
     },
     {
       "ticker": "8015",
-      "name": "Toyota Tsusho Corporation",
+      "name": "豊田通商",
       "ratio": 0.9436,
       "shares": 4600.0,
       "delta": -0.0436,
@@ -5880,7 +5880,7 @@
     },
     {
       "ticker": "8306",
-      "name": "Mitsubishi UFJ Financial Group, Inc.",
+      "name": "三菱ＵＦＪフィナンシャル・グループ",
       "ratio": 0.9282,
       "shares": 9800.0,
       "delta": -0.0197,
@@ -5888,7 +5888,7 @@
     },
     {
       "ticker": "5991",
-      "name": "NHK Spring Co., Ltd.",
+      "name": "日本発條",
       "ratio": 0.8872,
       "shares": 9200.0,
       "delta": 0.0337,
@@ -5896,7 +5896,7 @@
     },
     {
       "ticker": "4686",
-      "name": "JustSystems Corporation",
+      "name": "ジャストシステム",
       "ratio": 0.82,
       "shares": 6600.0,
       "delta": -0.0127,
@@ -5904,7 +5904,7 @@
     },
     {
       "ticker": "7741",
-      "name": "HOYA Corporation",
+      "name": "ＨＯＹＡ",
       "ratio": 0.7827,
       "shares": 800.0,
       "delta": -0.006,
@@ -5912,7 +5912,7 @@
     },
     {
       "ticker": "7202",
-      "name": "Isuzu Motors Limited",
+      "name": "いすゞ自動車",
       "ratio": 0.6783,
       "shares": 9400.0,
       "delta": -0.0399,
@@ -5920,7 +5920,7 @@
     },
     {
       "ticker": "4088",
-      "name": "Air Water Inc.",
+      "name": "エア・ウォーター",
       "ratio": 0.6639,
       "shares": 8900.0,
       "delta": -0.0128,
@@ -5928,7 +5928,7 @@
     },
     {
       "ticker": "9830",
-      "name": "Trusco Nakayama Corporation",
+      "name": "トラスコ中山",
       "ratio": 0.6327,
       "shares": 8700.0,
       "delta": -0.044,
@@ -5936,7 +5936,7 @@
     },
     {
       "ticker": "7532",
-      "name": "Pan Pacific International Holdings Corporation",
+      "name": "パン・パシフィック・インターナショナルホールディングス",
       "ratio": 0.622,
       "shares": 20800.0,
       "delta": -0.0083,
@@ -5944,7 +5944,7 @@
     },
     {
       "ticker": "6750",
-      "name": "Elecom Co., Ltd.",
+      "name": "エレコム",
       "ratio": 0.5614,
       "shares": 10300.0,
       "delta": -0.0014,
@@ -5952,7 +5952,7 @@
     },
     {
       "ticker": "6845",
-      "name": "Azbil Corporation",
+      "name": "アズビル",
       "ratio": 0.5296,
       "shares": 11300.0,
       "delta": 0.1317,
@@ -5960,7 +5960,7 @@
     },
     {
       "ticker": "4684",
-      "name": "OBIC Co.,Ltd.",
+      "name": "オービック",
       "ratio": 0.5176,
       "shares": 3700.0,
       "delta": -0.0168,
@@ -5968,7 +5968,7 @@
     },
     {
       "ticker": "2001",
-      "name": "Nippn Corporation",
+      "name": "ニップン",
       "ratio": 0.4726,
       "shares": 5300.0,
       "delta": -0.001,
@@ -5976,7 +5976,7 @@
     },
     {
       "ticker": "5803",
-      "name": "Fujikura Ltd.",
+      "name": "フジクラ",
       "ratio": 0.4216,
       "shares": 2100.0,
       "delta": -0.0222,
@@ -5984,7 +5984,7 @@
     },
     {
       "ticker": "6754",
-      "name": "Anritsu Corporation",
+      "name": "アンリツ",
       "ratio": 0.3802,
       "shares": 2800.0,
       "delta": 0.0058,
@@ -5992,7 +5992,7 @@
     },
     {
       "ticker": "6857",
-      "name": "Advantest Corporation",
+      "name": "アドバンテスト",
       "ratio": 0.3801,
       "shares": 400.0,
       "delta": -0.0202,
@@ -6000,7 +6000,7 @@
     },
     {
       "ticker": "7366",
-      "name": "LITALICO Inc.",
+      "name": "ＬＩＴＡＬＩＣＯ",
       "ratio": 0.3476,
       "shares": 8600.0,
       "delta": -0.008,
@@ -6008,7 +6008,7 @@
     },
     {
       "ticker": "1925",
-      "name": "Daiwa House Industry Co., Ltd.",
+      "name": "大和ハウス工業",
       "ratio": 0.322,
       "shares": 2000.0,
       "delta": -0.0061,
@@ -6016,7 +6016,7 @@
     },
     {
       "ticker": "6702",
-      "name": "Fujitsu Limited",
+      "name": "富士通",
       "ratio": 0.2887,
       "shares": 2700.0,
       "delta": -0.0468,
@@ -6024,7 +6024,7 @@
     },
     {
       "ticker": "6278",
-      "name": "Union Tool Co.",
+      "name": "ユニオンツール",
       "ratio": 0.2799,
       "shares": 500.0,
       "delta": 0.0044,
@@ -6032,7 +6032,7 @@
     },
     {
       "ticker": "4613",
-      "name": "Kansai Paint Co., Ltd.",
+      "name": "関西ペイント",
       "ratio": 0.2599,
       "shares": 3300.0,
       "delta": -0.0038,
@@ -6040,7 +6040,7 @@
     },
     {
       "ticker": "6301",
-      "name": "Komatsu Ltd.",
+      "name": "小松製作所",
       "ratio": 0.2425,
       "shares": 1100.0,
       "delta": -0.0112,
@@ -6048,7 +6048,7 @@
     },
     {
       "ticker": "2802",
-      "name": "Ajinomoto Co., Inc.",
+      "name": "味の素",
       "ratio": 0.2225,
       "shares": 1300.0,
       "delta": 0.014,
@@ -6056,7 +6056,7 @@
     },
     {
       "ticker": "4071",
-      "name": "Plus Alpha Consulting Co.,Ltd.",
+      "name": "プラスアルファ・コンサルティング",
       "ratio": 0.2127,
       "shares": 2900.0,
       "delta": -0.0012,
@@ -6064,7 +6064,7 @@
     },
     {
       "ticker": "3923",
-      "name": "Rakus Co., Ltd.",
+      "name": "ラクス",
       "ratio": 0.2073,
       "shares": 7200.0,
       "delta": -0.0038,
@@ -6072,7 +6072,7 @@
     },
     {
       "ticker": "9697",
-      "name": "Capcom Co., Ltd.",
+      "name": "カプコン",
       "ratio": 0.1999,
       "shares": 1800.0,
       "delta": -0.0114,
@@ -6080,7 +6080,7 @@
     },
     {
       "ticker": "4403",
-      "name": "NOF Corporation",
+      "name": "日油",
       "ratio": 0.1943,
       "shares": 1800.0,
       "delta": -0.003,
@@ -6088,7 +6088,7 @@
     },
     {
       "ticker": "5334",
-      "name": "Niterra Co., Ltd.",
+      "name": "日本特殊陶業",
       "ratio": 0.1697,
       "shares": 600.0,
       "delta": -0.0028,
@@ -6096,7 +6096,7 @@
     },
     {
       "ticker": "6951",
-      "name": "JEOL Ltd.",
+      "name": "日本電子",
       "ratio": 0.1688,
       "shares": 800.0,
       "delta": -0.0023,
@@ -6104,7 +6104,7 @@
     },
     {
       "ticker": "4046",
-      "name": "Osaka Soda Co., Ltd.",
+      "name": "大阪ソーダ",
       "ratio": 0.1573,
       "shares": 2500.0,
       "delta": -0.0013,
@@ -6112,7 +6112,7 @@
     },
     {
       "ticker": "5801",
-      "name": "Furukawa Electric Co., Ltd.",
+      "name": "古河電気工業",
       "ratio": 0.1425,
       "shares": 100.0,
       "delta": -0.0018,
@@ -6120,7 +6120,7 @@
     },
     {
       "ticker": "285A",
-      "name": "KIOXIA HOLDINGS CORPORATION",
+      "name": "キオクシアホールディングス",
       "ratio": 0.1263,
       "shares": 100.0,
       "delta": 0.0041,
@@ -6128,7 +6128,7 @@
     },
     {
       "ticker": "6762",
-      "name": "TDK Corporation",
+      "name": "ＴＤＫ",
       "ratio": 0.1263,
       "shares": 1300.0,
       "delta": 0.0092,
@@ -6136,7 +6136,7 @@
     },
     {
       "ticker": "6501",
-      "name": "Hitachi, Ltd.",
+      "name": "日立製作所",
       "ratio": 0.1149,
       "shares": 700.0,
       "delta": -0.004,
@@ -6144,7 +6144,7 @@
     },
     {
       "ticker": "6383",
-      "name": "Daifuku Co., Ltd.",
+      "name": "ダイフク",
       "ratio": 0.114,
       "shares": 500.0,
       "delta": 0.0015,
@@ -6152,7 +6152,7 @@
     },
     {
       "ticker": "6361",
-      "name": "Ebara Corporation",
+      "name": "荏原製作所",
       "ratio": 0.1075,
       "shares": 600.0,
       "delta": -0.002,
@@ -6160,7 +6160,7 @@
     },
     {
       "ticker": "8001",
-      "name": "ITOCHU Corporation",
+      "name": "伊藤忠商事",
       "ratio": 0.1043,
       "shares": 1600.0,
       "delta": -0.0011,
@@ -6168,7 +6168,7 @@
     },
     {
       "ticker": "6331",
-      "name": "Mitsubishi Kakoki Kaisha, Ltd.",
+      "name": "三菱化工機",
       "ratio": 0.0962,
       "shares": 900.0,
       "delta": -0.0008,
@@ -6178,7 +6178,7 @@
   "strong_buys": [
     {
       "ticker": "9433",
-      "name": "KDDI Corporation",
+      "name": "ＫＤＤＩ",
       "cumulative_pct": 990.9,
       "value": 30990000,
       "shares": 12000.0,
@@ -6187,7 +6187,7 @@
     },
     {
       "ticker": "1605",
-      "name": "Inpex Corporation",
+      "name": "ＩＮＰＥＸ",
       "cumulative_pct": 260.0,
       "value": 89640000,
       "shares": 21600.0,
@@ -6196,7 +6196,7 @@
     },
     {
       "ticker": "7747",
-      "name": "Asahi Intecc Co., Ltd.",
+      "name": "朝日インテック",
       "cumulative_pct": 216.7,
       "value": 31331000,
       "shares": 9500.0,
@@ -6205,7 +6205,7 @@
     },
     {
       "ticker": "6134",
-      "name": "Fuji Corporation",
+      "name": "ＦＵＪＩ",
       "cumulative_pct": 165.7,
       "value": 56432400,
       "shares": 9300.0,
@@ -6214,7 +6214,7 @@
     },
     {
       "ticker": "7936",
-      "name": "ASICS Corporation",
+      "name": "アシックス",
       "cumulative_pct": 164.2,
       "value": 78446400,
       "shares": 17700.0,
@@ -6223,7 +6223,7 @@
     },
     {
       "ticker": "8766",
-      "name": "Tokio Marine Holdings, Inc.",
+      "name": "東京海上ホールディングス",
       "cumulative_pct": 124.2,
       "value": 53294800,
       "shares": 7400.0,
@@ -6232,7 +6232,7 @@
     },
     {
       "ticker": "4519",
-      "name": "Chugai Pharmaceutical Co., Ltd.",
+      "name": "中外製薬",
       "cumulative_pct": 77.3,
       "value": 31652400,
       "shares": 3900.0,
@@ -6244,7 +6244,7 @@
   "buyup_pnl": [
     {
       "ticker": "3891",
-      "name": "Nippon Kodoshi Corporation",
+      "name": "ニッポン高度紙工業",
       "total_added_shares": 2000.0,
       "latest_shares": 13000.0,
       "latest_price": 6360.0,
@@ -6266,7 +6266,7 @@
     },
     {
       "ticker": "4022",
-      "name": "Rasa Industries, Ltd.",
+      "name": "ラサ工業",
       "total_added_shares": 4600.0,
       "latest_shares": 31900.0,
       "latest_price": 2128.0,
@@ -6288,7 +6288,7 @@
     },
     {
       "ticker": "6981",
-      "name": "Murata Manufacturing Co., Ltd.",
+      "name": "村田製作所",
       "total_added_shares": 2400.0,
       "latest_shares": 42500.0,
       "latest_price": 5156.0,
@@ -6305,7 +6305,7 @@
     },
     {
       "ticker": "6361",
-      "name": "Ebara Corporation",
+      "name": "荏原製作所",
       "total_added_shares": 900.0,
       "latest_shares": 600.0,
       "latest_price": 5327.0,
@@ -6322,7 +6322,7 @@
     },
     {
       "ticker": "5991",
-      "name": "NHK Spring Co., Ltd.",
+      "name": "日本発條",
       "total_added_shares": 1300.0,
       "latest_shares": 9200.0,
       "latest_price": 2868.0,
@@ -6339,7 +6339,7 @@
     },
     {
       "ticker": "4063",
-      "name": "Shin-Etsu Chemical Co., Ltd.",
+      "name": "信越化学工業",
       "total_added_shares": 900.0,
       "latest_shares": 7200.0,
       "latest_price": 7246.0,
@@ -6356,7 +6356,7 @@
     },
     {
       "ticker": "1605",
-      "name": "Inpex Corporation",
+      "name": "ＩＮＰＥＸ",
       "total_added_shares": 15600.0,
       "latest_shares": 21600.0,
       "latest_price": 4150.0,
@@ -6388,7 +6388,7 @@
     },
     {
       "ticker": "3064",
-      "name": "MonotaRO Co., Ltd.",
+      "name": "ＭｏｎｏｔａＲＯ",
       "total_added_shares": 29300.0,
       "latest_shares": 69200.0,
       "latest_price": 1858.0,
@@ -6425,7 +6425,7 @@
     },
     {
       "ticker": "4461",
-      "name": "DKS Co. Ltd.",
+      "name": "第一工業製薬",
       "total_added_shares": 800.0,
       "latest_shares": 5600.0,
       "latest_price": 8380.0,
@@ -6442,7 +6442,7 @@
     },
     {
       "ticker": "4071",
-      "name": "Plus Alpha Consulting Co.,Ltd.",
+      "name": "プラスアルファ・コンサルティング",
       "total_added_shares": 2300.0,
       "latest_shares": 2900.0,
       "latest_price": 2181.0,
@@ -6459,7 +6459,7 @@
     },
     {
       "ticker": "6857",
-      "name": "Advantest Corporation",
+      "name": "アドバンテスト",
       "total_added_shares": 800.0,
       "latest_shares": 400.0,
       "latest_price": 28260.0,
@@ -6481,7 +6481,7 @@
     },
     {
       "ticker": "7182",
-      "name": "JAPAN POST BANK Co., Ltd.",
+      "name": "ゆうちょ銀行",
       "total_added_shares": 9700.0,
       "latest_shares": 28400.0,
       "latest_price": 2689.0,
@@ -6508,7 +6508,7 @@
     },
     {
       "ticker": "4519",
-      "name": "Chugai Pharmaceutical Co., Ltd.",
+      "name": "中外製薬",
       "total_added_shares": 1700.0,
       "latest_shares": 3900.0,
       "latest_price": 8116.0,
@@ -6525,7 +6525,7 @@
     },
     {
       "ticker": "8766",
-      "name": "Tokio Marine Holdings, Inc.",
+      "name": "東京海上ホールディングス",
       "total_added_shares": 4100.0,
       "latest_shares": 7400.0,
       "latest_price": 7202.0,
@@ -6552,7 +6552,7 @@
     },
     {
       "ticker": "6146",
-      "name": "Disco Corporation",
+      "name": "ディスコ",
       "total_added_shares": 100.0,
       "latest_shares": 500.0,
       "latest_price": 74010.0,
@@ -6569,7 +6569,7 @@
     },
     {
       "ticker": "6134",
-      "name": "Fuji Corporation",
+      "name": "ＦＵＪＩ",
       "total_added_shares": 7000.0,
       "latest_shares": 9300.0,
       "latest_price": 6068.0,
@@ -6591,7 +6591,7 @@
     },
     {
       "ticker": "4684",
-      "name": "OBIC Co.,Ltd.",
+      "name": "オービック",
       "total_added_shares": 2200.0,
       "latest_shares": 3700.0,
       "latest_price": 4161.0,
@@ -6608,7 +6608,7 @@
     },
     {
       "ticker": "5802",
-      "name": "Sumitomo Electric Industries, Ltd.",
+      "name": "住友電気工業",
       "total_added_shares": 1800.0,
       "latest_shares": 5500.0,
       "latest_price": 10190.0,
@@ -6630,7 +6630,7 @@
     },
     {
       "ticker": "4686",
-      "name": "JustSystems Corporation",
+      "name": "ジャストシステム",
       "total_added_shares": 1700.0,
       "latest_shares": 6600.0,
       "latest_price": 3695.0,
@@ -6647,7 +6647,7 @@
     },
     {
       "ticker": "6845",
-      "name": "Azbil Corporation",
+      "name": "アズビル",
       "total_added_shares": 2800.0,
       "latest_shares": 11300.0,
       "latest_price": 1394.0,
@@ -6664,7 +6664,7 @@
     },
     {
       "ticker": "7730",
-      "name": "Mani, Inc.",
+      "name": "マニー",
       "total_added_shares": 6700.0,
       "latest_shares": 20500.0,
       "latest_price": 1709.0,
@@ -6686,7 +6686,7 @@
     },
     {
       "ticker": "9433",
-      "name": "KDDI Corporation",
+      "name": "ＫＤＤＩ",
       "total_added_shares": 10900.0,
       "latest_shares": 12000.0,
       "latest_price": 2582.5,
@@ -6708,7 +6708,7 @@
     },
     {
       "ticker": "3923",
-      "name": "Rakus Co., Ltd.",
+      "name": "ラクス",
       "total_added_shares": 6800.0,
       "latest_shares": 7200.0,
       "latest_price": 856.3,
@@ -6725,7 +6725,7 @@
     },
     {
       "ticker": "7846",
-      "name": "Pilot Corporation",
+      "name": "パイロットコーポレーション",
       "total_added_shares": 600.0,
       "latest_shares": 6700.0,
       "latest_price": 4790.0,
@@ -6742,7 +6742,7 @@
     },
     {
       "ticker": "9983",
-      "name": "Fast Retailing Co., Ltd.",
+      "name": "ファーストリテイリング",
       "total_added_shares": 100.0,
       "latest_shares": 600.0,
       "latest_price": 73590.0,
@@ -6759,7 +6759,7 @@
     },
     {
       "ticker": "7936",
-      "name": "ASICS Corporation",
+      "name": "アシックス",
       "total_added_shares": 11000.0,
       "latest_shares": 17700.0,
       "latest_price": 4432.0,
@@ -6796,7 +6796,7 @@
     },
     {
       "ticker": "8750",
-      "name": "Daiichi Life Group, Inc.",
+      "name": "第一生命ホールディングス",
       "total_added_shares": 13300.0,
       "latest_shares": 21500.0,
       "latest_price": 1440.0,
@@ -6823,7 +6823,7 @@
     },
     {
       "ticker": "5631",
-      "name": "The Japan Steel Works, Ltd.",
+      "name": "日本製鋼所",
       "total_added_shares": 1500.0,
       "latest_shares": 9400.0,
       "latest_price": 9489.0,
@@ -6840,7 +6840,7 @@
     },
     {
       "ticker": "7366",
-      "name": "LITALICO Inc.",
+      "name": "ＬＩＴＡＬＩＣＯ",
       "total_added_shares": 3100.0,
       "latest_shares": 8600.0,
       "latest_price": 1202.0,
@@ -6857,7 +6857,7 @@
     },
     {
       "ticker": "9735",
-      "name": "SECOM CO., LTD.",
+      "name": "セコム",
       "total_added_shares": 5200.0,
       "latest_shares": 10700.0,
       "latest_price": 5740.0,
@@ -6894,7 +6894,7 @@
     },
     {
       "ticker": "7747",
-      "name": "Asahi Intecc Co., Ltd.",
+      "name": "朝日インテック",
       "total_added_shares": 6500.0,
       "latest_shares": 9500.0,
       "latest_price": 3298.0,
@@ -6921,7 +6921,7 @@
     },
     {
       "ticker": "6758",
-      "name": "Sony Group Corporation",
+      "name": "ソニーグループ",
       "total_added_shares": 3700.0,
       "latest_shares": 32000.0,
       "latest_price": 3113.0,
@@ -6943,7 +6943,7 @@
     },
     {
       "ticker": "8015",
-      "name": "Toyota Tsusho Corporation",
+      "name": "豊田通商",
       "total_added_shares": 2300.0,
       "latest_shares": 4600.0,
       "latest_price": 6101.0,
@@ -6960,7 +6960,7 @@
     },
     {
       "ticker": "4568",
-      "name": "Daiichi Sankyo Company, Limited",
+      "name": "第一三共",
       "total_added_shares": 6500.0,
       "latest_shares": 21000.0,
       "latest_price": 2588.5,
@@ -6984,7 +6984,7 @@
   "trading_analysis": [
     {
       "ticker": "1605",
-      "name": "Inpex Corporation",
+      "name": "ＩＮＰＥＸ",
       "base_date": "2026-04-02",
       "base_price": 4701.0,
       "latest_price": 4150.0,
@@ -7018,7 +7018,7 @@
     },
     {
       "ticker": "4519",
-      "name": "Chugai Pharmaceutical Co., Ltd.",
+      "name": "中外製薬",
       "base_date": "2026-04-02",
       "base_price": 9000.0,
       "latest_price": 8116.0,
@@ -7043,7 +7043,7 @@
     },
     {
       "ticker": "8766",
-      "name": "Tokio Marine Holdings, Inc.",
+      "name": "東京海上ホールディングス",
       "base_date": "2026-04-02",
       "base_price": 7490.0,
       "latest_price": 7202.0,
@@ -7072,7 +7072,7 @@
     },
     {
       "ticker": "8001",
-      "name": "ITOCHU Corporation",
+      "name": "伊藤忠商事",
       "base_date": "2026-04-02",
       "base_price": 2070.0,
       "latest_price": 1938.0,
@@ -7091,7 +7091,7 @@
     },
     {
       "ticker": "8111",
-      "name": "Goldwin Inc.",
+      "name": "ゴールドウイン",
       "base_date": "2026-04-02",
       "base_price": 2266.0,
       "latest_price": 2194.0,
@@ -7110,7 +7110,7 @@
     },
     {
       "ticker": "7182",
-      "name": "JAPAN POST BANK Co., Ltd.",
+      "name": "ゆうちょ銀行",
       "base_date": "2026-04-02",
       "base_price": 2709.5,
       "latest_price": 2689.0,
@@ -7139,7 +7139,7 @@
     },
     {
       "ticker": "4613",
-      "name": "Kansai Paint Co., Ltd.",
+      "name": "関西ペイント",
       "base_date": "2026-04-02",
       "base_price": 2455.0,
       "latest_price": 2342.5,
@@ -7158,7 +7158,7 @@
     },
     {
       "ticker": "6758",
-      "name": "Sony Group Corporation",
+      "name": "ソニーグループ",
       "base_date": "2026-04-02",
       "base_price": 3372.0,
       "latest_price": 3113.0,
@@ -7182,7 +7182,7 @@
     },
     {
       "ticker": "8750",
-      "name": "Daiichi Life Group, Inc.",
+      "name": "第一生命ホールディングス",
       "base_date": "2026-04-02",
       "base_price": 1499.0,
       "latest_price": 1440.0,
@@ -7211,7 +7211,7 @@
     },
     {
       "ticker": "9433",
-      "name": "KDDI Corporation",
+      "name": "ＫＤＤＩ",
       "base_date": "2026-04-02",
       "base_price": 2633.0,
       "latest_price": 2582.5,
@@ -7235,7 +7235,7 @@
     },
     {
       "ticker": "7747",
-      "name": "Asahi Intecc Co., Ltd.",
+      "name": "朝日インテック",
       "base_date": "2026-04-02",
       "base_price": 3505.0,
       "latest_price": 3298.0,
@@ -7264,7 +7264,7 @@
     },
     {
       "ticker": "4516",
-      "name": "Nippon Shinyaku Co., Ltd.",
+      "name": "日本新薬",
       "base_date": "2026-04-02",
       "base_price": 5381.0,
       "latest_price": 4790.0,
@@ -7283,7 +7283,7 @@
     },
     {
       "ticker": "4071",
-      "name": "Plus Alpha Consulting Co.,Ltd.",
+      "name": "プラスアルファ・コンサルティング",
       "base_date": "2026-04-02",
       "base_price": 2140.0,
       "latest_price": 2181.0,
@@ -7302,7 +7302,7 @@
     },
     {
       "ticker": "9735",
-      "name": "SECOM CO., LTD.",
+      "name": "セコム",
       "base_date": "2026-04-02",
       "base_price": 6055.0,
       "latest_price": 5740.0,
@@ -7347,7 +7347,7 @@
     },
     {
       "ticker": "7846",
-      "name": "Pilot Corporation",
+      "name": "パイロットコーポレーション",
       "base_date": "2026-04-02",
       "base_price": 4870.0,
       "latest_price": 4790.0,
@@ -7372,7 +7372,7 @@
     },
     {
       "ticker": "4088",
-      "name": "Air Water Inc.",
+      "name": "エア・ウォーター",
       "base_date": "2026-04-02",
       "base_price": 2200.0,
       "latest_price": 2218.5,
@@ -7391,7 +7391,7 @@
     },
     {
       "ticker": "2001",
-      "name": "Nippn Corporation",
+      "name": "ニップン",
       "base_date": "2026-04-02",
       "base_price": 2756.0,
       "latest_price": 2652.0,
@@ -7410,7 +7410,7 @@
     },
     {
       "ticker": "4568",
-      "name": "Daiichi Sankyo Company, Limited",
+      "name": "第一三共",
       "base_date": "2026-04-02",
       "base_price": 2887.0,
       "latest_price": 2588.5,
@@ -7434,7 +7434,7 @@
     },
     {
       "ticker": "8015",
-      "name": "Toyota Tsusho Corporation",
+      "name": "豊田通商",
       "base_date": "2026-04-02",
       "base_price": 6346.0,
       "latest_price": 6101.0,
@@ -7453,7 +7453,7 @@
     },
     {
       "ticker": "5991",
-      "name": "NHK Spring Co., Ltd.",
+      "name": "日本発條",
       "base_date": "2026-04-02",
       "base_price": 2524.5,
       "latest_price": 2868.0,
@@ -7472,7 +7472,7 @@
     },
     {
       "ticker": "3064",
-      "name": "MonotaRO Co., Ltd.",
+      "name": "ＭｏｎｏｔａＲＯ",
       "base_date": "2026-04-02",
       "base_price": 1748.5,
       "latest_price": 1858.0,
@@ -7511,7 +7511,7 @@
     },
     {
       "ticker": "4461",
-      "name": "DKS Co. Ltd.",
+      "name": "第一工業製薬",
       "base_date": "2026-04-02",
       "base_price": 7880.0,
       "latest_price": 8380.0,
@@ -7530,7 +7530,7 @@
     },
     {
       "ticker": "4063",
-      "name": "Shin-Etsu Chemical Co., Ltd.",
+      "name": "信越化学工業",
       "base_date": "2026-04-02",
       "base_price": 6505.0,
       "latest_price": 7246.0,
@@ -7555,7 +7555,7 @@
     },
     {
       "ticker": "7936",
-      "name": "ASICS Corporation",
+      "name": "アシックス",
       "base_date": "2026-04-02",
       "base_price": 4380.0,
       "latest_price": 4432.0,
@@ -7594,7 +7594,7 @@
     },
     {
       "ticker": "9697",
-      "name": "Capcom Co., Ltd.",
+      "name": "カプコン",
       "base_date": "2026-04-02",
       "base_price": 3477.0,
       "latest_price": 3303.0,
@@ -7618,7 +7618,7 @@
     },
     {
       "ticker": "4686",
-      "name": "JustSystems Corporation",
+      "name": "ジャストシステム",
       "base_date": "2026-04-02",
       "base_price": 3575.0,
       "latest_price": 3695.0,
@@ -7637,7 +7637,7 @@
     },
     {
       "ticker": "6951",
-      "name": "JEOL Ltd.",
+      "name": "日本電子",
       "base_date": "2026-04-02",
       "base_price": 6099.0,
       "latest_price": 6277.0,
@@ -7671,7 +7671,7 @@
     },
     {
       "ticker": "6845",
-      "name": "Azbil Corporation",
+      "name": "アズビル",
       "base_date": "2026-04-02",
       "base_price": 1401.0,
       "latest_price": 1394.0,
@@ -7701,7 +7701,7 @@
     },
     {
       "ticker": "4022",
-      "name": "Rasa Industries, Ltd.",
+      "name": "ラサ工業",
       "base_date": "2026-04-02",
       "base_price": 1624.0,
       "latest_price": 2128.0,
@@ -7725,7 +7725,7 @@
     },
     {
       "ticker": "4684",
-      "name": "OBIC Co.,Ltd.",
+      "name": "オービック",
       "base_date": "2026-04-02",
       "base_price": 3960.0,
       "latest_price": 4161.0,
@@ -7744,7 +7744,7 @@
     },
     {
       "ticker": "7741",
-      "name": "HOYA Corporation",
+      "name": "ＨＯＹＡ",
       "base_date": "2026-04-02",
       "base_price": 27600.0,
       "latest_price": 29100.0,
@@ -7773,7 +7773,7 @@
     },
     {
       "ticker": "7366",
-      "name": "LITALICO Inc.",
+      "name": "ＬＩＴＡＬＩＣＯ",
       "base_date": "2026-04-02",
       "base_price": 1190.0,
       "latest_price": 1202.0,
@@ -7792,7 +7792,7 @@
     },
     {
       "ticker": "5631",
-      "name": "The Japan Steel Works, Ltd.",
+      "name": "日本製鋼所",
       "base_date": "2026-04-02",
       "base_price": 9249.0,
       "latest_price": 9489.0,
@@ -7811,7 +7811,7 @@
     },
     {
       "ticker": "6098",
-      "name": "Recruit Holdings Co., Ltd.",
+      "name": "リクルートホールディングス",
       "base_date": "2026-04-02",
       "base_price": 7145.0,
       "latest_price": 7303.0,
@@ -7830,7 +7830,7 @@
     },
     {
       "ticker": "4046",
-      "name": "Osaka Soda Co., Ltd.",
+      "name": "大阪ソーダ",
       "base_date": "2026-04-02",
       "base_price": 1784.0,
       "latest_price": 1871.0,
@@ -7859,7 +7859,7 @@
     },
     {
       "ticker": "6367",
-      "name": "Daikin Industries,Ltd.",
+      "name": "ダイキン工業",
       "base_date": "2026-04-02",
       "base_price": 19695.0,
       "latest_price": 21965.0,
@@ -7893,7 +7893,7 @@
     },
     {
       "ticker": "5802",
-      "name": "Sumitomo Electric Industries, Ltd.",
+      "name": "住友電気工業",
       "base_date": "2026-04-02",
       "base_price": 9269.0,
       "latest_price": 10190.0,
@@ -7923,7 +7923,7 @@
     },
     {
       "ticker": "3923",
-      "name": "Rakus Co., Ltd.",
+      "name": "ラクス",
       "base_date": "2026-04-02",
       "base_price": 778.7,
       "latest_price": 856.3,
@@ -7942,7 +7942,7 @@
     },
     {
       "ticker": "7730",
-      "name": "Mani, Inc.",
+      "name": "マニー",
       "base_date": "2026-04-02",
       "base_price": 1550.0,
       "latest_price": 1709.0,
@@ -7966,7 +7966,7 @@
     },
     {
       "ticker": "6383",
-      "name": "Daifuku Co., Ltd.",
+      "name": "ダイフク",
       "base_date": "2026-04-02",
       "base_price": 5879.0,
       "latest_price": 6780.0,
@@ -7985,7 +7985,7 @@
     },
     {
       "ticker": "9983",
-      "name": "Fast Retailing Co., Ltd.",
+      "name": "ファーストリテイリング",
       "base_date": "2026-04-02",
       "base_price": 63670.0,
       "latest_price": 73590.0,
@@ -8010,7 +8010,7 @@
     },
     {
       "ticker": "6146",
-      "name": "Disco Corporation",
+      "name": "ディスコ",
       "base_date": "2026-04-02",
       "base_price": 63680.0,
       "latest_price": 74010.0,
@@ -8040,7 +8040,7 @@
     },
     {
       "ticker": "6954",
-      "name": "Fanuc Corporation",
+      "name": "ファナック",
       "base_date": "2026-04-02",
       "base_price": 5697.0,
       "latest_price": 6875.0,
@@ -8059,7 +8059,7 @@
     },
     {
       "ticker": "6361",
-      "name": "Ebara Corporation",
+      "name": "荏原製作所",
       "base_date": "2026-04-02",
       "base_price": 4552.0,
       "latest_price": 5327.0,
@@ -8089,7 +8089,7 @@
     },
     {
       "ticker": "8035",
-      "name": "Tokyo Electron Limited",
+      "name": "東京エレクトロン",
       "base_date": "2026-04-02",
       "base_price": 39280.0,
       "latest_price": 44390.0,
@@ -8113,7 +8113,7 @@
     },
     {
       "ticker": "6754",
-      "name": "Anritsu Corporation",
+      "name": "アンリツ",
       "base_date": "2026-04-02",
       "base_price": 2986.5,
       "latest_price": 4039.0,
@@ -8132,7 +8132,7 @@
     },
     {
       "ticker": "6134",
-      "name": "Fuji Corporation",
+      "name": "ＦＵＪＩ",
       "base_date": "2026-04-02",
       "base_price": 5013.0,
       "latest_price": 6068.0,
@@ -8162,7 +8162,7 @@
     },
     {
       "ticker": "6981",
-      "name": "Murata Manufacturing Co., Ltd.",
+      "name": "村田製作所",
       "base_date": "2026-04-02",
       "base_price": 3671.0,
       "latest_price": 5156.0,
@@ -8181,7 +8181,7 @@
     },
     {
       "ticker": "6857",
-      "name": "Advantest Corporation",
+      "name": "アドバンテスト",
       "base_date": "2026-04-02",
       "base_price": 22500.0,
       "latest_price": 28260.0,
@@ -8211,7 +8211,7 @@
     },
     {
       "ticker": "3891",
-      "name": "Nippon Kodoshi Corporation",
+      "name": "ニッポン高度紙工業",
       "base_date": "2026-04-02",
       "base_price": 3715.0,
       "latest_price": 6360.0,
@@ -8251,7 +8251,7 @@
     },
     {
       "ticker": "5803",
-      "name": "Fujikura Ltd.",
+      "name": "フジクラ",
       "base_date": "2026-04-02",
       "base_price": 4446.0,
       "latest_price": 5971.0,
@@ -8310,7 +8310,7 @@
     },
     {
       "ticker": "5801",
-      "name": "Furukawa Electric Co., Ltd.",
+      "name": "古河電気工業",
       "base_date": "2026-04-02",
       "base_price": 32490.0,
       "latest_price": 42370.0,
@@ -8369,7 +8369,7 @@
     },
     {
       "ticker": "285A",
-      "name": "KIOXIA HOLDINGS CORPORATION",
+      "name": "キオクシアホールディングス",
       "base_date": "2026-04-02",
       "base_price": 21800.0,
       "latest_price": 37560.0,
