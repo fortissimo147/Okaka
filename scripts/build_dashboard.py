@@ -274,14 +274,12 @@ def _build_standalone(data: dict):
     import urllib.request
 
     app_dir = Path(__file__).parent.parent / "app"
-    css = (app_dir / "index.html").read_text(encoding="utf-8")
-    # CSSをindex.htmlから抽出
-    import re
-    style_match = re.search(r"<style>(.*?)</style>", css, re.DOTALL)
-    style = style_match.group(1) if style_match else ""
 
+    # app/index.html をベーステンプレートとして読み込む
+    html = (app_dir / "index.html").read_text(encoding="utf-8")
+
+    # app.js を読み込んでデータをインライン化
     js = (app_dir / "app.js").read_text(encoding="utf-8")
-    # fetchを使わずデータをインライン化
     js_inline = js.replace(
         """async function load() {
   try {
@@ -298,37 +296,16 @@ def _build_standalone(data: dict):
   render();
 }}"""
     )
+    html = html.replace('<script src="app.js"></script>', f"<script>{js_inline}</script>")
 
-    # Chart.js をCDNから取得してインライン化（失敗時はCDNリンクにフォールバック）
+    # Chart.js をCDNから取得してインライン化（失敗時はCDNリンクのまま）
     chartjs_tag = '<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>'
     try:
         with urllib.request.urlopen("https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js", timeout=10) as r:
-            chartjs_inline = f"<script>{r.read().decode('utf-8')}</script>"
+            html = html.replace(chartjs_tag, f"<script>{r.read().decode('utf-8')}</script>")
         print("  Chart.js をインライン化しました")
     except Exception:
-        chartjs_inline = chartjs_tag
         print("  Chart.js のダウンロード失敗。CDNリンクを使用します（オンライン環境が必要）")
-
-    html = f"""<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>2083 ETF モニタリング</title>
-  {chartjs_inline}
-  <style>{style}</style>
-</head>
-<body>
-  <header>
-    <h1>2083 NEXT FUNDS Japan Growth Equity Active ETF</h1>
-    <span class="meta" id="generated-at"></span>
-  </header>
-  <main id="app">
-    <div id="no-data">データを読み込み中...</div>
-  </main>
-  <script>{js_inline}</script>
-</body>
-</html>"""
 
     out_path = Path(__file__).parent.parent / "etf_dashboard.html"
     out_path.write_text(html, encoding="utf-8")
