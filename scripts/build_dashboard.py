@@ -8,7 +8,39 @@ from datetime import datetime
 from scripts.db import get_conn, init_db
 
 APP_DATA = Path(__file__).parent.parent / "app" / "data"
+NAMES_FILE = Path(__file__).parent.parent / "data" / "company_names.json"
 TOP_N = 20  # 時系列グラフに表示する上位銘柄数
+
+
+def load_company_names() -> dict:
+    """data/company_names.jsonを読み込む。なければ空dict。"""
+    if NAMES_FILE.exists():
+        return json.loads(NAMES_FILE.read_text(encoding="utf-8"))
+    return {}
+
+
+def save_company_names(names: dict):
+    """data/company_names.jsonに保存。"""
+    NAMES_FILE.parent.mkdir(parents=True, exist_ok=True)
+    NAMES_FILE.write_text(json.dumps(names, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def fetch_missing_names(tickers: list[str], existing: dict) -> dict:
+    """existingにないtickerのみyfinanceで検索。{ticker: name}を返す。"""
+    import yfinance as yf
+    result = {}
+    for ticker in tickers:
+        if ticker in existing:
+            continue
+        try:
+            info = yf.Ticker(f"{ticker}.T").info
+            name = info.get("longName") or info.get("shortName") or ""
+            result[ticker] = name if name else None
+            print(f"  {ticker}: {result[ticker]}")
+        except Exception as e:
+            print(f"  {ticker}: 取得失敗 ({e})")
+            result[ticker] = None
+    return result
 
 
 def build():
@@ -37,6 +69,19 @@ def build():
     for row in rows:
         d = row["date"]
         by_date.setdefault(d, {})[row["ticker"]] = dict(row)
+
+    # 銘柄名を日本語化
+    all_tickers = sorted({ticker for d_data in by_date.values() for ticker in d_data})
+    company_names = load_company_names()
+    new_names = fetch_missing_names(all_tickers, company_names)
+    if new_names:
+        company_names.update(new_names)
+        save_company_names(company_names)
+    for d_data in by_date.values():
+        for ticker, row in d_data.items():
+            jp_name = company_names.get(ticker)
+            if jp_name:
+                row["name"] = jp_name
 
     # 銘柄変動の計算（日付ごとに前日比を算出）
     changes = []
