@@ -52,10 +52,10 @@ function render() {
             <tr>
               <th>コード</th>
               <th>銘柄名</th>
-              <th>累積買い増し比率</th>
-              <th>基準日株数</th>
-              <th>最新株数</th>
-              <th>保有金額</th>
+              <th data-key="cumulative_pct">累積買い増し比率</th>
+              <th data-key="base_shares">基準日株数</th>
+              <th data-key="shares">最新株数</th>
+              <th data-key="value">保有金額</th>
             </tr>
           </thead>
           <tbody id="strong-buys-tbody"></tbody>
@@ -71,9 +71,9 @@ function render() {
             <tr>
               <th>コード</th>
               <th>銘柄名</th>
-              <th>ベンチマーク損益率</th>
-              <th>実際の運用損益率</th>
-              <th>評価（実際-ベンチマーク）</th>
+              <th data-key="benchmark_pnl_pct">ベンチマーク損益率</th>
+              <th data-key="actual_pnl_pct">実際の運用損益率</th>
+              <th data-key="evaluation_pct">評価（実際-ベンチマーク）</th>
               <th>買い増し回数</th>
               <th>売却回数</th>
               <th>保有比率</th>
@@ -92,9 +92,9 @@ function render() {
             <tr>
               <th>コード</th>
               <th>銘柄名</th>
-              <th>保有比率 (%)</th>
-              <th>前日比 (pp)</th>
-              <th>保有株数</th>
+              <th data-key="ratio">保有比率 (%)</th>
+              <th data-key="delta">前日比 (pp)</th>
+              <th data-key="shares">保有株数</th>
             </tr>
           </thead>
           <tbody id="latest-tbody"></tbody>
@@ -108,19 +108,6 @@ function render() {
   renderStrongBuys();
   renderTradingAnalysis();
   renderLatestTable();
-
-  const navLinks = document.querySelectorAll(".sidebar nav a");
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        navLinks.forEach(a => a.classList.remove("active"));
-        const link = document.querySelector(`.sidebar nav a[href="#${entry.target.id}"]`);
-        if (link) link.classList.add("active");
-      }
-    });
-  }, { rootMargin: "0px 0px -80% 0px", threshold: 0 });
-  ["section-changes", "section-timeseries", "section-strong-buys", "section-trading-analysis", "section-snapshot"]
-    .forEach(id => { const el = document.getElementById(id); if (el) observer.observe(el); });
 }
 
 function renderChangeDateSelect() {
@@ -205,13 +192,40 @@ function renderChart() {
   });
 }
 
+function makeSortable(tbodyId, getData, renderRowFn) {
+  const tbody = document.getElementById(tbodyId);
+  if (!tbody) return;
+  const thead = tbody.closest("table").querySelector("thead tr");
+  let sortKey = null, sortAsc = true;
+  thead.querySelectorAll("th[data-key]").forEach(th => {
+    th.dataset.label = th.textContent;
+    th.style.cursor = "pointer";
+    th.addEventListener("click", () => {
+      const key = th.dataset.key;
+      sortAsc = sortKey === key ? !sortAsc : false;
+      sortKey = key;
+      thead.querySelectorAll("th[data-key]").forEach(h => { h.textContent = h.dataset.label; });
+      th.textContent = th.dataset.label + (sortAsc ? " ▲" : " ▼");
+      const sorted = [...getData()].sort((a, b) => {
+        const av = a[key], bv = b[key];
+        if (av == null && bv == null) return 0;
+        if (av == null) return 1;
+        if (bv == null) return -1;
+        return sortAsc ? av - bv : bv - av;
+      });
+      tbody.innerHTML = sorted.map(renderRowFn).join("");
+    });
+  });
+}
+
 function renderStrongBuys() {
   const tbody = document.getElementById("strong-buys-tbody");
-  if (!DATA.strong_buys || DATA.strong_buys.length === 0) {
+  const data = DATA.strong_buys || [];
+  if (data.length === 0) {
     tbody.innerHTML = `<tr><td colspan="6" class="empty" style="padding:12px;text-align:center">該当銘柄なし</td></tr>`;
     return;
   }
-  tbody.innerHTML = DATA.strong_buys.map(r => `
+  const rowFn = r => `
     <tr>
       <td>${r.ticker}</td>
       <td>${r.name}</td>
@@ -220,12 +234,13 @@ function renderStrongBuys() {
       <td>${r.shares.toLocaleString()}</td>
       <td>${(r.value / 1_000_000).toFixed(1)}百万円</td>
     </tr>
-  `).join("");
+  `;
+  tbody.innerHTML = data.map(rowFn).join("");
+  makeSortable("strong-buys-tbody", () => DATA.strong_buys || [], rowFn);
 }
 
 function renderLatestTable() {
-  const tbody = document.getElementById("latest-tbody");
-  tbody.innerHTML = DATA.latest.map(r => `
+  const rowFn = r => `
     <tr>
       <td>${r.ticker}</td>
       <td>${r.name}${r.is_new ? '<span class="badge-new">NEW</span>' : ""}</td>
@@ -233,21 +248,20 @@ function renderLatestTable() {
       <td>${r.delta != null ? (r.delta >= 0 ? `<span class="delta-pos">+${r.delta.toFixed(2)}</span>` : `<span class="delta-neg">${r.delta.toFixed(2)}</span>`) : "—"}</td>
       <td>${r.shares != null ? r.shares.toLocaleString() : "—"}</td>
     </tr>
-  `).join("");
+  `;
+  document.getElementById("latest-tbody").innerHTML = (DATA.latest || []).map(rowFn).join("");
+  makeSortable("latest-tbody", () => DATA.latest || [], rowFn);
 }
 
 function renderTradingAnalysis() {
   const tbody = document.getElementById("trading-analysis-tbody");
-  if (!DATA.trading_analysis || DATA.trading_analysis.length === 0) {
+  const data = DATA.trading_analysis || [];
+  if (data.length === 0) {
     tbody.innerHTML = `<tr><td colspan="8" class="empty" style="padding:12px;text-align:center">該当銘柄なし</td></tr>`;
     return;
   }
-  const fmtPct = (v, forceSign = false) => {
-    const pct = v * 100;
-    const sign = pct >= 0 ? "+" : "";
-    return `${forceSign ? sign : (pct < 0 ? "" : "+")}${pct.toFixed(2)}%`;
-  };
-  tbody.innerHTML = DATA.trading_analysis.map(r => {
+  const fmtPct = v => { const p = v * 100; return `${p >= 0 ? "+" : ""}${p.toFixed(2)}%`; };
+  const rowFn = r => {
     const evalCls = r.evaluation_pct >= 0 ? "delta-pos" : "delta-neg";
     const benchCls = r.benchmark_pnl_pct >= 0 ? "delta-pos" : "delta-neg";
     const actualCls = r.actual_pnl_pct >= 0 ? "delta-pos" : "delta-neg";
@@ -263,7 +277,9 @@ function renderTradingAnalysis() {
         <td>${r.latest_ratio.toFixed(2)}%</td>
       </tr>
     `;
-  }).join("");
+  };
+  tbody.innerHTML = data.map(rowFn).join("");
+  makeSortable("trading-analysis-tbody", () => DATA.trading_analysis || [], rowFn);
 }
 
 load();
