@@ -316,6 +316,16 @@ def build():
         })
     trading_analysis.sort(key=lambda x: -x["evaluation_pct"])
 
+    # 全銘柄の日別終値（銘柄検索チャート用）
+    price_data = {}
+    for ticker in by_date[latest_date].keys():
+        prices = []
+        for d in dates:
+            if ticker in by_date[d] and by_date[d][ticker]["price"] is not None:
+                prices.append({"date": d, "close": by_date[d][ticker]["price"]})
+        if prices:
+            price_data[ticker] = prices
+
     # 全銘柄の全日付時系列（検索機能用）
     all_series = []
     for ticker in by_date[latest_date].keys():
@@ -346,6 +356,7 @@ def build():
         "buyup_pnl": buyup_pnl,
         "trading_analysis": trading_analysis,
         "all_series": all_series,
+        "price_data": price_data,
     }
 
     (APP_DATA / "dashboard.json").write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")

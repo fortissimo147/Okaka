@@ -351,26 +351,27 @@ function showTickerData(ticker) {
   const rows = allSeries.filter(s => s.shares != null);
   const hasPrice = rows.some(s => s.price != null);
 
-  // 売買イベント判定
+  // 株価チャート用データ
+  const priceData = DATA.price_data?.[ticker] || [];
+  const priceLabels = priceData.map(d => d.date);
+  const priceValues = priceData.map(d => d.close);
+
+  // 売買イベント判定（all_series から）
   const events = [];
   for (let i = 1; i < allSeries.length; i++) {
     const prev = allSeries[i - 1];
     const curr = allSeries[i];
     const ps = prev.shares, cs = curr.shares;
     if ((ps == null || ps === 0) && cs > 0) {
-      events.push({ date: curr.date, type: 'new',      icon: 'N', color: '#2e7d32',
-        delta: cs,       pct: null,               price: curr.price, amount: curr.price ? cs * curr.price : null });
+      events.push({ date: curr.date, type: 'new',      icon: 'N', color: '#2e7d32', delta: cs,    pct: null });
     } else if (ps > 0 && cs != null && cs > ps) {
       const d = cs - ps;
-      events.push({ date: curr.date, type: 'buyup',    icon: '↑', color: '#1565c0',
-        delta: d,        pct: d / ps * 100,        price: curr.price, amount: curr.price ? d * curr.price : null });
+      events.push({ date: curr.date, type: 'buyup',    icon: '↑', color: '#1565c0', delta: d,     pct: d / ps * 100 });
     } else if (ps > 0 && cs != null && cs > 0 && cs < ps) {
       const d = cs - ps;
-      events.push({ date: curr.date, type: 'sell',     icon: '↓', color: '#e65100',
-        delta: d,        pct: d / ps * 100,        price: curr.price, amount: curr.price ? Math.abs(d) * curr.price : null });
+      events.push({ date: curr.date, type: 'sell',     icon: '↓', color: '#e65100', delta: d,     pct: d / ps * 100 });
     } else if (ps > 0 && (cs == null || cs === 0)) {
-      events.push({ date: prev.date, type: 'fullsell', icon: '✕', color: '#c62828',
-        delta: -ps,      pct: -100,               price: prev.price, amount: prev.price ? ps * prev.price : null });
+      events.push({ date: prev.date, type: 'fullsell', icon: '✕', color: '#c62828', delta: -ps,   pct: -100 });
     }
   }
 
@@ -409,18 +410,17 @@ function showTickerData(ticker) {
       <tbody>${bodyRows}</tbody>
     </table></div>`;
 
-  // Chart.js カスタムプラグイン
-  const labels = allSeries.map(s => s.date);
+  const TYPE_LABEL = { new: '新規買い入れ', buyup: '買い増し', sell: '売却', fullsell: '全売却' };
+
   const tradeMarkerPlugin = {
     id: 'tradeMarkers',
     afterDraw(chart) {
       const ctx = chart.ctx;
       const xAxis = chart.scales.x;
       const yAxis = chart.scales.y;
-      const bottomY = yAxis.bottom;
-      const topY = yAxis.top;
+      const bottomY = yAxis.bottom, topY = yAxis.top;
       events.forEach(ev => {
-        const xIdx = labels.indexOf(ev.date);
+        const xIdx = priceLabels.indexOf(ev.date);
         if (xIdx < 0) return;
         const x = xAxis.getPixelForTick(xIdx);
         ctx.save();
@@ -444,20 +444,18 @@ function showTickerData(ticker) {
 
   if (tickerChart) tickerChart.destroy();
   const canvas = document.getElementById("ticker-chart");
-  const TYPE_LABEL = { new: '新規買い入れ', buyup: '買い増し', sell: '売却', fullsell: '全売却' };
   tickerChart = new Chart(canvas, {
     type: "line",
     data: {
-      labels,
+      labels: priceLabels,
       datasets: [{
         label: `${ticker} ${entry.name}`,
-        data: allSeries.map(s => s.ratio),
+        data: priceValues,
         borderColor: "#1565c0",
         backgroundColor: "rgba(21,101,192,0.08)",
         tension: 0.2,
         pointRadius: 3,
         fill: true,
-        spanGaps: true,
       }]
     },
     options: {
@@ -472,18 +470,26 @@ function showTickerData(ticker) {
               if (!items.length) return [];
               const ev = events.find(e => e.date === items[0].label);
               if (!ev) return [];
+              const eventPrice = priceData.find(d => d.date === ev.date)?.close || 0;
+              const amount = Math.abs(ev.delta) * eventPrice;
               const sign = ev.delta >= 0 ? '+' : '';
               const pctStr = ev.pct != null ? ` (${ev.pct >= 0 ? '+' : ''}${ev.pct.toFixed(1)}%)` : '';
-              const lines = [`【${TYPE_LABEL[ev.type]}】`, `${sign}${ev.delta.toLocaleString()}株${pctStr}`];
-              if (ev.amount != null) lines.push(`売買金額目安: ¥${Math.round(ev.amount).toLocaleString()}`);
-              return lines;
+              return [
+                `【${TYPE_LABEL[ev.type]}】`,
+                `${sign}${ev.delta.toLocaleString()}株${pctStr}`,
+                `株価: ¥${eventPrice.toLocaleString()}`,
+                `売買金額: ¥${Math.round(amount).toLocaleString()}`,
+              ];
             }
           }
         }
       },
       scales: {
         x: { ticks: { maxTicksLimit: 10, font: { size: 10 } } },
-        y: { title: { display: true, text: '保有比率 (%)' }, ticks: { font: { size: 10 } } }
+        y: {
+          title: { display: true, text: '株価（円）' },
+          ticks: { callback: v => `¥${v.toLocaleString()}`, font: { size: 10 } }
+        }
       }
     },
     plugins: [tradeMarkerPlugin]
@@ -499,9 +505,11 @@ function showTickerData(ticker) {
       if (ev.iconX == null) return;
       if (Math.sqrt((mx - ev.iconX) ** 2 + (my - ev.iconY) ** 2) < 12) {
         found = true;
+        const eventPrice = priceData.find(d => d.date === ev.date)?.close || 0;
+        const amount = Math.abs(ev.delta) * eventPrice;
         const sign = ev.delta >= 0 ? '+' : '';
         const pctStr = ev.pct != null ? ` (${ev.pct >= 0 ? '+' : ''}${ev.pct.toFixed(1)}%)` : '';
-        tooltip.innerHTML = `📅 ${ev.date}<br>━━━━━━━━━━<br>${ev.icon} ${TYPE_LABEL[ev.type]}<br>${sign}${ev.delta.toLocaleString()}株${pctStr}${ev.amount != null ? `<br>売買金額: ¥${Math.round(ev.amount).toLocaleString()}` : ''}`;
+        tooltip.innerHTML = `📅 ${ev.date}<br>━━━━━━━━━━<br>${ev.icon} ${TYPE_LABEL[ev.type]}<br>${sign}${ev.delta.toLocaleString()}株${pctStr}<br>株価: ¥${eventPrice.toLocaleString()}<br>売買金額: ¥${Math.round(amount).toLocaleString()}`;
         tooltip.style.display = 'block';
         tooltip.style.left = (e.clientX + 16) + 'px';
         tooltip.style.top = (e.clientY - 8) + 'px';
