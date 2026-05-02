@@ -101,6 +101,15 @@ function render() {
         </table>
       </div>
     </div>
+
+    <div class="card" id="section-search">
+      <h2>銘柄データ検索</h2>
+      <div class="search-box">
+        <input type="text" id="ticker-search" placeholder="銘柄コードまたは社名で検索..." />
+        <div id="search-suggestions"></div>
+      </div>
+      <div id="search-result"></div>
+    </div>
   `;
 
   renderChangeDateSelect();
@@ -108,6 +117,7 @@ function render() {
   renderStrongBuys();
   renderTradingAnalysis();
   renderLatestTable();
+  renderSearch();
 }
 
 function renderChangeDateSelect() {
@@ -280,6 +290,95 @@ function renderTradingAnalysis() {
   };
   tbody.innerHTML = data.map(rowFn).join("");
   makeSortable("trading-analysis-tbody", () => DATA.trading_analysis || [], rowFn);
+}
+
+function renderSearch() {
+  const input = document.getElementById("ticker-search");
+  const suggestions = document.getElementById("search-suggestions");
+
+  function getSuggestions(q) {
+    if (!q) return [];
+    const lq = q.toLowerCase();
+    return (DATA.latest || []).filter(r =>
+      r.ticker.startsWith(q.toUpperCase()) || r.name.toLowerCase().includes(lq)
+    ).slice(0, 10);
+  }
+
+  function showSuggestions(items) {
+    if (items.length === 0) { suggestions.innerHTML = ""; suggestions.style.display = "none"; return; }
+    suggestions.style.display = "block";
+    suggestions.innerHTML = items.map(r => `
+      <div class="suggestion-item" data-ticker="${r.ticker}">
+        <span class="suggestion-ticker">${r.ticker}</span>
+        <span>${r.name}</span>
+      </div>
+    `).join("");
+    suggestions.querySelectorAll(".suggestion-item").forEach(el => {
+      el.addEventListener("click", () => {
+        input.value = el.dataset.ticker;
+        suggestions.style.display = "none";
+        showTickerData(el.dataset.ticker);
+      });
+    });
+  }
+
+  input.addEventListener("input", () => showSuggestions(getSuggestions(input.value.trim())));
+
+  input.addEventListener("keydown", e => {
+    if (e.key !== "Enter") return;
+    const q = input.value.trim();
+    const matches = getSuggestions(q);
+    const ticker = (matches.find(r => r.ticker === q.toUpperCase()) || matches[0] || {}).ticker;
+    if (ticker) { suggestions.style.display = "none"; showTickerData(ticker); }
+  });
+
+  document.addEventListener("click", e => {
+    if (!e.target.closest(".search-box")) suggestions.style.display = "none";
+  });
+}
+
+function showTickerData(ticker) {
+  const result = document.getElementById("search-result");
+  const src = DATA.all_series || DATA.timeseries || [];
+  const entry = src.find(t => t.ticker === ticker);
+  if (!entry) {
+    result.innerHTML = `<p class="empty" style="padding:12px">銘柄データが見つかりません: ${ticker}</p>`;
+    return;
+  }
+
+  const rows = entry.series.filter(s => s.shares != null || s.ratio != null);
+  const hasPrice = rows.some(s => s.price != null);
+
+  const bodyRows = rows.map((s, i) => {
+    const prev = i > 0 ? rows[i - 1] : null;
+    const dShares = (s.shares != null && prev?.shares != null) ? s.shares - prev.shares : null;
+    const dRatio  = (s.ratio  != null && prev?.ratio  != null) ? s.ratio  - prev.ratio  : null;
+    const cls = dShares == null ? "" : dShares > 0 ? "delta-pos" : dShares < 0 ? "delta-neg" : "";
+    const fmtD = (v, decimals) => v == null ? "—"
+      : `<span class="${cls}">${v >= 0 ? "+" : ""}${decimals === 0 ? v.toLocaleString() : v.toFixed(decimals)}</span>`;
+    return `<tr>
+      <td>${s.date}</td>
+      <td>${s.shares != null ? s.shares.toLocaleString() : "—"}</td>
+      <td>${s.ratio != null ? s.ratio.toFixed(2) : "—"}</td>
+      ${hasPrice ? `<td>${s.price != null ? "¥" + s.price.toLocaleString() : "—"}</td>` : ""}
+      <td>${fmtD(dShares, 0)}</td>
+      <td>${fmtD(dRatio, 2)}</td>
+    </tr>`;
+  }).join("");
+
+  result.innerHTML = `
+    <div style="margin-bottom:12px">
+      <span class="ticker" style="font-size:1.1rem">${ticker}</span>
+      <span style="margin-left:8px;font-size:1rem;color:#333">${entry.name}</span>
+    </div>
+    <div class="table-wrap"><table>
+      <thead><tr>
+        <th>日付</th><th>保有株数</th><th>保有比率 (%)</th>
+        ${hasPrice ? "<th>株価</th>" : ""}
+        <th>前日比株数</th><th>前日比比率 (pp)</th>
+      </tr></thead>
+      <tbody>${bodyRows}</tbody>
+    </table></div>`;
 }
 
 load();

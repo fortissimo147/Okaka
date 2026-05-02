@@ -118,6 +118,42 @@
 
     #no-data { text-align: center; padding: 60px; color: #999; }
     .subtitle { font-size: 0.75rem; font-weight: 400; color: #888; margin-left: 8px; }
+
+    .search-box { position: relative; margin-bottom: 16px; }
+    .search-box input {
+      width: 100%;
+      max-width: 400px;
+      padding: 10px 14px;
+      font-size: 14px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      outline: none;
+    }
+    .search-box input:focus { border-color: #1a73e8; }
+    #search-suggestions {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 400px;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      z-index: 200;
+      max-height: 300px;
+      overflow-y: auto;
+      display: none;
+    }
+    .suggestion-item {
+      padding: 10px 14px;
+      font-size: 13px;
+      cursor: pointer;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    .suggestion-item:hover { background: #f0f4f8; }
+    .suggestion-ticker { font-weight: 600; color: #555; min-width: 50px; }
   </style>
 </head>
 <body>
@@ -127,6 +163,7 @@
     <a href="#section-strong-buys">累積買い増し</a>
     <a href="#section-trading-analysis">売買分析</a>
     <a href="#section-snapshot">全銘柄</a>
+    <a href="#section-search">銘柄検索</a>
   </nav>
   <header>
     <h1>2083 NEXT FUNDS Japan Growth Equity Active ETF</h1>

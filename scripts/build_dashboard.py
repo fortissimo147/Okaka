@@ -72,6 +72,7 @@ def build():
                 "SELECT DISTINCT date FROM holdings ORDER BY date"
             ).fetchall()
         ]
+        dates = [d for d in dates if d != "2026-02-24"]
 
         if not dates:
             out = {"dates": [], "changes": [], "timeseries": [], "latest": []}
@@ -315,6 +316,24 @@ def build():
         })
     trading_analysis.sort(key=lambda x: -x["evaluation_pct"])
 
+    # 全銘柄の全日付時系列（検索機能用）
+    all_series = []
+    for ticker in by_date[latest_date].keys():
+        series = []
+        for d in dates:
+            if ticker in by_date[d]:
+                row = by_date[d][ticker]
+                series.append({
+                    "date": d,
+                    "ratio": round(row["ratio"], 4),
+                    "shares": row["shares"],
+                    "price": row["price"],
+                })
+            else:
+                series.append({"date": d, "ratio": None, "shares": None, "price": None})
+        name = by_date[latest_date][ticker]["name"]
+        all_series.append({"ticker": ticker, "name": name, "series": series})
+
     out = {
         "generated_at": datetime.now().isoformat(),
         "dates": dates,
@@ -326,6 +345,7 @@ def build():
         "strong_buys_base_date": base_date,
         "buyup_pnl": buyup_pnl,
         "trading_analysis": trading_analysis,
+        "all_series": all_series,
     }
 
     (APP_DATA / "dashboard.json").write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")
