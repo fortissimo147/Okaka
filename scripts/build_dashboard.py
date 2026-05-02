@@ -234,6 +234,12 @@ def _build_standalone(data: dict):
     out_path.write_text(html, encoding="utf-8")
     print(f"スタンドアロンHTML を生成しました → {out_path}")
 
+    # GitHub Pages用にdocs/index.htmlにもコピー
+    docs_path = Path(__file__).parent.parent / "docs" / "index.html"
+    docs_path.parent.mkdir(parents=True, exist_ok=True)
+    docs_path.write_text(html, encoding="utf-8")
+    print(f"GitHub Pages用HTML を生成しました → {docs_path}")
+
 
 def main():
     build()
