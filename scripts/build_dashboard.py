@@ -107,9 +107,10 @@ def build():
                     "date": d,
                     "ratio": round(by_date[d][ticker]["ratio"], 4),
                     "shares": by_date[d][ticker]["shares"],
+                    "price": by_date[d][ticker]["price"],
                 })
             else:
-                series.append({"date": d, "ratio": None, "shares": None})
+                series.append({"date": d, "ratio": None, "shares": None, "price": None})
         name = by_date[latest_date][ticker]["name"]
         timeseries.append({"ticker": ticker, "name": name, "series": series})
 
@@ -153,6 +154,45 @@ def build():
             })
     strong_buys.sort(key=lambda x: -x["cumulative_pct"])
 
+    # 過去20営業日の買い増し損益計算
+    recent_dates = dates[-20:] if len(dates) >= 20 else dates
+    buyup_pnl = []
+    for ticker in by_date[latest_date]:
+        entries = []
+        for i in range(1, len(recent_dates)):
+            d = recent_dates[i]
+            prev_d = recent_dates[i - 1]
+            if ticker not in by_date[d] or ticker not in by_date[prev_d]:
+                continue
+            curr_shares = by_date[d][ticker]["shares"] or 0
+            prev_shares = by_date[prev_d][ticker]["shares"] or 0
+            added = curr_shares - prev_shares
+            if added > 0:
+                entries.append({
+                    "date": d,
+                    "added_shares": added,
+                    "entry_price": by_date[d][ticker]["price"],
+                })
+        if not entries:
+            continue
+        total_added = sum(e["added_shares"] for e in entries)
+        avg_entry = sum(e["added_shares"] * e["entry_price"] for e in entries) / total_added
+        latest_price = by_date[latest_date][ticker]["price"]
+        latest_row = by_date[latest_date][ticker]
+        pnl_pct = latest_price / avg_entry - 1
+        buyup_pnl.append({
+            "ticker": ticker,
+            "name": latest_row["name"],
+            "total_added_shares": total_added,
+            "latest_shares": latest_row["shares"],
+            "latest_price": latest_price,
+            "avg_entry_price": round(avg_entry, 2),
+            "entries": entries,
+            "pnl_pct": round(pnl_pct, 6),
+            "latest_ratio": round(latest_row["ratio"], 4),
+        })
+    buyup_pnl.sort(key=lambda x: -x["pnl_pct"])
+
     out = {
         "generated_at": datetime.now().isoformat(),
         "dates": dates,
@@ -162,6 +202,7 @@ def build():
         "latest": latest_snapshot,
         "strong_buys": strong_buys,
         "strong_buys_base_date": base_date,
+        "buyup_pnl": buyup_pnl,
     }
 
     (APP_DATA / "dashboard.json").write_text(json.dumps(out, ensure_ascii=False, indent=2))

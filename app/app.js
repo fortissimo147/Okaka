@@ -80,12 +80,33 @@ function render() {
         </table>
       </div>
     </div>
+
+    <div class="card">
+      <h2>過去20営業日 買い増し損益</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>コード</th>
+              <th>銘柄名</th>
+              <th>買い増し株数</th>
+              <th>回数</th>
+              <th>平均取得価格→現在価格</th>
+              <th>損益率</th>
+              <th>保有比率</th>
+            </tr>
+          </thead>
+          <tbody id="buyup-pnl-tbody"></tbody>
+        </table>
+      </div>
+    </div>
   `;
 
   renderChangeDateSelect();
   renderChart();
   renderStrongBuys();
   renderLatestTable();
+  renderBuyupPnl();
 }
 
 function renderChangeDateSelect() {
@@ -199,6 +220,31 @@ function renderLatestTable() {
       <td>${r.shares != null ? r.shares.toLocaleString() : "—"}</td>
     </tr>
   `).join("");
+}
+
+function renderBuyupPnl() {
+  const tbody = document.getElementById("buyup-pnl-tbody");
+  if (!DATA.buyup_pnl || DATA.buyup_pnl.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="7" class="empty" style="padding:12px;text-align:center">該当銘柄なし</td></tr>`;
+    return;
+  }
+  const fmt = v => "¥" + Math.round(v).toLocaleString();
+  tbody.innerHTML = DATA.buyup_pnl.map(r => {
+    const pct = r.pnl_pct * 100;
+    const cls = pct >= 0 ? "delta-pos" : "delta-neg";
+    const sign = pct >= 0 ? "+" : "";
+    return `
+      <tr>
+        <td>${r.ticker}</td>
+        <td>${r.name}</td>
+        <td>${r.total_added_shares.toLocaleString()}</td>
+        <td>${r.entries.length}</td>
+        <td>${fmt(r.avg_entry_price)} → ${fmt(r.latest_price)}</td>
+        <td><span class="${cls}">${sign}${pct.toFixed(2)}%</span></td>
+        <td>${r.latest_ratio.toFixed(2)}%</td>
+      </tr>
+    `;
+  }).join("");
 }
 
 load();
