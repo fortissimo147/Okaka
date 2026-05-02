@@ -193,6 +193,64 @@ def build():
         })
     buyup_pnl.sort(key=lambda x: -x["pnl_pct"])
 
+    # 過去20営業日の売買分析
+    trading_analysis = []
+    for ticker in by_date[latest_date]:
+        if ticker not in by_date[recent_dates[0]]:
+            continue
+        base_row = by_date[recent_dates[0]][ticker]
+        base_price = base_row["price"]
+        if not base_price:
+            continue
+        buy_entries = []
+        sell_entries = []
+        for i in range(1, len(recent_dates)):
+            d = recent_dates[i]
+            prev_d = recent_dates[i - 1]
+            if ticker not in by_date[d] or ticker not in by_date[prev_d]:
+                continue
+            curr_shares = by_date[d][ticker]["shares"] or 0
+            prev_shares = by_date[prev_d][ticker]["shares"] or 0
+            diff = curr_shares - prev_shares
+            if diff > 0:
+                buy_entries.append({
+                    "date": d,
+                    "added_shares": diff,
+                    "entry_price": by_date[d][ticker]["price"],
+                })
+            elif diff < 0:
+                sell_entries.append({
+                    "date": d,
+                    "sold_shares": -diff,
+                    "sell_price": by_date[d][ticker]["price"],
+                })
+        if not buy_entries and not sell_entries:
+            continue
+        latest_price = by_date[latest_date][ticker]["price"]
+        latest_row = by_date[latest_date][ticker]
+        benchmark_pnl_pct = latest_price / base_price - 1
+        total_buy_shares = sum(e["added_shares"] for e in buy_entries)
+        total_sell_shares = sum(e["sold_shares"] for e in sell_entries)
+        total_traded = total_buy_shares + total_sell_shares
+        buy_pnl_sum = sum(e["added_shares"] * (latest_price / e["entry_price"] - 1) for e in buy_entries) if buy_entries else 0
+        sell_pnl_sum = sum(e["sold_shares"] * (latest_price / e["sell_price"] - 1) for e in sell_entries) if sell_entries else 0
+        actual_pnl_pct = (buy_pnl_sum + sell_pnl_sum) / total_traded
+        evaluation_pct = actual_pnl_pct - benchmark_pnl_pct
+        trading_analysis.append({
+            "ticker": ticker,
+            "name": latest_row["name"],
+            "base_date": recent_dates[0],
+            "base_price": base_price,
+            "latest_price": latest_price,
+            "benchmark_pnl_pct": round(benchmark_pnl_pct, 6),
+            "actual_pnl_pct": round(actual_pnl_pct, 6),
+            "evaluation_pct": round(evaluation_pct, 6),
+            "buy_entries": buy_entries,
+            "sell_entries": sell_entries,
+            "latest_ratio": round(latest_row["ratio"], 4),
+        })
+    trading_analysis.sort(key=lambda x: -x["evaluation_pct"])
+
     out = {
         "generated_at": datetime.now().isoformat(),
         "dates": dates,
@@ -203,6 +261,7 @@ def build():
         "strong_buys": strong_buys,
         "strong_buys_base_date": base_date,
         "buyup_pnl": buyup_pnl,
+        "trading_analysis": trading_analysis,
     }
 
     (APP_DATA / "dashboard.json").write_text(json.dumps(out, ensure_ascii=False, indent=2))

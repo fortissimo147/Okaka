@@ -100,6 +100,27 @@ function render() {
         </table>
       </div>
     </div>
+
+    <div class="card">
+      <h2>過去20営業日 売買分析</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>コード</th>
+              <th>銘柄名</th>
+              <th>ベンチマーク損益率</th>
+              <th>実際の運用損益率</th>
+              <th>評価（実際-ベンチマーク）</th>
+              <th>買い増し回数</th>
+              <th>売却回数</th>
+              <th>保有比率</th>
+            </tr>
+          </thead>
+          <tbody id="trading-analysis-tbody"></tbody>
+        </table>
+      </div>
+    </div>
   `;
 
   renderChangeDateSelect();
@@ -107,6 +128,7 @@ function render() {
   renderStrongBuys();
   renderLatestTable();
   renderBuyupPnl();
+  renderTradingAnalysis();
 }
 
 function renderChangeDateSelect() {
@@ -241,6 +263,36 @@ function renderBuyupPnl() {
         <td>${r.entries.length}</td>
         <td>${fmt(r.avg_entry_price)} → ${fmt(r.latest_price)}</td>
         <td><span class="${cls}">${sign}${pct.toFixed(2)}%</span></td>
+        <td>${r.latest_ratio.toFixed(2)}%</td>
+      </tr>
+    `;
+  }).join("");
+}
+
+function renderTradingAnalysis() {
+  const tbody = document.getElementById("trading-analysis-tbody");
+  if (!DATA.trading_analysis || DATA.trading_analysis.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="8" class="empty" style="padding:12px;text-align:center">該当銘柄なし</td></tr>`;
+    return;
+  }
+  const fmtPct = (v, forceSign = false) => {
+    const pct = v * 100;
+    const sign = pct >= 0 ? "+" : "";
+    return `${forceSign ? sign : (pct < 0 ? "" : "+")}${pct.toFixed(2)}%`;
+  };
+  tbody.innerHTML = DATA.trading_analysis.map(r => {
+    const evalCls = r.evaluation_pct >= 0 ? "delta-pos" : "delta-neg";
+    const benchCls = r.benchmark_pnl_pct >= 0 ? "delta-pos" : "delta-neg";
+    const actualCls = r.actual_pnl_pct >= 0 ? "delta-pos" : "delta-neg";
+    return `
+      <tr>
+        <td>${r.ticker}</td>
+        <td>${r.name}</td>
+        <td><span class="${benchCls}">${fmtPct(r.benchmark_pnl_pct)}</span></td>
+        <td><span class="${actualCls}">${fmtPct(r.actual_pnl_pct)}</span></td>
+        <td><span class="${evalCls}">${fmtPct(r.evaluation_pct)}</span></td>
+        <td>${r.buy_entries.length}</td>
+        <td>${r.sell_entries.length}</td>
         <td>${r.latest_ratio.toFixed(2)}%</td>
       </tr>
     `;
