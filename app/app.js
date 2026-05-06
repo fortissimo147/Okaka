@@ -398,6 +398,9 @@ function showTickerData(ticker) {
     <div style="position:relative;height:260px;margin-bottom:44px">
       <canvas id="ticker-chart"></canvas>
     </div>
+    <p style="font-size:10px;color:#aaa;margin-top:-36px;margin-bottom:16px;padding-left:4px">
+      ※ 日付はデータ取得日（当営業日）。価格・株数はPCFファイルに基づく前営業日（N-1）時点の値です。
+    </p>
     <div class="table-wrap"><table>
       <thead><tr>
         <th>日付</th><th>保有株数</th><th>保有比率 (%)</th>
@@ -417,7 +420,6 @@ function showTickerData(ticker) {
       const yAxis = chart.scales.y;
       const bottomY = yAxis.bottom, topY = yAxis.top;
       events.forEach(ev => {
-        // 完全一致を優先、なければ5日以内の最近接日付を使用
         let xIdx = priceLabels.indexOf(ev.date);
         if (xIdx < 0) {
           let closest = -1, minDiff = Infinity;
