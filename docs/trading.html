@@ -46,8 +46,9 @@ header { padding: 1.5rem 2rem; background: #fff; border-bottom: 0.5px solid #e0d
 .status-div { width: 0.5px; height: 28px; background: #e0ddd8; flex-shrink: 0; }
 
 /* ===== サマリーグリッド ===== */
-.summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 1.25rem; }
-@media (max-width: 640px) { .summary-grid { grid-template-columns: repeat(2, 1fr); } }
+.summary-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 1.25rem; }
+@media (max-width: 760px) { .summary-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 480px) { .summary-grid { grid-template-columns: repeat(2, 1fr); } }
 .metric-card { background: #fff; border: 0.5px solid #e0ddd8; border-radius: 10px; padding: 0.875rem 1rem; }
 .metric-label { font-size: 11px; color: #888; margin-bottom: 4px; }
 .metric-value { font-size: 22px; font-weight: 500; line-height: 1; }
@@ -460,8 +461,8 @@ function calcStats(trades) {
     avgWinPct, avgLossPct,
     bestPnl: trades.reduce((m, t) => t.pnl > m ? t.pnl : m, -Infinity),
     worstPnl: trades.reduce((m, t) => t.pnl < m ? t.pnl : m, Infinity),
-    bestPct:  trades.length > 0 ? (trades.reduce((m, t) => t.pnl > m.pnl ? t : m, trades[0]).pct ?? null) : null,
-    worstPct: trades.length > 0 ? (trades.reduce((m, t) => t.pnl < m.pnl ? t : m, trades[0]).pct ?? null) : null,
+    bestPct:  trades.filter(t => t.pct != null).length > 0 ? Math.max(...trades.filter(t => t.pct != null).map(t => t.pct)) : null,
+    worstPct: trades.filter(t => t.pct != null).length > 0 ? Math.min(...trades.filter(t => t.pct != null).map(t => t.pct)) : null,
     monthly: Object.entries(monthMap).sort((a, b) => a[0].localeCompare(b[0])),
     byStock: Object.values(stockMap),
   };
@@ -504,7 +505,8 @@ function buildSummaryGrid(s) {
     { label: '勝率', value: s.winRate.toFixed(1), unit: '%', sub: `${s.winCount}勝 ${s.lossCount}敗`, cls: s.winRate >= 50 ? 'val-pos' : 'val-neg' },
     { label: '総損益', value: fmtPnlShort(s.totalPnl), unit: '円', sub: `PF（プロフィットファクター）= 総利益 ÷ 総損失 = ${s.pf === Infinity ? '∞' : s.pf.toFixed(2)}`, cls: s.totalPnl >= 0 ? 'val-pos' : 'val-neg' },
     { label: '平均利益 / 平均損失', value: `${fmtPnlShort(s.avgWin)} / ${fmtPnlShort(s.avgLoss)}`, unit: '', sub: `平均利幅 ${winPctStr} / 平均損幅 ${lossPctStr}（対投資額）`, cls: 'val-neu' },
-    { label: '最大利益 / 最大損失', value: `${fmtPnlShort(s.bestPnl)} / ${fmtPnlShort(s.worstPnl)}`, unit: '', sub: `最大利幅 ${s.bestPct != null ? '+' + s.bestPct.toFixed(2) + '%' : '-'} / 最大損幅 ${s.worstPct != null ? s.worstPct.toFixed(2) + '%' : '-'}（対投資額）`, cls: 'val-neu' },
+    { label: '最大利益 / 最大損失', value: `${fmtPnlShort(s.bestPnl)} / ${fmtPnlShort(s.worstPnl)}`, unit: '', sub: '勝負あたり最大・最小損益額', cls: 'val-neu' },
+    { label: '最大利幅 / 最大損幅', value: `${s.bestPct != null ? '+' + s.bestPct.toFixed(2) + '%' : '-'} / ${s.worstPct != null ? s.worstPct.toFixed(2) + '%' : '-'}`, unit: '', sub: '対投資額（%）の最大・最小', cls: s.bestPct != null && s.bestPct >= 0 ? 'val-pos' : 'val-neu' },
   ];
   metrics.forEach(m => {
     const c = document.createElement('div');
