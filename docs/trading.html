@@ -145,11 +145,13 @@ tr:hover td { background: #fafaf8; }
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"></script>
 <script>
 const UPLOAD_URL = 'https://raw.githubusercontent.com/fortissimo147/Okaka/main/upload/SaveFile_000001_001922.csv';
+const KESSAN_URL = 'https://raw.githubusercontent.com/fortissimo147/Okaka/main/data/kessan.csv';
 const PAGE_SIZE = 50;
 
 let allRows = [];        // 全取引行（新規・返済含む）
 let completedTrades = []; // 完結トレード
 let filteredTrades = [];  // フィルター後
+let kessanByCode = {};    // { code: ['2025-10-28', ...] }
 let barChart = null;
 let stockSort = { col: 'pnl', dir: -1 };
 let tradeSort = { col: 'endDate', dir: -1 };
@@ -158,19 +160,52 @@ let tradePage = 1;
 // ===== データ取得 =====
 async function load() {
   try {
-    const res = await fetch(UPLOAD_URL);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const buf = await res.arrayBuffer();
+    const [sbiRes, kessanRes] = await Promise.allSettled([
+      fetch(UPLOAD_URL),
+      fetch(KESSAN_URL),
+    ]);
+    if (sbiRes.status === 'rejected' || !sbiRes.value.ok) throw new Error(`HTTP ${sbiRes.value?.status ?? 'network error'}`);
+    const buf = await sbiRes.value.arrayBuffer();
     const text = new TextDecoder('shift-jis').decode(buf);
+    if (kessanRes.status === 'fulfilled' && kessanRes.value.ok) {
+      kessanByCode = parseKessan(await kessanRes.value.text());
+    }
     init(text);
   } catch(e) {
     showUpload(`データ取得エラー: ${e.message}`);
   }
 }
 
+function parseKessan(text) {
+  const map = {};
+  const lines = text.split('\n');
+  if (lines.length < 2) return map;
+  const hdrs = parseCSVLine(lines[0]);
+  const dateIdx = hdrs.indexOf('date');
+  const codeIdx = hdrs.indexOf('code');
+  if (dateIdx < 0 || codeIdx < 0) return map;
+  for (let i = 1; i < lines.length; i++) {
+    const c = parseCSVLine(lines[i].trim());
+    if (c.length < 2) continue;
+    const d = (c[dateIdx] || '').trim();
+    const code = (c[codeIdx] || '').trim();
+    if (!d || !code) continue;
+    if (!map[code]) map[code] = [];
+    map[code].push(d);
+  }
+  return map;
+}
+
 function init(text) {
   allRows = parseSBI(text);
   completedTrades = calcCompletedTrades(allRows);
+  // 決算跨ぎフラグ付与
+  completedTrades.forEach(t => {
+    const dates = kessanByCode[t.code] || [];
+    const start = slashToHyphen(t.startDate);
+    const end   = slashToHyphen(t.endDate);
+    t.isKessanMatagi = dates.some(d => d >= start && d <= end);
+  });
   filteredTrades = completedTrades.slice();
 
   // デフォルト日付セット
@@ -415,6 +450,9 @@ function render() {
   // 直近20勝負 勝率推移（全データ使用）
   app.appendChild(buildHalfMonthCard(completedTrades));
 
+  // 決算跨ぎ分析
+  app.appendChild(buildKessanMatagiCard(filteredTrades));
+
   // 銘柄別損益
   app.appendChild(buildStockTable(stats.byStock, filteredTrades));
 
@@ -622,6 +660,95 @@ function buildHalfMonthCard(allTrades) {
   return card;
 }
 
+function buildKessanMatagiCard(trades) {
+  const km = trades.filter(t => t.isKessanMatagi);
+  const kmWins = km.filter(t => t.win);
+  const kmRate = km.length > 0 ? kmWins.length / km.length * 100 : null;
+
+  const card = document.createElement('div');
+  card.className = 'card';
+
+  const hdr = document.createElement('div');
+  hdr.className = 'card-header';
+  hdr.innerHTML = `<div class="card-title">決算跨ぎ分析</div><div class="card-sub">ポジション保有期間中に決算を含むトレード（data/kessan.csv）</div>`;
+  card.appendChild(hdr);
+
+  if (Object.keys(kessanByCode).length === 0) {
+    const body = document.createElement('div');
+    body.className = 'card-body';
+    body.innerHTML = `<p style="font-size:12px;color:#aaa">決算データ（data/kessan.csv）が読み込まれていません。GitHub Actions で scrape-kessan ワークフローを実行してください。</p>`;
+    card.appendChild(body);
+    return card;
+  }
+
+  // 全体サマリー
+  const summary = document.createElement('div');
+  summary.style.cssText = 'display:flex;gap:10px;padding:1rem 1.25rem;flex-wrap:wrap;border-bottom:0.5px solid #e0ddd8';
+  const rateStr = kmRate != null ? kmRate.toFixed(1) + '%' : '-';
+  const rateCls = kmRate != null && kmRate >= 50 ? '#27500A' : '#791F1F';
+  summary.innerHTML = `
+    <div class="status-item"><div class="status-label">決算跨ぎ件数</div><div class="status-value">${km.length} 件</div></div>
+    <div class="status-div"></div>
+    <div class="status-item"><div class="status-label">勝率</div><div class="status-value" style="color:${rateCls}">${rateStr}</div></div>
+    <div class="status-div"></div>
+    <div class="status-item"><div class="status-label">勝 / 負</div><div class="status-value">${kmWins.length} / ${km.length - kmWins.length}</div></div>
+  `;
+  card.appendChild(summary);
+
+  if (km.length === 0) {
+    const body = document.createElement('div');
+    body.className = 'card-body';
+    body.innerHTML = `<p style="font-size:12px;color:#aaa">該当期間に決算跨ぎトレードはありません。</p>`;
+    card.appendChild(body);
+    return card;
+  }
+
+  // 月別集計
+  const monthMap = {};
+  km.forEach(t => {
+    if (!monthMap[t.endYm]) monthMap[t.endYm] = { wins: 0, losses: 0 };
+    if (t.win) monthMap[t.endYm].wins++; else monthMap[t.endYm].losses++;
+  });
+  const months = Object.entries(monthMap).sort((a, b) => a[0].localeCompare(b[0]));
+
+  const wrap = document.createElement('div');
+  wrap.className = 'table-wrap';
+  const table = document.createElement('table');
+  const thead = document.createElement('thead');
+  thead.innerHTML = `<tr>
+    <th>月</th>
+    <th class="td-r">決算跨ぎ件数</th>
+    <th class="td-r">勝</th>
+    <th class="td-r">負</th>
+    <th class="td-r">勝率</th>
+  </tr>`;
+  table.appendChild(thead);
+
+  const tbody = document.createElement('tbody');
+  months.forEach(([ym, v]) => {
+    const total = v.wins + v.losses;
+    const rate = total > 0 ? v.wins / total * 100 : 0;
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${ym}</td>
+      <td class="td-r">${total}</td>
+      <td class="td-r td-pos">${v.wins}</td>
+      <td class="td-r td-neg">${v.losses}</td>
+      <td class="td-r">
+        <div class="wr-wrap" style="justify-content:flex-end">
+          <div class="wr-bar-bg" style="max-width:80px"><div class="wr-bar-fill" style="width:${rate.toFixed(1)}%"></div></div>
+          <span class="wr-txt ${rate >= 50 ? 'hm-win' : 'hm-lose'}">${rate.toFixed(1)}%</span>
+        </div>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+  table.appendChild(tbody);
+  wrap.appendChild(table);
+  card.appendChild(wrap);
+  return card;
+}
+
 function buildStockTable(byStock, allTrades) {
   const card = document.createElement('div');
   card.className = 'card';
@@ -694,12 +821,13 @@ function buildStockTable(byStock, allTrades) {
         const pnlCls = t.pnl > 0 ? 'td-pos' : t.pnl < 0 ? 'td-neg' : '';
         const winCol = t.win ? '#27500A' : '#791F1F';
         const pctStr = t.pct != null ? `${t.pct >= 0 ? '+' : ''}${t.pct.toFixed(2)}%` : '';
+        const kmLabel = t.isKessanMatagi ? `<span style="font-size:9px;color:#888;font-weight:normal;margin-left:4px">＊決算跨ぎ</span>` : '';
         dtr.innerHTML = `
           <td style="color:#bbb;width:24px;text-align:right">${trades.length - i}</td>
           <td>${t.endDate}</td>
           <td style="color:#aaa">${t.startDate} 〜</td>
           <td class="dt-pnl ${pnlCls}">${fmtPnlFull(t.pnl)}</td>
-          <td style="color:${winCol};font-weight:500">${t.win ? '勝' : '負'}</td>
+          <td style="color:${winCol};font-weight:500">${t.win ? '勝' : '負'}${kmLabel}</td>
           <td style="color:${winCol};font-size:10px;text-align:right;padding-left:2px">${pctStr}</td>
         `;
         dtTable.appendChild(dtr);
