@@ -1,14 +1,10 @@
 """
+SQLiteからデータを取得してapp/data/dashboard.jsonを生成する。
+
 毎朝8時にcronから実行する。
 https://inav.ice.com/pcf-download/listOfZips で利用可能な最新ZIPの日付を確認し、
 当日の日付と一致していればZIPをダウンロードして2083のCSVを取り出しSQLiteに格納、
 ダッシュボードを再生成する。
-
-使い方:
-  uv run python -m scripts.fetch
-
-cron例 (毎朝8時):
-  0 8 * * * cd /path/to/projects/kimura && uv run python -m scripts.fetch >> logs/fetch.log 2>&1
 """
 import io
 import re
@@ -89,23 +85,29 @@ def main():
         print(f"  ERROR: パース失敗 — {e}")
         sys.exit(1)
 
+    # store_date = データ取得実行日（当営業日）として定義
+    # PCFファイル内のFund Date (fund_date) は前営業日分のデータだが、
+    # 取得・公開タイミングを基準に当日付で管理する。
+    store_date = today.isoformat()
+    print(f"  PCF Fund Date: {fund_date} → 保存日: {store_date}")
+
     init_db()
     with get_conn() as conn:
         existing = conn.execute(
-            "SELECT COUNT(*) FROM holdings WHERE date = ?", (fund_date,)
+            "SELECT COUNT(*) FROM holdings WHERE date = ?", (store_date,)
         ).fetchone()[0]
         if existing > 0:
-            print(f"  SKIP: {fund_date} のデータはすでに存在します")
+            print(f"  SKIP: {store_date} のデータはすでに存在します")
         else:
             rows = [
-                (fund_date, row.ticker, row.name, row.shares, row.price, row.value, row.ratio)
+                (store_date, row.ticker, row.name, row.shares, row.price, row.value, row.ratio)
                 for row in df.itertuples(index=False)
             ]
             conn.executemany(
                 "INSERT INTO holdings (date, ticker, name, shares, price, value, ratio) VALUES (?,?,?,?,?,?,?)",
                 rows,
             )
-            print(f"  INSERT: {fund_date} — {len(rows)} 銘柄")
+            print(f"  INSERT: {store_date} — {len(rows)} 銘柄（PCF: {fund_date}）")
 
     print("  ダッシュボード再生成...")
     build()
