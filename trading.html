@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>信用取引 損益分析 | fundamenkaka</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Helvetica Neue', Arial, sans-serif; background: #f8f7f4; color: #1a1a1a; min-height: 100vh; }
+header { padding: 1.5rem 2rem; background: #fff; border-bottom: 0.5px solid #e0ddd8; display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.header-text h1 { font-size: 16px; font-weight: 500; }
+.header-text p { font-size: 12px; color: #888; margin-top: 2px; }
+.header-nav { display: flex; gap: 8px; align-items: center; }
+.nav-link { font-size: 12px; color: #888; text-decoration: none; padding: 5px 10px; border: 0.5px solid #e0ddd8; border-radius: 7px; background: #fff; white-space: nowrap; }
+.nav-link:hover { color: #1a1a1a; border-color: #aaa; }
+
+.main { max-width: 960px; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
+
+.loading { text-align: center; padding: 4rem 1rem; color: #aaa; font-size: 13px; }
+.error-msg { background: #FCEBEB; color: #791F1F; border-radius: 10px; padding: 1rem 1.25rem; font-size: 13px; margin-bottom: 1rem; }
+
+/* ===== カード ===== */
+.card { background: #fff; border: 0.5px solid #e0ddd8; border-radius: 10px; margin-bottom: 1.25rem; }
+.card-header { padding: 0.875rem 1.25rem; border-bottom: 0.5px solid #e0ddd8; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.card-title { font-size: 13px; font-weight: 500; }
+.card-sub { font-size: 11px; color: #aaa; }
+.card-body { padding: 1rem 1.25rem; }
+
+/* ===== ステータスバー ===== */
+.status-bar { background: #fff; border: 0.5px solid #e0ddd8; border-radius: 10px; padding: 0.75rem 1.25rem; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+.status-item { display: flex; flex-direction: column; gap: 1px; }
+.status-label { font-size: 10px; color: #aaa; }
+.status-value { font-size: 13px; font-weight: 500; }
+.status-div { width: 0.5px; height: 28px; background: #e0ddd8; flex-shrink: 0; }
+
+/* ===== サマリーグリッド ===== */
+.summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 1.25rem; }
+@media (max-width: 640px) { .summary-grid { grid-template-columns: repeat(2, 1fr); } }
+.metric-card { background: #fff; border: 0.5px solid #e0ddd8; border-radius: 10px; padding: 0.875rem 1rem; }
+.metric-label { font-size: 11px; color: #888; margin-bottom: 4px; }
+.metric-value { font-size: 22px; font-weight: 500; line-height: 1; }
+.metric-unit { font-size: 12px; color: #888; margin-left: 2px; }
+.metric-sub { font-size: 11px; color: #aaa; margin-top: 4px; }
+.val-pos { color: #27500A; }
+.val-neg { color: #791F1F; }
+.val-neu { color: #1a1a1a; }
+
+/* ===== チャート ===== */
+.chart-wrap { position: relative; height: 240px; }
+
+/* ===== テーブル ===== */
+.table-wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; }
+th { padding: 8px 12px; font-size: 11px; color: #888; font-weight: 500; text-align: left; background: #f8f7f4; border-bottom: 0.5px solid #e0ddd8; cursor: pointer; user-select: none; white-space: nowrap; }
+th:hover { color: #1a1a1a; }
+th.sorted { color: #1a1a1a; }
+td { padding: 7px 12px; font-size: 12px; border-bottom: 0.5px solid #f0ede8; white-space: nowrap; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: #fafaf8; }
+.td-r { text-align: right; font-variant-numeric: tabular-nums; }
+.td-pos { color: #27500A; font-weight: 500; }
+.td-neg { color: #791F1F; font-weight: 500; }
+.td-neu { color: #888; }
+.sort-icon { font-size: 10px; margin-left: 3px; }
+
+/* 勝率バー */
+.wr-wrap { display: flex; align-items: center; gap: 6px; }
+.wr-bar-bg { flex: 1; height: 4px; background: #e0ddd8; border-radius: 2px; min-width: 40px; }
+.wr-bar-win { height: 100%; border-radius: 2px 0 0 2px; background: #27500A; display: inline-block; }
+.wr-bar-lose { height: 100%; border-radius: 0 2px 2px 0; background: #e0ddd8; display: inline-block; }
+.wr-txt { font-size: 11px; color: #888; flex-shrink: 0; }
+
+/* ===== ファイルアップロード ===== */
+.upload-area { border: 1px dashed #e0ddd8; border-radius: 10px; padding: 1.5rem; text-align: center; cursor: pointer; transition: border-color 0.15s; }
+.upload-area:hover, .upload-area.drag-over { border-color: #888; }
+.upload-area input { display: none; }
+.upload-label { font-size: 13px; color: #888; }
+.upload-label strong { color: #1a1a1a; }
+.upload-hint { font-size: 11px; color: #aaa; margin-top: 4px; }
+
+/* ページネーション */
+.pagination { display: flex; gap: 6px; justify-content: center; margin-top: 12px; flex-wrap: wrap; }
+.page-btn { font-size: 11px; padding: 4px 10px; border: 0.5px solid #e0ddd8; border-radius: 6px; background: #fff; cursor: pointer; color: #888; }
+.page-btn:hover { border-color: #aaa; color: #1a1a1a; }
+.page-btn.active { background: #1a1a1a; color: #fff; border-color: #1a1a1a; }
+.page-info { font-size: 11px; color: #aaa; text-align: center; margin-top: 8px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="header-text">
+    <h1>信用取引 損益分析</h1>
+    <p>SBI証券 約定履歴</p>
+  </div>
+  <nav class="header-nav">
+    <a class="nav-link" href="index.html">バランスシート</a>
+    <a class="nav-link" href="compare.html">企業比較</a>
+  </nav>
+</header>
+
+<div class="main">
+  <div id="app"><div class="loading" id="loading">データを読み込み中...</div></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"></script>
+<script>
+const UPLOAD_URL = 'https://raw.githubusercontent.com/fortissimo147/Okaka/main/upload/SaveFile_000001_001922.csv';
+
+let allTrades = [];
+let stockSort = { col: 'pnl', dir: -1 };
+let tradeSort = { col: 'date', dir: -1 };
+let tradePage = 1;
+const PAGE_SIZE = 50;
+let barChart = null;
+
+// ===== エントリポイント =====
+async function load() {
+  try {
+    const res = await fetch(UPLOAD_URL);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const buf = await res.arrayBuffer();
+    const text = new TextDecoder('shift-jis').decode(buf);
+    allTrades = parseSBI(text);
+    render();
+  } catch(e) {
+    showUpload(`データ取得エラー: ${e.message}`);
+  }
+}
+
+function showUpload(errMsg) {
+  const app = document.getElementById('app');
+  app.innerHTML = '';
+  if (errMsg) {
+    const err = document.createElement('div');
+    err.className = 'error-msg';
+    err.textContent = errMsg;
+    app.appendChild(err);
+  }
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.innerHTML = `
+    <div class="card-header"><div class="card-title">CSVファイルを読み込む</div></div>
+    <div class="card-body">
+      <div class="upload-area" id="drop-area">
+        <input type="file" id="file-input" accept=".csv">
+        <label for="file-input" class="upload-label"><strong>クリック</strong>してCSVを選択、またはドラッグ＆ドロップ</label>
+        <div class="upload-hint">SBI証券の約定履歴CSVに対応しています</div>
+      </div>
+    </div>`;
+  app.appendChild(card);
+  document.getElementById('file-input').addEventListener('change', e => {
+    readFile(e.target.files[0]);
+  });
+  const drop = document.getElementById('drop-area');
+  drop.addEventListener('dragover', e => { e.preventDefault(); drop.classList.add('drag-over'); });
+  drop.addEventListener('dragleave', () => drop.classList.remove('drag-over'));
+  drop.addEventListener('drop', e => {
+    e.preventDefault();
+    drop.classList.remove('drag-over');
+    readFile(e.dataTransfer.files[0]);
+  });
+}
+
+function readFile(file) {
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const text = new TextDecoder('shift-jis').decode(e.target.result);
+    allTrades = parseSBI(text);
+    render();
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+// ===== CSV パース =====
+function parseCSVLine(line) {
+  const result = [];
+  let inQ = false, cur = '';
+  for (let i = 0; i < line.length; i++) {
+    const c = line[i];
+    if (c === '"') { inQ = !inQ; }
+    else if (c === ',' && !inQ) { result.push(cur.trim()); cur = ''; }
+    else { cur += c; }
+  }
+  result.push(cur.trim());
+  return result;
+}
+
+function parseSBI(text) {
+  const lines = text.split('\n');
+  let headerIdx = -1;
+  for (let i = 0; i < lines.length; i++) {
+    if (lines[i].startsWith('約定日')) { headerIdx = i; break; }
+  }
+  if (headerIdx === -1) { showUpload('SBIフォーマットが認識できませんでした'); return []; }
+
+  const headers = parseCSVLine(lines[headerIdx]);
+  const IDX = {
+    date:   headers.indexOf('約定日'),
+    name:   headers.indexOf('銘柄'),
+    code:   headers.indexOf('銘柄コード'),
+    market: headers.indexOf('市場'),
+    type:   headers.indexOf('取引'),
+    qty:    headers.indexOf('約定数量'),
+    price:  headers.indexOf('約定単価'),
+    fee:    headers.indexOf('手数料/諸経費等'),
+    pnl:    headers.indexOf('受渡金額/決済損益'),
+  };
+
+  const trades = [];
+  for (let i = headerIdx + 1; i < lines.length; i++) {
+    const line = lines[i].trim();
+    if (!line) continue;
+    const c = parseCSVLine(line);
+    if (c.length < 5) continue;
+    const type = c[IDX.type] || '';
+    if (!type.includes('返済')) continue;
+    const pnlStr = c[IDX.pnl];
+    if (!pnlStr || pnlStr === '--') continue;
+    const pnl = parseFloat(pnlStr);
+    if (isNaN(pnl)) continue;
+
+    const date = c[IDX.date] || '';
+    const ym = date.slice(0, 7); // "2025/09"
+    trades.push({
+      date,
+      ym,
+      name: c[IDX.name] || '',
+      code: c[IDX.code] || '',
+      market: c[IDX.market] || '',
+      type,
+      qty: parseFloat(c[IDX.qty]) || 0,
+      price: parseFloat(c[IDX.price]) || 0,
+      fee: (c[IDX.fee] && c[IDX.fee] !== '--') ? parseFloat(c[IDX.fee]) || 0 : 0,
+      pnl,
+      win: pnl > 0,
+    });
+  }
+  return trades;
+}
+
+// ===== 描画 =====
+function render() {
+  if (barChart) { barChart.destroy(); barChart = null; }
+  const app = document.getElementById('app');
+  app.innerHTML = '';
+
+  if (allTrades.length === 0) {
+    const m = document.createElement('div');
+    m.className = 'loading';
+    m.textContent = '決済トレードが見つかりませんでした';
+    app.appendChild(m);
+    return;
+  }
+
+  const stats = calcStats(allTrades);
+
+  // ステータスバー
+  const dates = allTrades.map(t => t.date).sort();
+  app.appendChild(buildStatusBar(dates[0], dates[dates.length - 1], allTrades.length));
+
+  // サマリーグリッド
+  app.appendChild(buildSummaryGrid(stats));
+
+  // 月別損益チャート
+  app.appendChild(buildMonthlyCard(stats.monthly));
+
+  // 銘柄別損益
+  app.appendChild(buildStockTable(stats.byStock));
+
+  // 取引履歴
+  app.appendChild(buildTradeTable(allTrades));
+}
+
+function calcStats(trades) {
+  const wins = trades.filter(t => t.win);
+  const losses = trades.filter(t => !t.win);
+  const totalPnl = trades.reduce((s, t) => s + t.pnl, 0);
+  const totalWin = wins.reduce((s, t) => s + t.pnl, 0);
+  const totalLoss = losses.reduce((s, t) => s + t.pnl, 0);
+  const pf = totalLoss !== 0 ? Math.abs(totalWin / totalLoss) : Infinity;
+  const bestPnl = trades.reduce((m, t) => t.pnl > m ? t.pnl : m, -Infinity);
+  const worstPnl = trades.reduce((m, t) => t.pnl < m ? t.pnl : m, Infinity);
+
+  // 月別
+  const monthMap = {};
+  trades.forEach(t => {
+    if (!monthMap[t.ym]) monthMap[t.ym] = { pnl: 0, wins: 0, losses: 0 };
+    monthMap[t.ym].pnl += t.pnl;
+    if (t.win) monthMap[t.ym].wins++; else monthMap[t.ym].losses++;
+  });
+  const monthly = Object.entries(monthMap).sort((a, b) => a[0].localeCompare(b[0]));
+
+  // 銘柄別
+  const stockMap = {};
+  trades.forEach(t => {
+    const k = t.code || t.name;
+    if (!stockMap[k]) stockMap[k] = { name: t.name, code: t.code, pnl: 0, wins: 0, losses: 0, count: 0 };
+    stockMap[k].pnl += t.pnl;
+    stockMap[k].count++;
+    if (t.win) stockMap[k].wins++; else stockMap[k].losses++;
+  });
+  const byStock = Object.values(stockMap);
+
+  return {
+    total: trades.length,
+    winCount: wins.length,
+    lossCount: losses.length,
+    winRate: trades.length > 0 ? wins.length / trades.length * 100 : 0,
+    totalPnl, totalWin, totalLoss, pf,
+    avgWin: wins.length > 0 ? totalWin / wins.length : 0,
+    avgLoss: losses.length > 0 ? totalLoss / losses.length : 0,
+    bestPnl, worstPnl,
+    monthly, byStock,
+  };
+}
+
+function buildStatusBar(from, to, count) {
+  const bar = document.createElement('div');
+  bar.className = 'status-bar';
+  bar.innerHTML = `
+    <div class="status-item"><div class="status-label">開始</div><div class="status-value">${fmtDate(from)}</div></div>
+    <div class="status-div"></div>
+    <div class="status-item"><div class="status-label">終了</div><div class="status-value">${fmtDate(to)}</div></div>
+    <div class="status-div"></div>
+    <div class="status-item"><div class="status-label">決済トレード数</div><div class="status-value">${count.toLocaleString()} 件</div></div>
+  `;
+  return bar;
+}
+
+function buildSummaryGrid(s) {
+  const grid = document.createElement('div');
+  grid.className = 'summary-grid';
+
+  const metrics = [
+    {
+      label: '勝率',
+      value: s.winRate.toFixed(1),
+      unit: '%',
+      sub: `${s.winCount}勝 ${s.lossCount}敗`,
+      cls: s.winRate >= 50 ? 'val-pos' : 'val-neg',
+    },
+    {
+      label: '総損益',
+      value: fmtPnl(s.totalPnl),
+      unit: '円',
+      sub: `PF ${s.pf === Infinity ? '∞' : s.pf.toFixed(2)}`,
+      cls: s.totalPnl >= 0 ? 'val-pos' : 'val-neg',
+    },
+    {
+      label: '平均利益 / 平均損失',
+      value: `${fmtPnl(s.avgWin)} / ${fmtPnl(s.avgLoss)}`,
+      unit: '',
+      sub: `期待値 ${fmtPnl(s.winRate/100 * s.avgWin + (1 - s.winRate/100) * s.avgLoss)}円`,
+      cls: 'val-neu',
+    },
+    {
+      label: '最大利益 / 最大損失',
+      value: `${fmtPnl(s.bestPnl)} / ${fmtPnl(s.worstPnl)}`,
+      unit: '',
+      sub: '',
+      cls: 'val-neu',
+    },
+  ];
+
+  metrics.forEach(m => {
+    const card = document.createElement('div');
+    card.className = 'metric-card';
+    card.innerHTML = `
+      <div class="metric-label">${m.label}</div>
+      <div class="metric-value ${m.cls}">${m.value}<span class="metric-unit">${m.unit}</span></div>
+      <div class="metric-sub">${m.sub}</div>
+    `;
+    grid.appendChild(card);
+  });
+  return grid;
+}
+
+function buildMonthlyCard(monthly) {
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.innerHTML = `<div class="card-header"><div class="card-title">月別損益</div><div class="card-sub">単位: 円</div></div>`;
+  const body = document.createElement('div');
+  body.className = 'card-body';
+  const wrap = document.createElement('div');
+  wrap.className = 'chart-wrap';
+  const canvas = document.createElement('canvas');
+  wrap.appendChild(canvas);
+  body.appendChild(wrap);
+  card.appendChild(body);
+
+  const labels = monthly.map(([ym]) => ym.replace('/', '/'));
+  const values = monthly.map(([, d]) => d.pnl);
+  const colors = values.map(v => v >= 0 ? 'rgba(39,80,10,0.7)' : 'rgba(121,31,31,0.7)');
+  const borderColors = values.map(v => v >= 0 ? '#27500A' : '#791F1F');
+
+  setTimeout(() => {
+    barChart = new Chart(canvas, {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: [{
+          label: '月別損益',
+          data: values,
+          backgroundColor: colors,
+          borderColor: borderColors,
+          borderWidth: 1,
+          borderRadius: 3,
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: '#1a1a1a',
+            titleColor: '#ccc',
+            bodyColor: '#fff',
+            titleFont: { size: 11 },
+            bodyFont: { size: 11 },
+            padding: 10,
+            callbacks: {
+              label: ctx => `損益: ${fmtPnlFull(ctx.parsed.y)}円`,
+            }
+          }
+        },
+        scales: {
+          x: { ticks: { font: { size: 10 }, color: '#aaa' }, grid: { display: false } },
+          y: {
+            ticks: { font: { size: 10 }, color: '#aaa', callback: v => fmtK(v) },
+            grid: { color: '#f0ede8' }
+          }
+        }
+      }
+    });
+  }, 0);
+
+  return card;
+}
+
+function buildStockTable(byStock) {
+  const card = document.createElement('div');
+  card.className = 'card';
+
+  const header = document.createElement('div');
+  header.className = 'card-header';
+  const title = document.createElement('div');
+  title.className = 'card-title';
+  title.textContent = '銘柄別損益';
+  const sub = document.createElement('div');
+  sub.className = 'card-sub';
+  sub.textContent = byStock.length + ' 銘柄';
+  header.appendChild(title);
+  header.appendChild(sub);
+  card.appendChild(header);
+
+  const wrap = document.createElement('div');
+  wrap.className = 'table-wrap';
+
+  const cols = [
+    { key: 'code', label: 'コード' },
+    { key: 'name', label: '銘柄名' },
+    { key: 'count', label: '取引数' },
+    { key: 'wins', label: '勝' },
+    { key: 'losses', label: '負' },
+    { key: 'winRate', label: '勝率', derived: r => r.count > 0 ? r.wins / r.count * 100 : 0 },
+    { key: 'pnl', label: '合計損益' },
+  ];
+
+  function buildTbody(data) {
+    const sorted = data.slice().sort((a, b) => {
+      const col = cols.find(c => c.key === stockSort.col);
+      const av = col?.derived ? col.derived(a) : (a[stockSort.col] ?? 0);
+      const bv = col?.derived ? col.derived(b) : (b[stockSort.col] ?? 0);
+      return stockSort.dir * (typeof av === 'string' ? av.localeCompare(bv) : bv - av);
+    });
+    const tbody = document.createElement('tbody');
+    sorted.forEach(s => {
+      const wr = s.count > 0 ? s.wins / s.count * 100 : 0;
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td class="td-r" style="color:#aaa;font-size:11px">${s.code}</td>
+        <td style="max-width:160px;overflow:hidden;text-overflow:ellipsis" title="${s.name}">${s.name}</td>
+        <td class="td-r">${s.count}</td>
+        <td class="td-r td-pos">${s.wins}</td>
+        <td class="td-r td-neg">${s.losses}</td>
+        <td>
+          <div class="wr-wrap">
+            <div class="wr-bar-bg"><div class="wr-bar-win" style="width:${wr.toFixed(1)}%"></div></div>
+            <span class="wr-txt">${wr.toFixed(0)}%</span>
+          </div>
+        </td>
+        <td class="td-r ${s.pnl >= 0 ? 'td-pos' : 'td-neg'}">${fmtPnlFull(s.pnl)}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+    return tbody;
+  }
+
+  function buildTable() {
+    wrap.innerHTML = '';
+    const table = document.createElement('table');
+    const thead = document.createElement('thead');
+    const hr = document.createElement('tr');
+    cols.forEach(col => {
+      const th = document.createElement('th');
+      th.innerHTML = col.label + (stockSort.col === col.key ? `<span class="sort-icon">${stockSort.dir === -1 ? '↓' : '↑'}</span>` : '');
+      if (stockSort.col === col.key) th.classList.add('sorted');
+      th.addEventListener('click', () => {
+        if (stockSort.col === col.key) stockSort.dir *= -1;
+        else { stockSort.col = col.key; stockSort.dir = -1; }
+        table.replaceChild(buildTbody(byStock), table.querySelector('tbody'));
+        thead.querySelectorAll('th').forEach((t, i) => {
+          t.innerHTML = cols[i].label + (stockSort.col === cols[i].key ? `<span class="sort-icon">${stockSort.dir === -1 ? '↓' : '↑'}</span>` : '');
+          t.classList.toggle('sorted', stockSort.col === cols[i].key);
+        });
+      });
+      hr.appendChild(th);
+    });
+    thead.appendChild(hr);
+    table.appendChild(thead);
+    table.appendChild(buildTbody(byStock));
+    wrap.appendChild(table);
+  }
+
+  buildTable();
+  card.appendChild(wrap);
+  return card;
+}
+
+function buildTradeTable(trades) {
+  const card = document.createElement('div');
+  card.className = 'card';
+
+  const header = document.createElement('div');
+  header.className = 'card-header';
+  const title = document.createElement('div');
+  title.className = 'card-title';
+  title.textContent = '決済取引履歴';
+  const sub = document.createElement('div');
+  sub.className = 'card-sub';
+  sub.textContent = trades.length + ' 件';
+  header.appendChild(title);
+  header.appendChild(sub);
+  card.appendChild(header);
+
+  const bodyEl = document.createElement('div');
+  const wrap = document.createElement('div');
+  wrap.className = 'table-wrap';
+
+  const cols = [
+    { key: 'date', label: '約定日' },
+    { key: 'name', label: '銘柄' },
+    { key: 'code', label: 'コード' },
+    { key: 'type', label: '取引区分' },
+    { key: 'qty', label: '数量' },
+    { key: 'price', label: '単価' },
+    { key: 'fee', label: '手数料' },
+    { key: 'pnl', label: '損益' },
+  ];
+
+  const paginated = () => {
+    const sorted = trades.slice().sort((a, b) => {
+      const av = a[tradeSort.col] ?? '', bv = b[tradeSort.col] ?? '';
+      return tradeSort.dir * (typeof av === 'string' ? bv.localeCompare(av) : bv - av);
+    });
+    const start = (tradePage - 1) * PAGE_SIZE;
+    return { page: sorted.slice(start, start + PAGE_SIZE), total: sorted.length, sorted };
+  };
+
+  function buildContent() {
+    bodyEl.innerHTML = '';
+    const { page, total, sorted } = paginated();
+    const totalPages = Math.ceil(total / PAGE_SIZE);
+    const table = document.createElement('table');
+    const thead = document.createElement('thead');
+    const hr = document.createElement('tr');
+    cols.forEach(col => {
+      const th = document.createElement('th');
+      th.innerHTML = col.label + (tradeSort.col === col.key ? `<span class="sort-icon">${tradeSort.dir === -1 ? '↓' : '↑'}</span>` : '');
+      if (tradeSort.col === col.key) th.classList.add('sorted');
+      th.addEventListener('click', () => {
+        if (tradeSort.col === col.key) tradeSort.dir *= -1;
+        else { tradeSort.col = col.key; tradeSort.dir = -1; }
+        tradePage = 1;
+        buildContent();
+      });
+      hr.appendChild(th);
+    });
+    thead.appendChild(hr);
+    table.appendChild(thead);
+
+    const tbody = document.createElement('tbody');
+    page.forEach(t => {
+      const pnlCls = t.pnl > 0 ? 'td-pos' : t.pnl < 0 ? 'td-neg' : 'td-neu';
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${t.date}</td>
+        <td style="max-width:140px;overflow:hidden;text-overflow:ellipsis" title="${t.name}">${t.name}</td>
+        <td style="color:#aaa;font-size:11px">${t.code}</td>
+        <td style="font-size:11px;color:#555">${t.type}</td>
+        <td class="td-r">${t.qty.toLocaleString()}</td>
+        <td class="td-r">${t.price.toLocaleString()}</td>
+        <td class="td-r td-neu">${t.fee > 0 ? t.fee.toLocaleString() : '-'}</td>
+        <td class="td-r ${pnlCls}">${fmtPnlFull(t.pnl)}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+    table.appendChild(tbody);
+    wrap.innerHTML = '';
+    wrap.appendChild(table);
+    bodyEl.appendChild(wrap);
+
+    // ページネーション
+    if (totalPages > 1) {
+      const pag = document.createElement('div');
+      pag.className = 'pagination';
+      for (let p = 1; p <= totalPages; p++) {
+        const btn = document.createElement('button');
+        btn.className = 'page-btn' + (p === tradePage ? ' active' : '');
+        btn.textContent = p;
+        btn.addEventListener('click', () => { tradePage = p; buildContent(); });
+        pag.appendChild(btn);
+      }
+      bodyEl.appendChild(pag);
+      const info = document.createElement('div');
+      info.className = 'page-info';
+      info.textContent = `${(tradePage-1)*PAGE_SIZE+1}〜${Math.min(tradePage*PAGE_SIZE,total)} 件目 / 全${total}件`;
+      bodyEl.appendChild(info);
+    }
+  }
+
+  buildContent();
+  card.appendChild(bodyEl);
+  return card;
+}
+
+// ===== ユーティリティ =====
+function fmtDate(d) {
+  if (!d) return '-';
+  const [y, m, day] = d.split('/');
+  return `${y}年${parseInt(m)}月${parseInt(day)}日`;
+}
+
+function fmtPnl(n) {
+  if (n == null || isNaN(n)) return '-';
+  const abs = Math.abs(n);
+  if (abs >= 1e6) return (n < 0 ? '-' : '') + (abs / 1e4).toFixed(0) + '万';
+  if (abs >= 1e4) return (n < 0 ? '-' : '+') + (abs / 1e4).toFixed(1) + '万';
+  return (n >= 0 ? '+' : '') + n.toLocaleString('ja-JP');
+}
+
+function fmtPnlFull(n) {
+  if (n == null || isNaN(n)) return '-';
+  return (n >= 0 ? '+' : '') + n.toLocaleString('ja-JP');
+}
+
+function fmtK(n) {
+  if (Math.abs(n) >= 1e6) return (n / 1e4).toFixed(0) + '万';
+  if (Math.abs(n) >= 1e3) return (n / 1e3).toFixed(0) + 'k';
+  return n;
+}
+
+load();
+</script>
+</body>
+</html>
