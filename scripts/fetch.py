@@ -69,12 +69,12 @@ def main():
         sys.exit(1)
 
     print(f"  最新利用可能日: {latest}")
-    if latest != today:
+    if latest is None or latest < today:
         print(f"  {today} のデータはまだ公開されていないためスキップ")
         sys.exit(0)
 
     try:
-        filepath = fetch_csv(today)
+        filepath = fetch_csv(latest)  # latestのZIPを取得（翌日付ファイルにも対応）
     except Exception as e:
         print(f"  ERROR: ダウンロード失敗 — {e}")
         sys.exit(1)
