@@ -1,0 +1,62 @@
+name: 決算日データ取得
+
+on:
+  workflow_dispatch:
+    inputs:
+      from_date:
+        description: "取得開始日 (YYYY-MM-DD)"
+        required: false
+        default: "2025-10-01"
+      to_date:
+        description: "取得終了日 (YYYY-MM-DD、空欄=本日)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Python セットアップ
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 依存ライブラリインストール
+        run: pip install requests beautifulsoup4
+
+      - name: 取得終了日を決定
+        id: dates
+        run: |
+          TO="${{ github.event.inputs.to_date }}"
+          if [ -z "$TO" ]; then
+            TO=$(date '+%Y-%m-%d')
+          fi
+          echo "to=$TO" >> $GITHUB_OUTPUT
+
+      - name: 決算日データ取得
+        run: |
+          python scripts/scrape_kessan.py \
+            --from "${{ github.event.inputs.from_date || '2025-10-01' }}" \
+            --to   "${{ steps.dates.outputs.to }}" \
+            --out  data/kessan.csv
+
+      - name: CSV プレビュー
+        run: |
+          echo "=== 取得件数 ==="
+          wc -l data/kessan.csv
+          echo "=== 先頭10行 ==="
+          head -11 data/kessan.csv
+
+      - name: コミット・プッシュ
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/kessan.csv
+          git diff --staged --quiet || git commit -m "決算日データ更新: ${{ github.event.inputs.from_date || '2025-10-01' }} 〜 ${{ steps.dates.outputs.to }}"
+          git push
