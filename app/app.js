@@ -351,12 +351,10 @@ function showTickerData(ticker) {
   const rows = allSeries.filter(s => s.shares != null);
   const hasPrice = rows.some(s => s.price != null);
 
-  // 株価チャート用データ
   const priceData = DATA.price_data?.[ticker] || [];
   const priceLabels = priceData.map(d => d.date);
   const priceValues = priceData.map(d => d.close);
 
-  // 売買イベント判定（all_series から）
   const events = [];
   for (let i = 1; i < allSeries.length; i++) {
     const prev = allSeries[i - 1];
@@ -375,7 +373,6 @@ function showTickerData(ticker) {
     }
   }
 
-  // テーブル行生成
   const bodyRows = rows.map((s, i) => {
     const prev = i > 0 ? rows[i - 1] : null;
     const dShares = (s.shares != null && prev?.shares != null) ? s.shares - prev.shares : null;
@@ -420,7 +417,16 @@ function showTickerData(ticker) {
       const yAxis = chart.scales.y;
       const bottomY = yAxis.bottom, topY = yAxis.top;
       events.forEach(ev => {
-        const xIdx = priceLabels.indexOf(ev.date);
+        // 完全一致を優先、なければ5日以内の最近接日付を使用
+        let xIdx = priceLabels.indexOf(ev.date);
+        if (xIdx < 0) {
+          let closest = -1, minDiff = Infinity;
+          priceLabels.forEach((lbl, i) => {
+            const diff = Math.abs(new Date(lbl) - new Date(ev.date));
+            if (diff < minDiff) { minDiff = diff; closest = i; }
+          });
+          if (minDiff <= 5 * 86400000) xIdx = closest;
+        }
         if (xIdx < 0) return;
         const x = xAxis.getPixelForTick(xIdx);
         ctx.save();
@@ -495,7 +501,6 @@ function showTickerData(ticker) {
     plugins: [tradeMarkerPlugin]
   });
 
-  // アイコンホバー → カスタムツールチップ
   const tooltip = document.getElementById("trade-tooltip");
   canvas.addEventListener('mousemove', e => {
     const rect = canvas.getBoundingClientRect();
