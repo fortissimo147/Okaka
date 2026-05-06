@@ -3,30 +3,28 @@ SQLiteからデータを取得してapp/data/dashboard.jsonを生成する。
 """
 import json
 from pathlib import Path
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 
 from scripts.db import get_conn, init_db
 
 APP_DATA = Path(__file__).parent.parent / "app" / "data"
 NAMES_FILE = Path(__file__).parent.parent / "data" / "company_names.json"
-TOP_N = 20  # 時系列グラフに表示する上位銘柄数
+TOP_N = 20
+JST = timezone(timedelta(hours=9))
 
 
 def load_company_names() -> dict:
-    """data/company_names.jsonを読み込む。なければ空dict。"""
     if NAMES_FILE.exists():
         return json.loads(NAMES_FILE.read_text(encoding="utf-8"))
     return {}
 
 
 def save_company_names(names: dict):
-    """data/company_names.jsonに保存。"""
     NAMES_FILE.parent.mkdir(parents=True, exist_ok=True)
     NAMES_FILE.write_text(json.dumps(names, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
 def fetch_missing_names(tickers: list[str], existing: dict) -> dict:
-    """existingにないtickerのみyfinanceで検索。{ticker: name}を返す。"""
     import yfinance as yf
     result = {}
     for ticker in tickers:
@@ -44,7 +42,6 @@ def fetch_missing_names(tickers: list[str], existing: dict) -> dict:
 
 
 def _maybe_refresh_names():
-    """company_names.jsonの最終更新が7日以上前なら東証CSVを再取得する。"""
     import time
     from scripts.fetch_names import fetch_tse_names, update_names_cache
     if NAMES_FILE.exists():
@@ -79,18 +76,15 @@ def build():
             (APP_DATA / "dashboard.json").write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")
             return
 
-        # 全データ取得
         rows = conn.execute(
             "SELECT date, ticker, name, shares, price, value, ratio FROM holdings ORDER BY date, ratio DESC"
         ).fetchall()
 
-    # date → {ticker: row} のマップを構築
     by_date: dict[str, dict] = {}
     for row in rows:
         d = row["date"]
         by_date.setdefault(d, {})[row["ticker"]] = dict(row)
 
-    # 銘柄名を日本語化
     all_tickers = sorted({ticker for d_data in by_date.values() for ticker in d_data})
     company_names = load_company_names()
     new_names = fetch_missing_names(all_tickers, company_names)
@@ -103,7 +97,6 @@ def build():
             if jp_name:
                 row["name"] = jp_name
 
-    # 銘柄変動の計算（日付ごとに前日比を算出）
     changes = []
     for i, d in enumerate(dates):
         if i == 0:
@@ -154,7 +147,6 @@ def build():
             "decreased": decreased,
         })
 
-    # 最新日の上位N銘柄を時系列で追う
     latest_date = dates[-1]
     top_tickers = [
         ticker for ticker, _ in sorted(
@@ -179,7 +171,6 @@ def build():
         name = by_date[latest_date][ticker]["name"]
         timeseries.append({"ticker": ticker, "name": name, "series": series})
 
-    # 最新日のスナップショット（全銘柄）
     latest_snapshot = []
     prev_date = dates[-2] if len(dates) >= 2 else None
     for ticker, row in sorted(by_date[latest_date].items(), key=lambda x: -x[1]["ratio"]):
@@ -194,7 +185,6 @@ def build():
             "is_new": prev_date is not None and ticker not in by_date.get(prev_date, {}),
         })
 
-    # 過去10営業日 累積買い増し銘柄（保有金額2000万円以上 かつ 累積買い増し比率70%以上）
     base_date = dates[-11] if len(dates) >= 11 else dates[0]
     strong_buys = []
     for ticker, row in by_date[latest_date].items():
@@ -219,7 +209,6 @@ def build():
             })
     strong_buys.sort(key=lambda x: -x["cumulative_pct"])
 
-    # 過去20営業日の買い増し損益計算
     recent_dates = dates[-20:] if len(dates) >= 20 else dates
     buyup_pnl = []
     for ticker in by_date[latest_date]:
@@ -258,7 +247,6 @@ def build():
         })
     buyup_pnl.sort(key=lambda x: -x["pnl_pct"])
 
-    # 過去20営業日の売買分析
     trading_analysis = []
     for ticker in by_date[latest_date]:
         if ticker not in by_date[recent_dates[0]]:
@@ -316,7 +304,6 @@ def build():
         })
     trading_analysis.sort(key=lambda x: -x["evaluation_pct"])
 
-    # 全銘柄の日別終値（銘柄検索チャート用）
     price_data = {}
     for ticker in by_date[latest_date].keys():
         prices = []
@@ -326,7 +313,6 @@ def build():
         if prices:
             price_data[ticker] = prices
 
-    # 全銘柄の全日付時系列（検索機能用）
     all_series = []
     for ticker in by_date[latest_date].keys():
         series = []
@@ -345,7 +331,7 @@ def build():
         all_series.append({"ticker": ticker, "name": name, "series": series})
 
     out = {
-        "generated_at": datetime.now().isoformat(),
+        "generated_at": datetime.now(JST).isoformat(),
         "dates": dates,
         "latest_date": latest_date,
         "changes": changes,
@@ -370,10 +356,8 @@ def _build_standalone(data: dict):
 
     app_dir = Path(__file__).parent.parent / "app"
 
-    # app/index.html をベーステンプレートとして読み込む
     html = (app_dir / "index.html").read_text(encoding="utf-8")
 
-    # app.js を読み込んでデータをインライン化
     js = (app_dir / "app.js").read_text(encoding="utf-8")
     js_inline = js.replace(
         """async function load() {
@@ -393,7 +377,6 @@ def _build_standalone(data: dict):
     )
     html = html.replace('<script src="app.js"></script>', f"<script>{js_inline}</script>")
 
-    # Chart.js をCDNから取得してインライン化（失敗時はCDNリンクのまま）
     chartjs_tag = '<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>'
     try:
         with urllib.request.urlopen("https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js", timeout=10) as r:
@@ -406,7 +389,6 @@ def _build_standalone(data: dict):
     out_path.write_text(html, encoding="utf-8")
     print(f"スタンドアロンHTML を生成しました → {out_path}")
 
-    # GitHub Pages用にdocs/index.htmlにもコピー
     docs_path = Path(__file__).parent.parent / "docs" / "index.html"
     docs_path.parent.mkdir(parents=True, exist_ok=True)
     docs_path.write_text(html, encoding="utf-8")
