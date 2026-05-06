@@ -146,15 +146,14 @@ tr:hover td { background: #fafaf8; }
 const UPLOAD_URL = 'https://raw.githubusercontent.com/fortissimo147/Okaka/main/upload/SaveFile_000001_001922.csv';
 const PAGE_SIZE = 50;
 
-let allRows = [];        // 全取引行（新規・返済含む）
-let completedTrades = []; // 完結トレード
-let filteredTrades = [];  // フィルター後
+let allRows = [];
+let completedTrades = [];
+let filteredTrades = [];
 let barChart = null;
 let stockSort = { col: 'pnl', dir: -1 };
 let tradeSort = { col: 'endDate', dir: -1 };
 let tradePage = 1;
 
-// ===== データ取得 =====
 async function load() {
   try {
     const res = await fetch(UPLOAD_URL);
@@ -172,7 +171,6 @@ function init(text) {
   completedTrades = calcCompletedTrades(allRows);
   filteredTrades = completedTrades.slice();
 
-  // デフォルト日付セット
   if (completedTrades.length > 0) {
     const dates = completedTrades.map(t => t.endDate).sort();
     document.getElementById('date-from').value = slashToHyphen(dates[0]);
@@ -211,7 +209,6 @@ function updateFilterNote(from, to) {
   note.textContent = (from || to) ? `${filteredTrades.length} 件表示中` : '';
 }
 
-// ===== CSV パース（全行） =====
 function parseCSVLine(line) {
   const r = []; let inQ = false, cur = '';
   for (let i = 0; i < line.length; i++) {
@@ -270,9 +267,7 @@ function parseSBI(text) {
   return rows;
 }
 
-// ===== 完結トレード計算（銘柄ごとに株数0→0でひと勝負） =====
 function calcCompletedTrades(rows) {
-  // 日付昇順、同日内は新規建を返済より先に処理（CSV行順が逆になる場合の対策）
   const sorted = rows.slice().sort((a, b) => {
     if (a.date !== b.date) return a.date.localeCompare(b.date);
     const aNew = a.type.includes('新規') ? 0 : 1;
@@ -280,41 +275,44 @@ function calcCompletedTrades(rows) {
     return aNew - bNew;
   });
 
-  const state = {}; // code → { net, accPnl, startDate, name, inTrade }
+  const state = {};
   const trades = [];
 
   sorted.forEach(row => {
     const k = row.code;
-    if (!state[k]) state[k] = { net: 0, accPnl: 0, startDate: null, name: '', inTrade: false };
+    if (!state[k]) state[k] = { net: 0, accPnl: 0, startDate: null, name: '', inTrade: false, totalCost: 0 };
     const s = state[k];
 
-    // 新規建てでトレード開始
     if (!s.inTrade && row.type.includes('新規')) {
       s.startDate = row.date;
       s.name = row.name;
       s.accPnl = 0;
+      s.totalCost = 0;
       s.inTrade = true;
     }
 
-    // 株数を更新
-    if      (row.type.includes('新規買')) s.net += row.qty;
-    else if (row.type.includes('新規売')) s.net -= row.qty;
+    if      (row.type.includes('新規買')) { s.net += row.qty; s.totalCost += row.qty * row.price; }
+    else if (row.type.includes('新規売')) { s.net -= row.qty; s.totalCost += row.qty * row.price; }
     else if (row.type.includes('返済売')) { s.net -= row.qty; if (row.pnl !== null) s.accPnl += row.pnl; }
     else if (row.type.includes('返済買')) { s.net += row.qty; if (row.pnl !== null) s.accPnl += row.pnl; }
 
-    // 株数が0に戻ったら一勝負確定
     if (s.inTrade && Math.abs(s.net) < 0.01) {
+      const pnlRounded = Math.round(s.accPnl);
+      const costBasis = Math.round(s.totalCost);
       trades.push({
         code: k,
         name: s.name,
         startDate: s.startDate,
         endDate: row.date,
         endYm: row.ym,
-        pnl: Math.round(s.accPnl),
+        pnl: pnlRounded,
         win: s.accPnl > 0,
+        costBasis,
+        pct: costBasis > 0 ? s.accPnl / s.totalCost * 100 : null,
       });
       s.net = 0;
       s.accPnl = 0;
+      s.totalCost = 0;
       s.startDate = null;
       s.inTrade = false;
     }
@@ -323,7 +321,6 @@ function calcCompletedTrades(rows) {
   return trades.sort((a, b) => a.endDate.localeCompare(b.endDate));
 }
 
-// ===== 半月ごとの直近20勝負勝率 =====
 function buildHalfMonthTable(allTrades) {
   if (allTrades.length === 0) return [];
 
@@ -342,7 +339,6 @@ function buildHalfMonthTable(allTrades) {
   while (cur <= end) {
     const y = cur.getFullYear(), m = cur.getMonth();
 
-    // 前半（〜15日）
     const fhEnd = new Date(y, m, 15);
     const fhStr = fmtD(fhEnd);
     if (fhEnd >= start && fhEnd <= end) {
@@ -358,7 +354,6 @@ function buildHalfMonthTable(allTrades) {
       });
     }
 
-    // 後半（〜月末）
     const lhEnd = new Date(y, m+1, 0);
     const lhStr = fmtD(lhEnd);
     if (lhEnd >= start && lhEnd <= end) {
@@ -380,7 +375,6 @@ function buildHalfMonthTable(allTrades) {
   return rows;
 }
 
-// ===== 描画 =====
 function render() {
   if (barChart) { barChart.destroy(); barChart = null; }
   const app = document.getElementById('app');
@@ -396,22 +390,11 @@ function render() {
 
   const stats = calcStats(filteredTrades);
 
-  // ステータスバー
   app.appendChild(buildStatusBar());
-
-  // サマリーグリッド
   app.appendChild(buildSummaryGrid(stats));
-
-  // 月別損益チャート
   app.appendChild(buildMonthlyCard(filteredTrades));
-
-  // 直近20勝負 勝率推移（全データ使用）
   app.appendChild(buildHalfMonthCard(completedTrades));
-
-  // 銘柄別損益
   app.appendChild(buildStockTable(stats.byStock, filteredTrades));
-
-  // 完結トレード一覧
   app.appendChild(buildTradeTable(filteredTrades));
 }
 
@@ -439,6 +422,11 @@ function calcStats(trades) {
     if (t.win) stockMap[k].wins++; else stockMap[k].losses++;
   });
 
+  const winsWithCost   = wins.filter(t => t.costBasis > 0);
+  const lossesWithCost = losses.filter(t => t.costBasis > 0);
+  const avgWinPct  = winsWithCost.length  > 0 ? winsWithCost.reduce((s, t)  => s + t.pnl / t.costBasis * 100, 0) / winsWithCost.length  : null;
+  const avgLossPct = lossesWithCost.length > 0 ? lossesWithCost.reduce((s, t) => s + t.pnl / t.costBasis * 100, 0) / lossesWithCost.length : null;
+
   return {
     total: trades.length,
     winCount: wins.length, lossCount: losses.length,
@@ -446,6 +434,7 @@ function calcStats(trades) {
     totalPnl, totalWin, totalLoss, pf,
     avgWin: wins.length > 0 ? totalWin / wins.length : 0,
     avgLoss: losses.length > 0 ? totalLoss / losses.length : 0,
+    avgWinPct, avgLossPct,
     bestPnl: trades.reduce((m, t) => t.pnl > m ? t.pnl : m, -Infinity),
     worstPnl: trades.reduce((m, t) => t.pnl < m ? t.pnl : m, Infinity),
     monthly: Object.entries(monthMap).sort((a, b) => a[0].localeCompare(b[0])),
@@ -484,10 +473,12 @@ function calcOpenPositions() {
 function buildSummaryGrid(s) {
   const grid = document.createElement('div');
   grid.className = 'summary-grid';
+  const winPctStr  = s.avgWinPct  != null ? `+${s.avgWinPct.toFixed(2)}%`  : '-';
+  const lossPctStr = s.avgLossPct != null ? `${s.avgLossPct.toFixed(2)}%` : '-';
   const metrics = [
     { label: '勝率', value: s.winRate.toFixed(1), unit: '%', sub: `${s.winCount}勝 ${s.lossCount}敗`, cls: s.winRate >= 50 ? 'val-pos' : 'val-neg' },
-    { label: '総損益', value: fmtPnlShort(s.totalPnl), unit: '円', sub: `PF ${s.pf === Infinity ? '∞' : s.pf.toFixed(2)}`, cls: s.totalPnl >= 0 ? 'val-pos' : 'val-neg' },
-    { label: '平均利益 / 平均損失', value: `${fmtPnlShort(s.avgWin)} / ${fmtPnlShort(s.avgLoss)}`, unit: '', sub: `期待値 ${fmtPnlFull(Math.round(s.winRate/100*s.avgWin + (1-s.winRate/100)*s.avgLoss))}円`, cls: 'val-neu' },
+    { label: '総損益', value: fmtPnlShort(s.totalPnl), unit: '円', sub: `PF（プロフィットファクター）= 総利益 ÷ 総損失 = ${s.pf === Infinity ? '∞' : s.pf.toFixed(2)}`, cls: s.totalPnl >= 0 ? 'val-pos' : 'val-neg' },
+    { label: '平均利益 / 平均損失', value: `${fmtPnlShort(s.avgWin)} / ${fmtPnlShort(s.avgLoss)}`, unit: '', sub: `平均利幅 ${winPctStr} / 平均損幅 ${lossPctStr}（対投資額）`, cls: 'val-neu' },
     { label: '最大利益 / 最大損失', value: `${fmtPnlShort(s.bestPnl)} / ${fmtPnlShort(s.worstPnl)}`, unit: '', sub: '', cls: 'val-neu' },
   ];
   metrics.forEach(m => {
@@ -625,7 +616,6 @@ function buildStockTable(byStock, allTrades) {
     { key: 'pnl', label: '合計損益' },
   ];
 
-  // 銘柄ごとのトレード履歴（降順）
   const tradesByCode = {};
   allTrades.forEach(t => {
     if (!tradesByCode[t.code]) tradesByCode[t.code] = [];
@@ -645,7 +635,6 @@ function buildStockTable(byStock, allTrades) {
       const wr = s.count > 0 ? s.wins / s.count * 100 : 0;
       const NCOLS = cols.length;
 
-      // メイン行
       const tr = document.createElement('tr');
       tr.className = 'stock-row';
       const icon = `<span class="expand-icon" id="ei-${s.code}">▶</span>`;
@@ -659,7 +648,6 @@ function buildStockTable(byStock, allTrades) {
         <td class="td-r ${s.pnl >= 0 ? 'td-pos' : 'td-neg'}">${fmtPnlFull(s.pnl)}</td>
       `;
 
-      // 詳細行（折りたたみ）
       const detailTr = document.createElement('tr');
       detailTr.className = 'detail-row';
       const detailTd = document.createElement('td');
@@ -674,12 +662,15 @@ function buildStockTable(byStock, allTrades) {
       trades.forEach((t, i) => {
         const dtr = document.createElement('tr');
         const pnlCls = t.pnl > 0 ? 'td-pos' : t.pnl < 0 ? 'td-neg' : '';
+        const winCol = t.win ? '#27500A' : '#791F1F';
+        const pctStr = t.pct != null ? `${t.pct >= 0 ? '+' : ''}${t.pct.toFixed(2)}%` : '';
         dtr.innerHTML = `
           <td style="color:#bbb;width:24px;text-align:right">${trades.length - i}</td>
           <td>${t.endDate}</td>
           <td style="color:#aaa">${t.startDate} 〜</td>
           <td class="dt-pnl ${pnlCls}">${fmtPnlFull(t.pnl)}</td>
-          <td style="color:${t.win ? '#27500A' : '#791F1F'};font-weight:500">${t.win ? '勝' : '負'}</td>
+          <td style="color:${winCol};font-weight:500">${t.win ? '勝' : '負'}</td>
+          <td style="color:${winCol};font-size:10px;text-align:right;padding-left:2px">${pctStr}</td>
         `;
         dtTable.appendChild(dtr);
       });
@@ -687,7 +678,6 @@ function buildStockTable(byStock, allTrades) {
       detailTd.appendChild(inner);
       detailTr.appendChild(detailTd);
 
-      // クリックで開閉
       tr.addEventListener('click', () => {
         const innerEl = document.getElementById(`detail-${s.code}`);
         const iconEl = document.getElementById(`ei-${s.code}`);
@@ -814,7 +804,6 @@ function buildTradeTable(trades) {
   return card;
 }
 
-// ===== ファイルアップロード =====
 function showUpload(errMsg) {
   const app = document.getElementById('app');
   app.innerHTML = '';
@@ -850,7 +839,6 @@ function readFile(file) {
   reader.readAsArrayBuffer(file);
 }
 
-// ===== ユーティリティ =====
 function slashToHyphen(d) { return d ? d.replace(/\//g, '-') : ''; }
 
 function fmtPnlShort(n) {
