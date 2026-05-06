@@ -93,6 +93,19 @@ tr:hover td { background: #fafaf8; }
 .page-btn.active { background: #1a1a1a; color: #fff; border-color: #1a1a1a; }
 .page-info { font-size: 11px; color: #aaa; text-align: center; margin-top: 8px; }
 
+/* 銘柄展開 */
+.stock-row { cursor: pointer; }
+.stock-row:hover td { background: #f5f4f1 !important; }
+.expand-icon { font-size: 10px; color: #bbb; margin-left: 5px; transition: transform 0.15s; display: inline-block; }
+.expand-icon.open { transform: rotate(90deg); }
+.detail-row td { padding: 0 !important; background: #fafaf8; }
+.detail-inner { overflow: hidden; max-height: 0; transition: max-height 0.2s ease; }
+.detail-inner.open { max-height: 2000px; }
+.detail-table { width: 100%; border-collapse: collapse; }
+.detail-table td { padding: 5px 12px 5px 24px; font-size: 11px; border-bottom: 0.5px solid #f0ede8; color: #555; }
+.detail-table tr:last-child td { border-bottom: none; }
+.detail-table .dt-pnl { text-align: right; font-variant-numeric: tabular-nums; font-weight: 500; }
+
 /* ファイルアップロード */
 .upload-area { border: 1px dashed #e0ddd8; border-radius: 10px; padding: 1.5rem; text-align: center; cursor: pointer; transition: border-color 0.15s; }
 .upload-area:hover, .upload-area.drag-over { border-color: #888; }
@@ -259,8 +272,13 @@ function parseSBI(text) {
 
 // ===== 完結トレード計算（銘柄ごとに株数0→0でひと勝負） =====
 function calcCompletedTrades(rows) {
-  // 日付昇順でソート
-  const sorted = rows.slice().sort((a, b) => a.date.localeCompare(b.date));
+  // 日付昇順、同日内は新規建を返済より先に処理（CSV行順が逆になる場合の対策）
+  const sorted = rows.slice().sort((a, b) => {
+    if (a.date !== b.date) return a.date.localeCompare(b.date);
+    const aNew = a.type.includes('新規') ? 0 : 1;
+    const bNew = b.type.includes('新規') ? 0 : 1;
+    return aNew - bNew;
+  });
 
   const state = {}; // code → { net, accPnl, startDate, name, inTrade }
   const trades = [];
@@ -275,7 +293,6 @@ function calcCompletedTrades(rows) {
       s.startDate = row.date;
       s.name = row.name;
       s.accPnl = 0;
-      s.net = 0;
       s.inTrade = true;
     }
 
@@ -330,13 +347,13 @@ function buildHalfMonthTable(allTrades) {
     const fhStr = fmtD(fhEnd);
     if (fhEnd >= start && fhEnd <= end) {
       const up = sorted.filter(t => t.endDate <= fhStr);
-      const last20 = up.slice(-20);
-      const wins = last20.filter(t => t.win).length;
+      const last40 = up.slice(-40);
+      const wins = last40.filter(t => t.win).length;
       rows.push({
         label: `${y}/${String(m+1).padStart(2,'0')} 前半`,
         endDate: fhStr,
-        wins, total: last20.length,
-        rate: last20.length > 0 ? wins / last20.length * 100 : null,
+        wins, total: last40.length,
+        rate: last40.length > 0 ? wins / last40.length * 100 : null,
         cumCount: up.length,
       });
     }
@@ -346,13 +363,13 @@ function buildHalfMonthTable(allTrades) {
     const lhStr = fmtD(lhEnd);
     if (lhEnd >= start && lhEnd <= end) {
       const up = sorted.filter(t => t.endDate <= lhStr);
-      const last20 = up.slice(-20);
-      const wins = last20.filter(t => t.win).length;
+      const last40 = up.slice(-40);
+      const wins = last40.filter(t => t.win).length;
       rows.push({
         label: `${y}/${String(m+1).padStart(2,'0')} 後半`,
         endDate: lhStr,
-        wins, total: last20.length,
-        rate: last20.length > 0 ? wins / last20.length * 100 : null,
+        wins, total: last40.length,
+        rate: last40.length > 0 ? wins / last40.length * 100 : null,
         cumCount: up.length,
       });
     }
@@ -392,7 +409,7 @@ function render() {
   app.appendChild(buildHalfMonthCard(completedTrades));
 
   // 銘柄別損益
-  app.appendChild(buildStockTable(stats.byStock));
+  app.appendChild(buildStockTable(stats.byStock, filteredTrades));
 
   // 完結トレード一覧
   app.appendChild(buildTradeTable(filteredTrades));
@@ -543,7 +560,7 @@ function buildHalfMonthCard(allTrades) {
 
   const hdr = document.createElement('div');
   hdr.className = 'card-header';
-  hdr.innerHTML = `<div class="card-title">半月ごとの直近20勝負 勝率</div><div class="card-sub">全期間のデータを使用</div>`;
+  hdr.innerHTML = `<div class="card-title">半月ごとの直近40勝負 勝率</div><div class="card-sub">全期間のデータを使用</div>`;
   card.appendChild(hdr);
 
   const wrap = document.createElement('div');
@@ -552,7 +569,7 @@ function buildHalfMonthCard(allTrades) {
   const thead = document.createElement('thead');
   thead.innerHTML = `<tr>
     <th>期間</th>
-    <th class="td-r">直近20勝負 勝率</th>
+    <th class="td-r">直近40勝負 勝率</th>
     <th class="td-r">勝</th>
     <th class="td-r">負</th>
     <th class="td-r">累計完結数</th>
@@ -587,12 +604,12 @@ function buildHalfMonthCard(allTrades) {
   return card;
 }
 
-function buildStockTable(byStock) {
+function buildStockTable(byStock, allTrades) {
   const card = document.createElement('div');
   card.className = 'card';
   const hdr = document.createElement('div');
   hdr.className = 'card-header';
-  hdr.innerHTML = `<div class="card-title">銘柄別損益</div><div class="card-sub">${byStock.length} 銘柄</div>`;
+  hdr.innerHTML = `<div class="card-title">銘柄別損益</div><div class="card-sub">${byStock.length} 銘柄（行クリックで勝負履歴）</div>`;
   card.appendChild(hdr);
 
   const wrap = document.createElement('div');
@@ -608,6 +625,14 @@ function buildStockTable(byStock) {
     { key: 'pnl', label: '合計損益' },
   ];
 
+  // 銘柄ごとのトレード履歴（降順）
+  const tradesByCode = {};
+  allTrades.forEach(t => {
+    if (!tradesByCode[t.code]) tradesByCode[t.code] = [];
+    tradesByCode[t.code].push(t);
+  });
+  Object.values(tradesByCode).forEach(arr => arr.sort((a, b) => b.endDate.localeCompare(a.endDate)));
+
   function mkTbody(data) {
     const sorted = data.slice().sort((a, b) => {
       const col = cols.find(c => c.key === stockSort.col);
@@ -618,17 +643,61 @@ function buildStockTable(byStock) {
     const tbody = document.createElement('tbody');
     sorted.forEach(s => {
       const wr = s.count > 0 ? s.wins / s.count * 100 : 0;
+      const NCOLS = cols.length;
+
+      // メイン行
       const tr = document.createElement('tr');
+      tr.className = 'stock-row';
+      const icon = `<span class="expand-icon" id="ei-${s.code}">▶</span>`;
       tr.innerHTML = `
         <td class="td-r td-muted" style="font-size:11px">${s.code}</td>
-        <td style="max-width:160px;overflow:hidden;text-overflow:ellipsis" title="${s.name}">${s.name}</td>
+        <td style="max-width:160px;overflow:hidden;text-overflow:ellipsis" title="${s.name}">${s.name}${icon}</td>
         <td class="td-r">${s.count}</td>
         <td class="td-r td-pos">${s.wins}</td>
         <td class="td-r td-neg">${s.losses}</td>
         <td><div class="wr-wrap"><div class="wr-bar-bg"><div class="wr-bar-fill" style="width:${wr.toFixed(1)}%"></div></div><span class="wr-txt">${wr.toFixed(0)}%</span></div></td>
         <td class="td-r ${s.pnl >= 0 ? 'td-pos' : 'td-neg'}">${fmtPnlFull(s.pnl)}</td>
       `;
+
+      // 詳細行（折りたたみ）
+      const detailTr = document.createElement('tr');
+      detailTr.className = 'detail-row';
+      const detailTd = document.createElement('td');
+      detailTd.colSpan = NCOLS;
+      const inner = document.createElement('div');
+      inner.className = 'detail-inner';
+      inner.id = `detail-${s.code}`;
+
+      const trades = tradesByCode[s.code] || [];
+      const dtTable = document.createElement('table');
+      dtTable.className = 'detail-table';
+      trades.forEach((t, i) => {
+        const dtr = document.createElement('tr');
+        const pnlCls = t.pnl > 0 ? 'td-pos' : t.pnl < 0 ? 'td-neg' : '';
+        dtr.innerHTML = `
+          <td style="color:#bbb;width:24px;text-align:right">${trades.length - i}</td>
+          <td>${t.endDate}</td>
+          <td style="color:#aaa">${t.startDate} 〜</td>
+          <td class="dt-pnl ${pnlCls}">${fmtPnlFull(t.pnl)}</td>
+          <td style="color:${t.win ? '#27500A' : '#791F1F'};font-weight:500">${t.win ? '勝' : '負'}</td>
+        `;
+        dtTable.appendChild(dtr);
+      });
+      inner.appendChild(dtTable);
+      detailTd.appendChild(inner);
+      detailTr.appendChild(detailTd);
+
+      // クリックで開閉
+      tr.addEventListener('click', () => {
+        const innerEl = document.getElementById(`detail-${s.code}`);
+        const iconEl = document.getElementById(`ei-${s.code}`);
+        const isOpen = innerEl.classList.contains('open');
+        innerEl.classList.toggle('open', !isOpen);
+        iconEl.classList.toggle('open', !isOpen);
+      });
+
       tbody.appendChild(tr);
+      tbody.appendChild(detailTr);
     });
     return tbody;
   }
