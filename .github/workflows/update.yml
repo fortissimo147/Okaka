@@ -37,5 +37,5 @@ jobs:
           git config user.email "github-actions@github.com"
           git config user.name "github-actions"
           git add docs/data/dashboard.json docs/index.html db/etf.db data/raw/
-          git diff --cached --quiet || git commit -m "update ETF data $(date +'%Y-%m-%d')"
+          git diff --cached --quiet || git commit -m "update ETF data $(TZ='Asia/Tokyo' date +'%Y-%m-%d')"
           git push
