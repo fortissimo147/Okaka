@@ -24,7 +24,7 @@ jobs:
       - name: 決算日データ取得
         run: |
           python scripts/scrape_kessan_kabutan.py \
-            --codes data/companies.csv \
+            --codes data/company_names.json \
             --out   data/kessan.csv
 
       - name: CSV プレビュー
