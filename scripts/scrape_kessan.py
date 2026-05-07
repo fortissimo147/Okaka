@@ -1,10 +1,12 @@
 """
-irbank.net /market/kessan?y=YYYY-MM-DD から日付ごとの決算企業データを取得し CSV に保存。
+SBI証券の決算カレンダーから発表日・銘柄コード・銘柄名を取得してCSVに保存。
+Playwright（ヘッドレスブラウザ）を使用。
 
 使い方:
-  pip install requests beautifulsoup4
-  python scripts/scrape_kessan.py
-  python scripts/scrape_kessan.py --from 2025-10-01 --to 2026-05-06 --out data/kessan.csv
+  pip install playwright beautifulsoup4
+  playwright install chromium
+  python scripts/scrape_kessan_sbi.py
+  python scripts/scrape_kessan_sbi.py --from 2025-10-01 --to 2026-05-07 --out data/kessan.csv
 """
 
 import argparse
@@ -14,95 +16,73 @@ import time
 from datetime import datetime, date, timedelta
 from pathlib import Path
 
-import requests
 from bs4 import BeautifulSoup
+from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeout
 
-BASE_URL = "https://irbank.net/market/kessan"
 DEFAULT_FROM = "2025-10-01"
 DEFAULT_OUT  = "data/kessan.csv"
-REQUEST_INTERVAL = 1.0  # 秒
+PAGE_WAIT_MS = 3000   # ページ読み込み待機（ms）
+INTERVAL_SEC = 1.5    # リクエスト間隔（秒）
 
-HEADERS = {
-    "User-Agent": (
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-        "AppleWebKit/537.36 (KHTML, like Gecko) "
-        "Chrome/120.0.0.0 Safari/537.36"
-    ),
-    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-    "Accept-Language": "ja,en-US;q=0.9,en;q=0.8",
-    "Referer": "https://irbank.net/",
-}
-
-
-def fetch_day(session: requests.Session, d: date) -> BeautifulSoup | None:
-    try:
-        resp = session.get(
-            BASE_URL,
-            headers=HEADERS,
-            params={"y": d.strftime("%Y-%m-%d")},
-            timeout=30,
-        )
-        if resp.status_code == 404:
-            return None
-        resp.raise_for_status()
-        resp.encoding = resp.apparent_encoding or "utf-8"
-        return BeautifulSoup(resp.text, "html.parser")
-    except requests.RequestException as e:
-        print(f"    エラー ({d}): {e}", file=sys.stderr)
-        return None
+URL_TEMPLATE = (
+    "https://www.sbisec.co.jp/ETGate/"
+    "?_ControlID=WPLETmgR001Control"
+    "&_PageID=WPLETmgR001Mdtl20"
+    "&_DataStoreID=DSWPLETmgR001Control"
+    "&_ActionID=DefaultAID"
+    "&burl=iris_economicCalendar"
+    "&cat1=market"
+    "&cat2=economicCalender"
+    "&dir=tl1-cal%7Ctl2-schedule%7Ctl3-stock%7Ctl4-calsel%7Ctl9-{ym}%7Ctl10-{ymd}"
+    "&file=index.html"
+    "&getFlg=on"
+)
 
 
-def parse_day(soup: BeautifulSoup, d: date) -> list[dict]:
+def build_url(d: date) -> str:
+    return URL_TEMPLATE.format(ym=d.strftime("%Y%m"), ymd=d.strftime("%Y%m%d"))
+
+
+def parse_page(html: str, d: date) -> list[dict]:
     records = []
     date_str = d.strftime("%Y-%m-%d")
+    soup = BeautifulSoup(html, "html.parser")
 
     for table in soup.find_all("table"):
         rows = table.find_all("tr")
-        if not rows:
+        if len(rows) < 2:
             continue
 
-        # ヘッダー行からカラムを検出
-        header_cells = [th.get_text(strip=True) for th in rows[0].find_all(["th", "td"])]
-        col = {}
-        for i, h in enumerate(header_cells):
-            if h in ("コード", "証券コード", "銘柄コード"):
-                col["code"] = i
-            elif h in ("銘柄", "銘柄名", "企業名", "会社名"):
-                col["name"] = i
-            elif "市場" in h:
-                col["market"] = i
-            elif "業種" in h:
-                col["sector"] = i
-            elif "決算" in h:
-                col["kessan"] = i
+        headers = [th.get_text(strip=True) for th in rows[0].find_all(["th", "td"])]
 
-        # カラムが検出できなければ位置推定（コード=0, 銘柄名=1 が多い）
-        if "code" not in col and len(header_cells) >= 2:
-            col.setdefault("code", 0)
-            col.setdefault("name", 1)
+        col_code = col_name = col_ann = -1
+        for i, h in enumerate(headers):
+            if h in ("コード", "銘柄コード", "証券コード"):
+                col_code = i
+            elif h in ("銘柄", "銘柄名"):
+                col_name = i
+            elif "発表" in h or "決算" in h:
+                col_ann = i
+
+        if col_code < 0 and col_name < 0:
+            continue
 
         for row in rows[1:]:
             cells = [td.get_text(strip=True) for td in row.find_all(["td", "th"])]
             if len(cells) < 2:
                 continue
 
-            code   = cells[col["code"]]  if "code"   in col and col["code"]   < len(cells) else ""
-            name   = cells[col["name"]]  if "name"   in col and col["name"]   < len(cells) else ""
-            market = cells[col["market"]]if "market" in col and col["market"] < len(cells) else ""
-            sector = cells[col["sector"]]if "sector" in col and col["sector"] < len(cells) else ""
-            kessan = cells[col["kessan"]]if "kessan" in col and col["kessan"] < len(cells) else ""
+            code = cells[col_code] if col_code >= 0 and col_code < len(cells) else ""
+            name = cells[col_name] if col_name >= 0 and col_name < len(cells) else ""
+            ann  = cells[col_ann]  if col_ann  >= 0 and col_ann  < len(cells) else date_str
 
             if not code and not name:
                 continue
+            # 4桁数字以外のコードは除外
+            if code and not (code.isdigit() and len(code) == 4):
+                code = ""
 
-            records.append({
-                "date":   date_str,
-                "code":   code,
-                "name":   name,
-                "market": market,
-                "sector": sector,
-                "kessan": kessan,
-            })
+            records.append({"date": ann or date_str, "code": code, "name": name})
 
     return records
 
@@ -110,33 +90,51 @@ def parse_day(soup: BeautifulSoup, d: date) -> list[dict]:
 def scrape(from_str: str, to_str: str, out_path: str):
     start = datetime.strptime(from_str, "%Y-%m-%d").date()
     end   = datetime.strptime(to_str,   "%Y-%m-%d").date()
-    total_days = (end - start).days + 1
-    print(f"取得期間: {start} 〜 {end}（{total_days} 日間）", file=sys.stderr)
+    print(f"取得期間: {start} 〜 {end}（{(end-start).days+1} 日間）", file=sys.stderr)
 
-    session = requests.Session()
     all_records: list[dict] = []
-    empty_days = 0
 
-    d = start
-    while d <= end:
-        soup = fetch_day(session, d)
-        if soup is None:
-            d += timedelta(days=1)
-            time.sleep(REQUEST_INTERVAL)
-            continue
+    with sync_playwright() as pw:
+        browser = pw.chromium.launch(headless=True)
+        ctx = browser.new_context(
+            locale="ja-JP",
+            user_agent=(
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                "AppleWebKit/537.36 (KHTML, like Gecko) "
+                "Chrome/120.0.0.0 Safari/537.36"
+            ),
+        )
+        page = ctx.new_page()
 
-        records = parse_day(soup, d)
-        if records:
-            all_records.extend(records)
-            print(f"  {d}: {len(records)} 件（累計 {len(all_records)} 件）", file=sys.stderr)
-            empty_days = 0
-        else:
-            empty_days += 1
-            if empty_days <= 3:
+        d = start
+        while d <= end:
+            url = build_url(d)
+            try:
+                page.goto(url, wait_until="domcontentloaded", timeout=30000)
+                page.wait_for_timeout(PAGE_WAIT_MS)
+                html = page.content()
+            except PlaywrightTimeout:
+                print(f"  {d}: タイムアウト", file=sys.stderr)
+                d += timedelta(days=1)
+                time.sleep(INTERVAL_SEC)
+                continue
+            except Exception as e:
+                print(f"  {d}: エラー — {e}", file=sys.stderr)
+                d += timedelta(days=1)
+                time.sleep(INTERVAL_SEC)
+                continue
+
+            records = parse_page(html, d)
+            if records:
+                all_records.extend(records)
+                print(f"  {d}: {len(records)} 件（累計 {len(all_records)} 件）", file=sys.stderr)
+            else:
                 print(f"  {d}: 0 件（休場日・データなし）", file=sys.stderr)
 
-        d += timedelta(days=1)
-        time.sleep(REQUEST_INTERVAL)
+            d += timedelta(days=1)
+            time.sleep(INTERVAL_SEC)
+
+        browser.close()
 
     if not all_records:
         print("データが取得できませんでした。", file=sys.stderr)
@@ -144,9 +142,8 @@ def scrape(from_str: str, to_str: str, out_path: str):
 
     out = Path(out_path)
     out.parent.mkdir(parents=True, exist_ok=True)
-    fieldnames = ["date", "code", "name", "market", "sector", "kessan"]
     with open(out, "w", newline="", encoding="utf-8-sig") as f:
-        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer = csv.DictWriter(f, fieldnames=["date", "code", "name"])
         writer.writeheader()
         writer.writerows(all_records)
 
@@ -155,12 +152,10 @@ def scrape(from_str: str, to_str: str, out_path: str):
 
 def main():
     today = date.today().strftime("%Y-%m-%d")
-    parser = argparse.ArgumentParser(description="irbank.net 決算企業データ取得")
-    parser.add_argument("--from", dest="from_date", default=DEFAULT_FROM,
-                        help="取得開始日 (YYYY-MM-DD, デフォルト: 2025-10-01)")
-    parser.add_argument("--to",   dest="to_date",   default=today,
-                        help=f"取得終了日 (YYYY-MM-DD, デフォルト: 本日 {today})")
-    parser.add_argument("--out",  default=DEFAULT_OUT, help="出力CSVパス")
+    parser = argparse.ArgumentParser(description="SBI証券 決算カレンダーデータ取得")
+    parser.add_argument("--from", dest="from_date", default=DEFAULT_FROM)
+    parser.add_argument("--to",   dest="to_date",   default=today)
+    parser.add_argument("--out",  default=DEFAULT_OUT)
     args = parser.parse_args()
     scrape(args.from_date, args.to_date, args.out)
 
