@@ -9,6 +9,7 @@
 
 import argparse
 import csv
+import json
 import sys
 import time
 import re
@@ -18,7 +19,7 @@ from pathlib import Path
 import requests
 from bs4 import BeautifulSoup
 
-DEFAULT_CODES = "data/companies.csv"
+DEFAULT_CODES = "data/company_names.json"
 DEFAULT_OUT   = "data/kessan.csv"
 INTERVAL_SEC  = 0.8
 MAX_RETRIES   = 2
@@ -37,19 +38,14 @@ HEADERS = {
 }
 
 
-def load_companies(csv_path: str) -> list[dict]:
-    """companies.csv からコード・銘柄名リストを返す（ETF等を除く）。"""
+def load_companies(json_path: str) -> list[dict]:
+    """company_names.json からコード・銘柄名リストを返す（4桁数字コードのみ）。"""
+    with open(json_path, encoding="utf-8") as f:
+        data = json.load(f)
     companies = []
-    with open(csv_path, encoding="utf-8-sig") as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            code = row.get("コード", "").strip()
-            name = row.get("銘柄名", "").strip()
-            market = row.get("市場・商品区分", "").strip()
-            # 4桁数字コードのみ対象
-            if not (code.isdigit() and len(code) == 4):
-                continue
-            companies.append({"code": code, "name": name, "market": market})
+    for code, name in data.items():
+        if code.isdigit() and len(code) == 4:
+            companies.append({"code": code, "name": name})
     return companies
 
 
@@ -64,7 +60,7 @@ def parse_yy_date(s: str) -> str | None:
     return f"{year}-{mm}-{dd}"
 
 
-def fetch_ann_dates(session: requests.Session, code: str) -> list[str]:
+def fetch_ann_dates(session: requests.Session, code: str) -> list[str] | None:
     """かぶたんから指定コードの発表日リストを返す。"""
     url = f"https://kabutan.jp/stock/finance?code={code}"
     for attempt in range(MAX_RETRIES + 1):
@@ -74,7 +70,7 @@ def fetch_ann_dates(session: requests.Session, code: str) -> list[str]:
                 return []
             if resp.status_code == 403:
                 print(f"    [{code}] 403 blocked", file=sys.stderr)
-                return []
+                return None
             resp.raise_for_status()
             resp.encoding = resp.apparent_encoding or "utf-8"
             break
@@ -118,13 +114,12 @@ def scrape(codes_path: str, out_path: str):
         name = co["name"]
 
         dates = fetch_ann_dates(session, code)
-        if dates:
+        if dates is None:
+            blocked += 1
+        elif dates:
             for d in dates:
                 all_records.append({"date": d, "code": code, "name": name})
             print(f"  [{i+1}/{len(companies)}] {code} {name}: {len(dates)} 件", file=sys.stderr)
-        else:
-            # ETF等は発表日なしが正常
-            pass
 
         if blocked > 10:
             print("ブロックが続いています。処理を中断します。", file=sys.stderr)
