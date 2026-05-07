@@ -10,8 +10,10 @@ import io
 import re
 import sys
 import zipfile
-from datetime import date, datetime
+from datetime import date, datetime, timezone, timedelta
 from pathlib import Path
+
+JST = timezone(timedelta(hours=9))
 
 import requests
 
@@ -58,8 +60,8 @@ def fetch_csv(target_date: date) -> Path:
 
 
 def main():
-    today = date.today()
-    print(f"[{datetime.now().isoformat()}] fetch 開始 — {today}")
+    today = datetime.now(JST).date()  # UTC基準でなくJST基準で当日付を決定
+    print(f"[{datetime.now(JST).isoformat()}] fetch 開始 — {today}")
 
     print(f"  利用可能な最新日付を確認中...")
     try:
