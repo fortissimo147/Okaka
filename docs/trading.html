@@ -706,10 +706,13 @@ function buildKessanMatagiCard(trades) {
   // 月別集計
   const monthMap = {};
   km.forEach(t => {
-    if (!monthMap[t.endYm]) monthMap[t.endYm] = { wins: 0, losses: 0 };
+    if (!monthMap[t.endYm]) monthMap[t.endYm] = { wins: 0, losses: 0, pnl: 0, trades: [] };
     if (t.win) monthMap[t.endYm].wins++; else monthMap[t.endYm].losses++;
+    monthMap[t.endYm].pnl += t.pnl;
+    monthMap[t.endYm].trades.push(t);
   });
   const months = Object.entries(monthMap).sort((a, b) => a[0].localeCompare(b[0]));
+  const NCOLS = 6;
 
   const wrap = document.createElement('div');
   wrap.className = 'table-wrap';
@@ -717,10 +720,11 @@ function buildKessanMatagiCard(trades) {
   const thead = document.createElement('thead');
   thead.innerHTML = `<tr>
     <th>月</th>
-    <th class="td-r">決算跨ぎ件数</th>
+    <th class="td-r">件数</th>
     <th class="td-r">勝</th>
     <th class="td-r">負</th>
     <th class="td-r">勝率</th>
+    <th class="td-r">月間損益</th>
   </tr>`;
   table.appendChild(thead);
 
@@ -728,9 +732,14 @@ function buildKessanMatagiCard(trades) {
   months.forEach(([ym, v]) => {
     const total = v.wins + v.losses;
     const rate = total > 0 ? v.wins / total * 100 : 0;
+    const pnlCls = v.pnl >= 0 ? 'td-pos' : 'td-neg';
+
+    // 月行
     const tr = document.createElement('tr');
+    tr.className = 'stock-row';
+    const icon = `<span class="expand-icon" id="km-ei-${ym}">▶</span>`;
     tr.innerHTML = `
-      <td>${ym}</td>
+      <td>${ym}${icon}</td>
       <td class="td-r">${total}</td>
       <td class="td-r td-pos">${v.wins}</td>
       <td class="td-r td-neg">${v.losses}</td>
@@ -740,8 +749,51 @@ function buildKessanMatagiCard(trades) {
           <span class="wr-txt ${rate >= 50 ? 'hm-win' : 'hm-lose'}">${rate.toFixed(1)}%</span>
         </div>
       </td>
+      <td class="td-r ${pnlCls}">${fmtPnlFull(v.pnl)}</td>
     `;
+
+    // 詳細行
+    const detailTr = document.createElement('tr');
+    detailTr.className = 'detail-row';
+    const detailTd = document.createElement('td');
+    detailTd.colSpan = NCOLS;
+    const inner = document.createElement('div');
+    inner.className = 'detail-inner';
+    inner.id = `km-detail-${ym}`;
+
+    const dtTable = document.createElement('table');
+    dtTable.className = 'detail-table';
+    const sorted = v.trades.slice().sort((a, b) => a.endDate.localeCompare(b.endDate));
+    sorted.forEach((t, i) => {
+      const dtr = document.createElement('tr');
+      const dpnlCls = t.pnl > 0 ? 'td-pos' : t.pnl < 0 ? 'td-neg' : '';
+      const winCol = t.win ? '#27500A' : '#791F1F';
+      const pctStr = t.pct != null ? `${t.pct >= 0 ? '+' : ''}${t.pct.toFixed(2)}%` : '';
+      dtr.innerHTML = `
+        <td style="color:#bbb;width:24px;text-align:right">${i + 1}</td>
+        <td style="color:#aaa;font-size:11px">${t.code}</td>
+        <td style="max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${t.name}">${t.name}</td>
+        <td style="color:#aaa">${t.startDate} 〜 ${t.endDate}</td>
+        <td class="dt-pnl ${dpnlCls}">${fmtPnlFull(t.pnl)}</td>
+        <td style="color:${winCol};font-weight:500">${t.win ? '勝' : '負'}</td>
+        <td style="color:${winCol};font-size:10px;text-align:right;padding-left:2px">${pctStr}</td>
+      `;
+      dtTable.appendChild(dtr);
+    });
+    inner.appendChild(dtTable);
+    detailTd.appendChild(inner);
+    detailTr.appendChild(detailTd);
+
+    tr.addEventListener('click', () => {
+      const innerEl = document.getElementById(`km-detail-${ym}`);
+      const iconEl = document.getElementById(`km-ei-${ym}`);
+      const isOpen = innerEl.classList.contains('open');
+      innerEl.classList.toggle('open', !isOpen);
+      iconEl.classList.toggle('open', !isOpen);
+    });
+
     tbody.appendChild(tr);
+    tbody.appendChild(detailTr);
   });
   table.appendChild(tbody);
   wrap.appendChild(table);
