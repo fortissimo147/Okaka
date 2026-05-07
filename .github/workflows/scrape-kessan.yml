@@ -1,4 +1,4 @@
-name: 決算日データ取得
+name: 決算日データ取得（SBI）
 
 on:
   workflow_dispatch:
@@ -28,7 +28,10 @@ jobs:
           python-version: "3.12"
 
       - name: 依存ライブラリインストール
-        run: pip install requests beautifulsoup4
+        run: pip install playwright beautifulsoup4
+
+      - name: Playwright ブラウザインストール
+        run: playwright install chromium --with-deps
 
       - name: 取得終了日を決定
         id: dates
@@ -41,7 +44,7 @@ jobs:
 
       - name: 決算日データ取得
         run: |
-          python scripts/scrape_kessan.py \
+          python scripts/scrape_kessan_sbi.py \
             --from "${{ github.event.inputs.from_date || '2025-10-01' }}" \
             --to   "${{ steps.dates.outputs.to }}" \
             --out  data/kessan.csv
