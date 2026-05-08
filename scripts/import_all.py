@@ -12,7 +12,7 @@ RAW_DIR = Path(__file__).parent.parent / "data" / "raw"
 
 def import_file(filepath: Path):
     try:
-        fund_date, df = parse_csv(filepath)
+        fund_date, cash_component, df = parse_csv(filepath)
     except Exception as e:
         print(f"  SKIP (parse error): {filepath.name} — {e}")
         return
@@ -32,6 +32,10 @@ def import_file(filepath: Path):
         conn.executemany(
             "INSERT INTO holdings (date, ticker, name, shares, price, value, ratio) VALUES (?,?,?,?,?,?,?)",
             rows,
+        )
+        conn.execute(
+            "INSERT OR REPLACE INTO fund_stats (date, cash_component) VALUES (?,?)",
+            (fund_date, cash_component),
         )
         print(f"  OK: {filepath.name} → {fund_date} ({len(rows)} 銘柄)")
 

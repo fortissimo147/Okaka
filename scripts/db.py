@@ -30,3 +30,9 @@ def init_db():
         conn.execute("""
             CREATE INDEX IF NOT EXISTS idx_holdings_ticker ON holdings(ticker)
         """)
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS fund_stats (
+                date             TEXT PRIMARY KEY,
+                cash_component   REAL NOT NULL
+            )
+        """)

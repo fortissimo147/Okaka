@@ -80,6 +80,11 @@ def build():
             "SELECT date, ticker, name, shares, price, value, ratio FROM holdings ORDER BY date, ratio DESC"
         ).fetchall()
 
+        fund_stats_rows = conn.execute(
+            "SELECT date, cash_component FROM fund_stats ORDER BY date"
+        ).fetchall()
+    cash_by_date = {r["date"]: r["cash_component"] for r in fund_stats_rows}
+
     by_date: dict[str, dict] = {}
     for row in rows:
         d = row["date"]
@@ -330,6 +335,19 @@ def build():
         name = by_date[latest_date][ticker]["name"]
         all_series.append({"ticker": ticker, "name": name, "series": series})
 
+    fund_cash_series = []
+    for d in dates:
+        stock_total = sum(v["value"] for v in by_date[d].values() if v["value"] is not None)
+        cash = cash_by_date.get(d)
+        nav = (stock_total + cash) if cash is not None else None
+        cash_ratio = (cash / nav * 100) if (cash is not None and nav) else None
+        fund_cash_series.append({
+            "date": d,
+            "cash": round(cash) if cash is not None else None,
+            "nav": round(nav) if nav is not None else None,
+            "cash_ratio": round(cash_ratio, 2) if cash_ratio is not None else None,
+        })
+
     out = {
         "generated_at": datetime.now(JST).isoformat(),
         "dates": dates,
@@ -343,6 +361,7 @@ def build():
         "trading_analysis": trading_analysis,
         "all_series": all_series,
         "price_data": price_data,
+        "fund_cash_series": fund_cash_series,
     }
 
     (APP_DATA / "dashboard.json").write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")
