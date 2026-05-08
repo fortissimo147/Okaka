@@ -1,6 +1,6 @@
 """
 upload/ フォルダ内のSBI証券約定履歴CSVを全て読み込み、
-重複を除去して upload/merged.csv に出力する。
+約定日順に連結して upload/merged.csv に出力する。
 
 使い方:
   uv run python -m scripts.merge_csv
@@ -45,19 +45,13 @@ def parse_file(path: str) -> list[list[str]]:
     if not rows:
         return []
 
-    # ヘッダー行を検証
-    header = rows[0]
-    if header != EXPECTED_COLS:
+    if rows[0] != EXPECTED_COLS:
         print(f"  [warn] 列が想定外: {path}", file=sys.stderr)
 
-    data_rows = []
-    for row in rows[1:]:
-        if not row or not row[0].strip():
-            continue
-        # 信用取引のみ（念のためフィルタ）
-        if len(row) > 4 and "信用" in row[4]:
-            data_rows.append(row)
-
+    data_rows = [
+        row for row in rows[1:]
+        if row and row[0].strip() and len(row) > 4 and "信用" in row[4]
+    ]
     return data_rows
 
 
@@ -73,32 +67,15 @@ def merge():
         sys.exit(1)
 
     print(f"{len(files)} ファイルを処理中...")
-
-    # 各ファイルごとに「同一行の出現回数」を数える。
-    # 同日・同価格の同一トレードが本当に2回ある場合、1つのファイル内で2回登場する。
-    # 複数ファイルに跨って1回ずつ登場するのはファイル間の重複（同じトレードが2つのCSVに含まれている）。
-    # → 各行について「全ファイル中の最大出現回数」が正しい件数となる。
-    from collections import Counter
-
-    max_count: dict[tuple, int] = {}  # key → 正しい件数
+    all_rows = []
 
     for path in files:
-        print(f"  読み込み: {os.path.basename(path)}")
         rows = parse_file(path)
-        file_counts = Counter(tuple(r) for r in rows)
-        for key, cnt in file_counts.items():
-            if key not in max_count or cnt > max_count[key]:
-                max_count[key] = cnt
+        print(f"  読み込み: {os.path.basename(path)}  ({len(rows)} 件)")
+        all_rows.extend(rows)
 
-    # max_count に従って行を展開
-    all_rows = []
-    for key, cnt in max_count.items():
-        all_rows.extend([list(key)] * cnt)
-
-    # 約定日でソート
     all_rows.sort(key=lambda r: r[0])
 
-    # 出力（cp932 で書き出し）
     output = io.StringIO()
     writer = csv.writer(output, quoting=csv.QUOTE_MINIMAL)
     writer.writerow(EXPECTED_COLS)
