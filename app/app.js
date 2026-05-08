@@ -103,6 +103,24 @@ function render() {
       </div>
     </div>
 
+    <div class="card" id="section-fund-cash">
+      <h2>ファンド現金・資産推移</h2>
+      <div style="display:flex;flex-direction:column;gap:24px;padding:4px 0">
+        <div>
+          <div style="font-size:12px;color:#888;margin-bottom:6px">① Fund Cash Component 推移</div>
+          <div style="position:relative;height:180px"><canvas id="chart-cash"></canvas></div>
+        </div>
+        <div>
+          <div style="font-size:12px;color:#888;margin-bottom:6px">② ファンド総資産推移（株式時価総額 + Fund Cash Component）</div>
+          <div style="position:relative;height:180px"><canvas id="chart-nav"></canvas></div>
+        </div>
+        <div>
+          <div style="font-size:12px;color:#888;margin-bottom:6px">③ 現金比率推移（Fund Cash Component ÷ 総資産）</div>
+          <div style="position:relative;height:180px"><canvas id="chart-cash-ratio"></canvas></div>
+        </div>
+      </div>
+    </div>
+
     <div class="card" id="section-search">
       <h2>銘柄データ検索</h2>
       <div class="search-box">
@@ -118,6 +136,7 @@ function render() {
   renderStrongBuys();
   renderTradingAnalysis();
   renderLatestTable();
+  renderFundCashCharts();
   renderSearch();
 }
 
@@ -291,6 +310,45 @@ function renderTradingAnalysis() {
   };
   tbody.innerHTML = data.map(rowFn).join("");
   makeSortable("trading-analysis-tbody", () => DATA.trading_analysis || [], rowFn);
+}
+
+function renderFundCashCharts() {
+  const series = DATA.fund_cash_series || [];
+  if (series.length === 0) return;
+
+  const labels = series.map(s => s.date);
+  const fmtM = v => v == null ? null : Math.round(v / 1_000_000);
+
+  const commonOpts = (yLabel, tickFn, tooltipFn) => ({
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: tooltipFn } },
+    },
+    scales: {
+      x: { ticks: { maxTicksLimit: 10, font: { size: 10 } } },
+      y: { title: { display: true, text: yLabel }, ticks: { font: { size: 10 }, callback: tickFn } },
+    },
+  });
+
+  new Chart(document.getElementById("chart-cash"), {
+    type: "line",
+    data: { labels, datasets: [{ data: series.map(s => fmtM(s.cash)), borderColor: "#1565c0", backgroundColor: "rgba(21,101,192,0.08)", tension: 0.2, pointRadius: 3, fill: true, spanGaps: true }] },
+    options: commonOpts("百万円", v => `¥${v.toLocaleString()}M`, ctx => `¥${ctx.parsed.y != null ? ctx.parsed.y.toLocaleString() : "—"}M`),
+  });
+
+  new Chart(document.getElementById("chart-nav"), {
+    type: "line",
+    data: { labels, datasets: [{ data: series.map(s => fmtM(s.nav)), borderColor: "#2e7d32", backgroundColor: "rgba(46,125,50,0.08)", tension: 0.2, pointRadius: 3, fill: true, spanGaps: true }] },
+    options: commonOpts("百万円", v => `¥${v.toLocaleString()}M`, ctx => `¥${ctx.parsed.y != null ? ctx.parsed.y.toLocaleString() : "—"}M`),
+  });
+
+  new Chart(document.getElementById("chart-cash-ratio"), {
+    type: "line",
+    data: { labels, datasets: [{ data: series.map(s => s.cash_ratio), borderColor: "#e65100", backgroundColor: "rgba(230,81,0,0.08)", tension: 0.2, pointRadius: 3, fill: true, spanGaps: true }] },
+    options: commonOpts("%", v => `${v}%`, ctx => `${ctx.parsed.y != null ? ctx.parsed.y.toFixed(2) : "—"}%`),
+  });
 }
 
 function renderSearch() {

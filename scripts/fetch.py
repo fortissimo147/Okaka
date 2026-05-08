@@ -82,7 +82,7 @@ def main():
         sys.exit(1)
 
     try:
-        fund_date, df = parse_csv(filepath)
+        fund_date, cash_component, df = parse_csv(filepath)
     except Exception as e:
         print(f"  ERROR: パース失敗 — {e}")
         sys.exit(1)
@@ -108,6 +108,10 @@ def main():
             conn.executemany(
                 "INSERT INTO holdings (date, ticker, name, shares, price, value, ratio) VALUES (?,?,?,?,?,?,?)",
                 rows,
+            )
+            conn.execute(
+                "INSERT OR REPLACE INTO fund_stats (date, cash_component) VALUES (?,?)",
+                (store_date, cash_component),
             )
             print(f"  INSERT: {store_date} — {len(rows)} 銘柄（PCF: {fund_date}）")
 
