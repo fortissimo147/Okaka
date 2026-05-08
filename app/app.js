@@ -430,7 +430,7 @@ function showTickerData(ticker) {
           if (minDiff <= 5 * 86400000) xIdx = closest;
         }
         if (xIdx < 0) return;
-        const x = xAxis.getPixelForTick(xIdx);
+        const x = xAxis.getPixelForValue(xIdx);
         ctx.save();
         ctx.setLineDash([4, 4]);
         ctx.strokeStyle = ev.color + '88';
