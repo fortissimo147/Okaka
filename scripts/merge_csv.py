@@ -73,17 +73,27 @@ def merge():
         sys.exit(1)
 
     print(f"{len(files)} ファイルを処理中...")
-    seen = set()
-    all_rows = []
+
+    # 各ファイルごとに「同一行の出現回数」を数える。
+    # 同日・同価格の同一トレードが本当に2回ある場合、1つのファイル内で2回登場する。
+    # 複数ファイルに跨って1回ずつ登場するのはファイル間の重複（同じトレードが2つのCSVに含まれている）。
+    # → 各行について「全ファイル中の最大出現回数」が正しい件数となる。
+    from collections import Counter
+
+    max_count: dict[tuple, int] = {}  # key → 正しい件数
 
     for path in files:
         print(f"  読み込み: {os.path.basename(path)}")
         rows = parse_file(path)
-        for row in rows:
-            key = tuple(row)
-            if key not in seen:
-                seen.add(key)
-                all_rows.append(row)
+        file_counts = Counter(tuple(r) for r in rows)
+        for key, cnt in file_counts.items():
+            if key not in max_count or cnt > max_count[key]:
+                max_count[key] = cnt
+
+    # max_count に従って行を展開
+    all_rows = []
+    for key, cnt in max_count.items():
+        all_rows.extend([list(key)] * cnt)
 
     # 約定日でソート
     all_rows.sort(key=lambda r: r[0])
