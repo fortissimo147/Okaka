@@ -71,7 +71,15 @@ def merge():
 
     for path in files:
         rows = parse_file(path)
-        print(f"  読み込み: {os.path.basename(path)}  ({len(rows)} 件)")
+        if all_rows:
+            last_date = all_rows[-1][0]
+            before = len(rows)
+            rows = [r for r in rows if r[0] != last_date]
+            skipped = before - len(rows)
+            skip_note = f"  ※ {last_date} の {skipped} 件をスキップ" if skipped else ""
+        else:
+            skip_note = ""
+        print(f"  読み込み: {os.path.basename(path)}  ({len(rows)} 件){skip_note}")
         all_rows.extend(rows)
 
     all_rows.sort(key=lambda r: r[0])
