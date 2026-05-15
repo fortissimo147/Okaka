@@ -1,0 +1,77 @@
+name: かぶたん HTML構造デバッグ
+
+on:
+  workflow_dispatch:
+
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install uv
+        run: pip install uv
+
+      - name: Install dependencies
+        run: uv sync
+
+      - name: HTMLダンプ・テーブル構造確認
+        run: |
+          uv run python -c "
+          import requests
+          from bs4 import BeautifulSoup
+
+          HEADERS = {
+              'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+              'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+              'Accept-Language': 'ja,en-US;q=0.9',
+              'Referer': 'https://kabutan.jp/',
+          }
+
+          url = 'https://kabutan.jp/stock/kabuka?code=6965&ashi=day&page=1'
+          resp = requests.get(url, headers=HEADERS, timeout=20)
+          print(f'HTTP status: {resp.status_code}')
+
+          soup = BeautifulSoup(resp.text, 'html.parser')
+
+          print()
+          print('=== 全テーブルのclass一覧 ===')
+          for t in soup.find_all('table'):
+              print(' ', t.get('class'), t.get('id'))
+
+          print()
+          print('=== 株価テーブルのヘッダー ===')
+          for t in soup.find_all('table'):
+              rows = t.find_all('tr')
+              if not rows:
+                  continue
+              cells = [c.get_text(strip=True) for c in rows[0].find_all(['th','td'])]
+              if any(k in cells for k in ['始値','終値','日付']):
+                  print('class:', t.get('class'))
+                  print('headers:', cells)
+                  print()
+                  print('=== データ行（先頭5行）===')
+                  for row in rows[1:6]:
+                      print([c.get_text(strip=True) for c in row.find_all(['th','td'])])
+                  break
+
+          print()
+          print('=== page=5 の最古日付確認 ===')
+          url2 = 'https://kabutan.jp/stock/kabuka?code=6965&ashi=day&page=5'
+          resp2 = requests.get(url2, headers=HEADERS, timeout=20)
+          soup2 = BeautifulSoup(resp2.text, 'html.parser')
+          for t in soup2.find_all('table'):
+              rows = t.find_all('tr')
+              if not rows: continue
+              cells = [c.get_text(strip=True) for c in rows[0].find_all(['th','td'])]
+              if any(k in cells for k in ['始値','終値','日付']):
+                  last = rows[-1]
+                  print('最終行:', [c.get_text(strip=True) for c in last.find_all(['th','td'])])
+                  print('行数:', len(rows)-1)
+                  break
+          "
