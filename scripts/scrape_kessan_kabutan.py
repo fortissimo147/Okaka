@@ -39,7 +39,7 @@ HEADERS = {
 
 
 def load_companies(json_path: str) -> list[dict]:
-    """company_names.json からコード・銘柄名リストを返す（4桁数字コードのみ）。"""
+    """company_names.json からコード・銀柄名リストを返す（4桁数字コードのみ）。"""
     with open(json_path, encoding="utf-8") as f:
         data = json.load(f)
     companies = []
@@ -101,12 +101,24 @@ def fetch_ann_dates(session: requests.Session, code: str) -> list[str] | None:
     return dates
 
 
+def load_existing(out_path: str) -> set[tuple[str, str]]:
+    """既存CSVから (date, code) のセットを返す。ファイルがなければ空セット。"""
+    p = Path(out_path)
+    if not p.exists():
+        return set()
+    with open(p, encoding="utf-8-sig") as f:
+        return {(r["date"], r["code"]) for r in csv.DictReader(f)}
+
+
 def scrape(codes_path: str, out_path: str):
     companies = load_companies(codes_path)
     print(f"対象企業数: {len(companies)}", file=sys.stderr)
 
+    existing = load_existing(out_path)
+    print(f"既存レコード数: {len(existing)}", file=sys.stderr)
+
     session = requests.Session()
-    all_records: list[dict] = []
+    new_records: list[dict] = []
     blocked = 0
 
     for i, co in enumerate(companies):
@@ -117,9 +129,14 @@ def scrape(codes_path: str, out_path: str):
         if dates is None:
             blocked += 1
         elif dates:
+            added = 0
             for d in dates:
-                all_records.append({"date": d, "code": code, "name": name})
-            print(f"  [{i+1}/{len(companies)}] {code} {name}: {len(dates)} 件", file=sys.stderr)
+                if (d, code) not in existing:
+                    new_records.append({"date": d, "code": code, "name": name})
+                    existing.add((d, code))
+                    added += 1
+            if added:
+                print(f"  [{i+1}/{len(companies)}] {code} {name}: +{added} 件", file=sys.stderr)
 
         if blocked > 10:
             print("ブロックが続いています。処理を中断します。", file=sys.stderr)
@@ -127,26 +144,34 @@ def scrape(codes_path: str, out_path: str):
 
         time.sleep(INTERVAL_SEC)
 
-    if not all_records:
-        print("データが取得できませんでした。", file=sys.stderr)
-        sys.exit(1)
+    print(f"\n新規取得: {len(new_records)} 件", file=sys.stderr)
 
-    # 日付昇順でソート
-    all_records.sort(key=lambda r: (r["date"], r["code"]))
+    if not new_records:
+        print("新しいデータはありませんでした。", file=sys.stderr)
+        return
 
+    # 既存ファイルに追記してから日付昇順でソートして書き直す
     out = Path(out_path)
     out.parent.mkdir(parents=True, exist_ok=True)
+
+    all_records: list[dict] = []
+    if out.exists():
+        with open(out, encoding="utf-8-sig") as f:
+            all_records = list(csv.DictReader(f))
+    all_records.extend(new_records)
+    all_records.sort(key=lambda r: (r["date"], r["code"]))
+
     with open(out, "w", newline="", encoding="utf-8-sig") as f:
         writer = csv.DictWriter(f, fieldnames=["date", "code", "name"])
         writer.writeheader()
         writer.writerows(all_records)
 
-    print(f"\n完了: {len(all_records)} 件 -> {out}", file=sys.stderr)
+    print(f"完了: 合計 {len(all_records)} 件 -> {out}", file=sys.stderr)
 
 
 def main():
-    parser = argparse.ArgumentParser(description="かぶたん 決算発表日データ取得")
-    parser.add_argument("--codes", default=DEFAULT_CODES, help="企業一覧CSV（companies.csv）")
+    parser = argparse.ArgumentParser(description="かぶたん 決算発表日データ取得（増分追加）")
+    parser.add_argument("--codes", default=DEFAULT_CODES, help="企業一覧JSON")
     parser.add_argument("--out",   default=DEFAULT_OUT,   help="出力CSVパス")
     args = parser.parse_args()
     scrape(args.codes, args.out)
