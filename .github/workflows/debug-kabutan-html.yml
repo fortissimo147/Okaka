@@ -33,45 +33,27 @@ jobs:
               'Referer': 'https://kabutan.jp/',
           }
 
-          url = 'https://kabutan.jp/stock/kabuka?code=6965&ashi=day&page=1'
-          resp = requests.get(url, headers=HEADERS, timeout=20)
-          print(f'HTTP status: {resp.status_code}')
+          for page in [1, 2, 10]:
+              url = f'https://kabutan.jp/stock/kabuka?code=6965&ashi=day&page={page}'
+              resp = requests.get(url, headers=HEADERS, timeout=20)
+              print(f'=== page={page} HTTP {resp.status_code} ===')
+              soup = BeautifulSoup(resp.text, 'html.parser')
 
-          soup = BeautifulSoup(resp.text, 'html.parser')
-
-          print()
-          print('=== 全テーブルのclass一覧 ===')
-          for t in soup.find_all('table'):
-              print(' ', t.get('class'), t.get('id'))
-
-          print()
-          print('=== 株価テーブルのヘッダー ===')
-          for t in soup.find_all('table'):
-              rows = t.find_all('tr')
-              if not rows:
-                  continue
-              cells = [c.get_text(strip=True) for c in rows[0].find_all(['th','td'])]
-              if any(k in cells for k in ['始値','終値','日付']):
-                  print('class:', t.get('class'))
-                  print('headers:', cells)
-                  print()
-                  print('=== データ行（先頭5行）===')
-                  for row in rows[1:6]:
-                      print([c.get_text(strip=True) for c in row.find_all(['th','td'])])
-                  break
-
-          print()
-          print('=== page=5 の最古日付確認 ===')
-          url2 = 'https://kabutan.jp/stock/kabuka?code=6965&ashi=day&page=5'
-          resp2 = requests.get(url2, headers=HEADERS, timeout=20)
-          soup2 = BeautifulSoup(resp2.text, 'html.parser')
-          for t in soup2.find_all('table'):
-              rows = t.find_all('tr')
-              if not rows: continue
-              cells = [c.get_text(strip=True) for c in rows[0].find_all(['th','td'])]
-              if any(k in cells for k in ['始値','終値','日付']):
-                  last = rows[-1]
-                  print('最終行:', [c.get_text(strip=True) for c in last.find_all(['th','td'])])
-                  print('行数:', len(rows)-1)
-                  break
+              # stock_kabuka_dwm を直接探す
+              t = soup.find('table', class_='stock_kabuka_dwm')
+              if t is None:
+                  print('  stock_kabuka_dwm: 見つからない')
+                  # 全テーブル列挙
+                  for tbl in soup.find_all('table'):
+                      print('  table class:', tbl.get('class'), '行数:', len(tbl.find_all('tr')))
+              else:
+                  trs = t.find_all('tr')
+                  print(f'  stock_kabuka_dwm: {len(trs)} 行')
+                  for i, tr in enumerate(trs[:4]):
+                      cells = [td.get_text(strip=True) for td in tr.find_all(['th','td'])]
+                      print(f'  row[{i}]:', cells)
+                  if len(trs) > 4:
+                      last = trs[-1]
+                      print(f'  row[-1]:', [td.get_text(strip=True) for td in last.find_all(['th','td'])])
+              print()
           "
