@@ -199,6 +199,7 @@ def assign_offsets(
     """
     決算日±1に対応する株価行を特定してoffsetを付与する。
     price_by_date のキーは実際に取得できた日付のみ。
+    change_pct はスクレイプ値ではなく終値から再計算する。
     """
     sorted_avail = sorted(price_by_date.keys())
     records = []
@@ -206,33 +207,46 @@ def assign_offsets(
     for kd in kessan_dates:
         kd_dt = datetime.strptime(kd, "%Y-%m-%d")
 
-        for offset in [-1, 0, 1]:
-            # offset=0: 決算日当日またはその最近傍
-            # offset=-1: 決算日の1つ前の取引日
-            # offset=+1: 決算日の1つ後の取引日
-            if offset == 0:
-                target = kd
-                candidates = [d for d in sorted_avail if abs((datetime.strptime(d, "%Y-%m-%d") - kd_dt).days) <= 3]
-                if not candidates:
-                    continue
-                chosen = min(candidates, key=lambda d: abs((datetime.strptime(d, "%Y-%m-%d") - kd_dt).days))
-            else:
-                # offset != 0: 基準日（offset=0で選んだ日）の前後の取引日
-                base_candidates = [d for d in sorted_avail if abs((datetime.strptime(d, "%Y-%m-%d") - kd_dt).days) <= 3]
-                if not base_candidates:
-                    continue
-                base = min(base_candidates, key=lambda d: abs((datetime.strptime(d, "%Y-%m-%d") - kd_dt).days))
-                bi = sorted_avail.index(base)
-                ni = bi + offset
-                if ni < 0 or ni >= len(sorted_avail):
-                    continue
-                chosen = sorted_avail[ni]
+        # offset=0の基準日を決める（決算日から±3日以内の最近傍取引日）
+        candidates = [d for d in sorted_avail if abs((datetime.strptime(d, "%Y-%m-%d") - kd_dt).days) <= 3]
+        if not candidates:
+            continue
+        base = min(candidates, key=lambda d: abs((datetime.strptime(d, "%Y-%m-%d") - kd_dt).days))
+        bi = sorted_avail.index(base)
 
+        chosen_by_offset: dict[int, str] = {}
+        for offset in [-1, 0, 1]:
+            ni = bi + offset
+            if ni < 0 or ni >= len(sorted_avail):
+                continue
+            candidate = sorted_avail[ni]
+            # offset±1 は基準日から7日以内でなければスキップ（別決算期間への飛びを防ぐ）
+            if offset != 0:
+                dist = abs((datetime.strptime(candidate, "%Y-%m-%d") - datetime.strptime(base, "%Y-%m-%d")).days)
+                if dist > 7:
+                    continue
+            chosen_by_offset[offset] = candidate
+
+        for offset, chosen in chosen_by_offset.items():
             row = price_by_date[chosen]
             if row["close"] is None:
                 continue
+
+            # change_pct を終値から再計算（kabutan の % 列は stock_kabuka_dwm にない）
+            change_pct = None
+            if offset == 0 and -1 in chosen_by_offset:
+                prev_close = price_by_date[chosen_by_offset[-1]]["close"]
+                if prev_close:
+                    change_pct = round((row["close"] / prev_close - 1) * 100, 2)
+            elif offset == 1 and 0 in chosen_by_offset:
+                prev_close = price_by_date[chosen_by_offset[0]]["close"]
+                if prev_close:
+                    change_pct = round((row["close"] / prev_close - 1) * 100, 2)
+            elif offset == -1 and -2 in {o: chosen_by_offset.get(o) for o in chosen_by_offset}:
+                pass  # offset=-1 の前日は取得していないので計算不可
+
             records.append({
-                "code":        "",   # 呼び出し元で設定
+                "code":        "",
                 "kessan_date": kd,
                 "offset":      offset,
                 "date":        chosen,
@@ -240,7 +254,7 @@ def assign_offsets(
                 "high":        row["high"],
                 "low":         row["low"],
                 "close":       row["close"],
-                "change_pct":  row["change_pct"],
+                "change_pct":  change_pct,
             })
 
     return records
