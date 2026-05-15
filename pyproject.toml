@@ -3,6 +3,7 @@ name = "kimura"
 version = "0.1.0"
 requires-python = ">=3.10"
 dependencies = [
+    "curl-cffi>=0.15.0",
     "pandas",
     "requests",
     "xlrd>=2.0.2",
