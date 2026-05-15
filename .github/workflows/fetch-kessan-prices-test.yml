@@ -27,10 +27,8 @@ jobs:
       - name: 株価データ取得（上位10銘柄のみ）
         run: |
           uv run python -c "
-          import sys
-          sys.argv = ['fetch_kessan_prices']
           from scripts.fetch_kessan_prices import load_kessan, needed_dates, fetch_prices_for_code, assign_offsets
-          import csv, time, requests
+          import csv as csv_mod, time, requests
           from datetime import datetime, timedelta
           from pathlib import Path
 
@@ -39,7 +37,7 @@ jobs:
 
           kessan = load_kessan()
           codes = sorted(kessan.keys())[:10]
-          print(f'対象: {codes}')
+          print(f'対象コード: {codes}')
 
           session = requests.Session()
           all_records = []
@@ -51,18 +49,18 @@ jobs:
                   (datetime.strptime(d, '%Y-%m-%d') - timedelta(days=5)).strftime('%Y-%m-%d')
                   for d in dates
               )
-              print(f'[{i}/10] {code} ({len(dates)}決算)', end=' ', flush=True)
+              print(f'[{i}/10] {code}  決算日: {dates}')
               price_by_date = fetch_prices_for_code(session, code, target, earliest)
+              print(f'  取得できた日付: {sorted(price_by_date.keys())[:5]} ... ({len(price_by_date)}件)')
               rows = assign_offsets(price_by_date, dates)
               for r in rows:
                   r['code'] = code
               all_records.extend(rows)
-              print(f'-> {len(rows)} 件')
+              print(f'  オフセット付与後: {len(rows)} 件')
               time.sleep(INTERVAL_SEC)
 
           fieldnames = ['code','kessan_date','offset','date','open','high','low','close','change_pct']
           with open(OUTPUT, 'w', newline='', encoding='utf-8-sig') as f:
-              import csv as csv_mod
               writer = csv_mod.DictWriter(f, fieldnames=fieldnames)
               writer.writeheader()
               writer.writerows(all_records)
