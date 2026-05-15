@@ -79,5 +79,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/kessan_prices_test.csv
-          git diff --staged --quiet || git commit -m "テスト: 決算日±1株価（上位10銘柄）$(date +'%Y-%m-%d')"
-          git push
+          git diff --staged --quiet && echo "変更なし、スキップ" && exit 0
+          git commit -m "テスト: 決算日±1株価（上位10銘柄）$(date +'%Y-%m-%d')"
+          git pull --rebase origin main
+          git push origin HEAD:main
