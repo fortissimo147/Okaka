@@ -67,37 +67,46 @@ def parse_page(html: str) -> list[dict]:
     soup = BeautifulSoup(html, "html.parser")
     table = soup.find("table", class_="stock_kabuka_dwm")
     if table is None:
-        # フォールバック: 株価テーブルを探す
-        for t in soup.find_all("table"):
-            hdrs = [th.get_text(strip=True) for th in t.find_all("th")]
-            if "始値" in hdrs and "終値" in hdrs:
-                table = t
-                break
-    if table is None:
         return []
 
     rows = table.find_all("tr")
     if not rows:
         return []
 
-    # ヘッダー行でインデックスを特定
-    headers = [th.get_text(strip=True) for th in rows[0].find_all(["th", "td"])]
+    # ヘッダー行を特定（colspan行をスキップして列名が入っている行を使う）
+    header_row = None
+    for row in rows:
+        cells = [c.get_text(strip=True) for c in row.find_all(["th", "td"])]
+        if "始値" in cells and "終値" in cells:
+            header_row = cells
+            header_tr_idx = rows.index(row)
+            break
+    if header_row is None:
+        return []
+
+    headers = header_row
     def idx(name):
         return headers.index(name) if name in headers else -1
 
-    date_i    = idx("日付")
+    # 日付列: 「日付」または「本日」
+    date_i = idx("日付")
+    if date_i < 0:
+        date_i = idx("本日")
     open_i    = idx("始値")
     high_i    = idx("高値")
     low_i     = idx("安値")
     close_i   = idx("終値")
     change_i  = idx("前日比")
-    changep_i = next((i for i, h in enumerate(headers) if "%" in h), -1)
+    # 前日比%: 全角％・半角%両対応
+    changep_i = next((i for i, h in enumerate(headers) if "%" in h or "％" in h), -1)
 
     if date_i < 0 or close_i < 0:
         return []
 
+    data_rows = rows[header_tr_idx + 1:]
+
     records = []
-    for row in rows[1:]:
+    for row in data_rows:
         cells = [td.get_text(strip=True) for td in row.find_all(["td", "th"])]
         if not cells or date_i >= len(cells):
             continue
