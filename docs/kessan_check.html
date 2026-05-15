@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>kessan.csv データ整合性チェック</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Helvetica Neue', Arial, sans-serif; background: #f8f7f4; color: #1a1a1a; min-height: 100vh; }
+header { padding: 1.5rem 2rem; background: #fff; border-bottom: 0.5px solid #e0ddd8; }
+header h1 { font-size: 16px; font-weight: 500; }
+header p { font-size: 12px; color: #888; margin-top: 2px; }
+.main { max-width: 1100px; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
+.card { background: #fff; border: 0.5px solid #e0ddd8; border-radius: 10px; margin-bottom: 1.25rem; }
+.card-header { padding: 0.875rem 1.25rem; border-bottom: 0.5px solid #e0ddd8; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
+.card-title { font-size: 13px; font-weight: 500; }
+.card-sub { font-size: 11px; color: #aaa; }
+.card-body { padding: 1rem 1.25rem; }
+.chart-wrap { position: relative; height: 320px; }
+.stats { display: flex; gap: 2rem; flex-wrap: wrap; padding: 1rem 1.25rem; border-bottom: 0.5px solid #e0ddd8; }
+.stat { display: flex; flex-direction: column; gap: 2px; }
+.stat-label { font-size: 10px; color: #aaa; }
+.stat-value { font-size: 18px; font-weight: 500; }
+.filter-bar { padding: 0.75rem 1.25rem; border-bottom: 0.5px solid #e0ddd8; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.filter-label { font-size: 11px; color: #888; }
+select, input[type=range] { font-size: 12px; border: 0.5px solid #e0ddd8; border-radius: 6px; padding: 4px 8px; background: #fff; }
+.range-labels { font-size: 11px; color: #555; }
+</style>
+</head>
+<body>
+<header>
+  <h1>kessan.csv データ整合性チェック</h1>
+  <p>決算発表日データの月別件数推移</p>
+</header>
+<div class="main">
+  <div class="card">
+    <div class="stats" id="stats"></div>
+    <div class="filter-bar">
+      <span class="filter-label">表示期間</span>
+      <select id="year-from"></select>
+      <span style="font-size:12px;color:#aaa">〜</span>
+      <select id="year-to"></select>
+      <span class="range-labels" id="range-note"></span>
+    </div>
+    <div class="card-header">
+      <span class="card-title">月別 決算発表件数</span>
+      <span class="card-sub" id="chart-note"></span>
+    </div>
+    <div class="card-body">
+      <div class="chart-wrap"><canvas id="chart"></canvas></div>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"></script>
+<script>
+const RAW = [{"month":"2006-02","count":1},{"month":"2022-02","count":5},{"month":"2022-03","count":1},{"month":"2022-04","count":52},{"month":"2022-05","count":1767},{"month":"2022-06","count":47},{"month":"2022-07","count":73},{"month":"2022-08","count":133},{"month":"2022-09","count":50},{"month":"2022-10","count":90},{"month":"2022-11","count":161},{"month":"2022-12","count":62},{"month":"2023-01","count":67},{"month":"2023-02","count":459},{"month":"2023-03","count":65},{"month":"2023-04","count":443},{"month":"2023-05","count":2022},{"month":"2023-06","count":107},{"month":"2023-07","count":177},{"month":"2023-08","count":574},{"month":"2023-09","count":117},{"month":"2023-10","count":504},{"month":"2023-11","count":221},{"month":"2023-12","count":70},{"month":"2024-01","count":350},{"month":"2024-02","count":2355},{"month":"2024-03","count":235},{"month":"2024-04","count":722},{"month":"2024-05","count":2625},{"month":"2024-06","count":247},{"month":"2024-07","count":965},{"month":"2024-08","count":2396},{"month":"2024-09","count":249},{"month":"2024-10","count":952},{"month":"2024-11","count":2408},{"month":"2024-12","count":249},{"month":"2025-01","count":886},{"month":"2025-02","count":2476},{"month":"2025-03","count":245},{"month":"2025-04","count":725},{"month":"2025-05","count":2650},{"month":"2025-06","count":240},{"month":"2025-07","count":998},{"month":"2025-08","count":2388},{"month":"2025-09","count":259},{"month":"2025-10","count":1006},{"month":"2025-11","count":2437},{"month":"2025-12","count":272},{"month":"2026-01","count":876},{"month":"2026-02","count":2561},{"month":"2026-03","count":436},{"month":"2026-04","count":905},{"month":"2026-05","count":65}];
+
+const years = [...new Set(RAW.map(d => d.month.slice(0,4)))].sort();
+let chart = null;
+
+// 年セレクタ
+['year-from','year-to'].forEach((id, i) => {
+  const sel = document.getElementById(id);
+  years.forEach(y => {
+    const opt = document.createElement('option');
+    opt.value = y; opt.textContent = y;
+    sel.appendChild(opt);
+  });
+  sel.value = i === 0 ? years[0] : years[years.length-1];
+  sel.addEventListener('change', update);
+});
+
+function update() {
+  const from = document.getElementById('year-from').value;
+  const to   = document.getElementById('year-to').value;
+  const data = RAW.filter(d => d.month >= from && d.month <= to + '-12');
+
+  document.getElementById('range-note').textContent = `${data.length} ヶ月`;
+  document.getElementById('chart-note').textContent = `合計 ${data.reduce((s,d)=>s+d.count,0).toLocaleString()} 件`;
+
+  const labels = data.map(d => d.month);
+  const values = data.map(d => d.count);
+  const colors = values.map(v => v >= 2000 ? 'rgba(121,31,31,0.75)' : v >= 500 ? 'rgba(39,80,10,0.75)' : 'rgba(21,101,192,0.65)');
+
+  if (chart) chart.destroy();
+  chart = new Chart(document.getElementById('chart'), {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [{
+        data: values,
+        backgroundColor: colors,
+        borderColor: colors.map(c => c.replace('0.75','1').replace('0.65','1')),
+        borderWidth: 1,
+        borderRadius: 2,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => `${ctx.parsed.y.toLocaleString()} 件`,
+          }
+        }
+      },
+      scales: {
+        x: { ticks: { maxTicksLimit: 24, font: { size: 10 }, maxRotation: 45 } },
+        y: { ticks: { font: { size: 10 }, callback: v => v.toLocaleString() }, grid: { color: '#f0ede8' } }
+      }
+    }
+  });
+}
+
+// サマリー
+const total = RAW.reduce((s,d) => s+d.count, 0);
+const maxM = RAW.reduce((a,b) => a.count>b.count?a:b);
+const minM = RAW.filter(d=>d.month>='2022').reduce((a,b) => a.count<b.count?a:b);
+document.getElementById('stats').innerHTML = `
+  <div class="stat"><div class="stat-label">総件数</div><div class="stat-value">${total.toLocaleString()}</div></div>
+  <div class="stat"><div class="stat-label">月数</div><div class="stat-value">${RAW.length}</div></div>
+  <div class="stat"><div class="stat-label">最多月</div><div class="stat-value">${maxM.month} (${maxM.count.toLocaleString()}件)</div></div>
+  <div class="stat"><div class="stat-label">最少月 (2022以降)</div><div class="stat-value">${minM.month} (${minM.count.toLocaleString()}件)</div></div>
+`;
+
+update();
+</script>
+</body>
+</html>
