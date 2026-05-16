@@ -20,7 +20,6 @@ from bs4 import BeautifulSoup
 
 KESSAN_CSV = Path(__file__).parent.parent / "data" / "kessan.csv"
 OUTPUT_CSV = Path(__file__).parent.parent / "data" / "kessan_prices.csv"
-START_DATE = "2022-01-01"
 INTERVAL_SEC = 0.8
 MAX_RETRIES = 2
 MAX_PAGES = 40  # 1ページ約30日分 → 最大40ページで約4年分
@@ -40,15 +39,19 @@ HEADERS = {
 
 
 def load_kessan() -> dict[str, list[str]]:
-    """code → sorted([kessan_date, ...]) のマップ（START_DATE以降）。"""
+    """横持ちCSVから code → sorted([kessan_date, ...]) のマップを返す。"""
     result: dict[str, list[str]] = {}
     with open(KESSAN_CSV, encoding="utf-8-sig") as f:
         for row in csv.DictReader(f):
-            code, date = row["code"], row["date"]
-            if date >= START_DATE and code.isdigit() and len(code) == 4:
-                result.setdefault(code, []).append(date)
-    for code in result:
-        result[code] = sorted(set(result[code]))
+            code = row["code"]
+            if not (code.isdigit() and len(code) == 4):
+                continue
+            dates = sorted(
+                v for k, v in row.items()
+                if k.startswith("date_") and v
+            )
+            if dates:
+                result[code] = dates
     return result
 
 
