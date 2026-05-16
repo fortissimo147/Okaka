@@ -268,7 +268,7 @@ def main():
     kessan = load_kessan()
     all_codes = sorted(kessan.keys())
     total_events = sum(len(v) for v in kessan.values())
-    print(f"  {len(all_codes)} 銘柄 / {total_events} 決算イベント（{START_DATE}以降）")
+    print(f"  {len(all_codes)} 銘柄 / {total_events} 決算イベント")
 
     session = requests.Session()
     all_records = []
