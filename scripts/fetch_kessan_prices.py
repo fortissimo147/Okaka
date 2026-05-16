@@ -20,7 +20,7 @@ from bs4 import BeautifulSoup
 
 KESSAN_CSV = Path(__file__).parent.parent / "data" / "kessan.csv"
 OUTPUT_CSV = Path(__file__).parent.parent / "data" / "kessan_prices.csv"
-INTERVAL_SEC = 0.8
+INTERVAL_SEC = 0.3
 MAX_RETRIES = 2
 MAX_PAGES = 40  # 1ページ約30日分 → 最大40ページで約4年分
 
