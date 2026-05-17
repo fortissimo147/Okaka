@@ -148,6 +148,24 @@ const UPLOAD_URL = 'https://raw.githubusercontent.com/fortissimo147/Okaka/main/u
 const KESSAN_URL = 'https://raw.githubusercontent.com/fortissimo147/Okaka/main/data/kessan.csv';
 const PAGE_SIZE = 50;
 
+// ===== 月別パフォーマンス用 入出金・初期残高 =====
+const INITIAL_BALANCE = 4000000; // 2025/11 月初
+const CASHFLOW = [
+  { date: '2025/11/14', amount:  500000 },
+  { date: '2025/11/18', amount:  319000 },
+  { date: '2026/01/07', amount: -100719 },
+  { date: '2026/01/30', amount: -500000 },
+  { date: '2026/02/03', amount:   45000 },
+  { date: '2026/02/17', amount:   11000 },
+  { date: '2026/03/04', amount: -1000000 },
+  { date: '2026/03/12', amount:   35000 },
+  { date: '2026/03/23', amount:   40000 },
+  { date: '2026/04/01', amount:   30000 },
+  { date: '2026/04/09', amount:   45000 },
+  { date: '2026/04/17', amount:  -10000 },
+  { date: '2026/05/04', amount:  -10000 },
+];
+
 let allRows = [];        // 全取引行（新規・返済含む）
 let completedTrades = []; // 完結トレード
 let filteredTrades = [];  // フィルター後
@@ -448,6 +466,9 @@ function render() {
   // 月別損益チャート
   app.appendChild(buildMonthlyCard(filteredTrades));
 
+  // 月別パフォーマンス（残高・収益率）
+  app.appendChild(buildMonthlyPerformanceCard(completedTrades));
+
   // 直近20勝負 勝率推移（全データ使用）
   app.appendChild(buildHalfMonthCard(completedTrades));
 
@@ -607,6 +628,88 @@ function buildMonthlyCard(trades) {
     });
   }, 0);
 
+  return card;
+}
+
+function buildMonthlyPerformanceCard(allTrades) {
+  // 月ごとのトレード損益を集計（完結トレードの決済月ベース）
+  const tradePnlByYm = {};
+  allTrades.forEach(t => {
+    if (!tradePnlByYm[t.endYm]) tradePnlByYm[t.endYm] = 0;
+    tradePnlByYm[t.endYm] += t.pnl;
+  });
+
+  // 月ごとの入出金を集計
+  const cashByYm = {};
+  CASHFLOW.forEach(cf => {
+    const ym = cf.date.slice(0, 7); // "2025/11"
+    if (!cashByYm[ym]) cashByYm[ym] = 0;
+    cashByYm[ym] += cf.amount;
+  });
+
+  // 月リスト（2025/11 〜 最新月）
+  const allYms = new Set([
+    ...Object.keys(tradePnlByYm),
+    ...Object.keys(cashByYm),
+  ]);
+  const START_YM = '2025/11';
+  const months = Array.from(allYms).filter(ym => ym >= START_YM).sort();
+
+  // 月初残高・月末残高・収益率を計算
+  let balance = INITIAL_BALANCE;
+  const rows = [];
+  for (const ym of months) {
+    const startBal = balance;
+    const tradePnl = Math.round(tradePnlByYm[ym] || 0);
+    const netCash  = cashByYm[ym] || 0;
+    const endBal   = startBal + tradePnl + netCash;
+    const retPct   = startBal > 0 ? tradePnl / startBal * 100 : null;
+    rows.push({ ym, startBal, tradePnl, netCash, endBal, retPct });
+    balance = endBal;
+  }
+
+  const fmt = n => n >= 0
+    ? '+' + n.toLocaleString() + ' 円'
+    : n.toLocaleString() + ' 円';
+  const fmtBal = n => n.toLocaleString() + ' 円';
+  const fmtPct = p => p === null ? '-' : (p >= 0 ? '+' : '') + p.toFixed(2) + '%';
+  const cls = v => v > 0 ? 'td-pos' : v < 0 ? 'td-neg' : '';
+
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.innerHTML = `
+    <div class="card-header">
+      <div class="card-title">月別パフォーマンス</div>
+      <div class="card-sub">トレード損益 / 月初残高（入出金除く）</div>
+    </div>
+    <div class="card-body">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>月</th>
+              <th class="td-r">月初残高</th>
+              <th class="td-r">トレード損益</th>
+              <th class="td-r">入出金</th>
+              <th class="td-r">月末残高</th>
+              <th class="td-r">収益率</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${rows.map(r => `
+              <tr>
+                <td>${r.ym}</td>
+                <td class="td-r">${fmtBal(r.startBal)}</td>
+                <td class="td-r ${cls(r.tradePnl)}">${fmt(r.tradePnl)}</td>
+                <td class="td-r ${cls(r.netCash)}">${r.netCash !== 0 ? fmt(r.netCash) : '-'}</td>
+                <td class="td-r">${fmtBal(r.endBal)}</td>
+                <td class="td-r ${cls(r.retPct)}">${fmtPct(r.retPct)}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>`;
   return card;
 }
 
