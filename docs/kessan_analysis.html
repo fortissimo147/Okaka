@@ -4,48 +4,41 @@
 <meta charset="utf-8">
 <title>決算日±1 株価変動分析</title>
 <style>
-  body { font-family: -apple-system, "Hiragino Sans", sans-serif; margin: 2em; color: #222; }
-  h1 { font-size: 1.5em; }
-  .desc { color: #666; margin-bottom: 1.5em; font-size: 0.9em; }
-  table { border-collapse: collapse; margin-top: 1em; }
-  th, td { border: 1px solid #ddd; padding: 0.5em 0.8em; text-align: right; font-variant-numeric: tabular-nums; }
+  body { font-family: -apple-system, "Hiragino Sans", sans-serif; margin: 2em; color: #222; font-size: 14px; }
+  h1 { font-size: 1.4em; }
+  .desc { color: #666; margin-bottom: 1.5em; font-size: 0.88em; line-height: 1.6; }
+  table { border-collapse: collapse; margin-top: 1em; white-space: nowrap; }
+  th, td { border: 1px solid #ddd; padding: 0.4em 0.7em; text-align: right; font-variant-numeric: tabular-nums; }
   thead th { background: #f3f3f3; text-align: center; }
   tbody th { background: #fafafa; text-align: left; }
   .pos { color: #c00; }
   .neg { color: #06c; }
-  .empty { color: #aaa; text-align: center; }
   .total { background: #fffbe6; font-weight: bold; }
-  .group { border-left: 2px solid #999; }
+  .group { border-left: 3px solid #aaa; }
 </style>
 </head>
 <body>
 <h1>決算日±1 株価変動分析</h1>
 <p class="desc">
-  対象: data/kessan_prices.csv<br>
-  集計単位: 年×四半期（決算発表日ベース）<br>
-  offset=0: 決算発表日終値 vs 前日終値の変化率<br>
-  offset=1: 翌営業日終値 vs 決算発表日終値の変化率
+  対象: data/kessan_prices.csv　｜　集計単位: 年×四半期（決算発表日ベース）<br>
+  <b>前日終値→当日終値</b>: 決算発表日の前日終値に対する当日終値の変化率<br>
+  <b>当日始値→終値</b>: 決算発表日のイントラデイ変化率（始値→終値）<br>
+  <b>当日終値→翌日終値</b>: 決算発表日終値に対する翌営業日終値の変化率<br>
+  <b>前日終値→翌日終値</b>: 前日終値から翌日終値までの3日跨ぎ変化率
 </p>
 <table>
 <thead>
-<tr>
-  <th rowspan="2">四半期</th>
-  <th colspan="6">offset=0（決算日）</th>
-  <th colspan="6" class="group">offset=+1（翌日）</th>
-</tr>
-<tr>
-  <th>件数</th><th>平均</th><th>中央値</th><th>上昇</th><th>下落</th><th>変わらず</th>
-  <th class="group">件数</th><th>平均</th><th>中央値</th><th>上昇</th><th>下落</th><th>変わらず</th>
-</tr>
+<tr><th rowspan='2'>四半期</th><th colspan='6'>前日終値→当日終値</th><th colspan='6' class="group">当日始値→終値</th><th colspan='6' class="group">当日終値→翌日終値</th><th colspan='6' class="group">前日終値→翌日終値</th></tr>
+<tr><th>件数</th><th>平均</th><th>中央値</th><th>上昇</th><th>下落</th><th>変わらず</th><th class="group">件数</th><th>平均</th><th>中央値</th><th>上昇</th><th>下落</th><th>変わらず</th><th class="group">件数</th><th>平均</th><th>中央値</th><th>上昇</th><th>下落</th><th>変わらず</th><th class="group">件数</th><th>平均</th><th>中央値</th><th>上昇</th><th>下落</th><th>変わらず</th></tr>
 </thead>
 <tbody>
-<tr><th>2025Q1</th><td>241</td><td class='pos'>+0.44%</td><td class=''>+0.00%</td><td class='pos'>117</td><td class='neg'>114</td><td>10</td><td>248</td><td class='neg'>-0.10%</td><td class='neg'>-0.20%</td><td class='pos'>115</td><td class='neg'>127</td><td>6</td></tr>
-<tr><th>2025Q2</th><td>3,518</td><td class='pos'>+0.43%</td><td class='pos'>+0.16%</td><td class='pos'>1,852</td><td class='neg'>1,493</td><td>173</td><td>3,548</td><td class='pos'>+0.02%</td><td class='neg'>-0.36%</td><td class='pos'>1,549</td><td class='neg'>1,897</td><td>102</td></tr>
-<tr><th>2025Q3</th><td>3,404</td><td class='pos'>+0.39%</td><td class='pos'>+0.27%</td><td class='pos'>1,904</td><td class='neg'>1,341</td><td>159</td><td>2,703</td><td class='pos'>+0.02%</td><td class='neg'>-0.25%</td><td class='pos'>1,230</td><td class='neg'>1,417</td><td>56</td></tr>
-<tr><th>2025Q4</th><td>3,503</td><td class='pos'>+0.17%</td><td class='pos'>+0.07%</td><td class='pos'>1,769</td><td class='neg'>1,588</td><td>146</td><td>3,276</td><td class='neg'>-0.46%</td><td class='neg'>-0.41%</td><td class='pos'>1,393</td><td class='neg'>1,806</td><td>77</td></tr>
-<tr><th>2026Q1</th><td>3,725</td><td class='pos'>+0.19%</td><td class=''>+0.00%</td><td class='pos'>1,823</td><td class='neg'>1,762</td><td>140</td><td>3,722</td><td class='pos'>+0.22%</td><td class=''>+0.00%</td><td class='pos'>1,771</td><td class='neg'>1,854</td><td>97</td></tr>
-<tr><th>2026Q2</th><td>3,464</td><td class='neg'>-0.14%</td><td class='neg'>-0.19%</td><td class='pos'>1,446</td><td class='neg'>1,863</td><td>155</td><td>2,140</td><td class='neg'>-0.13%</td><td class='neg'>-0.40%</td><td class='pos'>904</td><td class='neg'>1,175</td><td>61</td></tr>
-<tr class='total'><th>全期間</th><td>17,855</td><td class='pos'>+0.21%</td><td class=''>+0.00%</td><td class='pos'>8,911</td><td class='neg'>8,161</td><td>783</td><td>15,637</td><td class='neg'>-0.06%</td><td class='neg'>-0.29%</td><td class='pos'>6,962</td><td class='neg'>8,276</td><td>399</td></tr>
+<tr><th>2025Q1</th><td>241</td><td class="pos">+0.44%</td><td>+0.00%</td><td class='pos'>117</td><td class='neg'>114</td><td>10</td><td class="group">250</td><td class="group pos">+0.26%</td><td class="neg">-0.08%</td><td class='pos'>116</td><td class='neg'>127</td><td>7</td><td class="group">248</td><td class="group neg">-0.10%</td><td class="neg">-0.20%</td><td class='pos'>115</td><td class='neg'>127</td><td>6</td><td class="group">239</td><td class="group pos">+0.33%</td><td class="neg">-0.20%</td><td class='pos'>114</td><td class='neg'>122</td><td>3</td></tr>
+<tr><th>2025Q2</th><td>3,518</td><td class="pos">+0.43%</td><td class="pos">+0.16%</td><td class='pos'>1,852</td><td class='neg'>1,493</td><td>173</td><td class="group">3,566</td><td class="group pos">+0.08%</td><td>+0.00%</td><td class='pos'>1,686</td><td class='neg'>1,712</td><td>168</td><td class="group">3,548</td><td class="group pos">+0.02%</td><td class="neg">-0.36%</td><td class='pos'>1,549</td><td class='neg'>1,897</td><td>102</td><td class="group">3,493</td><td class="group pos">+0.45%</td><td class="neg">-0.13%</td><td class='pos'>1,652</td><td class='neg'>1,766</td><td>75</td></tr>
+<tr><th>2025Q3</th><td>3,404</td><td class="pos">+0.39%</td><td class="pos">+0.27%</td><td class='pos'>1,904</td><td class='neg'>1,341</td><td>159</td><td class="group">3,584</td><td class="group pos">+0.21%</td><td class="pos">+0.11%</td><td class='pos'>1,840</td><td class='neg'>1,564</td><td>180</td><td class="group">2,703</td><td class="group pos">+0.02%</td><td class="neg">-0.25%</td><td class='pos'>1,230</td><td class='neg'>1,417</td><td>56</td><td class="group">2,515</td><td class="group pos">+0.56%</td><td>+0.00%</td><td class='pos'>1,230</td><td class='neg'>1,243</td><td>42</td></tr>
+<tr><th>2025Q4</th><td>3,503</td><td class="pos">+0.17%</td><td class="pos">+0.07%</td><td class='pos'>1,769</td><td class='neg'>1,588</td><td>146</td><td class="group">3,657</td><td class="group pos">+0.06%</td><td>+0.00%</td><td class='pos'>1,720</td><td class='neg'>1,774</td><td>163</td><td class="group">3,276</td><td class="group neg">-0.46%</td><td class="neg">-0.41%</td><td class='pos'>1,393</td><td class='neg'>1,806</td><td>77</td><td class="group">3,111</td><td class="group neg">-0.27%</td><td class="neg">-0.42%</td><td class='pos'>1,358</td><td class='neg'>1,698</td><td>55</td></tr>
+<tr><th>2026Q1</th><td>3,725</td><td class="pos">+0.19%</td><td>+0.00%</td><td class='pos'>1,823</td><td class='neg'>1,762</td><td>140</td><td class="group">3,806</td><td class="group neg">-0.11%</td><td class="neg">-0.15%</td><td class='pos'>1,665</td><td class='neg'>1,985</td><td>156</td><td class="group">3,722</td><td class="group pos">+0.22%</td><td>+0.00%</td><td class='pos'>1,771</td><td class='neg'>1,854</td><td>97</td><td class="group">3,631</td><td class="group pos">+0.42%</td><td class="neg">-0.13%</td><td class='pos'>1,713</td><td class='neg'>1,843</td><td>75</td></tr>
+<tr><th>2026Q2</th><td>3,464</td><td class="neg">-0.14%</td><td class="neg">-0.19%</td><td class='pos'>1,446</td><td class='neg'>1,863</td><td>155</td><td class="group">3,509</td><td class="group neg">-0.26%</td><td class="neg">-0.29%</td><td class='pos'>1,403</td><td class='neg'>1,944</td><td>162</td><td class="group">2,140</td><td class="group neg">-0.13%</td><td class="neg">-0.40%</td><td class='pos'>904</td><td class='neg'>1,175</td><td>61</td><td class="group">2,080</td><td class="group pos">+0.16%</td><td class="neg">-0.40%</td><td class='pos'>918</td><td class='neg'>1,118</td><td>44</td></tr>
+<tr class='total'><th>全期間</th><td>17,855</td><td class="pos">+0.21%</td><td>+0.00%</td><td class='pos'>8,911</td><td class='neg'>8,161</td><td>783</td><td class="group">18,372</td><td class="group">+0.00%</td><td>+0.00%</td><td class='pos'>8,430</td><td class='neg'>9,106</td><td>836</td><td class="group">15,637</td><td class="group neg">-0.06%</td><td class="neg">-0.29%</td><td class='pos'>6,962</td><td class='neg'>8,276</td><td>399</td><td class="group">15,069</td><td class="group pos">+0.27%</td><td class="neg">-0.21%</td><td class='pos'>6,985</td><td class='neg'>7,790</td><td>294</td></tr>
 </tbody>
 </table>
 </body>
