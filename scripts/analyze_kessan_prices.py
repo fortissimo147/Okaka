@@ -70,8 +70,9 @@ def aggregate(rows_by_event):
       "span"        : offset=-1 終値 → offset=+1 終値 の変化率
     """
     buckets: dict[str, dict[str, list[float]]] = defaultdict(lambda: defaultdict(list))
+    bake_events: list[dict] = []  # 高化け値・安化け値リスト
 
-    for (_code, kdate), offsets in rows_by_event.items():
+    for (code, kdate), offsets in rows_by_event.items():
         q = quarter_label(kdate)
 
         d0 = offsets.get(0)
@@ -94,12 +95,86 @@ def aggregate(rows_by_event):
         # 前日終値→翌日終値（3日跨ぎ）
         if dm1 and d1 and dm1["close"] and d1["close"]:
             span = (d1["close"] / dm1["close"] - 1) * 100
-            buckets[q]["span"].append(round(span, 2))
+            span_r = round(span, 2)
+            buckets[q]["span"].append(span_r)
+            if span_r >= 20:
+                buckets[q]["taka_bake"].append(span_r)
+                bake_events.append({"code": code, "kessan_date": kdate, "span": span_r, "kind": "taka"})
+            elif span_r <= -20:
+                buckets[q]["yasu_bake"].append(span_r)
+                bake_events.append({"code": code, "kessan_date": kdate, "span": span_r, "kind": "yasu"})
 
-    return buckets
+    return buckets, bake_events
 
 
-def render_html(buckets) -> str:
+def render_bake_table(buckets, bake_events) -> str:
+    quarters = sorted(buckets.keys())
+    rows = []
+    total_taka = 0
+    total_yasu = 0
+    total_span_n = 0
+    for q in quarters:
+        n_taka = len(buckets[q].get("taka_bake", []))
+        n_yasu = len(buckets[q].get("yasu_bake", []))
+        n_span = len(buckets[q].get("span", []))
+        total_taka += n_taka
+        total_yasu += n_yasu
+        total_span_n += n_span
+        taka_pct = (n_taka / n_span * 100) if n_span else 0
+        yasu_pct = (n_yasu / n_span * 100) if n_span else 0
+        rows.append(
+            f"<tr><th>{q}</th>"
+            f"<td>{n_span:,}</td>"
+            f"<td class='pos'>{n_taka:,}</td><td class='pos'>{taka_pct:.2f}%</td>"
+            f"<td class='neg'>{n_yasu:,}</td><td class='neg'>{yasu_pct:.2f}%</td>"
+            f"</tr>"
+        )
+    taka_pct_all = (total_taka / total_span_n * 100) if total_span_n else 0
+    yasu_pct_all = (total_yasu / total_span_n * 100) if total_span_n else 0
+    rows.append(
+        f"<tr class='total'><th>全期間</th>"
+        f"<td>{total_span_n:,}</td>"
+        f"<td class='pos'>{total_taka:,}</td><td class='pos'>{taka_pct_all:.2f}%</td>"
+        f"<td class='neg'>{total_yasu:,}</td><td class='neg'>{yasu_pct_all:.2f}%</td>"
+        f"</tr>"
+    )
+
+    # 個別リスト（変化率の絶対値順）
+    sorted_events = sorted(bake_events, key=lambda e: -abs(e["span"]))
+    detail_rows = []
+    for e in sorted_events:
+        cls = "pos" if e["kind"] == "taka" else "neg"
+        label = "高化け値" if e["kind"] == "taka" else "安化け値"
+        detail_rows.append(
+            f"<tr><td>{e['code']}</td><td>{e['kessan_date']}</td>"
+            f"<td class='{cls}'>{label}</td>"
+            f"<td class='{cls}'>{e['span']:+.2f}%</td></tr>"
+        )
+
+    return f"""
+<h2>高化け値・安化け値（前日終値→翌日終値の絶対変化率 ≥ 20%）</h2>
+<table>
+<thead>
+<tr><th rowspan="2">四半期</th><th rowspan="2">対象件数<br>（3日跨ぎ計算可）</th>
+    <th colspan="2">高化け値 (+20%以上)</th><th colspan="2">安化け値 (−20%以下)</th></tr>
+<tr><th>件数</th><th>比率</th><th>件数</th><th>比率</th></tr>
+</thead>
+<tbody>
+{chr(10).join(rows)}
+</tbody>
+</table>
+
+<h3>個別一覧（{len(sorted_events)} 件、変化率絶対値順）</h3>
+<table>
+<thead><tr><th>コード</th><th>決算日</th><th>区分</th><th>前日→翌日</th></tr></thead>
+<tbody>
+{chr(10).join(detail_rows) if detail_rows else "<tr><td colspan='4' style='text-align:center;color:#aaa'>なし</td></tr>"}
+</tbody>
+</table>
+"""
+
+
+def render_html(buckets, bake_events) -> str:
     quarters = sorted(buckets.keys())
 
     METRICS = [
@@ -192,6 +267,9 @@ def render_html(buckets) -> str:
 {chr(10).join(rows)}
 </tbody>
 </table>
+
+{render_bake_table(buckets, bake_events)}
+
 </body>
 </html>
 """
@@ -202,9 +280,10 @@ def main():
     rows_by_event = load_events()
     print(f"  決算イベント数: {len(rows_by_event):,}")
 
-    buckets = aggregate(rows_by_event)
+    buckets, bake_events = aggregate(rows_by_event)
     OUTPUT_HTML.parent.mkdir(parents=True, exist_ok=True)
-    OUTPUT_HTML.write_text(render_html(buckets), encoding="utf-8")
+    OUTPUT_HTML.write_text(render_html(buckets, bake_events), encoding="utf-8")
+    print(f"  高化け値: {sum(1 for e in bake_events if e['kind']=='taka')} 件 / 安化け値: {sum(1 for e in bake_events if e['kind']=='yasu')} 件")
     print(f"完了 -> {OUTPUT_HTML}")
 
 
