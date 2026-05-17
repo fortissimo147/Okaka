@@ -15,7 +15,16 @@ from datetime import datetime
 from pathlib import Path
 
 INPUT_CSV = Path(__file__).parent.parent / "data" / "kessan_prices.csv"
+KESSAN_CSV = Path(__file__).parent.parent / "data" / "kessan.csv"
 OUTPUT_HTML = Path(__file__).parent.parent / "docs" / "kessan_analysis.html"
+
+
+def load_names() -> dict[str, str]:
+    names = {}
+    with open(KESSAN_CSV, encoding="utf-8-sig") as f:
+        for row in csv.DictReader(f):
+            names[row["code"]] = row.get("name", "")
+    return names
 
 
 def quarter_label(date_str: str) -> str:
@@ -107,7 +116,7 @@ def aggregate(rows_by_event):
     return buckets, bake_events
 
 
-def render_bake_table(buckets, bake_events) -> str:
+def render_bake_table(buckets, bake_events, names) -> str:
     quarters = sorted(buckets.keys())
     rows = []
     total_taka = 0
@@ -145,8 +154,10 @@ def render_bake_table(buckets, bake_events) -> str:
     for e in sorted_events:
         cls = "pos" if e["kind"] == "taka" else "neg"
         label = "高化け値" if e["kind"] == "taka" else "安化け値"
+        name = names.get(e["code"], "")
         detail_rows.append(
-            f"<tr><td>{e['code']}</td><td>{e['kessan_date']}</td>"
+            f"<tr><td>{e['code']}</td><td style='text-align:left'>{name}</td>"
+            f"<td>{e['kessan_date']}</td>"
             f"<td class='{cls}'>{label}</td>"
             f"<td class='{cls}'>{e['span']:+.2f}%</td></tr>"
         )
@@ -166,15 +177,15 @@ def render_bake_table(buckets, bake_events) -> str:
 
 <h3>個別一覧（{len(sorted_events)} 件、変化率絶対値順）</h3>
 <table>
-<thead><tr><th>コード</th><th>決算日</th><th>区分</th><th>前日→翌日</th></tr></thead>
+<thead><tr><th>コード</th><th>銘柄名</th><th>決算日</th><th>区分</th><th>前日→翌日</th></tr></thead>
 <tbody>
-{chr(10).join(detail_rows) if detail_rows else "<tr><td colspan='4' style='text-align:center;color:#aaa'>なし</td></tr>"}
+{chr(10).join(detail_rows) if detail_rows else "<tr><td colspan='5' style='text-align:center;color:#aaa'>なし</td></tr>"}
 </tbody>
 </table>
 """
 
 
-def render_html(buckets, bake_events) -> str:
+def render_html(buckets, bake_events, names) -> str:
     quarters = sorted(buckets.keys())
 
     METRICS = [
@@ -268,7 +279,7 @@ def render_html(buckets, bake_events) -> str:
 </tbody>
 </table>
 
-{render_bake_table(buckets, bake_events)}
+{render_bake_table(buckets, bake_events, names)}
 
 </body>
 </html>
@@ -281,8 +292,9 @@ def main():
     print(f"  決算イベント数: {len(rows_by_event):,}")
 
     buckets, bake_events = aggregate(rows_by_event)
+    names = load_names()
     OUTPUT_HTML.parent.mkdir(parents=True, exist_ok=True)
-    OUTPUT_HTML.write_text(render_html(buckets, bake_events), encoding="utf-8")
+    OUTPUT_HTML.write_text(render_html(buckets, bake_events, names), encoding="utf-8")
     print(f"  高化け値: {sum(1 for e in bake_events if e['kind']=='taka')} 件 / 安化け値: {sum(1 for e in bake_events if e['kind']=='yasu')} 件")
     print(f"完了 -> {OUTPUT_HTML}")
 
