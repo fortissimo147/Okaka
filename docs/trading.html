@@ -177,21 +177,22 @@ async function load() {
 }
 
 function parseKessan(text) {
+  // 横持ち形式: code, name, date_01, date_02, ...
   const map = {};
   const lines = text.split('\n');
   if (lines.length < 2) return map;
-  const hdrs = parseCSVLine(lines[0]);
-  const dateIdx = hdrs.indexOf('date');
+  const hdrs = parseCSVLine(lines[0]).map(h => h.replace(/^﻿/, ''));
   const codeIdx = hdrs.indexOf('code');
-  if (dateIdx < 0 || codeIdx < 0) return map;
+  if (codeIdx < 0) return map;
+  const dateIdxs = hdrs.map((h, i) => h.startsWith('date_') ? i : -1).filter(i => i >= 0);
+  if (dateIdxs.length === 0) return map;
   for (let i = 1; i < lines.length; i++) {
     const c = parseCSVLine(lines[i].trim());
     if (c.length < 2) continue;
-    const d = (c[dateIdx] || '').trim();
     const code = (c[codeIdx] || '').trim();
-    if (!d || !code) continue;
-    if (!map[code]) map[code] = [];
-    map[code].push(d);
+    if (!code) continue;
+    const dates = dateIdxs.map(idx => (c[idx] || '').trim()).filter(Boolean);
+    if (dates.length) map[code] = dates;
   }
   return map;
 }
