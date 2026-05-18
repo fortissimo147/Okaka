@@ -270,7 +270,6 @@ def render_html(buckets, bake_events, names) -> str:
 <div class="page-header">
   <h1>決算日±1 株価変動分析</h1>
   <nav class="top-nav">
-    <a href="index.html">ホーム</a>
     <a href="trading.html">損益分析</a>
     <a href="kessan_analysis.html">決算分析</a>
     <a href="expected_growth.html">期待増益率</a>
