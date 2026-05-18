@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>期待増益率 計算ツール</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Helvetica Neue', Arial, sans-serif; background: #f8f7f4; color: #1a1a1a; min-height: 100vh; }
+header { padding: 1.5rem 2rem; background: #fff; border-bottom: 0.5px solid #e0ddd8; display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.header-text h1 { font-size: 16px; font-weight: 500; }
+.header-text p { font-size: 12px; color: #888; margin-top: 2px; }
+.nav-link { font-size: 12px; color: #888; text-decoration: none; padding: 5px 10px; border: 0.5px solid #e0ddd8; border-radius: 7px; background: #fff; white-space: nowrap; }
+.nav-link:hover { color: #1a1a1a; border-color: #aaa; }
+
+.main { max-width: 860px; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
+
+/* カード */
+.card { background: #fff; border: 0.5px solid #e0ddd8; border-radius: 10px; margin-bottom: 1.25rem; }
+.card-header { padding: 0.875rem 1.25rem; border-bottom: 0.5px solid #e0ddd8; }
+.card-title { font-size: 13px; font-weight: 500; }
+.card-sub { font-size: 11px; color: #aaa; margin-top: 2px; }
+.card-body { padding: 1.25rem; }
+
+/* 入力グリッド */
+.input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+@media (max-width: 540px) { .input-grid { grid-template-columns: 1fr; } }
+.field { display: flex; flex-direction: column; gap: 5px; }
+.field label { font-size: 11px; color: #666; }
+.field .hint { font-size: 10px; color: #aaa; }
+.field input { font-size: 13px; border: 0.5px solid #e0ddd8; border-radius: 7px; padding: 7px 10px; outline: none; background: #fff; color: #1a1a1a; width: 100%; }
+.field input:focus { border-color: #888; }
+.field input.default { color: #aaa; }
+
+.btn-calc { margin-top: 1.25rem; font-size: 13px; padding: 9px 28px; border-radius: 7px; cursor: pointer; border: none; background: #1a1a1a; color: #fff; }
+.btn-calc:hover { background: #333; }
+
+/* 結果 */
+.result-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 1rem; }
+@media (max-width: 540px) { .result-grid { grid-template-columns: 1fr 1fr; } }
+.metric { background: #f8f7f4; border-radius: 8px; padding: 0.875rem 1rem; }
+.metric-label { font-size: 11px; color: #888; margin-bottom: 4px; }
+.metric-value { font-size: 22px; font-weight: 500; line-height: 1; }
+.metric-unit { font-size: 12px; color: #888; margin-left: 2px; }
+.metric-sub { font-size: 10px; color: #aaa; margin-top: 4px; }
+.val-pos { color: #27500A; }
+.val-neg { color: #791F1F; }
+
+.verdict { border-radius: 8px; padding: 0.875rem 1.25rem; font-size: 13px; font-weight: 500; }
+.verdict.beat { background: #f0f7ec; color: #27500A; border: 0.5px solid #c3ddb8; }
+.verdict.miss { background: #fdf0f0; color: #791F1F; border: 0.5px solid #f0c0c0; }
+.verdict.neutral { background: #f8f7f4; color: #888; border: 0.5px solid #e0ddd8; }
+.verdict-detail { font-size: 11px; font-weight: 400; margin-top: 4px; color: inherit; opacity: 0.8; }
+
+/* 公式メモ */
+.formula-block { margin-bottom: 1.25rem; }
+.formula-block:last-child { margin-bottom: 0; }
+.formula-title { font-size: 12px; font-weight: 500; color: #555; margin-bottom: 8px; }
+.formula-box { background: #f8f7f4; border-left: 3px solid #1a1a1a; border-radius: 0 6px 6px 0; padding: 0.75rem 1rem; font-family: 'Courier New', monospace; font-size: 13px; line-height: 1.8; color: #1a1a1a; }
+.formula-box .comment { color: #aaa; font-size: 11px; font-family: 'Helvetica Neue', sans-serif; }
+.formula-vars { margin-top: 10px; border-collapse: collapse; width: 100%; }
+.formula-vars td { font-size: 11px; padding: 4px 8px; border-bottom: 0.5px solid #f0ede8; color: #555; }
+.formula-vars td:first-child { font-family: monospace; color: #1a1a1a; font-weight: 500; width: 110px; }
+.formula-vars tr:last-child td { border-bottom: none; }
+
+.note-box { background: #fffbe6; border: 0.5px solid #e6d87a; border-radius: 8px; padding: 0.75rem 1rem; font-size: 12px; color: #6b5c00; line-height: 1.7; }
+.note-box ul { padding-left: 1.2em; margin-top: 4px; }
+.section-sep { border: none; border-top: 0.5px solid #e0ddd8; margin: 1.25rem 0; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-text">
+    <h1>期待増益率 計算ツール</h1>
+    <p>CAPM × FCFベース逆算</p>
+  </div>
+  <a class="nav-link" href="trading.html">← 損益分析</a>
+</header>
+
+<div class="main">
+
+  <!-- 入力フォーム -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">入力</div>
+      <div class="card-sub">各値を入力して「計算する」を押してください</div>
+    </div>
+    <div class="card-body">
+      <div class="input-grid">
+
+        <div class="field">
+          <label>銘柄名（任意）</label>
+          <input type="text" id="name" placeholder="例: トヨタ">
+        </div>
+
+        <div class="field">
+          <label>β（ベータ値）</label>
+          <span class="hint">個別株 vs 市場の感応度。過去1年の日次リターンから計算</span>
+          <input type="number" id="beta" placeholder="例: 1.2" step="0.01">
+        </div>
+
+        <div class="field">
+          <label>Rf — リスクフリーレート（%）</label>
+          <span class="hint">日本国債10年利回り。現在は約1.5%</span>
+          <input type="number" id="rf" placeholder="1.5" value="1.5" step="0.1">
+        </div>
+
+        <div class="field">
+          <label>MRP — マーケットリスクプレミアム（%）</label>
+          <span class="hint">日本株の超過期待リターン。一般的に5〜6%（Damodaran参照）</span>
+          <input type="number" id="mrp" placeholder="5.5" value="5.5" step="0.1">
+        </div>
+
+        <div class="field">
+          <label>FCF per share — 一株あたりFCF（円）</label>
+          <span class="hint">フリーキャッシュフロー ÷ 発行済株式数。有報から取得</span>
+          <input type="number" id="fcf" placeholder="例: 150" step="1">
+        </div>
+
+        <div class="field">
+          <label>株価（円）</label>
+          <span class="hint">現在の株価</span>
+          <input type="number" id="price" placeholder="例: 3000" step="1">
+        </div>
+
+        <div class="field">
+          <label>実際の増益率（%）・任意</label>
+          <span class="hint">実績 or 予想の増益率。入力すると期待値との比較を表示</span>
+          <input type="number" id="actual" placeholder="例: 8.0" step="0.1">
+        </div>
+
+      </div>
+      <button class="btn-calc" onclick="calc()">計算する</button>
+    </div>
+  </div>
+
+  <!-- 結果 -->
+  <div class="card" id="result-card" style="display:none">
+    <div class="card-header">
+      <div class="card-title" id="result-title">計算結果</div>
+    </div>
+    <div class="card-body">
+      <div class="result-grid">
+        <div class="metric">
+          <div class="metric-label">資本コスト（CAPM）</div>
+          <div class="metric-value" id="res-ke">—</div>
+          <div class="metric-sub">Rf + β × MRP</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">FCF利回り</div>
+          <div class="metric-value" id="res-fcfy">—</div>
+          <div class="metric-sub">FCF per share ÷ 株価</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">期待増益率</div>
+          <div class="metric-value" id="res-eg">—</div>
+          <div class="metric-sub">資本コスト − FCF利回り</div>
+        </div>
+      </div>
+      <div id="verdict" class="verdict neutral" style="display:none"></div>
+    </div>
+  </div>
+
+  <!-- 公式メモ -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">公式メモ</div>
+      <div class="card-sub">CAPM × FCFゴードン成長モデル逆算</div>
+    </div>
+    <div class="card-body">
+
+      <div class="formula-block">
+        <div class="formula-title">① 期待増益率（完全計算式）</div>
+        <div class="formula-box">
+期待増益率 = [Rf + β × (Rm − Rf)] − (FCF per share ÷ 株価)
+        </div>
+      </div>
+
+      <hr class="section-sep">
+
+      <div class="formula-block">
+        <div class="formula-title">② CAPM — 資本コスト</div>
+        <div class="formula-box">
+資本コスト (Ke) = Rf + β × (Rm − Rf)
+                = Rf + β × MRP
+        </div>
+        <table class="formula-vars">
+          <tr><td>Rf</td><td>リスクフリーレート。日本国債10年利回り（現在 約1.5%）</td></tr>
+          <tr><td>β（ベータ）</td><td>個別株と市場の連動性・感応度。1より大きければ市場より振れ幅が大きい</td></tr>
+          <tr><td>Rm − Rf = MRP</td><td>マーケットリスクプレミアム。日本株の歴史的超過リターン。一般的に 5〜6%（Damodaran 推奨値を参照）</td></tr>
+        </table>
+      </div>
+
+      <hr class="section-sep">
+
+      <div class="formula-block">
+        <div class="formula-title">③ ベータ（β）の計算式</div>
+        <div class="formula-box">
+β = ρ × (σ_株 ÷ σ_指数)
+        </div>
+        <table class="formula-vars">
+          <tr><td>ρ（ロー）</td><td>個別株リターンと指数リターンの相関係数（−1〜+1）</td></tr>
+          <tr><td>σ_株（シグマ）</td><td>個別株の日次リターンの標準偏差（値動きのバラつき）</td></tr>
+          <tr><td>σ_指数</td><td>市場指数（TOPIX・日経225等）の日次リターンの標準偏差</td></tr>
+        </table>
+      </div>
+
+      <hr class="section-sep">
+
+      <div class="formula-block">
+        <div class="formula-title">④ FCFベース・ゴードン成長モデル（逆算の元になる式）</div>
+        <div class="formula-box">
+株価 = FCF per share ÷ (資本コスト − 期待増益率)
+<br>
+↓ 期待増益率について解くと
+<br>
+期待増益率 = 資本コスト − (FCF per share ÷ 株価)
+        </div>
+        <table class="formula-vars">
+          <tr><td>FCF per share</td><td>一株あたりフリーキャッシュフロー。有報から「営業CF − 投資CF」÷ 発行済株式数</td></tr>
+          <tr><td>FCF ÷ 株価</td><td>FCF利回り。資本コストのうち「今すでに稼いでいる部分」</td></tr>
+          <tr><td>差分</td><td>資本コストとのギャップ = 市場が期待している成長の部分</td></tr>
+        </table>
+      </div>
+
+      <hr class="section-sep">
+
+      <div class="formula-block">
+        <div class="formula-title">⑤ 判断基準</div>
+        <div class="formula-box">
+実際の増益率 &gt; 期待増益率  →  市場期待を上回っている（割安の可能性）
+実際の増益率 &lt; 期待増益率  →  市場期待を下回っている（割高の可能性）
+        </div>
+      </div>
+
+      <hr class="section-sep">
+
+      <div class="formula-block">
+        <div class="formula-title">⑥ PEGレシオ（参考）</div>
+        <div class="formula-box">
+PEG = PER ÷ 増益率
+        </div>
+        <table class="formula-vars">
+          <tr><td>PEG &lt; 1</td><td>成長率に対してPERが低い → 割安とみなされやすい</td></tr>
+          <tr><td>PEG &gt; 1</td><td>成長率に対してPERが高い → 割高とみなされやすい</td></tr>
+        </table>
+      </div>
+
+      <hr class="section-sep">
+
+      <div class="note-box">
+        <strong>注意点・前提</strong>
+        <ul>
+          <li>ゴードン成長モデルは成長率が一定という前提。実際は年ごとにブレる。</li>
+          <li>βは過去データの平均値なので、現在の市場環境とはタイムラグが生じる。</li>
+          <li>MRPは仮定値。銘柄間の相対比較には同じ値を使えば問題ない。</li>
+          <li>配当版（配当 ÷ 株価）は配当が少ない成長株には使えない。FCFベースを推奨。</li>
+          <li>FCFがマイナスの会社は計算値が歪む。その場合は別手法（マルチプル等）を使う。</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+function calc() {
+  const beta   = parseFloat(document.getElementById('beta').value);
+  const rf     = parseFloat(document.getElementById('rf').value);
+  const mrp    = parseFloat(document.getElementById('mrp').value);
+  const fcf    = parseFloat(document.getElementById('fcf').value);
+  const price  = parseFloat(document.getElementById('price').value);
+  const actual = parseFloat(document.getElementById('actual').value);
+  const name   = document.getElementById('name').value.trim();
+
+  if (isNaN(beta) || isNaN(rf) || isNaN(mrp) || isNaN(fcf) || isNaN(price) || price <= 0) {
+    alert('β・Rf・MRP・FCF per share・株価を入力してください');
+    return;
+  }
+
+  const ke   = rf + beta * mrp;          // 資本コスト (%)
+  const fcfy = fcf / price * 100;        // FCF利回り (%)
+  const eg   = ke - fcfy;                // 期待増益率 (%)
+
+  const fmt = v => (v >= 0 ? '+' : '') + v.toFixed(2) + '%';
+
+  document.getElementById('res-ke').innerHTML   = `<span>${ke.toFixed(2)}</span><span class="metric-unit">%</span>`;
+  document.getElementById('res-fcfy').innerHTML = `<span>${fcfy.toFixed(2)}</span><span class="metric-unit">%</span>`;
+
+  const egEl = document.getElementById('res-eg');
+  egEl.innerHTML = `<span class="${eg >= 0 ? 'val-pos' : 'val-neg'}">${eg.toFixed(2)}</span><span class="metric-unit">%</span>`;
+
+  const title = document.getElementById('result-title');
+  title.textContent = name ? `計算結果 — ${name}` : '計算結果';
+
+  const verdict = document.getElementById('verdict');
+  if (!isNaN(actual)) {
+    const diff = actual - eg;
+    verdict.style.display = '';
+    if (diff > 0) {
+      verdict.className = 'verdict beat';
+      verdict.innerHTML = `実際の増益率（${fmt(actual)}）が期待増益率（${fmt(eg)}）を <strong>${fmt(diff)} 上回っています</strong>
+        <div class="verdict-detail">市場の期待を超えている → 割安の可能性あり</div>`;
+    } else if (diff < 0) {
+      verdict.className = 'verdict miss';
+      verdict.innerHTML = `実際の増益率（${fmt(actual)}）が期待増益率（${fmt(eg)}）を <strong>${fmt(diff)} 下回っています</strong>
+        <div class="verdict-detail">市場の期待を下回っている → 割高の可能性あり</div>`;
+    } else {
+      verdict.className = 'verdict neutral';
+      verdict.innerHTML = `実際の増益率（${fmt(actual)}）が期待増益率（${fmt(eg)}）とほぼ一致しています`;
+    }
+  } else {
+    verdict.style.display = 'none';
+  }
+
+  document.getElementById('result-card').style.display = '';
+}
+</script>
+</body>
+</html>
