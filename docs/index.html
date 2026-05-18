@@ -29,14 +29,16 @@
       color: #fff;
       padding: 16px 24px;
       display: flex;
-      align-items: baseline;
+      align-items: center;
+      justify-content: space-between;
       gap: 16px;
+      flex-wrap: wrap;
     }
     header h1 { font-size: 1.2rem; font-weight: 700; }
     header .meta { font-size: 0.8rem; color: #aaa; }
-    .top-nav { background: #fff; border-bottom: 0.5px solid #e0ddd8; padding: 0.6rem 1.5rem; display: flex; gap: 8px; flex-wrap: wrap; }
-    .top-nav a { font-size: 12px; color: #888; text-decoration: none; padding: 4px 10px; border: 0.5px solid #e0ddd8; border-radius: 7px; background: #fff; white-space: nowrap; }
-    .top-nav a:hover { color: #1a1a1a; border-color: #aaa; }
+    .top-nav { display: flex; gap: 8px; flex-wrap: wrap; }
+    .top-nav a { font-size: 12px; color: #ccc; text-decoration: none; padding: 4px 10px; border: 0.5px solid #444; border-radius: 7px; white-space: nowrap; }
+    .top-nav a:hover { color: #fff; border-color: #aaa; }
 
     .sidebar {
       position: fixed;
@@ -198,15 +200,17 @@
     <a href="#section-snapshot">全銘柄</a>
     <a href="#section-search">銘柄検索</a>
   </nav>
-  <nav class="top-nav">
-    <a href="index.html">ホーム</a>
-    <a href="trading.html">損益分析</a>
-    <a href="kessan_analysis.html">決算分析</a>
-    <a href="expected_growth.html">期待増益率</a>
-  </nav>
   <header>
-    <h1>2083 NEXT FUNDS Japan Growth Equity Active ETF</h1>
-    <span class="meta" id="generated-at"></span>
+    <div>
+      <h1>2083 NEXT FUNDS Japan Growth Equity Active ETF</h1>
+      <span class="meta" id="generated-at"></span>
+    </div>
+    <nav class="top-nav">
+      <a href="index.html">ホーム</a>
+      <a href="trading.html">損益分析</a>
+      <a href="kessan_analysis.html">決算分析</a>
+      <a href="expected_growth.html">期待増益率</a>
+    </nav>
   </header>
   <main id="app">
     <div id="no-data">データを読み込み中...</div>
