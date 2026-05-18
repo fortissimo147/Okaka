@@ -810,7 +810,7 @@ function buildHalfMonthCard(allTrades) {
       if (t.costBasis > 0) {
         const ci = costToClassIdx(t.costBasis);
         classLabel = classIdxToName(ci);
-        if (periodMedian !== null && Math.abs(ci - periodMedian) >= 2) outlier = true;
+        if (periodMedian !== null && ci - periodMedian >= 2) outlier = true;
       }
       if (outlier) dtr.style.color = '#e05555';
       dtr.innerHTML = `
