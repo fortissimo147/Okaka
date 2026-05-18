@@ -387,7 +387,7 @@ function calcCompletedTrades(rows) {
   return trades.sort((a, b) => a.endDate.localeCompare(b.endDate));
 }
 
-// ===== 半月ごとの直近20勝負勝率 =====
+// ===== 半月ごとの直近40勝負勝率 =====
 function buildHalfMonthTable(allTrades) {
   if (allTrades.length === 0) return [];
 
@@ -409,32 +409,40 @@ function buildHalfMonthTable(allTrades) {
     // 前半（〜15日）
     const fhEnd = new Date(y, m, 15);
     const fhStr = fmtD(fhEnd);
+    const fhStart = fmtD(new Date(y, m, 1));
     if (fhEnd >= start && fhEnd <= end) {
       const up = sorted.filter(t => t.endDate <= fhStr);
       const last40 = up.slice(-40);
       const wins = last40.filter(t => t.win).length;
+      const periodTrades = sorted.filter(t => t.endDate >= fhStart && t.endDate <= fhStr);
       rows.push({
         label: `${y}/${String(m+1).padStart(2,'0')} 前半`,
         endDate: fhStr,
         wins, total: last40.length,
         rate: last40.length > 0 ? wins / last40.length * 100 : null,
         cumCount: up.length,
+        trades: periodTrades,
+        totalCost: periodTrades.reduce((s, t) => s + (t.costBasis || 0), 0),
       });
     }
 
     // 後半（〜月末）
     const lhEnd = new Date(y, m+1, 0);
     const lhStr = fmtD(lhEnd);
+    const lhStart = fmtD(new Date(y, m, 16));
     if (lhEnd >= start && lhEnd <= end) {
       const up = sorted.filter(t => t.endDate <= lhStr);
       const last40 = up.slice(-40);
       const wins = last40.filter(t => t.win).length;
+      const periodTrades = sorted.filter(t => t.endDate >= lhStart && t.endDate <= lhStr);
       rows.push({
         label: `${y}/${String(m+1).padStart(2,'0')} 後半`,
         endDate: lhStr,
         wins, total: last40.length,
         rate: last40.length > 0 ? wins / last40.length * 100 : null,
         cumCount: up.length,
+        trades: periodTrades,
+        totalCost: periodTrades.reduce((s, t) => s + (t.costBasis || 0), 0),
       });
     }
 
@@ -723,9 +731,10 @@ function buildHalfMonthCard(allTrades) {
 
   const hdr = document.createElement('div');
   hdr.className = 'card-header';
-  hdr.innerHTML = `<div class="card-title">半月ごとの直近40勝負 勝率</div><div class="card-sub">全期間のデータを使用</div>`;
+  hdr.innerHTML = `<div class="card-title">半月ごとの直近40勝負 勝率</div><div class="card-sub">全期間のデータを使用　▶ をクリックでトレード内訳</div>`;
   card.appendChild(hdr);
 
+  const NCOLS = 6;
   const wrap = document.createElement('div');
   wrap.className = 'table-wrap';
   const table = document.createElement('table');
@@ -736,19 +745,25 @@ function buildHalfMonthCard(allTrades) {
     <th class="td-r">勝</th>
     <th class="td-r">負</th>
     <th class="td-r">累計完結数</th>
+    <th class="td-r">建玉サイズ</th>
   </tr>`;
   table.appendChild(thead);
 
   const tbody = document.createElement('tbody');
-  rows.forEach(row => {
-    const tr = document.createElement('tr');
+  rows.forEach((row, idx) => {
     let rateCls = 'hm-na', rateStr = '-';
     if (row.rate !== null) {
       rateStr = row.rate.toFixed(1) + '%';
       rateCls = row.rate >= 50 ? 'hm-win' : 'hm-lose';
     }
+    const costStr = row.totalCost > 0 ? row.totalCost.toLocaleString() + ' 円' : '-';
+    const hasTrades = row.trades.length > 0;
+    const icon = hasTrades ? `<span class="expand-icon" id="hm-ei-${idx}">▶</span>` : '';
+
+    const tr = document.createElement('tr');
+    if (hasTrades) tr.className = 'stock-row';
     tr.innerHTML = `
-      <td>${row.label}</td>
+      <td>${row.label}${icon}</td>
       <td class="td-r">
         <div class="wr-wrap" style="justify-content:flex-end">
           <div class="wr-bar-bg" style="max-width:80px"><div class="wr-bar-fill" style="width:${row.rate ?? 0}%"></div></div>
@@ -758,8 +773,53 @@ function buildHalfMonthCard(allTrades) {
       <td class="td-r td-pos">${row.total > 0 ? row.wins : '-'}</td>
       <td class="td-r td-neg">${row.total > 0 ? row.total - row.wins : '-'}</td>
       <td class="td-r td-muted">${row.cumCount}</td>
+      <td class="td-r td-muted">${costStr}</td>
     `;
+
+    // 詳細行
+    const detailTr = document.createElement('tr');
+    detailTr.className = 'detail-row';
+    const detailTd = document.createElement('td');
+    detailTd.colSpan = NCOLS;
+    const inner = document.createElement('div');
+    inner.className = 'detail-inner';
+    inner.id = `hm-detail-${idx}`;
+
+    const dtTable = document.createElement('table');
+    dtTable.className = 'detail-table';
+    row.trades.slice().sort((a, b) => a.endDate.localeCompare(b.endDate)).forEach((t, i) => {
+      const dtr = document.createElement('tr');
+      const dpnlCls = t.pnl > 0 ? 'td-pos' : t.pnl < 0 ? 'td-neg' : '';
+      const winCol = t.win ? '#27500A' : '#791F1F';
+      const pctStr = t.pct != null ? `${t.pct >= 0 ? '+' : ''}${t.pct.toFixed(2)}%` : '';
+      const costStr = t.costBasis > 0 ? t.costBasis.toLocaleString() + ' 円' : '-';
+      dtr.innerHTML = `
+        <td style="color:#bbb;width:24px;text-align:right">${i + 1}</td>
+        <td style="color:#aaa;font-size:11px">${t.code}</td>
+        <td style="max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${t.name}">${t.name}</td>
+        <td style="color:#aaa">${t.startDate} 〜 ${t.endDate}</td>
+        <td class="dt-pnl ${dpnlCls}">${fmtPnlFull(t.pnl)}</td>
+        <td style="color:${winCol};font-weight:500">${t.win ? '勝' : '負'}</td>
+        <td style="color:${winCol};font-size:10px;text-align:right;padding-left:2px">${pctStr}</td>
+        <td style="color:#aaa;font-size:11px;text-align:right">${costStr}</td>
+      `;
+      dtTable.appendChild(dtr);
+    });
+    inner.appendChild(dtTable);
+    detailTd.appendChild(inner);
+    detailTr.appendChild(detailTd);
+
+    if (hasTrades) {
+      tr.addEventListener('click', () => {
+        const innerEl = document.getElementById(`hm-detail-${idx}`);
+        const iconEl = document.getElementById(`hm-ei-${idx}`);
+        innerEl.classList.toggle('open');
+        iconEl.classList.toggle('open');
+      });
+    }
+
     tbody.appendChild(tr);
+    tbody.appendChild(detailTr);
   });
   table.appendChild(tbody);
   wrap.appendChild(table);
