@@ -247,7 +247,11 @@ def render_html(buckets, bake_events, names) -> str:
 <meta charset="utf-8">
 <title>決算日±1 株価変動分析</title>
 <style>
-  body {{ font-family: -apple-system, "Hiragino Sans", sans-serif; margin: 2em; color: #222; font-size: 14px; }}
+  body {{ font-family: -apple-system, "Hiragino Sans", sans-serif; margin: 0; color: #222; font-size: 14px; }}
+  nav.top-nav {{ background: #fff; border-bottom: 0.5px solid #e0ddd8; padding: 0.75rem 1.5rem; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }}
+  nav.top-nav a {{ font-size: 12px; color: #888; text-decoration: none; padding: 5px 10px; border: 0.5px solid #e0ddd8; border-radius: 7px; background: #fff; white-space: nowrap; }}
+  nav.top-nav a:hover {{ color: #1a1a1a; border-color: #aaa; }}
+  .content {{ margin: 2em; }}
   h1 {{ font-size: 1.4em; }}
   .desc {{ color: #666; margin-bottom: 1.5em; font-size: 0.88em; line-height: 1.6; }}
   table {{ border-collapse: collapse; margin-top: 1em; white-space: nowrap; }}
@@ -261,6 +265,13 @@ def render_html(buckets, bake_events, names) -> str:
 </style>
 </head>
 <body>
+<nav class="top-nav">
+  <a href="index.html">ホーム</a>
+  <a href="trading.html">損益分析</a>
+  <a href="kessan_analysis.html">決算分析</a>
+  <a href="expected_growth.html">期待増益率</a>
+</nav>
+<div class="content">
 <h1>決算日±1 株価変動分析</h1>
 <p class="desc">
   対象: data/kessan_prices.csv　｜　集計単位: 年×四半期（決算発表日ベース）<br>
@@ -281,6 +292,7 @@ def render_html(buckets, bake_events, names) -> str:
 
 {render_bake_table(buckets, bake_events, names)}
 
+</div>
 </body>
 </html>
 """
