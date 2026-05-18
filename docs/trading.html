@@ -734,7 +734,22 @@ function buildHalfMonthCard(allTrades) {
   hdr.innerHTML = `<div class="card-title">半月ごとの直近40勝負 勝率</div><div class="card-sub">全期間のデータを使用　▶ をクリックでトレード内訳</div>`;
   card.appendChild(hdr);
 
-  const NCOLS = 6;
+  const NCOLS = 5;
+
+  function costToClassIdx(cost) {
+    return Math.max(2, Math.round(cost / 500000));
+  }
+  function classIdxToName(idx) {
+    return `${idx * 50}万円クラス`;
+  }
+  function medianClassIdx(trades) {
+    const idxs = trades.filter(t => t.costBasis > 0).map(t => costToClassIdx(t.costBasis));
+    if (idxs.length === 0) return null;
+    idxs.sort((a, b) => a - b);
+    const mid = Math.floor(idxs.length / 2);
+    return idxs.length % 2 === 0 ? (idxs[mid - 1] + idxs[mid]) / 2 : idxs[mid];
+  }
+
   const wrap = document.createElement('div');
   wrap.className = 'table-wrap';
   const table = document.createElement('table');
@@ -745,7 +760,6 @@ function buildHalfMonthCard(allTrades) {
     <th class="td-r">勝</th>
     <th class="td-r">負</th>
     <th class="td-r">累計完結数</th>
-    <th class="td-r">建玉サイズ</th>
   </tr>`;
   table.appendChild(thead);
 
@@ -756,7 +770,6 @@ function buildHalfMonthCard(allTrades) {
       rateStr = row.rate.toFixed(1) + '%';
       rateCls = row.rate >= 50 ? 'hm-win' : 'hm-lose';
     }
-    const costStr = row.totalCost > 0 ? row.totalCost.toLocaleString() + ' 円' : '-';
     const hasTrades = row.trades.length > 0;
     const icon = hasTrades ? `<span class="expand-icon" id="hm-ei-${idx}">▶</span>` : '';
 
@@ -773,7 +786,6 @@ function buildHalfMonthCard(allTrades) {
       <td class="td-r td-pos">${row.total > 0 ? row.wins : '-'}</td>
       <td class="td-r td-neg">${row.total > 0 ? row.total - row.wins : '-'}</td>
       <td class="td-r td-muted">${row.cumCount}</td>
-      <td class="td-r td-muted">${costStr}</td>
     `;
 
     // 詳細行
@@ -785,6 +797,7 @@ function buildHalfMonthCard(allTrades) {
     inner.className = 'detail-inner';
     inner.id = `hm-detail-${idx}`;
 
+    const periodMedian = medianClassIdx(row.trades);
     const dtTable = document.createElement('table');
     dtTable.className = 'detail-table';
     row.trades.slice().sort((a, b) => a.endDate.localeCompare(b.endDate)).forEach((t, i) => {
@@ -792,16 +805,23 @@ function buildHalfMonthCard(allTrades) {
       const dpnlCls = t.pnl > 0 ? 'td-pos' : t.pnl < 0 ? 'td-neg' : '';
       const winCol = t.win ? '#27500A' : '#791F1F';
       const pctStr = t.pct != null ? `${t.pct >= 0 ? '+' : ''}${t.pct.toFixed(2)}%` : '';
-      const costStr = t.costBasis > 0 ? t.costBasis.toLocaleString() + ' 円' : '-';
+      let classLabel = '-';
+      let outlier = false;
+      if (t.costBasis > 0) {
+        const ci = costToClassIdx(t.costBasis);
+        classLabel = classIdxToName(ci);
+        if (periodMedian !== null && Math.abs(ci - periodMedian) >= 2) outlier = true;
+      }
+      if (outlier) dtr.style.color = '#e05555';
       dtr.innerHTML = `
-        <td style="color:#bbb;width:24px;text-align:right">${i + 1}</td>
-        <td style="color:#aaa;font-size:11px">${t.code}</td>
+        <td style="color:${outlier ? '#e05555' : '#bbb'};width:24px;text-align:right">${i + 1}</td>
+        <td style="color:${outlier ? '#e05555' : '#aaa'};font-size:11px">${t.code}</td>
         <td style="max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${t.name}">${t.name}</td>
-        <td style="color:#aaa">${t.startDate} 〜 ${t.endDate}</td>
+        <td style="color:${outlier ? '#e05555' : '#aaa'}">${t.startDate} 〜 ${t.endDate}</td>
         <td class="dt-pnl ${dpnlCls}">${fmtPnlFull(t.pnl)}</td>
         <td style="color:${winCol};font-weight:500">${t.win ? '勝' : '負'}</td>
         <td style="color:${winCol};font-size:10px;text-align:right;padding-left:2px">${pctStr}</td>
-        <td style="color:#aaa;font-size:11px;text-align:right">${costStr}</td>
+        <td style="color:${outlier ? '#e05555' : '#aaa'};font-size:11px;text-align:right">${classLabel}</td>
       `;
       dtTable.appendChild(dtr);
     });
