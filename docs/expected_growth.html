@@ -66,6 +66,18 @@ header { padding: 1.5rem 2rem; background: #fff; border-bottom: 0.5px solid #e0d
 .note-box { background: #fffbe6; border: 0.5px solid #e6d87a; border-radius: 8px; padding: 0.75rem 1rem; font-size: 12px; color: #6b5c00; line-height: 1.7; }
 .note-box ul { padding-left: 1.2em; margin-top: 4px; }
 .section-sep { border: none; border-top: 0.5px solid #e0ddd8; margin: 1.25rem 0; }
+
+/* オートコンプリート */
+.ac-wrap { position: relative; }
+.ac-dropdown { position: absolute; top: 100%; left: 0; right: 0; background: #fff; border: 0.5px solid #ccc; border-radius: 7px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); z-index: 100; max-height: 220px; overflow-y: auto; margin-top: 2px; }
+.ac-item { padding: 7px 12px; font-size: 12px; cursor: pointer; display: flex; gap: 8px; align-items: baseline; }
+.ac-item:hover, .ac-item.active { background: #f8f7f4; }
+.ac-code { color: #888; font-variant-numeric: tabular-nums; flex-shrink: 0; }
+.ac-name { color: #1a1a1a; }
+.ac-beta { margin-left: auto; color: #aaa; font-size: 11px; flex-shrink: 0; }
+.field-row { display: flex; gap: 8px; }
+.field-row .field { flex: 1; }
+.field-row .field-code { flex: 0 0 100px; }
 </style>
 </head>
 <body>
@@ -94,14 +106,24 @@ header { padding: 1.5rem 2rem; background: #fff; border-bottom: 0.5px solid #e0d
     <div class="card-body">
       <div class="input-grid">
 
-        <div class="field">
-          <label>銘柄名（任意）</label>
-          <input type="text" id="name" placeholder="例: トヨタ">
+        <!-- コード＋銘柄名（横並び） -->
+        <div class="field" style="grid-column: 1 / -1;">
+          <label>銘柄コード・銘柄名</label>
+          <span class="hint">どちらか入力すると自動補完（コードは4桁）</span>
+          <div class="field-row">
+            <div class="field field-code">
+              <input type="text" id="code" placeholder="例: 7203" maxlength="4" autocomplete="off" oninput="onCodeInput()">
+            </div>
+            <div class="field ac-wrap" style="flex:1">
+              <input type="text" id="name" placeholder="例: トヨタ" autocomplete="off" oninput="onNameInput()" onblur="closeDropdown(200)">
+              <div class="ac-dropdown" id="ac-dropdown" style="display:none"></div>
+            </div>
+          </div>
         </div>
 
         <div class="field">
           <label>β（ベータ値）</label>
-          <span class="hint">個別株 vs 市場の感応度。過去1年の日次リターンから計算</span>
+          <span class="hint">個別株 vs 市場の感応度（beta_refer.csv より自動入力）</span>
           <input type="number" id="beta" placeholder="例: 1.2" step="0.01">
         </div>
 
@@ -271,6 +293,90 @@ PEG = PER ÷ 増益率
 </div>
 
 <script>
+const BETA_URL = 'https://raw.githubusercontent.com/fortissimo147/Okaka/main/data/beta_refer.csv';
+let betaMap = {};   // code → { name, beta }
+let betaList = [];  // [{ code, name, beta }] for search
+
+async function loadBeta() {
+  try {
+    const res = await fetch(BETA_URL);
+    const text = await res.text();
+    const lines = text.replace(/^﻿/, '').split('\n');
+    for (let i = 1; i < lines.length; i++) {
+      const cols = parseCSV(lines[i]);
+      if (cols.length < 6) continue;
+      const code = cols[0].trim();
+      const name = cols[1].trim();
+      const beta = parseFloat(cols[5]);
+      if (!code || !name || isNaN(beta)) continue;
+      betaMap[code] = { name, beta };
+      betaList.push({ code, name, beta });
+    }
+  } catch(e) { console.warn('beta_refer 読み込み失敗', e); }
+}
+
+function parseCSV(line) {
+  const r = []; let inQ = false, cur = '';
+  for (let i = 0; i < line.length; i++) {
+    const c = line[i];
+    if (c === '"') { inQ = !inQ; }
+    else if (c === ',' && !inQ) { r.push(cur); cur = ''; }
+    else cur += c;
+  }
+  r.push(cur);
+  return r;
+}
+
+function fillFromCode(code) {
+  const entry = betaMap[code];
+  if (!entry) return;
+  document.getElementById('name').value = entry.name;
+  document.getElementById('beta').value = entry.beta;
+}
+
+function onCodeInput() {
+  const code = document.getElementById('code').value.trim();
+  if (code.length === 4 && /^\d{4}$/.test(code)) fillFromCode(code);
+}
+
+let acActive = -1;
+
+function onNameInput() {
+  const q = document.getElementById('name').value.trim();
+  const dd = document.getElementById('ac-dropdown');
+  if (q.length < 1) { dd.style.display = 'none'; return; }
+  const hits = betaList.filter(e =>
+    e.name.includes(q) || e.code.startsWith(q)
+  ).slice(0, 30);
+  if (hits.length === 0) { dd.style.display = 'none'; return; }
+  acActive = -1;
+  dd.innerHTML = hits.map((e, i) =>
+    `<div class="ac-item" data-code="${e.code}" onmousedown="selectAC('${e.code}')">
+      <span class="ac-code">${e.code}</span>
+      <span class="ac-name">${e.name}</span>
+      <span class="ac-beta">β ${e.beta}</span>
+    </div>`
+  ).join('');
+  dd.style.display = '';
+}
+
+function selectAC(code) {
+  const entry = betaMap[code];
+  if (!entry) return;
+  document.getElementById('code').value = code;
+  document.getElementById('name').value = entry.name;
+  document.getElementById('beta').value = entry.beta;
+  document.getElementById('ac-dropdown').style.display = 'none';
+}
+
+function closeDropdown(delay) {
+  setTimeout(() => {
+    document.getElementById('ac-dropdown').style.display = 'none';
+  }, delay);
+}
+
+loadBeta();
+
 function calc() {
   const beta   = parseFloat(document.getElementById('beta').value);
   const rf     = parseFloat(document.getElementById('rf').value);
