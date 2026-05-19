@@ -34,6 +34,10 @@
     }
     header h1 { font-size: 1.2rem; font-weight: 700; }
     header .meta { font-size: 0.8rem; color: #aaa; }
+    header .page-nav { margin-left: auto; display: flex; gap: 12px; align-items: center; }
+    header .page-nav a { color: #ccc; font-size: 0.8rem; text-decoration: none; white-space: nowrap; }
+    header .page-nav a:hover { color: #fff; }
+    header .page-nav .nav-sep { color: #555; }
 
     .sidebar {
       position: fixed;
@@ -198,6 +202,15 @@
   <header>
     <h1>2083 NEXT FUNDS Japan Growth Equity Active ETF</h1>
     <span class="meta" id="generated-at"></span>
+    <nav class="page-nav">
+      <a href="https://fortissimo147.github.io/Okaka/">2083モニタリング</a>
+      <span class="nav-sep">|</span>
+      <a href="./trading.html">損益分析</a>
+      <span class="nav-sep">|</span>
+      <a href="./kessan_analysis.html">決算分析</a>
+      <span class="nav-sep">|</span>
+      <a href="./expected_growth.html">期待増益率</a>
+    </nav>
   </header>
   <main id="app">
     <div id="no-data">データを読み込み中...</div>
