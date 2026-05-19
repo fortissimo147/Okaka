@@ -1,0 +1,31 @@
+name: ETFデータ更新
+
+on:
+  schedule:
+    # 毎朝 8:00 JST (= 23:00 UTC 前日) 月〜金
+    - cron: '0 23 * * 0-4'
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v5
+
+      - name: データ取得・ダッシュボード再生成
+        run: uv run python -m scripts.fetch
+
+      - name: 変更があればコミット&プッシュ
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add db/etf.db app/data/dashboard.json docs/index.html etf_dashboard.html data/raw/ data/company_names.json
+          git diff --staged --quiet && echo "変更なし、スキップ" || (
+            git commit -m "update ETF data $(TZ=Asia/Tokyo date +%Y-%m-%d)" &&
+            git push -u origin main
+          )
