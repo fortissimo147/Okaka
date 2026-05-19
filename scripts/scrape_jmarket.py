@@ -93,29 +93,31 @@ def fetch_page(session: requests.Session, target_date: str) -> str | None:
     url = BASE_URL.format(date=target_date)
     try:
         resp = session.get(url, headers=HEADERS, timeout=20)
+        print(f"HTTP {resp.status_code}", file=sys.stderr, end=" ")
         if resp.status_code == 404:
             return ""  # その日はデータなし
         if resp.status_code != 200:
-            print(f"  [{target_date}] HTTP {resp.status_code}", file=sys.stderr)
+            print(f"(先頭100字: {resp.text[:100]})", file=sys.stderr)
             return None
         resp.encoding = resp.apparent_encoding or "utf-8"
         return resp.text
     except requests.RequestException as e:
-        print(f"  [{target_date}] エラー: {e}", file=sys.stderr)
+        print(f"エラー: {e}", file=sys.stderr)
         return None
 
 
 def parse_disclosures(html: str, target_date: str, debug: bool = False) -> list[dict]:
     """
     HTMLから短信の行を抽出して [{code, name}] を返す。
-    列名が異なる場合は debug=True で確認してください。
+    列構造（スクリーンショット確認済み）:
+      時刻 | 会社名 | PDF | 決算期 | 四半期 | 売上高 | 営業利益 | 経常利益 | 純利益 | EPS | コード
+       0       1      2      3        4        5        6          7          8       9    10
     """
     soup = BeautifulSoup(html, "html.parser")
     results = []
 
     tables = soup.find_all("table")
     if not tables:
-        # テーブルがない場合はdivやリスト形式の可能性
         if debug:
             print(f"[DEBUG] テーブルが見つかりません。最初の1000文字:\n{html[:1000]}", file=sys.stderr)
         return results
@@ -125,26 +127,25 @@ def parse_disclosures(html: str, target_date: str, debug: bool = False) -> list[
         if not rows:
             continue
 
-        # ヘッダー行を探す
         header_row = rows[0]
         headers = [th.get_text(strip=True) for th in header_row.find_all(["th", "td"])]
 
         if debug:
             print(f"[DEBUG] テーブルヘッダー: {headers}", file=sys.stderr)
 
-        if not headers:
-            continue
-
-        # コード列・銘柄名列・PDF列のインデックスを特定
+        # 列インデックスを動的に特定（ヘッダー名で決定）
         code_idx = name_idx = pdf_idx = None
         for i, h in enumerate(headers):
-            h_lower = h.lower()
-            if code_idx is None and ("コード" in h or "code" in h_lower or "証券" in h):
+            if "コード" in h:
                 code_idx = i
-            if name_idx is None and ("銘柄" in h or "企業名" in h or "会社名" in h or "name" in h_lower):
+            if "会社名" in h or "銘柄" in h or "企業名" in h:
                 name_idx = i
-            if pdf_idx is None and ("pdf" in h_lower or "種別" in h or "書類" in h or "資料" in h):
+            if h.upper() == "PDF" or h == "種別" or h == "書類":
                 pdf_idx = i
+
+        # フォールバック: ヘッダーがなければスクリーンショットの位置で固定
+        if code_idx is None and len(headers) >= 11:
+            code_idx, name_idx, pdf_idx = 10, 1, 2
 
         if debug:
             print(f"[DEBUG] code_idx={code_idx}, name_idx={name_idx}, pdf_idx={pdf_idx}", file=sys.stderr)
@@ -158,42 +159,34 @@ def parse_disclosures(html: str, target_date: str, debug: bool = False) -> list[
                 continue
             texts = [c.get_text(strip=True) for c in cells]
 
-            if debug and len(results) < 3:
+            if debug and len(results) < 5:
                 print(f"[DEBUG] 行データ: {texts}", file=sys.stderr)
 
-            # コード取得（4桁数字）
-            if code_idx >= len(texts):
+            if len(texts) <= code_idx:
                 continue
-            code_raw = texts[code_idx].strip()
+
+            # コード取得（4桁数字）
+            code_raw = re.sub(r"\s+", "", texts[code_idx])
             if not re.fullmatch(r"\d{4}", code_raw):
-                # リンクのテキストとして含まれている可能性
-                if cells[code_idx].find("a"):
-                    code_raw = cells[code_idx].find("a").get_text(strip=True)
+                a = cells[code_idx].find("a")
+                code_raw = re.sub(r"\s+", "", a.get_text()) if a else ""
                 if not re.fullmatch(r"\d{4}", code_raw):
                     continue
 
             # 短信フィルタ
             if pdf_idx is not None and pdf_idx < len(texts):
-                pdf_text = texts[pdf_idx]
-                # PDF列のリンクテキストも確認
-                if cells[pdf_idx].find("a"):
-                    pdf_text = cells[pdf_idx].get_text(strip=True)
+                pdf_cell = cells[pdf_idx]
+                pdf_text = pdf_cell.get_text(strip=True)
                 if "短信" not in pdf_text:
                     continue
-            # pdf_idx が特定できない場合は行全体で「短信」を検索
-            elif "短信" not in " ".join(texts):
-                continue
+            else:
+                if "短信" not in " ".join(texts):
+                    continue
 
             # 銘柄名取得
             name = ""
             if name_idx is not None and name_idx < len(texts):
                 name = texts[name_idx]
-            else:
-                # コードの隣のセルを銘柄名と推定
-                for ci in [code_idx + 1, code_idx - 1]:
-                    if 0 <= ci < len(texts) and texts[ci] and not re.fullmatch(r"\d{4}", texts[ci]):
-                        name = texts[ci]
-                        break
 
             results.append({"code": code_raw, "name": name})
 
