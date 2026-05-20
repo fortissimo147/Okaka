@@ -404,10 +404,6 @@ def _build_standalone(data: dict):
     except Exception:
         print("  Chart.js のダウンロード失敗。CDNリンクを使用します（オンライン環境が必要）")
 
-    out_path = Path(__file__).parent.parent / "etf_dashboard.html"
-    out_path.write_text(html, encoding="utf-8")
-    print(f"スタンドアロンHTML を生成しました → {out_path}")
-
     docs_path = Path(__file__).parent.parent / "docs" / "index.html"
     docs_path.parent.mkdir(parents=True, exist_ok=True)
     docs_path.write_text(html, encoding="utf-8")
