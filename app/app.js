@@ -96,6 +96,7 @@ function render() {
               <th data-key="ratio">保有比率 (%)</th>
               <th data-key="delta">前日比 (pp)</th>
               <th data-key="shares">保有株数</th>
+              <th data-key="value">保有金額</th>
             </tr>
           </thead>
           <tbody id="latest-tbody"></tbody>
@@ -277,6 +278,7 @@ function renderLatestTable() {
       <td>${r.ratio.toFixed(2)}</td>
       <td>${r.delta != null ? (r.delta >= 0 ? `<span class="delta-pos">+${r.delta.toFixed(2)}</span>` : `<span class="delta-neg">${r.delta.toFixed(2)}</span>`) : "—"}</td>
       <td>${r.shares != null ? r.shares.toLocaleString() : "—"}</td>
+      <td>${r.value != null ? (r.value / 1_000_000).toFixed(1) + "百万円" : "—"}</td>
     </tr>
   `;
   document.getElementById("latest-tbody").innerHTML = (DATA.latest || []).map(rowFn).join("");

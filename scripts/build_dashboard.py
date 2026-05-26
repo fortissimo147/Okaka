@@ -186,6 +186,7 @@ def build():
             "name": row["name"],
             "ratio": round(row["ratio"], 4),
             "shares": row["shares"],
+            "value": round(row["value"]) if row["value"] is not None else None,
             "delta": delta,
             "is_new": prev_date is not None and ticker not in by_date.get(prev_date, {}),
         })
