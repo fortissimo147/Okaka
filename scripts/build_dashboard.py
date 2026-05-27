@@ -65,20 +65,22 @@ def _calc_unrealized_gains(by_date: dict, dates: list, latest_date: str) -> dict
     """
     推測含み益を計算する。
     - 加重平均取得原価: 保有株数が増えた日の価格で更新、減った日は平均単価を維持
-    - BASELINE_DATE より保有株数が少ない銘柄は除外
+    - BASELINE_DATE より保有金額が少ない銘柄は除外
+    Returns: {baseline_date, total, items: [{ticker, avg_cost, unrealized, unrealized_pct}]}
     """
     baseline = by_date.get(BASELINE_DATE, {})
 
-    items = []
+    result = {}
     for ticker, latest_row in by_date[latest_date].items():
         current_shares = latest_row["shares"] or 0
         latest_price = latest_row["price"]
+        current_value = latest_row["value"] or 0
         if not latest_price or current_shares <= 0:
             continue
 
-        # 03/27時点より株数が減っている銘柄は除外
-        baseline_shares = (baseline.get(ticker) or {}).get("shares", 0) or 0
-        if current_shares < baseline_shares:
+        # 03/27時点より保有金額が少ない銘柄は除外
+        baseline_value = (baseline.get(ticker) or {}).get("value", 0) or 0
+        if current_value < baseline_value:
             continue
 
         # 加重平均取得原価の計算
@@ -103,19 +105,14 @@ def _calc_unrealized_gains(by_date: dict, dates: list, latest_date: str) -> dict
             continue
 
         unrealized = (latest_price - avg_cost) * current_shares
-        items.append({
-            "ticker": ticker,
-            "name": latest_row["name"],
-            "shares": current_shares,
+        result[ticker] = {
             "avg_cost": round(avg_cost, 2),
-            "latest_price": latest_price,
             "unrealized": round(unrealized),
             "unrealized_pct": round((latest_price / avg_cost - 1) * 100, 2),
-        })
+        }
 
-    items.sort(key=lambda x: -x["unrealized"])
-    total = sum(r["unrealized"] for r in items)
-    return {"baseline_date": BASELINE_DATE, "total": round(total), "items": items}
+    total = sum(v["unrealized"] for v in result.values())
+    return {"baseline_date": BASELINE_DATE, "total": round(total), "by_ticker": result}
 
 
 def build():
@@ -236,11 +233,15 @@ def build():
         name = by_date[latest_date][ticker]["name"]
         timeseries.append({"ticker": ticker, "name": name, "series": series})
 
+    unrealized_gains = _calc_unrealized_gains(by_date, dates, latest_date)
+    ug_map = unrealized_gains["by_ticker"]
+
     latest_snapshot = []
     prev_date = dates[-2] if len(dates) >= 2 else None
     for ticker, row in sorted(by_date[latest_date].items(), key=lambda x: -x[1]["ratio"]):
         prev_ratio = by_date[prev_date][ticker]["ratio"] if prev_date and ticker in by_date[prev_date] else None
         delta = round(row["ratio"] - prev_ratio, 4) if prev_ratio is not None else None
+        ug = ug_map.get(ticker, {})
         latest_snapshot.append({
             "ticker": ticker,
             "name": row["name"],
@@ -249,6 +250,9 @@ def build():
             "value": round(row["value"]) if row["value"] is not None else None,
             "delta": delta,
             "is_new": prev_date is not None and ticker not in by_date.get(prev_date, {}),
+            "avg_cost": ug.get("avg_cost"),
+            "unrealized": ug.get("unrealized"),
+            "unrealized_pct": ug.get("unrealized_pct"),
         })
 
     base_date = dates[-11] if len(dates) >= 11 else dates[0]
@@ -408,8 +412,6 @@ def build():
             "nav": round(nav) if nav is not None else None,
             "cash_ratio": round(cash_ratio, 2) if cash_ratio is not None else None,
         })
-
-    unrealized_gains = _calc_unrealized_gains(by_date, dates, latest_date)
 
     out = {
         "generated_at": datetime.now(JST).isoformat(),

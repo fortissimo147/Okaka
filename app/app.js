@@ -93,13 +93,13 @@ function render() {
             <tr>
               <th>コード</th>
               <th>銘柄名</th>
-              <th data-key="ratio">保有比率 (%)</th>
-              <th data-key="delta">前日比 (pp)</th>
+              <th data-key="ratio">保有比率</th>
+              <th data-key="delta">前日比</th>
               <th data-key="shares">保有株数</th>
-              <th data-key="value">保有金額</th>
-              <th data-key="avg_cost">平均取得単価</th>
+              <th data-key="value">保有金額 (円)</th>
+              <th data-key="avg_cost">平均取得単価 (円)</th>
               <th data-key="unrealized_pct">含み損益率</th>
-              <th data-key="unrealized">推測含み損益</th>
+              <th data-key="unrealized">推測含み損益 (円)</th>
             </tr>
           </thead>
           <tbody id="latest-tbody"></tbody>
@@ -274,25 +274,20 @@ function renderStrongBuys() {
 }
 
 function renderLatestTable() {
-  // 含み益データをtickerキーでマップ化
-  const ugMap = {};
-  (DATA.unrealized_gains?.items || []).forEach(r => { ugMap[r.ticker] = r; });
-
   const rowFn = r => {
-    const ug = ugMap[r.ticker];
-    const pctColor = ug ? (ug.unrealized_pct >= 0 ? "#4caf50" : "#ef5350") : "";
-    const valColor = ug ? (ug.unrealized >= 0 ? "#4caf50" : "#ef5350") : "";
+    const pctColor = r.unrealized_pct != null ? (r.unrealized_pct >= 0 ? "#4caf50" : "#ef5350") : "";
+    const valColor = r.unrealized != null ? (r.unrealized >= 0 ? "#4caf50" : "#ef5350") : "";
     return `
     <tr>
       <td>${r.ticker}</td>
       <td>${r.name}${r.is_new ? '<span class="badge-new">NEW</span>' : ""}</td>
-      <td>${r.ratio.toFixed(2)}</td>
-      <td>${r.delta != null ? (r.delta >= 0 ? `<span class="delta-pos">+${r.delta.toFixed(2)}</span>` : `<span class="delta-neg">${r.delta.toFixed(2)}</span>`) : "—"}</td>
+      <td style="text-align:right">${r.ratio.toFixed(2)}</td>
+      <td style="text-align:right">${r.delta != null ? (r.delta >= 0 ? `<span class="delta-pos">+${r.delta.toFixed(2)}</span>` : `<span class="delta-neg">${r.delta.toFixed(2)}</span>`) : "—"}</td>
       <td style="text-align:right">${r.shares != null ? r.shares.toLocaleString() : "—"}</td>
-      <td style="text-align:right">${r.value != null ? (r.value / 1_000_000).toFixed(1) + "百万円" : "—"}</td>
-      <td style="text-align:right">${ug ? ug.avg_cost.toLocaleString() : "—"}</td>
-      <td style="text-align:right;color:${pctColor}">${ug ? (ug.unrealized_pct >= 0 ? "+" : "") + ug.unrealized_pct.toFixed(2) + "%" : "—"}</td>
-      <td style="text-align:right;color:${valColor}">${ug ? (ug.unrealized >= 0 ? "+" : "") + (ug.unrealized / 1_000_000).toFixed(2) + "百万円" : "—"}</td>
+      <td style="text-align:right">${r.value != null ? r.value.toLocaleString() : "—"}</td>
+      <td style="text-align:right">${r.avg_cost != null ? r.avg_cost.toLocaleString() : "—"}</td>
+      <td style="text-align:right;color:${pctColor}">${r.unrealized_pct != null ? (r.unrealized_pct >= 0 ? "+" : "") + r.unrealized_pct.toFixed(2) : "—"}</td>
+      <td style="text-align:right;color:${valColor}">${r.unrealized != null ? r.unrealized.toLocaleString() : "—"}</td>
     </tr>`;
   };
   document.getElementById("latest-tbody").innerHTML = (DATA.latest || []).map(rowFn).join("");
