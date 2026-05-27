@@ -58,6 +58,66 @@ def _maybe_refresh_names():
         print(f"  東証CSV取得失敗（スキップ）: {e}")
 
 
+BASELINE_DATE = "2026-03-27"
+
+
+def _calc_unrealized_gains(by_date: dict, dates: list, latest_date: str) -> dict:
+    """
+    推測含み益を計算する。
+    - 加重平均取得原価: 保有株数が増えた日の価格で更新、減った日は平均単価を維持
+    - BASELINE_DATE より保有株数が少ない銘柄は除外
+    """
+    baseline = by_date.get(BASELINE_DATE, {})
+
+    items = []
+    for ticker, latest_row in by_date[latest_date].items():
+        current_shares = latest_row["shares"] or 0
+        latest_price = latest_row["price"]
+        if not latest_price or current_shares <= 0:
+            continue
+
+        # 03/27時点より株数が減っている銘柄は除外
+        baseline_shares = (baseline.get(ticker) or {}).get("shares", 0) or 0
+        if current_shares < baseline_shares:
+            continue
+
+        # 加重平均取得原価の計算
+        avg_cost = 0.0
+        tracked_shares = 0.0
+        for d in dates:
+            row = by_date[d].get(ticker)
+            if not row or not row["price"]:
+                continue
+            day_shares = row["shares"] or 0
+            day_price = row["price"]
+            if tracked_shares == 0:
+                avg_cost = day_price
+                tracked_shares = day_shares
+            else:
+                added = day_shares - tracked_shares
+                if added > 0:
+                    avg_cost = (avg_cost * tracked_shares + day_price * added) / day_shares
+                tracked_shares = day_shares
+
+        if avg_cost <= 0:
+            continue
+
+        unrealized = (latest_price - avg_cost) * current_shares
+        items.append({
+            "ticker": ticker,
+            "name": latest_row["name"],
+            "shares": current_shares,
+            "avg_cost": round(avg_cost, 2),
+            "latest_price": latest_price,
+            "unrealized": round(unrealized),
+            "unrealized_pct": round((latest_price / avg_cost - 1) * 100, 2),
+        })
+
+    items.sort(key=lambda x: -x["unrealized"])
+    total = sum(r["unrealized"] for r in items)
+    return {"baseline_date": BASELINE_DATE, "total": round(total), "items": items}
+
+
 def build():
     init_db()
     APP_DATA.mkdir(parents=True, exist_ok=True)
@@ -349,6 +409,8 @@ def build():
             "cash_ratio": round(cash_ratio, 2) if cash_ratio is not None else None,
         })
 
+    unrealized_gains = _calc_unrealized_gains(by_date, dates, latest_date)
+
     out = {
         "generated_at": datetime.now(JST).isoformat(),
         "dates": dates,
@@ -363,6 +425,7 @@ def build():
         "all_series": all_series,
         "price_data": price_data,
         "fund_cash_series": fund_cash_series,
+        "unrealized_gains": unrealized_gains,
     }
 
     (APP_DATA / "dashboard.json").write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")
