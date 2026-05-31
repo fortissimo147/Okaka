@@ -182,8 +182,8 @@ let tradePage = 1;
 async function load() {
   try {
     const [sbiRes, kessanRes] = await Promise.allSettled([
-      fetch(UPLOAD_URL),
-      fetch(KESSAN_URL),
+      fetch(UPLOAD_URL + '?t=' + Date.now()),
+      fetch(KESSAN_URL + '?t=' + Date.now()),
     ]);
     if (sbiRes.status === 'rejected' || !sbiRes.value.ok) throw new Error(`HTTP ${sbiRes.value?.status ?? 'network error'}`);
     const buf = await sbiRes.value.arrayBuffer();
