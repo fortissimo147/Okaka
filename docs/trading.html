@@ -287,10 +287,14 @@ function parseSBI(text) {
   let hi = -1;
   for (let i = 0; i < lines.length; i++) {
     if (lines[i].startsWith('約定日')) { hi = i; break; }
+    if (lines[i].startsWith('決済日')) { hi = i; break; }
   }
-  if (hi === -1) { showUpload('SBIフォーマットが認識できません'); return []; }
+  if (hi === -1) { showUpload('フォーマットが認識できません（「約定日」または「決済日」列が見つかりません）'); return []; }
 
   const hdrs = parseCSVLine(lines[hi]);
+  if (hdrs[0] === '決済日') return parseSBIKessan(lines, hi, hdrs);
+
+  // ===== 旧フォーマット: 約定履歴照会 =====
   const IDX = {
     date:  hdrs.indexOf('約定日'),
     name:  hdrs.indexOf('銘柄'),
@@ -323,14 +327,68 @@ function parseSBI(text) {
       qty: parseFloat(c[IDX.qty]) || 0,
       price: parseFloat(c[IDX.price]) || 0,
       pnl,
+      _fmt: 'legacy',
     });
   }
   return rows;
 }
 
-// ===== 完結トレード計算（銘柄ごとに株数0→0でひと勝負） =====
+// ===== 新フォーマット: 信用決済明細 =====
+function parseSBIKessan(lines, hi, hdrs) {
+  const IDX = {
+    date:        hdrs.indexOf('決済日'),
+    name:        hdrs.indexOf('銘柄'),
+    code:        hdrs.indexOf('銘柄コード'),
+    type:        hdrs.indexOf('取引'),
+    direction:   hdrs.indexOf('買/売建'),
+    qty:         hdrs.indexOf('決済数量'),
+    entryPrice:  hdrs.indexOf('建単価'),
+    exitPrice:   hdrs.indexOf('決済単価'),
+    entryAmount: hdrs.indexOf('建代金'),
+    startDate:   hdrs.indexOf('建日'),
+    pnl:         hdrs.indexOf('受渡金額/決済損益'),
+  };
+
+  const rows = [];
+  for (let i = hi + 1; i < lines.length; i++) {
+    const line = lines[i].trim();
+    if (!line) continue;
+    const c = parseCSVLine(line);
+    if (c.length < 10) continue;
+    const type = c[IDX.type] || '';
+    if (!type.includes('信用')) continue;
+
+    const pnlStr = c[IDX.pnl];
+    const pnl = (pnlStr && pnlStr !== '--') ? parseFloat(pnlStr) : null;
+    const date = c[IDX.date] || '';
+    const entryAmtStr = c[IDX.entryAmount];
+    const entryAmount = (entryAmtStr && entryAmtStr !== '--') ? parseFloat(entryAmtStr) : 0;
+
+    rows.push({
+      date,
+      ym: date.slice(0, 7),
+      name: c[IDX.name] || '',
+      code: (c[IDX.code] || '').trim(),
+      type,
+      direction: c[IDX.direction] || '',
+      qty: parseFloat(c[IDX.qty]) || 0,
+      entryPrice: parseFloat(c[IDX.entryPrice]) || 0,
+      exitPrice: parseFloat(c[IDX.exitPrice]) || 0,
+      entryAmount,
+      startDate: c[IDX.startDate] || date,
+      pnl,
+      _fmt: 'kessan',
+    });
+  }
+  return rows;
+}
+
+// ===== 完結トレード計算 =====
 function calcCompletedTrades(rows) {
-  // 日付昇順、同日内は新規建を返済より先に処理（CSV行順が逆になる場合の対策）
+  if (rows.length === 0) return [];
+  if (rows[0]._fmt === 'kessan') return calcCompletedTradesKessan(rows);
+
+  // ===== 旧フォーマット: 新規→返済マッチング =====
   const sorted = rows.slice().sort((a, b) => {
     if (a.date !== b.date) return a.date.localeCompare(b.date);
     const aNew = a.type.includes('新規') ? 0 : 1;
@@ -338,7 +396,7 @@ function calcCompletedTrades(rows) {
     return aNew - bNew;
   });
 
-  const state = {}; // code → { net, accPnl, startDate, name, inTrade, totalCost }
+  const state = {};
   const trades = [];
 
   sorted.forEach(row => {
@@ -346,7 +404,6 @@ function calcCompletedTrades(rows) {
     if (!state[k]) state[k] = { net: 0, accPnl: 0, startDate: null, name: '', inTrade: false, totalCost: 0 };
     const s = state[k];
 
-    // 新規建てでトレード開始
     if (!s.inTrade && row.type.includes('新規')) {
       s.startDate = row.date;
       s.name = row.name;
@@ -355,34 +412,72 @@ function calcCompletedTrades(rows) {
       s.inTrade = true;
     }
 
-    // 株数を更新
     if      (row.type.includes('新規買')) { s.net += row.qty; s.totalCost += row.qty * row.price; }
     else if (row.type.includes('新規売')) { s.net -= row.qty; s.totalCost += row.qty * row.price; }
     else if (row.type.includes('返済売')) { s.net -= row.qty; if (row.pnl !== null) s.accPnl += row.pnl; }
     else if (row.type.includes('返済買')) { s.net += row.qty; if (row.pnl !== null) s.accPnl += row.pnl; }
 
-    // 株数が0に戻ったら一勝負確定
     if (s.inTrade && Math.abs(s.net) < 0.01) {
       const pnlRounded = Math.round(s.accPnl);
       const costBasis = Math.round(s.totalCost);
       trades.push({
-        code: k,
-        name: s.name,
-        startDate: s.startDate,
-        endDate: row.date,
-        endYm: row.ym,
-        pnl: pnlRounded,
-        win: s.accPnl > 0,
+        code: k, name: s.name,
+        startDate: s.startDate, endDate: row.date, endYm: row.ym,
+        pnl: pnlRounded, win: s.accPnl > 0,
         costBasis,
         pct: costBasis > 0 ? s.accPnl / s.totalCost * 100 : null,
       });
-      s.net = 0;
-      s.accPnl = 0;
-      s.totalCost = 0;
-      s.startDate = null;
-      s.inTrade = false;
+      s.net = 0; s.accPnl = 0; s.totalCost = 0; s.startDate = null; s.inTrade = false;
     }
   });
+
+  return trades.sort((a, b) => a.endDate.localeCompare(b.endDate));
+}
+
+// ===== 新フォーマット: 信用決済明細（1行=1決済ロット） =====
+// 同一銘柄で決済日の間隔が14日以内のロットをひとつの勝負にまとめる
+function calcCompletedTradesKessan(rows) {
+  const TRADE_GAP_MS = 14 * 24 * 60 * 60 * 1000;
+
+  const parseDate = d => {
+    const [y, m, day] = d.split('/').map(Number);
+    return new Date(y, m - 1, day).getTime();
+  };
+
+  const sorted = rows.slice().sort((a, b) => {
+    if (a.code !== b.code) return a.code.localeCompare(b.code);
+    return a.date.localeCompare(b.date);
+  });
+
+  const flushTrade = (lots, trades) => {
+    if (!lots.length) return;
+    const pnl = lots.reduce((s, l) => s + (l.pnl || 0), 0);
+    const costBasis = lots.reduce((s, l) => s + (l.entryAmount || 0), 0);
+    const startDate = lots.reduce((mn, l) => l.startDate < mn ? l.startDate : mn, lots[0].startDate);
+    const endDate   = lots.reduce((mx, l) => l.date > mx ? l.date : mx, lots[0].date);
+    trades.push({
+      code: lots[0].code, name: lots[0].name,
+      startDate, endDate, endYm: endDate.slice(0, 7),
+      pnl: Math.round(pnl), win: pnl > 0,
+      costBasis: Math.round(costBasis),
+      pct: costBasis > 0 ? pnl / costBasis * 100 : null,
+    });
+  };
+
+  const trades = [];
+  let curCode = null, curLots = [], lastDateMs = 0;
+
+  sorted.forEach(row => {
+    const dateMs = parseDate(row.date);
+    if (row.code !== curCode || dateMs - lastDateMs > TRADE_GAP_MS) {
+      flushTrade(curLots, trades);
+      curCode = row.code;
+      curLots = [];
+    }
+    curLots.push(row);
+    lastDateMs = dateMs;
+  });
+  flushTrade(curLots, trades);
 
   return trades.sort((a, b) => a.endDate.localeCompare(b.endDate));
 }
@@ -549,12 +644,14 @@ function buildStatusBar() {
     <div class="status-div"></div>
     <div class="status-item"><div class="status-label">表示中</div><div class="status-value">${filteredTrades.length} 勝負</div></div>
     <div class="status-div"></div>
-    <div class="status-item"><div class="status-label">未決（建中）</div><div class="status-value">${open} 銘柄</div></div>
+    <div class="status-item"><div class="status-label">未決（建中）</div><div class="status-value">${open === null ? '-- 銘柄' : open + ' 銘柄'}</div></div>
   `;
   return bar;
 }
 
 function calcOpenPositions() {
+  // 信用決済明細フォーマットでは新規建行がないため未決数は判定不可
+  if (allRows.length > 0 && allRows[0]._fmt === 'kessan') return null;
   const state = {};
   allRows.slice().sort((a,b) => a.date.localeCompare(b.date)).forEach(row => {
     const k = row.code;
@@ -1220,7 +1317,7 @@ function showUpload(errMsg) {
       <div class="upload-area" id="drop-area">
         <input type="file" id="file-input" accept=".csv">
         <label for="file-input" class="upload-label"><strong>クリック</strong>してCSVを選択、またはドラッグ＆ドロップ</label>
-        <div class="upload-hint">SBI証券の約定履歴CSVに対応（Shift-JIS）</div>
+        <div class="upload-hint">松井証券「信用決済明細」CSV または SBI証券「約定履歴」CSV に対応（Shift-JIS）</div>
       </div>
     </div>`;
   app.appendChild(card);
