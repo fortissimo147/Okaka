@@ -2,9 +2,9 @@ name: ETFデータ更新
 
 on:
   schedule:
-    # 毎朝 8:00 JST (= 23:00 UTC 前日) 月〜金
-    # GitHub Actions の遅延（約1時間）を考慮して 22:00 UTC に設定
-    - cron: '0 22 * * 0-4'
+    # 毎朝 07:55 JST (= 22:55 UTC 前日) 月〜金
+    # GitHub Actions の遅延（約1時間）を考慮して 22:55 UTC に設定 → ~08:00 JST 着地
+    - cron: '55 22 * * 0-4'
   workflow_dispatch:
 
 jobs:
