@@ -464,6 +464,16 @@ function calcCompletedTradesKessan(rows) {
   let curCode = null, curLots = [], maxSettleDate = null;
 
   sorted.forEach(row => {
+    // 建日=決済日（当日決済）は複数往復のデイトレ → 1ロット=1勝負
+    if (row.startDate === row.date) {
+      flushTrade(curLots, trades);
+      curCode = row.code;
+      curLots = [];
+      maxSettleDate = row.date;
+      flushTrade([row], trades);
+      return;
+    }
+
     // 新ロットの建日が現グループ最大決済日より後 → ポジションがゼロに戻った = 新しい勝負
     const isNewTrade = row.code !== curCode ||
       (maxSettleDate !== null && row.startDate > maxSettleDate);
