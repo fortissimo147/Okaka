@@ -435,17 +435,13 @@ function calcCompletedTrades(rows) {
 }
 
 // ===== 新フォーマット: 信用決済明細（1行=1決済ロット） =====
-// 同一銘柄で決済日の間隔が14日以内のロットをひとつの勝負にまとめる
+// 勝負の区切り: 新ロットの建日 > 現グループの最大決済日 → 別の勝負（ポジションが一度ゼロに戻った）
+// 同一建日期間内の分割決済（ドテン等）は同一勝負としてまとめる
 function calcCompletedTradesKessan(rows) {
-  const TRADE_GAP_MS = 14 * 24 * 60 * 60 * 1000;
-
-  const parseDate = d => {
-    const [y, m, day] = d.split('/').map(Number);
-    return new Date(y, m - 1, day).getTime();
-  };
-
+  // 建日昇順→決済日昇順でソート
   const sorted = rows.slice().sort((a, b) => {
     if (a.code !== b.code) return a.code.localeCompare(b.code);
+    if (a.startDate !== b.startDate) return a.startDate.localeCompare(b.startDate);
     return a.date.localeCompare(b.date);
   });
 
@@ -465,17 +461,21 @@ function calcCompletedTradesKessan(rows) {
   };
 
   const trades = [];
-  let curCode = null, curLots = [], lastDateMs = 0;
+  let curCode = null, curLots = [], maxSettleDate = null;
 
   sorted.forEach(row => {
-    const dateMs = parseDate(row.date);
-    if (row.code !== curCode || dateMs - lastDateMs > TRADE_GAP_MS) {
+    // 新ロットの建日が現グループ最大決済日より後 → ポジションがゼロに戻った = 新しい勝負
+    const isNewTrade = row.code !== curCode ||
+      (maxSettleDate !== null && row.startDate > maxSettleDate);
+
+    if (isNewTrade) {
       flushTrade(curLots, trades);
       curCode = row.code;
       curLots = [];
+      maxSettleDate = null;
     }
     curLots.push(row);
-    lastDateMs = dateMs;
+    if (maxSettleDate === null || row.date > maxSettleDate) maxSettleDate = row.date;
   });
   flushTrade(curLots, trades);
 
