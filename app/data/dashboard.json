@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-25T08:53:26.167909+09:00",
+  "generated_at": "2026-06-25T10:20:05.803486+09:00",
   "dates": [
     "2026-03-06",
     "2026-03-27",
@@ -71,32 +71,44 @@
         {
           "ticker": "4812",
           "name": "電通総研",
-          "ratio": 0.9962
+          "ratio": 0.9962,
+          "shares": 14700.0,
+          "traded_value": 28679700
         },
         {
           "ticker": "5803",
           "name": "フジクラ",
-          "ratio": 2.8321
+          "ratio": 2.8321,
+          "shares": 2900.0,
+          "traded_value": 81533500
         },
         {
           "ticker": "6954",
           "name": "ファナック",
-          "ratio": 1.0954
+          "ratio": 1.0954,
+          "shares": 5400.0,
+          "traded_value": 31536000
         },
         {
           "ticker": "9735",
           "name": "セコム",
-          "ratio": 1.5189
+          "ratio": 1.5189,
+          "shares": 7400.0,
+          "traded_value": 43726600
         }
       ],
       "removed": [
         {
           "ticker": "6871",
-          "name": "日本マイクロニクス"
+          "name": "日本マイクロニクス",
+          "shares": 200.0,
+          "traded_value": 2218000
         },
         {
           "ticker": "7911",
-          "name": "ＴＯＰＰＡＮホールディングス"
+          "name": "ＴＯＰＰＡＮホールディングス",
+          "shares": 1600.0,
+          "traded_value": 8512000
         }
       ],
       "increased": [
@@ -104,6 +116,8 @@
           "ticker": "8035",
           "name": "東京エレクトロン",
           "delta": 2100.0,
+          "delta_shares": 2100.0,
+          "traded_value": 85113000,
           "shares": 2200.0,
           "ratio": 3.0972
         },
@@ -111,6 +125,8 @@
           "ticker": "6146",
           "name": "ディスコ",
           "delta": 700.0,
+          "delta_shares": 700.0,
+          "traded_value": 47243000,
           "shares": 800.0,
           "ratio": 1.8754
         },
@@ -118,6 +134,8 @@
           "ticker": "4519",
           "name": "中外製薬",
           "delta": 292.31,
+          "delta_shares": 3800.0,
+          "traded_value": 32113800,
           "shares": 5100.0,
           "ratio": 1.4971
         },
@@ -125,6 +143,8 @@
           "ticker": "5801",
           "name": "古河電気工業",
           "delta": 117.65,
+          "delta_shares": 2000.0,
+          "traded_value": 64420000,
           "shares": 3700.0,
           "ratio": 4.1397
         },
@@ -132,6 +152,8 @@
           "ticker": "9983",
           "name": "ファーストリテイリング",
           "delta": 100.0,
+          "delta_shares": 400.0,
+          "traded_value": 24748000,
           "shares": 800.0,
           "ratio": 1.7193
         },
@@ -139,6 +161,8 @@
           "ticker": "6361",
           "name": "荏原製作所",
           "delta": 93.75,
+          "delta_shares": 1500.0,
+          "traded_value": 6963000,
           "shares": 3100.0,
           "ratio": 0.4998
         },
@@ -146,6 +170,8 @@
           "ticker": "4461",
           "name": "第一工業製薬",
           "delta": 82.35,
+          "delta_shares": 1400.0,
+          "traded_value": 11298000,
           "shares": 3100.0,
           "ratio": 0.869
         },
@@ -153,6 +179,8 @@
           "ticker": "4022",
           "name": "ラサ工業",
           "delta": 53.57,
+          "delta_shares": 1500.0,
+          "traded_value": 12045000,
           "shares": 4300.0,
           "ratio": 1.1994
         },
@@ -160,6 +188,8 @@
           "ticker": "8766",
           "name": "東京海上ホールディングス",
           "delta": 46.67,
+          "delta_shares": 700.0,
+          "traded_value": 5310900,
           "shares": 2200.0,
           "ratio": 0.5798
         },
@@ -167,6 +197,8 @@
           "ticker": "6981",
           "name": "村田製作所",
           "delta": 46.3,
+          "delta_shares": 12500.0,
+          "traded_value": 46537500,
           "shares": 39500.0,
           "ratio": 5.1081
         },
@@ -174,6 +206,8 @@
           "ticker": "3064",
           "name": "ＭｏｎｏｔａＲＯ",
           "delta": 33.33,
+          "delta_shares": 8900.0,
+          "traded_value": 15868700,
           "shares": 35600.0,
           "ratio": 2.2048
         },
@@ -181,6 +215,8 @@
           "ticker": "8015",
           "name": "豊田通商",
           "delta": 27.78,
+          "delta_shares": 500.0,
+          "traded_value": 3107500,
           "shares": 2300.0,
           "ratio": 0.4965
         },
@@ -188,6 +224,8 @@
           "ticker": "5802",
           "name": "住友電気工業",
           "delta": 26.09,
+          "delta_shares": 600.0,
+          "traded_value": 5931000,
           "shares": 2900.0,
           "ratio": 0.9957
         },
@@ -195,6 +233,8 @@
           "ticker": "4666",
           "name": "パーク２４",
           "delta": 23.66,
+          "delta_shares": 4400.0,
+          "traded_value": 8835200,
           "shares": 23000.0,
           "ratio": 1.6042
         },
@@ -202,6 +242,8 @@
           "ticker": "7832",
           "name": "バンダイナムコホールディングス",
           "delta": 21.43,
+          "delta_shares": 2400.0,
+          "traded_value": 9624000,
           "shares": 13600.0,
           "ratio": 1.8943
         },
@@ -209,6 +251,8 @@
           "ticker": "3891",
           "name": "ニッポン高度紙工業",
           "delta": 11.11,
+          "delta_shares": 1400.0,
+          "traded_value": 5278000,
           "shares": 14000.0,
           "ratio": 1.8333
         },
@@ -216,6 +260,8 @@
           "ticker": "9697",
           "name": "カプコン",
           "delta": 9.09,
+          "delta_shares": 600.0,
+          "traded_value": 1983000,
           "shares": 7200.0,
           "ratio": 0.8266
         },
@@ -223,6 +269,8 @@
           "ticker": "4046",
           "name": "大阪ソーダ",
           "delta": 8.12,
+          "delta_shares": 1300.0,
+          "traded_value": 2384200,
           "shares": 17300.0,
           "ratio": 1.1021
         },
@@ -230,6 +278,8 @@
           "ticker": "8053",
           "name": "住友商事",
           "delta": 6.8,
+          "delta_shares": 700.0,
+          "traded_value": 4120900,
           "shares": 11000.0,
           "ratio": 2.2494
         },
@@ -237,6 +287,8 @@
           "ticker": "6098",
           "name": "リクルートホールディングス",
           "delta": 5.26,
+          "delta_shares": 1100.0,
+          "traded_value": 7038900,
           "shares": 22000.0,
           "ratio": 4.89
         },
@@ -244,6 +296,8 @@
           "ticker": "8830",
           "name": "住友不動産",
           "delta": 4.7,
+          "delta_shares": 700.0,
+          "traded_value": 3210900,
           "shares": 15600.0,
           "ratio": 2.4856
         },
@@ -251,6 +305,8 @@
           "ticker": "6951",
           "name": "日本電子",
           "delta": 4.41,
+          "delta_shares": 300.0,
+          "traded_value": 1782000,
           "shares": 7100.0,
           "ratio": 1.4649
         },
@@ -258,6 +314,8 @@
           "ticker": "6504",
           "name": "富士電機",
           "delta": 3.23,
+          "delta_shares": 200.0,
+          "traded_value": 2288000,
           "shares": 6400.0,
           "ratio": 2.5432
         },
@@ -265,6 +323,8 @@
           "ticker": "5631",
           "name": "日本製鋼所",
           "delta": 2.78,
+          "delta_shares": 200.0,
+          "traded_value": 1896600,
           "shares": 7400.0,
           "ratio": 2.4375
         },
@@ -272,6 +332,8 @@
           "ticker": "8111",
           "name": "ゴールドウイン",
           "delta": 1.82,
+          "delta_shares": 400.0,
+          "traded_value": 911600,
           "shares": 22400.0,
           "ratio": 1.7732
         },
@@ -279,6 +341,8 @@
           "ticker": "7203",
           "name": "トヨタ自動車",
           "delta": 1.17,
+          "delta_shares": 700.0,
+          "traded_value": 2371600,
           "shares": 60500.0,
           "ratio": 7.1199
         }
@@ -288,6 +352,8 @@
           "ticker": "6869",
           "name": "シスメックス",
           "delta": -91.06,
+          "delta_shares": -11200.0,
+          "traded_value": 15288000,
           "shares": 1100.0,
           "ratio": 0.0522
         },
@@ -295,6 +361,8 @@
           "ticker": "4684",
           "name": "オービック",
           "delta": -78.57,
+          "delta_shares": -5500.0,
+          "traded_value": 21142000,
           "shares": 1500.0,
           "ratio": 0.2003
         },
@@ -302,6 +370,8 @@
           "ticker": "5334",
           "name": "日本特殊陶業",
           "delta": -76.92,
+          "delta_shares": -2000.0,
+          "traded_value": 15444000,
           "shares": 600.0,
           "ratio": 0.1609
         },
@@ -309,6 +379,8 @@
           "ticker": "7366",
           "name": "ＬＩＴＡＬＩＣＯ",
           "delta": -68.02,
+          "delta_shares": -11700.0,
+          "traded_value": 14426100,
           "shares": 5500.0,
           "ratio": 0.2356
         },
@@ -316,6 +388,8 @@
           "ticker": "9433",
           "name": "ＫＤＤＩ",
           "delta": -67.65,
+          "delta_shares": -4600.0,
+          "traded_value": 12466000,
           "shares": 2200.0,
           "ratio": 0.2071
         },
@@ -323,6 +397,8 @@
           "ticker": "6331",
           "name": "三菱化工機",
           "delta": -64.0,
+          "delta_shares": -1600.0,
+          "traded_value": 5064000,
           "shares": 900.0,
           "ratio": 0.0989
         },
@@ -330,6 +406,8 @@
           "ticker": "7936",
           "name": "アシックス",
           "delta": -63.19,
+          "delta_shares": -11500.0,
+          "traded_value": 50174500,
           "shares": 6700.0,
           "ratio": 1.0154
         },
@@ -337,6 +415,8 @@
           "ticker": "7532",
           "name": "パン・パシフィック・インターナショナルホールディングス",
           "delta": -58.46,
+          "delta_shares": -41800.0,
+          "traded_value": 40583620,
           "shares": 29700.0,
           "ratio": 1.0016
         },
@@ -344,6 +424,8 @@
           "ticker": "7747",
           "name": "朝日インテック",
           "delta": -58.06,
+          "delta_shares": -5400.0,
+          "traded_value": 17706600,
           "shares": 3900.0,
           "ratio": 0.4442
         },
@@ -351,6 +433,8 @@
           "ticker": "4568",
           "name": "第一三共",
           "delta": -50.17,
+          "delta_shares": -14600.0,
+          "traded_value": 41967700,
           "shares": 14500.0,
           "ratio": 1.4478
         },
@@ -358,6 +442,8 @@
           "ticker": "8750",
           "name": "第一生命ホールディングス",
           "delta": -48.1,
+          "delta_shares": -7600.0,
+          "traded_value": 10928800,
           "shares": 8200.0,
           "ratio": 0.4096
         },
@@ -365,6 +451,8 @@
           "ticker": "6501",
           "name": "日立製作所",
           "delta": -46.15,
+          "delta_shares": -600.0,
+          "traded_value": 2854200,
           "shares": 700.0,
           "ratio": 0.1157
         },
@@ -372,6 +460,8 @@
           "ticker": "7846",
           "name": "パイロットコーポレーション",
           "delta": -41.54,
+          "delta_shares": -5400.0,
+          "traded_value": 26001000,
           "shares": 7600.0,
           "ratio": 1.2711
         },
@@ -379,6 +469,8 @@
           "ticker": "4536",
           "name": "参天製薬",
           "delta": -40.9,
+          "delta_shares": -13700.0,
+          "traded_value": 24077750,
           "shares": 19800.0,
           "ratio": 1.2087
         },
@@ -386,6 +478,8 @@
           "ticker": "6301",
           "name": "小松製作所",
           "delta": -35.29,
+          "delta_shares": -600.0,
+          "traded_value": 3860400,
           "shares": 1100.0,
           "ratio": 0.2458
         },
@@ -393,6 +487,8 @@
           "ticker": "7182",
           "name": "ゆうちょ銀行",
           "delta": -34.12,
+          "delta_shares": -2900.0,
+          "traded_value": 7635700,
           "shares": 5600.0,
           "ratio": 0.5122
         },
@@ -400,6 +496,8 @@
           "ticker": "8306",
           "name": "三菱ＵＦＪフィナンシャル・グループ",
           "delta": -28.04,
+          "delta_shares": -3000.0,
+          "traded_value": 8101500,
           "shares": 7700.0,
           "ratio": 0.7223
         },
@@ -407,6 +505,8 @@
           "ticker": "7741",
           "name": "ＨＯＹＡ",
           "delta": -26.92,
+          "delta_shares": -700.0,
+          "traded_value": 19663000,
           "shares": 1900.0,
           "ratio": 1.8539
         },
@@ -414,6 +514,8 @@
           "ticker": "6845",
           "name": "アズビル",
           "delta": -24.33,
+          "delta_shares": -7300.0,
+          "traded_value": 10325850,
           "shares": 22700.0,
           "ratio": 1.1153
         },
@@ -421,6 +523,8 @@
           "ticker": "2001",
           "name": "ニップン",
           "delta": -24.04,
+          "delta_shares": -2500.0,
+          "traded_value": 6892500,
           "shares": 7900.0,
           "ratio": 0.7565
         },
@@ -428,6 +532,8 @@
           "ticker": "7202",
           "name": "いすゞ自動車",
           "delta": -22.12,
+          "delta_shares": -2300.0,
+          "traded_value": 5300350,
           "shares": 8100.0,
           "ratio": 0.6484
         },
@@ -435,6 +541,8 @@
           "ticker": "6367",
           "name": "ダイキン工業",
           "delta": -21.43,
+          "delta_shares": -1200.0,
+          "traded_value": 24612000,
           "shares": 4400.0,
           "ratio": 3.1347
         },
@@ -442,6 +550,8 @@
           "ticker": "4516",
           "name": "日本新薬",
           "delta": -17.89,
+          "delta_shares": -1700.0,
+          "traded_value": 8996400,
           "shares": 7800.0,
           "ratio": 1.4338
         },
@@ -449,6 +559,8 @@
           "ticker": "7730",
           "name": "マニー",
           "delta": -10.5,
+          "delta_shares": -2100.0,
+          "traded_value": 3238200,
           "shares": 17900.0,
           "ratio": 0.9588
         },
@@ -456,6 +568,8 @@
           "ticker": "3382",
           "name": "セブン＆アイ・ホールディングス",
           "delta": -9.93,
+          "delta_shares": -4300.0,
+          "traded_value": 9032150,
           "shares": 39000.0,
           "ratio": 2.8455
         },
@@ -463,6 +577,8 @@
           "ticker": "9830",
           "name": "トラスコ中山",
           "delta": -9.38,
+          "delta_shares": -900.0,
+          "traded_value": 2102400,
           "shares": 8700.0,
           "ratio": 0.7059
         },
@@ -470,6 +586,8 @@
           "ticker": "1605",
           "name": "ＩＮＰＥＸ",
           "delta": -6.76,
+          "delta_shares": -500.0,
+          "traded_value": 2343500,
           "shares": 6900.0,
           "ratio": 1.1234
         },
@@ -477,6 +595,8 @@
           "ticker": "4063",
           "name": "信越化学工業",
           "delta": -5.63,
+          "delta_shares": -400.0,
+          "traded_value": 2516400,
           "shares": 6700.0,
           "ratio": 1.4641
         }
@@ -491,6 +611,8 @@
           "ticker": "5803",
           "name": "フジクラ",
           "delta": 603.45,
+          "delta_shares": 17499.9592,
+          "traded_value": 80237473,
           "shares": 20399.9592,
           "ratio": 3.2883
         },
@@ -498,6 +620,8 @@
           "ticker": "4022",
           "name": "ラサ工業",
           "delta": 458.14,
+          "delta_shares": 19700.0,
+          "traded_value": 31259960,
           "shares": 24000.0,
           "ratio": 1.3389
         },
@@ -505,6 +629,8 @@
           "ticker": "5801",
           "name": "古河電気工業",
           "delta": 21.62,
+          "delta_shares": 800.0,
+          "traded_value": 24584000,
           "shares": 4500.0,
           "ratio": 4.8616
         },
@@ -512,6 +638,8 @@
           "ticker": "6954",
           "name": "ファナック",
           "delta": 18.52,
+          "delta_shares": 1000.0,
+          "traded_value": 5677930,
           "shares": 6400.0,
           "ratio": 1.2775
         },
@@ -519,6 +647,8 @@
           "ticker": "4461",
           "name": "第一工業製薬",
           "delta": 16.13,
+          "delta_shares": 500.0,
+          "traded_value": 3895000,
           "shares": 3600.0,
           "ratio": 0.9859
         },
@@ -526,6 +656,8 @@
           "ticker": "6504",
           "name": "富士電機",
           "delta": 9.38,
+          "delta_shares": 600.0,
+          "traded_value": 6797400,
           "shares": 7000.0,
           "ratio": 2.788
         },
@@ -533,6 +665,8 @@
           "ticker": "8053",
           "name": "住友商事",
           "delta": 9.09,
+          "delta_shares": 1000.0,
+          "traded_value": 5921000,
           "shares": 12000.0,
           "ratio": 2.4979
         },
@@ -540,6 +674,8 @@
           "ticker": "3891",
           "name": "ニッポン高度紙工業",
           "delta": 5.0,
+          "delta_shares": 700.0,
+          "traded_value": 2576000,
           "shares": 14700.0,
           "ratio": 1.9018
         }
@@ -549,6 +685,8 @@
           "ticker": "285A",
           "name": "キオクシアホールディングス",
           "delta": -55.56,
+          "delta_shares": -1000.0,
+          "traded_value": 20270000,
           "shares": 800.0,
           "ratio": 0.5701
         },
@@ -556,6 +694,8 @@
           "ticker": "9433",
           "name": "ＫＤＤＩ",
           "delta": -50.0,
+          "delta_shares": -1100.0,
+          "traded_value": 2951300,
           "shares": 1100.0,
           "ratio": 0.1038
         },
@@ -563,6 +703,8 @@
           "ticker": "7730",
           "name": "マニー",
           "delta": -22.91,
+          "delta_shares": -4100.0,
+          "traded_value": 6473900,
           "shares": 13800.0,
           "ratio": 0.7661
         },
@@ -570,6 +712,8 @@
           "ticker": "2001",
           "name": "ニップン",
           "delta": -20.25,
+          "delta_shares": -1600.0,
+          "traded_value": 4376000,
           "shares": 6300.0,
           "ratio": 0.6058
         },
@@ -577,6 +721,8 @@
           "ticker": "3382",
           "name": "セブン＆アイ・ホールディングス",
           "delta": -19.74,
+          "delta_shares": -7700.0,
+          "traded_value": 16374050,
           "shares": 31300.0,
           "ratio": 2.34
         },
@@ -584,6 +730,8 @@
           "ticker": "4536",
           "name": "参天製薬",
           "delta": -15.66,
+          "delta_shares": -3100.0,
+          "traded_value": 5480800,
           "shares": 16700.0,
           "ratio": 1.038
         },
@@ -591,6 +739,8 @@
           "ticker": "1605",
           "name": "ＩＮＰＥＸ",
           "delta": -13.04,
+          "delta_shares": -900.0,
+          "traded_value": 4410000,
           "shares": 6000.0,
           "ratio": 1.0336
         },
@@ -598,6 +748,8 @@
           "ticker": "9697",
           "name": "カプコン",
           "delta": -11.11,
+          "delta_shares": -800.0,
+          "traded_value": 2709600,
           "shares": 6400.0,
           "ratio": 0.7621
         },
@@ -605,6 +757,8 @@
           "ticker": "4812",
           "name": "電通総研",
           "delta": -10.88,
+          "delta_shares": -1600.0,
+          "traded_value": 3179200,
           "shares": 13100.0,
           "ratio": 0.9151
         }
@@ -619,6 +773,8 @@
           "ticker": "5802",
           "name": "住友電気工業",
           "delta": 31.03,
+          "delta_shares": 900.0,
+          "traded_value": 8100000,
           "shares": 3800.0,
           "ratio": 1.2259
         },
@@ -626,6 +782,8 @@
           "ticker": "7202",
           "name": "いすゞ自動車",
           "delta": 16.05,
+          "delta_shares": 1300.0,
+          "traded_value": 2880150,
           "shares": 9400.0,
           "ratio": 0.7465
         },
@@ -633,6 +791,8 @@
           "ticker": "6146",
           "name": "ディスコ",
           "delta": 12.5,
+          "delta_shares": 100.0,
+          "traded_value": 6425000,
           "shares": 900.0,
           "ratio": 2.0727
         },
@@ -640,6 +800,8 @@
           "ticker": "5631",
           "name": "日本製鋼所",
           "delta": 6.76,
+          "delta_shares": 500.0,
+          "traded_value": 4403000,
           "shares": 7900.0,
           "ratio": 2.4936
         },
@@ -647,6 +809,8 @@
           "ticker": "8053",
           "name": "住友商事",
           "delta": 3.33,
+          "delta_shares": 400.0,
+          "traded_value": 2340800,
           "shares": 12400.0,
           "ratio": 2.601
         },
@@ -654,6 +818,8 @@
           "ticker": "5803",
           "name": "フジクラ",
           "delta": 2.45,
+          "delta_shares": 500.04079999999885,
+          "traded_value": 2252684,
           "shares": 20900.0,
           "ratio": 3.3749
         },
@@ -661,6 +827,8 @@
           "ticker": "6981",
           "name": "村田製作所",
           "delta": 1.52,
+          "delta_shares": 600.0,
+          "traded_value": 2120400,
           "shares": 40100.0,
           "ratio": 5.0796
         }
@@ -670,6 +838,8 @@
           "ticker": "4536",
           "name": "参天製薬",
           "delta": -23.95,
+          "delta_shares": -4000.0,
+          "traded_value": 7064000,
           "shares": 12700.0,
           "ratio": 0.8039
         },
@@ -677,6 +847,8 @@
           "ticker": "3382",
           "name": "セブン＆アイ・ホールディングス",
           "delta": -18.53,
+          "delta_shares": -5800.0,
+          "traded_value": 12388800,
           "shares": 25500.0,
           "ratio": 1.9524
         },
@@ -684,6 +856,8 @@
           "ticker": "7532",
           "name": "パン・パシフィック・インターナショナルホールディングス",
           "delta": -15.15,
+          "delta_shares": -4500.0,
+          "traded_value": 4463550,
           "shares": 25200.0,
           "ratio": 0.896
         }
@@ -699,6 +873,8 @@
           "ticker": "5801",
           "name": "古河電気工業",
           "delta": -46.67,
+          "delta_shares": -2100.0,
+          "traded_value": 60448500,
           "shares": 2400.0,
           "ratio": 2.6016
         },
@@ -706,6 +882,8 @@
           "ticker": "8830",
           "name": "住友不動産",
           "delta": -39.1,
+          "delta_shares": -6100.0,
+          "traded_value": 26791200,
           "shares": 9500.0,
           "ratio": 1.5713
         }
@@ -717,7 +895,9 @@
         {
           "ticker": "6857",
           "name": "アドバンテスト",
-          "ratio": 0.4671
+          "ratio": 0.4671,
+          "shares": 600.0,
+          "traded_value": 13500000
         }
       ],
       "removed": [],
@@ -726,6 +906,8 @@
           "ticker": "7182",
           "name": "ゆうちょ銀行",
           "delta": 233.93,
+          "delta_shares": 13100.0,
+          "traded_value": 35494450,
           "shares": 18700.0,
           "ratio": 1.7531
         },
@@ -733,6 +915,8 @@
           "ticker": "6134",
           "name": "ＦＵＪＩ",
           "delta": 66.67,
+          "delta_shares": 1400.0,
+          "traded_value": 7018200,
           "shares": 3500.0,
           "ratio": 0.6071
         },
@@ -740,6 +924,8 @@
           "ticker": "6361",
           "name": "荏原製作所",
           "delta": 61.29,
+          "delta_shares": 1900.0,
+          "traded_value": 8648800,
           "shares": 5000.0,
           "ratio": 0.7875
         },
@@ -747,6 +933,8 @@
           "ticker": "8766",
           "name": "東京海上ホールディングス",
           "delta": 50.0,
+          "delta_shares": 1100.0,
+          "traded_value": 8239000,
           "shares": 3300.0,
           "ratio": 0.8552
         },
@@ -754,6 +942,8 @@
           "ticker": "4461",
           "name": "第一工業製薬",
           "delta": 33.33,
+          "delta_shares": 1200.0,
+          "traded_value": 9456000,
           "shares": 4800.0,
           "ratio": 1.3087
         },
@@ -761,6 +951,8 @@
           "ticker": "5802",
           "name": "住友電気工業",
           "delta": 31.58,
+          "delta_shares": 1200.0,
+          "traded_value": 11122800,
           "shares": 5000.0,
           "ratio": 1.6035
         },
@@ -768,6 +960,8 @@
           "ticker": "8306",
           "name": "三菱ＵＦＪフィナンシャル・グループ",
           "delta": 27.27,
+          "delta_shares": 2100.0,
+          "traded_value": 5896800,
           "shares": 9800.0,
           "ratio": 0.9521
         },
@@ -775,6 +969,8 @@
           "ticker": "6954",
           "name": "ファナック",
           "delta": 18.75,
+          "delta_shares": 1200.0,
+          "traded_value": 6836400,
           "shares": 7600.0,
           "ratio": 1.4981
         },
@@ -782,6 +978,8 @@
           "ticker": "4022",
           "name": "ラサ工業",
           "delta": 13.75,
+          "delta_shares": 3300.0,
+          "traded_value": 5359200,
           "shares": 27300.0,
           "ratio": 1.534
         },
@@ -789,6 +987,8 @@
           "ticker": "3064",
           "name": "ＭｏｎｏｔａＲＯ",
           "delta": 12.08,
+          "delta_shares": 4300.0,
+          "traded_value": 7518550,
           "shares": 39900.0,
           "ratio": 2.4139
         },
@@ -796,6 +996,8 @@
           "ticker": "8053",
           "name": "住友商事",
           "delta": 6.45,
+          "delta_shares": 800.0,
+          "traded_value": 4945600,
           "shares": 13200.0,
           "ratio": 2.8234
         }
@@ -805,6 +1007,8 @@
           "ticker": "4812",
           "name": "電通総研",
           "delta": -33.59,
+          "delta_shares": -4400.0,
+          "traded_value": 8896800,
           "shares": 8700.0,
           "ratio": 0.6087
         },
@@ -812,6 +1016,8 @@
           "ticker": "7747",
           "name": "朝日インテック",
           "delta": -23.08,
+          "delta_shares": -900.0,
+          "traded_value": 3154500,
           "shares": 3000.0,
           "ratio": 0.3638
         },
@@ -819,6 +1025,8 @@
           "ticker": "7532",
           "name": "パン・パシフィック・インターナショナルホールディングス",
           "delta": -17.46,
+          "delta_shares": -4400.0,
+          "traded_value": 4322560,
           "shares": 20800.0,
           "ratio": 0.707
         },
@@ -826,6 +1034,8 @@
           "ticker": "4536",
           "name": "参天製薬",
           "delta": -13.39,
+          "delta_shares": -1700.0,
+          "traded_value": 3143300,
           "shares": 11000.0,
           "ratio": 0.7037
         },
@@ -833,6 +1043,8 @@
           "ticker": "4088",
           "name": "エア・ウォーター",
           "delta": -10.0,
+          "delta_shares": -1100.0,
+          "traded_value": 2420000,
           "shares": 9900.0,
           "ratio": 0.7536
         },
@@ -840,6 +1052,8 @@
           "ticker": "9735",
           "name": "セコム",
           "delta": -9.46,
+          "delta_shares": -700.0,
+          "traded_value": 4238500,
           "shares": 6700.0,
           "ratio": 1.4037
         },
@@ -847,6 +1061,8 @@
           "ticker": "7846",
           "name": "パイロットコーポレーション",
           "delta": -9.21,
+          "delta_shares": -700.0,
+          "traded_value": 3409000,
           "shares": 6900.0,
           "ratio": 1.1627
         },
@@ -854,6 +1070,8 @@
           "ticker": "8111",
           "name": "ゴールドウイン",
           "delta": -8.04,
+          "delta_shares": -1800.0,
+          "traded_value": 4078800,
           "shares": 20600.0,
           "ratio": 1.6151
         },
@@ -861,6 +1079,8 @@
           "ticker": "4516",
           "name": "日本新薬",
           "delta": -5.13,
+          "delta_shares": -400.0,
+          "traded_value": 2152400,
           "shares": 7400.0,
           "ratio": 1.3777
         }
@@ -879,7 +1099,9 @@
       "removed": [
         {
           "ticker": "6869",
-          "name": "シスメックス"
+          "name": "シスメックス",
+          "shares": 1100.0,
+          "traded_value": 1568600
         }
       ],
       "increased": [
@@ -887,6 +1109,8 @@
           "ticker": "3064",
           "name": "ＭｏｎｏｔａＲＯ",
           "delta": 15.29,
+          "delta_shares": 6100.0,
+          "traded_value": 10723800,
           "shares": 46000.0,
           "ratio": 2.846
         }
@@ -896,6 +1120,8 @@
           "ticker": "4812",
           "name": "電通総研",
           "delta": -33.33,
+          "delta_shares": -2900.0,
+          "traded_value": 5829000,
           "shares": 5800.0,
           "ratio": 0.4103
         },
@@ -903,6 +1129,8 @@
           "ticker": "9735",
           "name": "セコム",
           "delta": -17.91,
+          "delta_shares": -1200.0,
+          "traded_value": 7347600,
           "shares": 5500.0,
           "ratio": 1.1852
         },
@@ -910,6 +1138,8 @@
           "ticker": "8111",
           "name": "ゴールドウイン",
           "delta": -16.5,
+          "delta_shares": -3400.0,
+          "traded_value": 7459600,
           "shares": 17200.0,
           "ratio": 1.3281
         },
@@ -917,6 +1147,8 @@
           "ticker": "2001",
           "name": "ニップン",
           "delta": -15.87,
+          "delta_shares": -1000.0,
+          "traded_value": 2755000,
           "shares": 5300.0,
           "ratio": 0.5139
         },
@@ -924,6 +1156,8 @@
           "ticker": "7846",
           "name": "パイロットコーポレーション",
           "delta": -11.59,
+          "delta_shares": -800.0,
+          "traded_value": 3893600,
           "shares": 6100.0,
           "ratio": 1.0448
         },
@@ -931,6 +1165,8 @@
           "ticker": "4088",
           "name": "エア・ウォーター",
           "delta": -10.1,
+          "delta_shares": -1000.0,
+          "traded_value": 2199000,
           "shares": 8900.0,
           "ratio": 0.6888
         },
@@ -938,6 +1174,8 @@
           "ticker": "5801",
           "name": "古河電気工業",
           "delta": -8.33,
+          "delta_shares": -200.0,
+          "traded_value": 7160000,
           "shares": 2200.0,
           "ratio": 2.7718
         },
@@ -945,6 +1183,8 @@
           "ticker": "6951",
           "name": "日本電子",
           "delta": -7.04,
+          "delta_shares": -500.0,
+          "traded_value": 3038500,
           "shares": 6600.0,
           "ratio": 1.4115
         },
@@ -952,6 +1192,8 @@
           "ticker": "4516",
           "name": "日本新薬",
           "delta": -6.76,
+          "delta_shares": -500.0,
+          "traded_value": 2655500,
           "shares": 6900.0,
           "ratio": 1.2897
         },
@@ -959,6 +1201,8 @@
           "ticker": "4063",
           "name": "信越化学工業",
           "delta": -5.97,
+          "delta_shares": -400.0,
+          "traded_value": 2580000,
           "shares": 6300.0,
           "ratio": 1.4301
         }
@@ -973,6 +1217,8 @@
           "ticker": "7182",
           "name": "ゆうちょ銀行",
           "delta": 34.76,
+          "delta_shares": 6500.0,
+          "traded_value": 17215250,
           "shares": 25200.0,
           "ratio": 2.3123
         },
@@ -980,6 +1226,8 @@
           "ticker": "8750",
           "name": "第一生命ホールディングス",
           "delta": 29.27,
+          "delta_shares": 2400.0,
+          "traded_value": 3481200,
           "shares": 10600.0,
           "ratio": 0.5327
         },
@@ -987,6 +1235,8 @@
           "ticker": "6361",
           "name": "荏原製作所",
           "delta": 18.0,
+          "delta_shares": 900.0,
+          "traded_value": 4074300,
           "shares": 5900.0,
           "ratio": 0.9254
         },
@@ -994,6 +1244,8 @@
           "ticker": "4461",
           "name": "第一工業製薬",
           "delta": 16.67,
+          "delta_shares": 800.0,
+          "traded_value": 6456000,
           "shares": 5600.0,
           "ratio": 1.5657
         },
@@ -1001,6 +1253,8 @@
           "ticker": "3064",
           "name": "ＭｏｎｏｔａＲＯ",
           "delta": 13.04,
+          "delta_shares": 6000.0,
+          "traded_value": 10422000,
           "shares": 52000.0,
           "ratio": 3.1293
         },
@@ -1008,6 +1262,8 @@
           "ticker": "4022",
           "name": "ラサ工業",
           "delta": 3.66,
+          "delta_shares": 1000.0,
+          "traded_value": 1625000,
           "shares": 28300.0,
           "ratio": 1.5933
         },
@@ -1015,6 +1271,8 @@
           "ticker": "3891",
           "name": "ニッポン高度紙工業",
           "delta": 2.04,
+          "delta_shares": 300.0,
+          "traded_value": 1132500,
           "shares": 15000.0,
           "ratio": 1.9618
         }
@@ -1024,6 +1282,8 @@
           "ticker": "5801",
           "name": "古河電気工業",
           "delta": -13.64,
+          "delta_shares": -300.0,
+          "traded_value": 11190000,
           "shares": 1900.0,
           "ratio": 2.4553
         }
@@ -1045,6 +1305,8 @@
           "ticker": "8015",
           "name": "豊田通商",
           "delta": 100.0,
+          "delta_shares": 2300.0,
+          "traded_value": 14890200,
           "shares": 4600.0,
           "ratio": 0.9902
         }
@@ -1054,6 +1316,8 @@
           "ticker": "5801",
           "name": "古河電気工業",
           "delta": -31.58,
+          "delta_shares": -600.0,
+          "traded_value": 25764000,
           "shares": 1300.0,
           "ratio": 1.856
         }
@@ -1065,7 +1329,9 @@
         {
           "ticker": "6278",
           "name": "ユニオンツール",
-          "ratio": 0.2762
+          "ratio": 0.2762,
+          "shares": 500.0,
+          "traded_value": 8195000
         }
       ],
       "removed": [],
@@ -1074,6 +1340,8 @@
           "ticker": "8750",
           "name": "第一生命ホールディングス",
           "delta": 51.89,
+          "delta_shares": 5500.0,
+          "traded_value": 8230750,
           "shares": 16100.0,
           "ratio": 0.812
         }
@@ -1083,6 +1351,8 @@
           "ticker": "6845",
           "name": "アズビル",
           "delta": -36.56,
+          "delta_shares": -8300.0,
+          "traded_value": 12271550,
           "shares": 14400.0,
           "ratio": 0.7176
         },
@@ -1090,6 +1360,8 @@
           "ticker": "5801",
           "name": "古河電気工業",
           "delta": -23.08,
+          "delta_shares": -300.0,
+          "traded_value": 13392000,
           "shares": 1000.0,
           "ratio": 1.5045
         },
@@ -1097,6 +1369,8 @@
           "ticker": "5803",
           "name": "フジクラ",
           "delta": -8.13,
+          "delta_shares": -1700.0,
+          "traded_value": 8547600,
           "shares": 19200.0,
           "ratio": 3.2536
         }
@@ -1111,6 +1385,8 @@
           "ticker": "4022",
           "name": "ラサ工業",
           "delta": 12.72,
+          "delta_shares": 3600.0,
+          "traded_value": 6102000,
           "shares": 31900.0,
           "ratio": 1.8105
         },
@@ -1118,6 +1394,8 @@
           "ticker": "5802",
           "name": "住友電気工業",
           "delta": 12.0,
+          "delta_shares": 600.0,
+          "traded_value": 6348000,
           "shares": 5600.0,
           "ratio": 1.9839
         }
@@ -1127,6 +1405,8 @@
           "ticker": "5801",
           "name": "古河電気工業",
           "delta": -20.0,
+          "delta_shares": -200.0,
+          "traded_value": 9160000,
           "shares": 800.0,
           "ratio": 1.2269
         },
@@ -1134,6 +1414,8 @@
           "ticker": "5803",
           "name": "フジクラ",
           "delta": -14.58,
+          "delta_shares": -2800.0,
+          "traded_value": 15764000,
           "shares": 16400.0,
           "ratio": 3.0916
         }
@@ -1148,6 +1430,8 @@
           "ticker": "5802",
           "name": "住友電気工業",
           "delta": 21.43,
+          "delta_shares": 1200.0,
+          "traded_value": 11911200,
           "shares": 6800.0,
           "ratio": 2.2442
         },
@@ -1155,6 +1439,8 @@
           "ticker": "5631",
           "name": "日本製鋼所",
           "delta": 18.99,
+          "delta_shares": 1500.0,
+          "traded_value": 14607000,
           "shares": 9400.0,
           "ratio": 3.0435
         },
@@ -1162,6 +1448,8 @@
           "ticker": "9735",
           "name": "セコム",
           "delta": 18.18,
+          "delta_shares": 1000.0,
+          "traded_value": 6050000,
           "shares": 6500.0,
           "ratio": 1.3075
         },
@@ -1169,6 +1457,8 @@
           "ticker": "3064",
           "name": "ＭｏｎｏｔａＲＯ",
           "delta": 17.69,
+          "delta_shares": 9200.0,
+          "traded_value": 16468000,
           "shares": 61200.0,
           "ratio": 3.6423
         },
@@ -1176,6 +1466,8 @@
           "ticker": "9983",
           "name": "ファーストリテイリング",
           "delta": 12.5,
+          "delta_shares": 100.0,
+          "traded_value": 7505000,
           "shares": 900.0,
           "ratio": 2.2458
         }
@@ -1185,6 +1477,8 @@
           "ticker": "4536",
           "name": "参天製薬",
           "delta": -38.18,
+          "delta_shares": -4200.0,
+          "traded_value": 7585200,
           "shares": 6800.0,
           "ratio": 0.4083
         },
@@ -1192,6 +1486,8 @@
           "ticker": "5803",
           "name": "フジクラ",
           "delta": -11.59,
+          "delta_shares": -1900.0,
+          "traded_value": 10826200,
           "shares": 14500.0,
           "ratio": 2.7471
         }
@@ -1203,15 +1499,21 @@
       "removed": [
         {
           "ticker": "4536",
-          "name": "参天製薬"
+          "name": "参天製薬",
+          "shares": 6800.0,
+          "traded_value": 12280800
         },
         {
           "ticker": "4617",
-          "name": "中国塗料"
+          "name": "中国塗料",
+          "shares": 1400.0,
+          "traded_value": 4620000
         },
         {
           "ticker": "4812",
-          "name": "電通総研"
+          "name": "電通総研",
+          "shares": 5800.0,
+          "traded_value": 12162600
         }
       ],
       "increased": [
@@ -1219,6 +1521,8 @@
           "ticker": "6857",
           "name": "アドバンテスト",
           "delta": 83.33,
+          "delta_shares": 500.0,
+          "traded_value": 13500000,
           "shares": 1100.0,
           "ratio": 1.0129
         },
@@ -1226,6 +1530,8 @@
           "ticker": "3891",
           "name": "ニッポン高度紙工業",
           "delta": 11.33,
+          "delta_shares": 1700.0,
+          "traded_value": 7301500,
           "shares": 16700.0,
           "ratio": 2.4462
         },
@@ -1233,6 +1539,8 @@
           "ticker": "6981",
           "name": "村田製作所",
           "delta": 5.99,
+          "delta_shares": 2400.0,
+          "traded_value": 10389600,
           "shares": 42500.0,
           "ratio": 6.2745
         }
@@ -1242,6 +1550,8 @@
           "ticker": "6383",
           "name": "ダイフク",
           "delta": -73.68,
+          "delta_shares": -1400.0,
+          "traded_value": 9209200,
           "shares": 500.0,
           "ratio": 0.1122
         },
@@ -1249,6 +1559,8 @@
           "ticker": "8001",
           "name": "伊藤忠商事",
           "delta": -69.23,
+          "delta_shares": -3600.0,
+          "traded_value": 7146000,
           "shares": 1600.0,
           "ratio": 0.1083
         },
@@ -1256,6 +1568,8 @@
           "ticker": "4046",
           "name": "大阪ソーダ",
           "delta": -61.85,
+          "delta_shares": -10700.0,
+          "traded_value": 20265800,
           "shares": 6600.0,
           "ratio": 0.4263
         },
@@ -1263,6 +1577,8 @@
           "ticker": "4519",
           "name": "中外製薬",
           "delta": -56.86,
+          "delta_shares": -2900.0,
+          "traded_value": 24708000,
           "shares": 2200.0,
           "ratio": 0.6392
         },
@@ -1270,6 +1586,8 @@
           "ticker": "6845",
           "name": "アズビル",
           "delta": -40.97,
+          "delta_shares": -5900.0,
+          "traded_value": 8702500,
           "shares": 8500.0,
           "ratio": 0.4276
         },
@@ -1277,6 +1595,8 @@
           "ticker": "6367",
           "name": "ダイキン工業",
           "delta": -29.55,
+          "delta_shares": -1300.0,
+          "traded_value": 26637000,
           "shares": 3100.0,
           "ratio": 2.1663
         },
@@ -1284,6 +1604,8 @@
           "ticker": "6361",
           "name": "荏原製作所",
           "delta": -28.81,
+          "delta_shares": -1700.0,
+          "traded_value": 8790700,
           "shares": 4200.0,
           "ratio": 0.7407
         },
@@ -1291,6 +1613,8 @@
           "ticker": "7741",
           "name": "ＨＯＹＡ",
           "delta": -26.32,
+          "delta_shares": -500.0,
+          "traded_value": 14700000,
           "shares": 1400.0,
           "ratio": 1.4037
         }
@@ -1302,7 +1626,9 @@
         {
           "ticker": "6976",
           "name": "太陽誘電",
-          "ratio": 1.512
+          "ratio": 1.512,
+          "shares": 7900.0,
+          "traded_value": 46191300
         }
       ],
       "removed": [],
@@ -1311,6 +1637,8 @@
           "ticker": "3923",
           "name": "ラクス",
           "delta": 1700.0,
+          "delta_shares": 6800.0,
+          "traded_value": 5861600,
           "shares": 7200.0,
           "ratio": 0.2032
         },
@@ -1318,6 +1646,8 @@
           "ticker": "9433",
           "name": "ＫＤＤＩ",
           "delta": 427.27,
+          "delta_shares": 4700.0,
+          "traded_value": 12379800,
           "shares": 5800.0,
           "ratio": 0.5001
         },
@@ -1325,6 +1655,8 @@
           "ticker": "4071",
           "name": "プラスアルファ・コンサルティング",
           "delta": 383.33,
+          "delta_shares": 2300.0,
+          "traded_value": 4878300,
           "shares": 2900.0,
           "ratio": 0.2013
         },
@@ -1332,6 +1664,8 @@
           "ticker": "4684",
           "name": "オービック",
           "delta": 146.67,
+          "delta_shares": 2200.0,
+          "traded_value": 9086000,
           "shares": 3700.0,
           "ratio": 0.5002
         },
@@ -1339,6 +1673,8 @@
           "ticker": "7747",
           "name": "朝日インテック",
           "delta": 100.0,
+          "delta_shares": 3000.0,
+          "traded_value": 10770000,
           "shares": 6000.0,
           "ratio": 0.7051
         },
@@ -1346,6 +1682,8 @@
           "ticker": "7366",
           "name": "ＬＩＴＡＬＩＣＯ",
           "delta": 56.36,
+          "delta_shares": 3100.0,
+          "traded_value": 3881200,
           "shares": 8600.0,
           "ratio": 0.3524
         },
@@ -1353,6 +1691,8 @@
           "ticker": "1605",
           "name": "ＩＮＰＥＸ",
           "delta": 51.67,
+          "delta_shares": 3100.0,
+          "traded_value": 12508500,
           "shares": 9100.0,
           "ratio": 1.2019
         },
@@ -1360,6 +1700,8 @@
           "ticker": "8766",
           "name": "東京海上ホールディングス",
           "delta": 36.36,
+          "delta_shares": 1200.0,
+          "traded_value": 8203200,
           "shares": 4500.0,
           "ratio": 1.0069
         },
@@ -1367,6 +1709,8 @@
           "ticker": "9735",
           "name": "セコム",
           "delta": 26.15,
+          "delta_shares": 1700.0,
+          "traded_value": 10262900,
           "shares": 8200.0,
           "ratio": 1.6204
         },
@@ -1374,6 +1718,8 @@
           "ticker": "7846",
           "name": "パイロットコーポレーション",
           "delta": 9.84,
+          "delta_shares": 600.0,
+          "traded_value": 2919000,
           "shares": 6700.0,
           "ratio": 1.0669
         },
@@ -1381,6 +1727,8 @@
           "ticker": "3064",
           "name": "ＭｏｎｏｔａＲＯ",
           "delta": 9.8,
+          "delta_shares": 6000.0,
+          "traded_value": 11061000,
           "shares": 67200.0,
           "ratio": 4.055
         }
@@ -1390,6 +1738,8 @@
           "ticker": "285A",
           "name": "キオクシアホールディングス",
           "delta": -75.0,
+          "delta_shares": -600.0,
+          "traded_value": 19446000,
           "shares": 200.0,
           "ratio": 0.2122
         }
@@ -1404,6 +1754,8 @@
           "ticker": "6857",
           "name": "アドバンテスト",
           "delta": 27.27,
+          "delta_shares": 300.0,
+          "traded_value": 8587500,
           "shares": 1400.0,
           "ratio": 1.2849
         },
@@ -1411,6 +1763,8 @@
           "ticker": "4568",
           "name": "第一三共",
           "delta": 26.9,
+          "delta_shares": 3900.0,
+          "traded_value": 11267100,
           "shares": 18400.0,
           "ratio": 1.7044
         },
@@ -1418,6 +1772,8 @@
           "ticker": "6146",
           "name": "ディスコ",
           "delta": 11.11,
+          "delta_shares": 100.0,
+          "traded_value": 7303000,
           "shares": 1000.0,
           "ratio": 2.3416
         }
@@ -1427,6 +1783,8 @@
           "ticker": "5801",
           "name": "古河電気工業",
           "delta": -37.5,
+          "delta_shares": -300.0,
+          "traded_value": 13716000,
           "shares": 500.0,
           "ratio": 0.733
         },
@@ -1434,6 +1792,8 @@
           "ticker": "4046",
           "name": "大阪ソーダ",
           "delta": -22.73,
+          "delta_shares": -1500.0,
+          "traded_value": 2845500,
           "shares": 5100.0,
           "ratio": 0.3102
         },
@@ -1441,6 +1801,8 @@
           "ticker": "5803",
           "name": "フジクラ",
           "delta": -11.03,
+          "delta_shares": -1600.0,
+          "traded_value": 9521600,
           "shares": 12900.0,
           "ratio": 2.4614
         },
@@ -1448,6 +1810,8 @@
           "ticker": "6367",
           "name": "ダイキン工業",
           "delta": -6.45,
+          "delta_shares": -200.0,
+          "traded_value": 4418000,
           "shares": 2900.0,
           "ratio": 2.054
         }
@@ -1462,6 +1826,8 @@
           "ticker": "9735",
           "name": "セコム",
           "delta": 12.2,
+          "delta_shares": 1000.0,
+          "traded_value": 6061000,
           "shares": 9200.0,
           "ratio": 1.8723
         }
@@ -1471,6 +1837,8 @@
           "ticker": "4046",
           "name": "大阪ソーダ",
           "delta": -50.98,
+          "delta_shares": -2600.0,
+          "traded_value": 4976400,
           "shares": 2500.0,
           "ratio": 0.1607
         },
@@ -1478,6 +1846,8 @@
           "ticker": "285A",
           "name": "キオクシアホールディングス",
           "delta": -50.0,
+          "delta_shares": -100.0,
+          "traded_value": 3053000,
           "shares": 100.0,
           "ratio": 0.1025
         },
@@ -1485,6 +1855,8 @@
           "ticker": "5803",
           "name": "フジクラ",
           "delta": -48.84,
+          "delta_shares": -6300.0,
+          "traded_value": 36300600,
           "shares": 6600.0,
           "ratio": 1.2769
         },
@@ -1492,6 +1864,8 @@
           "ticker": "9697",
           "name": "カプコン",
           "delta": -45.31,
+          "delta_shares": -2900.0,
+          "traded_value": 10640100,
           "shares": 3500.0,
           "ratio": 0.4312
         },
@@ -1499,6 +1873,8 @@
           "ticker": "6754",
           "name": "アンリツ",
           "delta": -44.0,
+          "delta_shares": -2200.0,
+          "traded_value": 7519600,
           "shares": 2800.0,
           "ratio": 0.3214
         },
@@ -1506,6 +1882,8 @@
           "ticker": "5801",
           "name": "古河電気工業",
           "delta": -40.0,
+          "delta_shares": -200.0,
+          "traded_value": 8992000,
           "shares": 300.0,
           "ratio": 0.4529
         },
@@ -1513,6 +1891,8 @@
           "ticker": "6134",
           "name": "ＦＵＪＩ",
           "delta": -34.29,
+          "delta_shares": -1200.0,
+          "traded_value": 6788400,
           "shares": 2300.0,
           "ratio": 0.4369
         },
@@ -1520,6 +1900,8 @@
           "ticker": "6367",
           "name": "ダイキン工業",
           "delta": -24.14,
+          "delta_shares": -700.0,
+          "traded_value": 14920500,
           "shares": 2200.0,
           "ratio": 1.5745
         },
@@ -1527,6 +1909,8 @@
           "ticker": "6951",
           "name": "日本電子",
           "delta": -22.73,
+          "delta_shares": -1500.0,
+          "traded_value": 9150000,
           "shares": 5100.0,
           "ratio": 1.0446
         }
@@ -1541,6 +1925,8 @@
           "ticker": "1605",
           "name": "ＩＮＰＥＸ",
           "delta": 69.23,
+          "delta_shares": 6300.0,
+          "traded_value": 24210900,
           "shares": 15400.0,
           "ratio": 1.9305
         },
@@ -1548,6 +1934,8 @@
           "ticker": "8766",
           "name": "東京海上ホールディングス",
           "delta": 44.44,
+          "delta_shares": 2000.0,
+          "traded_value": 14350000,
           "shares": 6500.0,
           "ratio": 1.5213
         },
@@ -1555,6 +1943,8 @@
           "ticker": "7936",
           "name": "アシックス",
           "delta": 41.79,
+          "delta_shares": 2800.0,
+          "traded_value": 12905200,
           "shares": 9500.0,
           "ratio": 1.4283
         },
@@ -1562,6 +1952,8 @@
           "ticker": "8750",
           "name": "第一生命ホールディングス",
           "delta": 33.54,
+          "delta_shares": 5400.0,
+          "traded_value": 7878600,
           "shares": 21500.0,
           "ratio": 1.0232
         },
@@ -1569,6 +1961,8 @@
           "ticker": "5991",
           "name": "日本発條",
           "delta": 16.46,
+          "delta_shares": 1300.0,
+          "traded_value": 3338400,
           "shares": 9200.0,
           "ratio": 0.7707
         },
@@ -1576,6 +1970,8 @@
           "ticker": "4568",
           "name": "第一三共",
           "delta": 14.13,
+          "delta_shares": 2600.0,
+          "traded_value": 7800000,
           "shares": 21000.0,
           "ratio": 2.0551
         },
@@ -1583,6 +1979,8 @@
           "ticker": "9735",
           "name": "セコム",
           "delta": 7.61,
+          "delta_shares": 700.0,
+          "traded_value": 4207000,
           "shares": 9900.0,
           "ratio": 1.9409
         },
@@ -1590,6 +1988,8 @@
           "ticker": "7182",
           "name": "ゆうちょ銀行",
           "delta": 4.76,
+          "delta_shares": 1200.0,
+          "traded_value": 3252000,
           "shares": 26400.0,
           "ratio": 2.3338
         },
@@ -1597,6 +1997,8 @@
           "ticker": "3064",
           "name": "ＭｏｎｏｔａＲＯ",
           "delta": 2.98,
+          "delta_shares": 2000.0,
+          "traded_value": 3698000,
           "shares": 69200.0,
           "ratio": 4.1738
         }
@@ -1606,6 +2008,8 @@
           "ticker": "5803",
           "name": "フジクラ",
           "delta": -31.82,
+          "delta_shares": -2100.0,
+          "traded_value": 11610900,
           "shares": 4500.0,
           "ratio": 0.8116
         }
@@ -1620,6 +2024,8 @@
           "ticker": "7936",
           "name": "アシックス",
           "delta": 35.79,
+          "delta_shares": 3400.0,
+          "traded_value": 15538000,
           "shares": 12900.0,
           "ratio": 2.0092
         },
@@ -1627,6 +2033,8 @@
           "ticker": "1605",
           "name": "ＩＮＰＥＸ",
           "delta": 25.32,
+          "delta_shares": 3900.0,
+          "traded_value": 14847300,
           "shares": 19300.0,
           "ratio": 2.5042
         },
@@ -1634,6 +2042,8 @@
           "ticker": "6758",
           "name": "ソニーグループ",
           "delta": 8.83,
+          "delta_shares": 2500.0,
+          "traded_value": 8357500,
           "shares": 30800.0,
           "ratio": 3.5092
         },
@@ -1641,6 +2051,8 @@
           "ticker": "9735",
           "name": "セコム",
           "delta": 8.08,
+          "delta_shares": 800.0,
+          "traded_value": 4643200,
           "shares": 10700.0,
           "ratio": 2.1166
         }
@@ -1650,6 +2062,8 @@
           "ticker": "6361",
           "name": "荏原製作所",
           "delta": -85.71,
+          "delta_shares": -3600.0,
+          "traded_value": 19695600,
           "shares": 600.0,
           "ratio": 0.1119
         },
@@ -1657,6 +2071,8 @@
           "ticker": "6951",
           "name": "日本電子",
           "delta": -80.39,
+          "delta_shares": -4100.0,
+          "traded_value": 26502400,
           "shares": 1000.0,
           "ratio": 0.2203
         },
@@ -1664,6 +2080,8 @@
           "ticker": "9697",
           "name": "カプコン",
           "delta": -48.57,
+          "delta_shares": -1700.0,
+          "traded_value": 5948300,
           "shares": 1800.0,
           "ratio": 0.2147
         },
@@ -1671,6 +2089,8 @@
           "ticker": "6954",
           "name": "ファナック",
           "delta": -35.53,
+          "delta_shares": -2700.0,
+          "traded_value": 17579700,
           "shares": 4900.0,
           "ratio": 1.0873
         },
@@ -1678,6 +2098,8 @@
           "ticker": "9983",
           "name": "ファーストリテイリング",
           "delta": -33.33,
+          "delta_shares": -300.0,
+          "traded_value": 21513000,
           "shares": 600.0,
           "ratio": 1.4664
         },
@@ -1685,6 +2107,8 @@
           "ticker": "6367",
           "name": "ダイキン工業",
           "delta": -31.82,
+          "delta_shares": -700.0,
+          "traded_value": 14864500,
           "shares": 1500.0,
           "ratio": 1.0856
         },
@@ -1692,6 +2116,8 @@
           "ticker": "4613",
           "name": "関西ペイント",
           "delta": -31.25,
+          "delta_shares": -1500.0,
+          "traded_value": 3584250,
           "shares": 3300.0,
           "ratio": 0.2687
         },
@@ -1699,6 +2125,8 @@
           "ticker": "8035",
           "name": "東京エレクトロン",
           "delta": -27.27,
+          "delta_shares": -600.0,
+          "traded_value": 27300000,
           "shares": 1600.0,
           "ratio": 2.4812
         },
@@ -1706,6 +2134,8 @@
           "ticker": "5803",
           "name": "フジクラ",
           "delta": -22.22,
+          "delta_shares": -1000.0,
+          "traded_value": 5985000,
           "shares": 3500.0,
           "ratio": 0.7139
         },
@@ -1713,6 +2143,8 @@
           "ticker": "6976",
           "name": "太陽誘電",
           "delta": -21.52,
+          "delta_shares": -1700.0,
+          "traded_value": 10648800,
           "shares": 6200.0,
           "ratio": 1.3236
         },
@@ -1720,6 +2152,8 @@
           "ticker": "7741",
           "name": "ＨＯＹＡ",
           "delta": -21.43,
+          "delta_shares": -300.0,
+          "traded_value": 8602500,
           "shares": 1100.0,
           "ratio": 1.075
         },
@@ -1727,6 +2161,8 @@
           "ticker": "3891",
           "name": "ニッポン高度紙工業",
           "delta": -9.58,
+          "delta_shares": -1600.0,
+          "traded_value": 7168000,
           "shares": 15100.0,
           "ratio": 2.3056
         }
@@ -1741,6 +2177,8 @@
           "ticker": "1605",
           "name": "ＩＮＰＥＸ",
           "delta": 11.92,
+          "delta_shares": 2300.0,
+          "traded_value": 9128700,
           "shares": 21600.0,
           "ratio": 3.0347
         }
@@ -1750,6 +2188,8 @@
           "ticker": "6146",
           "name": "ディスコ",
           "delta": -40.0,
+          "delta_shares": -400.0,
+          "traded_value": 28800000,
           "shares": 600.0,
           "ratio": 1.5292
         },
@@ -1757,6 +2197,8 @@
           "ticker": "5801",
           "name": "古河電気工業",
           "delta": -33.33,
+          "delta_shares": -100.0,
+          "traded_value": 4253000,
           "shares": 200.0,
           "ratio": 0.3011
         },
@@ -1764,6 +2206,8 @@
           "ticker": "7741",
           "name": "ＨＯＹＡ",
           "delta": -27.27,
+          "delta_shares": -300.0,
+          "traded_value": 8548500,
           "shares": 800.0,
           "ratio": 0.8069
         },
@@ -1771,6 +2215,8 @@
           "ticker": "5803",
           "name": "フジクラ",
           "delta": -22.86,
+          "delta_shares": -800.0,
+          "traded_value": 4714400,
           "shares": 2700.0,
           "ratio": 0.5632
         },
@@ -1778,6 +2224,8 @@
           "ticker": "6951",
           "name": "日本電子",
           "delta": -20.0,
+          "delta_shares": -200.0,
+          "traded_value": 1287400,
           "shares": 800.0,
           "ratio": 0.1823
         },
@@ -1785,6 +2233,8 @@
           "ticker": "5802",
           "name": "住友電気工業",
           "delta": -19.12,
+          "delta_shares": -1300.0,
+          "traded_value": 13266500,
           "shares": 5500.0,
           "ratio": 1.9868
         },
@@ -1792,6 +2242,8 @@
           "ticker": "3891",
           "name": "ニッポン高度紙工業",
           "delta": -9.27,
+          "delta_shares": -1400.0,
+          "traded_value": 6223000,
           "shares": 13700.0,
           "ratio": 2.1557
         },
@@ -1799,6 +2251,8 @@
           "ticker": "6098",
           "name": "リクルートホールディングス",
           "delta": -7.73,
+          "delta_shares": -1700.0,
+          "traded_value": 12853700,
           "shares": 20300.0,
           "ratio": 5.4333
         }
@@ -1813,6 +2267,8 @@
           "ticker": "9433",
           "name": "ＫＤＤＩ",
           "delta": 106.9,
+          "delta_shares": 6200.0,
+          "traded_value": 15903000,
           "shares": 12000.0,
           "ratio": 1.0701
         },
@@ -1820,6 +2276,8 @@
           "ticker": "7747",
           "name": "朝日インテック",
           "delta": 43.33,
+          "delta_shares": 2600.0,
+          "traded_value": 8723000,
           "shares": 8600.0,
           "ratio": 1.0031
         },
@@ -1827,6 +2285,8 @@
           "ticker": "4063",
           "name": "信越化学工業",
           "delta": 14.29,
+          "delta_shares": 900.0,
+          "traded_value": 6091200,
           "shares": 7200.0,
           "ratio": 1.6941
         },
@@ -1834,6 +2294,8 @@
           "ticker": "7936",
           "name": "アシックス",
           "delta": 8.53,
+          "delta_shares": 1100.0,
+          "traded_value": 4855400,
           "shares": 14000.0,
           "ratio": 2.1484
         },
@@ -1841,6 +2303,8 @@
           "ticker": "7182",
           "name": "ゆうちょ銀行",
           "delta": 7.58,
+          "delta_shares": 2000.0,
+          "traded_value": 5020000,
           "shares": 28400.0,
           "ratio": 2.4782
         }
@@ -1850,6 +2314,8 @@
           "ticker": "3891",
           "name": "ニッポン高度紙工業",
           "delta": -5.11,
+          "delta_shares": -700.0,
+          "traded_value": 3605000,
           "shares": 13000.0,
           "ratio": 2.3276
         }
@@ -1864,6 +2330,8 @@
           "ticker": "6134",
           "name": "ＦＵＪＩ",
           "delta": 213.04,
+          "delta_shares": 4900.0,
+          "traded_value": 29218700,
           "shares": 7200.0,
           "ratio": 1.4501
         },
@@ -1871,6 +2339,8 @@
           "ticker": "4686",
           "name": "ジャストシステム",
           "delta": 34.69,
+          "delta_shares": 1700.0,
+          "traded_value": 6281500,
           "shares": 6600.0,
           "ratio": 0.8237
         },
@@ -1878,6 +2348,8 @@
           "ticker": "7730",
           "name": "マニー",
           "delta": 31.88,
+          "delta_shares": 4400.0,
+          "traded_value": 7594400,
           "shares": 18200.0,
           "ratio": 1.061
         },
@@ -1885,6 +2357,8 @@
           "ticker": "7936",
           "name": "アシックス",
           "delta": 19.29,
+          "delta_shares": 2700.0,
+          "traded_value": 12090600,
           "shares": 16700.0,
           "ratio": 2.5258
         },
@@ -1892,6 +2366,8 @@
           "ticker": "8766",
           "name": "東京海上ホールディングス",
           "delta": 13.85,
+          "delta_shares": 900.0,
+          "traded_value": 6447600,
           "shares": 7400.0,
           "ratio": 1.7906
         },
@@ -1899,6 +2375,8 @@
           "ticker": "7747",
           "name": "朝日インテック",
           "delta": 10.47,
+          "delta_shares": 900.0,
+          "traded_value": 2981700,
           "shares": 9500.0,
           "ratio": 1.063
         },
@@ -1906,6 +2384,8 @@
           "ticker": "6758",
           "name": "ソニーグループ",
           "delta": 3.9,
+          "delta_shares": 1200.0,
+          "traded_value": 3825600,
           "shares": 32000.0,
           "ratio": 3.4457
         }
@@ -1915,6 +2395,8 @@
           "ticker": "6146",
           "name": "ディスコ",
           "delta": -16.67,
+          "delta_shares": -100.0,
+          "traded_value": 7603000,
           "shares": 500.0,
           "ratio": 1.284
         },
@@ -1922,6 +2404,8 @@
           "ticker": "8035",
           "name": "東京エレクトロン",
           "delta": -12.5,
+          "delta_shares": -200.0,
+          "traded_value": 9420000,
           "shares": 1400.0,
           "ratio": 2.2272
         }
@@ -1936,6 +2420,8 @@
           "ticker": "4519",
           "name": "中外製薬",
           "delta": 77.27,
+          "delta_shares": 1700.0,
+          "traded_value": 13498000,
           "shares": 3900.0,
           "ratio": 1.0418
         },
@@ -1943,6 +2429,8 @@
           "ticker": "7730",
           "name": "マニー",
           "delta": 12.64,
+          "delta_shares": 2300.0,
+          "traded_value": 3903100,
           "shares": 20500.0,
           "ratio": 1.1704
         }
@@ -1952,6 +2440,8 @@
           "ticker": "6857",
           "name": "アドバンテスト",
           "delta": -71.43,
+          "delta_shares": -1000.0,
+          "traded_value": 29750000,
           "shares": 400.0,
           "ratio": 0.4003
         },
@@ -1959,6 +2449,8 @@
           "ticker": "5801",
           "name": "古河電気工業",
           "delta": -50.0,
+          "delta_shares": -100.0,
+          "traded_value": 4290000,
           "shares": 100.0,
           "ratio": 0.1443
         },
@@ -1966,6 +2458,8 @@
           "ticker": "5803",
           "name": "フジクラ",
           "delta": -22.22,
+          "delta_shares": -600.0,
+          "traded_value": 3768600,
           "shares": 2100.0,
           "ratio": 0.4438
         }
@@ -1980,6 +2474,8 @@
           "ticker": "6845",
           "name": "アズビル",
           "delta": 32.94,
+          "delta_shares": 2800.0,
+          "traded_value": 3903200,
           "shares": 11300.0,
           "ratio": 0.5296
         },
@@ -1987,6 +2483,8 @@
           "ticker": "6134",
           "name": "ＦＵＪＩ",
           "delta": 29.17,
+          "delta_shares": 2100.0,
+          "traded_value": 12742800,
           "shares": 9300.0,
           "ratio": 1.8974
         },
@@ -1994,6 +2492,8 @@
           "ticker": "7936",
           "name": "アシックス",
           "delta": 5.99,
+          "delta_shares": 1000.0,
+          "traded_value": 4432000,
           "shares": 17700.0,
           "ratio": 2.6376
         }
@@ -2006,11 +2506,15 @@
       "removed": [
         {
           "ticker": "3923",
-          "name": "ラクス"
+          "name": "ラクス",
+          "shares": 7200.0,
+          "traded_value": 6165360
         },
         {
           "ticker": "4071",
-          "name": "プラスアルファ・コンサルティング"
+          "name": "プラスアルファ・コンサルティング",
+          "shares": 2900.0,
+          "traded_value": 6324900
         }
       ],
       "increased": [
@@ -2018,6 +2522,8 @@
           "ticker": "8766",
           "name": "東京海上ホールディングス",
           "delta": 66.22,
+          "delta_shares": 4900.0,
+          "traded_value": 34755700,
           "shares": 12300.0,
           "ratio": 2.8864
         },
@@ -2025,6 +2531,8 @@
           "ticker": "6845",
           "name": "アズビル",
           "delta": 56.64,
+          "delta_shares": 6400.0,
+          "traded_value": 9068800,
           "shares": 17700.0,
           "ratio": 0.8298
         },
@@ -2032,6 +2540,8 @@
           "ticker": "7747",
           "name": "朝日インテック",
           "delta": 22.11,
+          "delta_shares": 2100.0,
+          "traded_value": 6816600,
           "shares": 11600.0,
           "ratio": 1.2457
         },
@@ -2039,6 +2549,8 @@
           "ticker": "6861",
           "name": "キーエンス",
           "delta": 20.0,
+          "delta_shares": 100.0,
+          "traded_value": 7646000,
           "shares": 600.0,
           "ratio": 1.5178
         },
@@ -2046,6 +2558,8 @@
           "ticker": "7936",
           "name": "アシックス",
           "delta": 16.38,
+          "delta_shares": 2900.0,
+          "traded_value": 12588900,
           "shares": 20600.0,
           "ratio": 2.9585
         },
@@ -2053,6 +2567,8 @@
           "ticker": "4519",
           "name": "中外製薬",
           "delta": 15.38,
+          "delta_shares": 600.0,
+          "traded_value": 4947000,
           "shares": 4500.0,
           "ratio": 1.2275
         }
@@ -2062,6 +2578,8 @@
           "ticker": "6702",
           "name": "富士通",
           "delta": -59.26,
+          "delta_shares": -1600.0,
+          "traded_value": 4920000,
           "shares": 1100.0,
           "ratio": 0.1119
         },
@@ -2069,6 +2587,8 @@
           "ticker": "4684",
           "name": "オービック",
           "delta": -45.95,
+          "delta_shares": -1700.0,
+          "traded_value": 6985300,
           "shares": 2000.0,
           "ratio": 0.2719
         }
@@ -2083,6 +2603,8 @@
           "ticker": "7730",
           "name": "マニー",
           "delta": 21.95,
+          "delta_shares": 4500.0,
+          "traded_value": 7510500,
           "shares": 25000.0,
           "ratio": 1.3256
         },
@@ -2090,6 +2612,8 @@
           "ticker": "7747",
           "name": "朝日インテック",
           "delta": 17.24,
+          "delta_shares": 2000.0,
+          "traded_value": 6626000,
           "shares": 13600.0,
           "ratio": 1.4314
         },
@@ -2097,6 +2621,8 @@
           "ticker": "4461",
           "name": "第一工業製薬",
           "delta": 16.07,
+          "delta_shares": 900.0,
+          "traded_value": 8055000,
           "shares": 6500.0,
           "ratio": 1.8482
         },
@@ -2104,6 +2630,8 @@
           "ticker": "9433",
           "name": "ＫＤＤＩ",
           "delta": 11.67,
+          "delta_shares": 1400.0,
+          "traded_value": 3535000,
           "shares": 13400.0,
           "ratio": 1.0749
         },
@@ -2111,6 +2639,8 @@
           "ticker": "9735",
           "name": "セコム",
           "delta": 6.54,
+          "delta_shares": 700.0,
+          "traded_value": 3939600,
           "shares": 11400.0,
           "ratio": 2.0383
         }
@@ -2120,6 +2650,8 @@
           "ticker": "9983",
           "name": "ファーストリテイリング",
           "delta": -16.67,
+          "delta_shares": -100.0,
+          "traded_value": 7576000,
           "shares": 500.0,
           "ratio": 1.2034
         }
@@ -2134,6 +2666,8 @@
           "ticker": "4684",
           "name": "オービック",
           "delta": 205.0,
+          "delta_shares": 4100.0,
+          "traded_value": 17351200,
           "shares": 6100.0,
           "ratio": 0.8246
         },
@@ -2141,6 +2675,8 @@
           "ticker": "7532",
           "name": "パン・パシフィック・インターナショナルホールディングス",
           "delta": 75.96,
+          "delta_shares": 15800.0,
+          "traded_value": 13959300,
           "shares": 36600.0,
           "ratio": 1.0329
         },
@@ -2148,6 +2684,8 @@
           "ticker": "8766",
           "name": "東京海上ホールディングス",
           "delta": 11.38,
+          "delta_shares": 1400.0,
+          "traded_value": 9842000,
           "shares": 13700.0,
           "ratio": 3.0763
         },
@@ -2155,6 +2693,8 @@
           "ticker": "4461",
           "name": "第一工業製薬",
           "delta": 6.15,
+          "delta_shares": 400.0,
+          "traded_value": 3572000,
           "shares": 6900.0,
           "ratio": 1.9681
         },
@@ -2162,6 +2702,8 @@
           "ticker": "7203",
           "name": "トヨタ自動車",
           "delta": 5.95,
+          "delta_shares": 3600.0,
+          "traded_value": 10486800,
           "shares": 64100.0,
           "ratio": 5.9642
         }
@@ -2171,6 +2713,8 @@
           "ticker": "6146",
           "name": "ディスコ",
           "delta": -60.0,
+          "delta_shares": -300.0,
+          "traded_value": 22500000,
           "shares": 200.0,
           "ratio": 0.4791
         },
@@ -2178,6 +2722,8 @@
           "ticker": "8035",
           "name": "東京エレクトロン",
           "delta": -42.86,
+          "delta_shares": -600.0,
+          "traded_value": 31470000,
           "shares": 800.0,
           "ratio": 1.3403
         },
@@ -2185,6 +2731,8 @@
           "ticker": "6954",
           "name": "ファナック",
           "delta": -28.57,
+          "delta_shares": -1400.0,
+          "traded_value": 10521000,
           "shares": 3500.0,
           "ratio": 0.8401
         },
@@ -2192,6 +2740,8 @@
           "ticker": "4516",
           "name": "日本新薬",
           "delta": -14.49,
+          "delta_shares": -1000.0,
+          "traded_value": 4093000,
           "shares": 5900.0,
           "ratio": 0.7713
         },
@@ -2199,6 +2749,8 @@
           "ticker": "5991",
           "name": "日本発條",
           "delta": -13.04,
+          "delta_shares": -1200.0,
+          "traded_value": 3474000,
           "shares": 8000.0,
           "ratio": 0.7398
         },
@@ -2206,6 +2758,8 @@
           "ticker": "3891",
           "name": "ニッポン高度紙工業",
           "delta": -7.69,
+          "delta_shares": -1000.0,
+          "traded_value": 6550000,
           "shares": 12000.0,
           "ratio": 2.5106
         }
@@ -2217,7 +2771,9 @@
       "removed": [
         {
           "ticker": "4516",
-          "name": "日本新薬"
+          "name": "日本新薬",
+          "shares": 5900.0,
+          "traded_value": 24148700
         }
       ],
       "increased": [
@@ -2225,6 +2781,8 @@
           "ticker": "4063",
           "name": "信越化学工業",
           "delta": 43.06,
+          "delta_shares": 3100.0,
+          "traded_value": 23479400,
           "shares": 10300.0,
           "ratio": 2.532
         },
@@ -2232,6 +2790,8 @@
           "ticker": "4461",
           "name": "第一工業製薬",
           "delta": 10.14,
+          "delta_shares": 700.0,
+          "traded_value": 6531000,
           "shares": 7600.0,
           "ratio": 2.3014
         }
@@ -2241,6 +2801,8 @@
           "ticker": "6954",
           "name": "ファナック",
           "delta": -37.14,
+          "delta_shares": -1300.0,
+          "traded_value": 9833200,
           "shares": 2200.0,
           "ratio": 0.5401
         },
@@ -2248,6 +2810,8 @@
           "ticker": "5991",
           "name": "日本発條",
           "delta": -30.0,
+          "delta_shares": -2400.0,
+          "traded_value": 7066800,
           "shares": 5600.0,
           "ratio": 0.5352
         },
@@ -2255,6 +2819,8 @@
           "ticker": "6504",
           "name": "富士電機",
           "delta": -21.43,
+          "delta_shares": -1500.0,
+          "traded_value": 22507500,
           "shares": 5500.0,
           "ratio": 2.6786
         },
@@ -2262,6 +2828,8 @@
           "ticker": "5802",
           "name": "住友電気工業",
           "delta": -20.0,
+          "delta_shares": -1100.0,
+          "traded_value": 12331000,
           "shares": 4400.0,
           "ratio": 1.6009
         },
@@ -2269,6 +2837,8 @@
           "ticker": "8053",
           "name": "住友商事",
           "delta": -13.64,
+          "delta_shares": -1800.0,
+          "traded_value": 12970800,
           "shares": 11400.0,
           "ratio": 2.6662
         },
@@ -2276,6 +2846,8 @@
           "ticker": "7741",
           "name": "ＨＯＹＡ",
           "delta": -12.5,
+          "delta_shares": -100.0,
+          "traded_value": 2723500,
           "shares": 700.0,
           "ratio": 0.6188
         },
@@ -2283,6 +2855,8 @@
           "ticker": "3891",
           "name": "ニッポン高度紙工業",
           "delta": -9.17,
+          "delta_shares": -1100.0,
+          "traded_value": 7139000,
           "shares": 10900.0,
           "ratio": 2.296
         },
@@ -2290,6 +2864,8 @@
           "ticker": "4022",
           "name": "ラサ工業",
           "delta": -4.7,
+          "delta_shares": -1500.0,
+          "traded_value": 3697500,
           "shares": 30400.0,
           "ratio": 2.4322
         }
@@ -2301,7 +2877,9 @@
         {
           "ticker": "1812",
           "name": "鹿島建設",
-          "ratio": 1.5868
+          "ratio": 1.5868,
+          "shares": 7600.0,
+          "traded_value": 49932000
         }
       ],
       "removed": [],
@@ -2310,6 +2888,8 @@
           "ticker": "7532",
           "name": "パン・パシフィック・インターナショナルホールディングス",
           "delta": 20.77,
+          "delta_shares": 7600.0,
+          "traded_value": 6792880,
           "shares": 44200.0,
           "ratio": 1.2555
         },
@@ -2317,6 +2897,8 @@
           "ticker": "6845",
           "name": "アズビル",
           "delta": 18.64,
+          "delta_shares": 3300.0,
+          "traded_value": 4593600,
           "shares": 21000.0,
           "ratio": 0.929
         },
@@ -2324,6 +2906,8 @@
           "ticker": "4063",
           "name": "信越化学工業",
           "delta": 9.71,
+          "delta_shares": 1000.0,
+          "traded_value": 7520000,
           "shares": 11300.0,
           "ratio": 2.7004
         }
@@ -2333,6 +2917,8 @@
           "ticker": "5802",
           "name": "住友電気工業",
           "delta": -15.91,
+          "delta_shares": -700.0,
+          "traded_value": 8155000,
           "shares": 3700.0,
           "ratio": 1.3698
         },
@@ -2340,6 +2926,8 @@
           "ticker": "3891",
           "name": "ニッポン高度紙工業",
           "delta": -10.09,
+          "delta_shares": -1100.0,
+          "traded_value": 6963000,
           "shares": 9800.0,
           "ratio": 1.9714
         },
@@ -2347,6 +2935,8 @@
           "ticker": "4022",
           "name": "ラサ工業",
           "delta": -6.25,
+          "delta_shares": -1900.0,
+          "traded_value": 4620800,
           "shares": 28500.0,
           "ratio": 2.2027
         }
@@ -2361,6 +2951,8 @@
           "ticker": "7366",
           "name": "ＬＩＴＡＬＩＣＯ",
           "delta": 34.88,
+          "delta_shares": 3000.0,
+          "traded_value": 4695000,
           "shares": 11600.0,
           "ratio": 0.569
         },
@@ -2368,6 +2960,8 @@
           "ticker": "7936",
           "name": "アシックス",
           "delta": 10.68,
+          "delta_shares": 2200.0,
+          "traded_value": 10120000,
           "shares": 22800.0,
           "ratio": 3.2872
         },
@@ -2375,6 +2969,8 @@
           "ticker": "9735",
           "name": "セコム",
           "delta": 10.53,
+          "delta_shares": 1200.0,
+          "traded_value": 7314000,
           "shares": 12600.0,
           "ratio": 2.407
         },
@@ -2382,6 +2978,8 @@
           "ticker": "1812",
           "name": "鹿島建設",
           "delta": 7.89,
+          "delta_shares": 600.0,
+          "traded_value": 3886200,
           "shares": 8200.0,
           "ratio": 1.6647
         }
@@ -2391,6 +2989,8 @@
           "ticker": "4046",
           "name": "大阪ソーダ",
           "delta": -64.0,
+          "delta_shares": -1600.0,
+          "traded_value": 3075200,
           "shares": 900.0,
           "ratio": 0.0542
         },
@@ -2398,6 +2998,8 @@
           "ticker": "8035",
           "name": "東京エレクトロン",
           "delta": -50.0,
+          "delta_shares": -400.0,
+          "traded_value": 20536000,
           "shares": 400.0,
           "ratio": 0.6437
         },
@@ -2405,6 +3007,8 @@
           "ticker": "2802",
           "name": "味の素",
           "delta": -46.15,
+          "delta_shares": -600.0,
+          "traded_value": 3289800,
           "shares": 700.0,
           "ratio": 0.1203
         },
@@ -2412,6 +3016,8 @@
           "ticker": "3891",
           "name": "ニッポン高度紙工業",
           "delta": -5.1,
+          "delta_shares": -500.0,
+          "traded_value": 3265000,
           "shares": 9300.0,
           "ratio": 1.9034
         }
@@ -2426,6 +3032,8 @@
           "ticker": "9735",
           "name": "セコム",
           "delta": 7.94,
+          "delta_shares": 1000.0,
+          "traded_value": 6114000,
           "shares": 13600.0,
           "ratio": 2.7361
         }
@@ -2435,6 +3043,8 @@
           "ticker": "6754",
           "name": "アンリツ",
           "delta": -71.43,
+          "delta_shares": -2000.0,
+          "traded_value": 8288000,
           "shares": 800.0,
           "ratio": 0.1091
         },
@@ -2442,6 +3052,8 @@
           "ticker": "4461",
           "name": "第一工業製薬",
           "delta": -36.84,
+          "delta_shares": -2800.0,
+          "traded_value": 26404000,
           "shares": 4800.0,
           "ratio": 1.4894
         },
@@ -2449,6 +3061,8 @@
           "ticker": "5991",
           "name": "日本発條",
           "delta": -32.14,
+          "delta_shares": -1800.0,
+          "traded_value": 6300000,
           "shares": 3800.0,
           "ratio": 0.4376
         },
@@ -2456,6 +3070,8 @@
           "ticker": "5803",
           "name": "フジクラ",
           "delta": -23.81,
+          "delta_shares": -500.0,
+          "traded_value": 3177500,
           "shares": 1600.0,
           "ratio": 0.3346
         },
@@ -2463,6 +3079,8 @@
           "ticker": "4022",
           "name": "ラサ工業",
           "delta": -23.51,
+          "delta_shares": -6700.0,
+          "traded_value": 16368100,
           "shares": 21800.0,
           "ratio": 1.7525
         },
@@ -2470,6 +3088,8 @@
           "ticker": "6976",
           "name": "太陽誘電",
           "delta": -22.58,
+          "delta_shares": -1400.0,
+          "traded_value": 9674000,
           "shares": 4800.0,
           "ratio": 1.0914
         },
@@ -2477,6 +3097,8 @@
           "ticker": "6504",
           "name": "富士電機",
           "delta": -21.82,
+          "delta_shares": -1200.0,
+          "traded_value": 18522000,
           "shares": 4300.0,
           "ratio": 2.184
         },
@@ -2484,6 +3106,8 @@
           "ticker": "6367",
           "name": "ダイキン工業",
           "delta": -20.0,
+          "delta_shares": -300.0,
+          "traded_value": 7507500,
           "shares": 1200.0,
           "ratio": 0.9882
         },
@@ -2491,6 +3115,8 @@
           "ticker": "5802",
           "name": "住友電気工業",
           "delta": -16.22,
+          "delta_shares": -600.0,
+          "traded_value": 7263000,
           "shares": 3100.0,
           "ratio": 1.2348
         },
@@ -2498,6 +3124,8 @@
           "ticker": "3891",
           "name": "ニッポン高度紙工業",
           "delta": -15.05,
+          "delta_shares": -1400.0,
+          "traded_value": 8694000,
           "shares": 7900.0,
           "ratio": 1.6143
         },
@@ -2505,6 +3133,8 @@
           "ticker": "6981",
           "name": "村田製作所",
           "delta": -6.59,
+          "delta_shares": -2800.0,
+          "traded_value": 17749200,
           "shares": 39700.0,
           "ratio": 8.281
         },
@@ -2512,6 +3142,8 @@
           "ticker": "6134",
           "name": "ＦＵＪＩ",
           "delta": -3.23,
+          "delta_shares": -300.0,
+          "traded_value": 2160300,
           "shares": 9000.0,
           "ratio": 2.1326
         }
@@ -2526,6 +3158,8 @@
           "ticker": "8306",
           "name": "三菱ＵＦＪフィナンシャル・グループ",
           "delta": 50.0,
+          "delta_shares": 4900.0,
+          "traded_value": 14352100,
           "shares": 14700.0,
           "ratio": 1.3857
         },
@@ -2533,6 +3167,8 @@
           "ticker": "8750",
           "name": "第一生命ホールディングス",
           "delta": 33.49,
+          "delta_shares": 7200.0,
+          "traded_value": 11649600,
           "shares": 28700.0,
           "ratio": 1.4944
         },
@@ -2540,6 +3176,8 @@
           "ticker": "7203",
           "name": "トヨタ自動車",
           "delta": 18.1,
+          "delta_shares": 11600.0,
+          "traded_value": 35786000,
           "shares": 75700.0,
           "ratio": 7.5157
         },
@@ -2547,6 +3185,8 @@
           "ticker": "4063",
           "name": "信越化学工業",
           "delta": 13.27,
+          "delta_shares": 1500.0,
+          "traded_value": 10657500,
           "shares": 12800.0,
           "ratio": 2.9268
         },
@@ -2554,6 +3194,8 @@
           "ticker": "7182",
           "name": "ゆうちょ銀行",
           "delta": 11.62,
+          "delta_shares": 3300.0,
+          "traded_value": 9335700,
           "shares": 31700.0,
           "ratio": 2.8861
         },
@@ -2561,6 +3203,8 @@
           "ticker": "9735",
           "name": "セコム",
           "delta": 7.35,
+          "delta_shares": 1000.0,
+          "traded_value": 6163000,
           "shares": 14600.0,
           "ratio": 2.8958
         }
@@ -2570,6 +3214,8 @@
           "ticker": "5803",
           "name": "フジクラ",
           "delta": -62.5,
+          "delta_shares": -1000.0,
+          "traded_value": 5819000,
           "shares": 600.0,
           "ratio": 0.1124
         },
@@ -2577,6 +3223,8 @@
           "ticker": "4461",
           "name": "第一工業製薬",
           "delta": -12.5,
+          "delta_shares": -600.0,
+          "traded_value": 5268000,
           "shares": 4200.0,
           "ratio": 1.1868
         }
@@ -2588,7 +3236,9 @@
       "removed": [
         {
           "ticker": "6278",
-          "name": "ユニオンツール"
+          "name": "ユニオンツール",
+          "shares": 500.0,
+          "traded_value": 10080000
         }
       ],
       "increased": [
@@ -2596,6 +3246,8 @@
           "ticker": "8750",
           "name": "第一生命ホールディングス",
           "delta": 28.22,
+          "delta_shares": 8100.0,
+          "traded_value": 13081500,
           "shares": 36800.0,
           "ratio": 1.9406
         },
@@ -2603,6 +3255,8 @@
           "ticker": "8306",
           "name": "三菱ＵＦＪフィナンシャル・グループ",
           "delta": 12.24,
+          "delta_shares": 1800.0,
+          "traded_value": 5391000,
           "shares": 16500.0,
           "ratio": 1.6136
         },
@@ -2610,6 +3264,8 @@
           "ticker": "7203",
           "name": "トヨタ自動車",
           "delta": 2.25,
+          "delta_shares": 1700.0,
+          "traded_value": 5022650,
           "shares": 77400.0,
           "ratio": 7.4669
         }
@@ -2619,6 +3275,8 @@
           "ticker": "6367",
           "name": "ダイキン工業",
           "delta": -41.67,
+          "delta_shares": -500.0,
+          "traded_value": 12010000,
           "shares": 700.0,
           "ratio": 0.549
         },
@@ -2626,6 +3284,8 @@
           "ticker": "1812",
           "name": "鹿島建設",
           "delta": -35.37,
+          "delta_shares": -2900.0,
+          "traded_value": 16385000,
           "shares": 5300.0,
           "ratio": 0.9778
         },
@@ -2633,6 +3293,8 @@
           "ticker": "6504",
           "name": "富士電機",
           "delta": -32.56,
+          "delta_shares": -1400.0,
+          "traded_value": 20685000,
           "shares": 2900.0,
           "ratio": 1.3991
         },
@@ -2640,6 +3302,8 @@
           "ticker": "8015",
           "name": "豊田通商",
           "delta": -17.39,
+          "delta_shares": -800.0,
+          "traded_value": 5651200,
           "shares": 3800.0,
           "ratio": 0.8765
         },
@@ -2647,6 +3311,8 @@
           "ticker": "3891",
           "name": "ニッポン高度紙工業",
           "delta": -7.59,
+          "delta_shares": -600.0,
+          "traded_value": 3858000,
           "shares": 7300.0,
           "ratio": 1.5327
         },
@@ -2654,6 +3320,8 @@
           "ticker": "6981",
           "name": "村田製作所",
           "delta": -4.53,
+          "delta_shares": -1800.0,
+          "traded_value": 11107800,
           "shares": 37900.0,
           "ratio": 7.6368
         }
@@ -2668,6 +3336,8 @@
           "ticker": "6146",
           "name": "ディスコ",
           "delta": 150.0,
+          "delta_shares": 300.0,
+          "traded_value": 18480000,
           "shares": 500.0,
           "ratio": 0.9726
         },
@@ -2675,6 +3345,8 @@
           "ticker": "4684",
           "name": "オービック",
           "delta": 27.87,
+          "delta_shares": 1700.0,
+          "traded_value": 7252200,
           "shares": 7800.0,
           "ratio": 1.0508
         },
@@ -2682,6 +3354,8 @@
           "ticker": "7203",
           "name": "トヨタ自動車",
           "delta": 10.34,
+          "delta_shares": 8000.0,
+          "traded_value": 23656000,
           "shares": 85400.0,
           "ratio": 7.9744
         },
@@ -2689,6 +3363,8 @@
           "ticker": "5631",
           "name": "日本製鋼所",
           "delta": 9.57,
+          "delta_shares": 900.0,
+          "traded_value": 7198200,
           "shares": 10300.0,
           "ratio": 2.6014
         }
@@ -2698,6 +3374,8 @@
           "ticker": "7832",
           "name": "バンダイナムコホールディングス",
           "delta": -11.76,
+          "delta_shares": -1600.0,
+          "traded_value": 6241600,
           "shares": 12000.0,
           "ratio": 1.4782
         }
@@ -2709,12 +3387,16 @@
         {
           "ticker": "7550",
           "name": "ゼンショーホールディングス",
-          "ratio": 0.2011
+          "ratio": 0.2011,
+          "shares": 800.0,
+          "traded_value": 6359200
         },
         {
           "ticker": "9766",
           "name": "コナミグループ",
-          "ratio": 0.1918
+          "ratio": 0.1918,
+          "shares": 300.0,
+          "traded_value": 6066000
         }
       ],
       "removed": [],
@@ -2723,6 +3405,8 @@
           "ticker": "6098",
           "name": "リクルートホールディングス",
           "delta": 5.91,
+          "delta_shares": 1200.0,
+          "traded_value": 11583600,
           "shares": 21500.0,
           "ratio": 6.5619
         },
@@ -2730,6 +3414,8 @@
           "ticker": "6134",
           "name": "ＦＵＪＩ",
           "delta": 5.56,
+          "delta_shares": 500.0,
+          "traded_value": 3610000,
           "shares": 9500.0,
           "ratio": 2.1687
         },
@@ -2737,6 +3423,8 @@
           "ticker": "7203",
           "name": "トヨタ自動車",
           "delta": 3.98,
+          "delta_shares": 3400.0,
+          "traded_value": 10002800,
           "shares": 88800.0,
           "ratio": 8.2601
         }
@@ -2746,6 +3434,8 @@
           "ticker": "6845",
           "name": "アズビル",
           "delta": -6.19,
+          "delta_shares": -1300.0,
+          "traded_value": 2014350,
           "shares": 19700.0,
           "ratio": 0.9651
         }
@@ -2760,6 +3450,8 @@
           "ticker": "6857",
           "name": "アドバンテスト",
           "delta": 125.0,
+          "delta_shares": 500.0,
+          "traded_value": 13372500,
           "shares": 900.0,
           "ratio": 0.7435
         },
@@ -2767,6 +3459,8 @@
           "ticker": "7550",
           "name": "ゼンショーホールディングス",
           "delta": 112.5,
+          "delta_shares": 900.0,
+          "traded_value": 6914700,
           "shares": 1700.0,
           "ratio": 0.4034
         },
@@ -2774,6 +3468,8 @@
           "ticker": "9766",
           "name": "コナミグループ",
           "delta": 100.0,
+          "delta_shares": 300.0,
+          "traded_value": 5848500,
           "shares": 600.0,
           "ratio": 0.3613
         },
@@ -2781,6 +3477,8 @@
           "ticker": "7532",
           "name": "パン・パシフィック・インターナショナルホールディングス",
           "delta": 28.05,
+          "delta_shares": 12400.0,
+          "traded_value": 10752040,
           "shares": 56600.0,
           "ratio": 1.5159
         },
@@ -2788,6 +3486,8 @@
           "ticker": "6098",
           "name": "リクルートホールディングス",
           "delta": 3.72,
+          "delta_shares": 800.0,
+          "traded_value": 7651200,
           "shares": 22300.0,
           "ratio": 6.5876
         },
@@ -2795,6 +3495,8 @@
           "ticker": "7203",
           "name": "トヨタ自動車",
           "delta": 2.82,
+          "delta_shares": 2500.0,
+          "traded_value": 7445000,
           "shares": 91300.0,
           "ratio": 8.398
         }
@@ -2804,6 +3506,8 @@
           "ticker": "5991",
           "name": "日本発條",
           "delta": -18.42,
+          "delta_shares": -700.0,
+          "traded_value": 2276400,
           "shares": 3100.0,
           "ratio": 0.3114
         },
@@ -2811,6 +3515,8 @@
           "ticker": "6504",
           "name": "富士電機",
           "delta": -13.79,
+          "delta_shares": -400.0,
+          "traded_value": 6132000,
           "shares": 2500.0,
           "ratio": 1.1838
         },
@@ -2818,6 +3524,8 @@
           "ticker": "6981",
           "name": "村田製作所",
           "delta": -3.69,
+          "delta_shares": -1400.0,
+          "traded_value": 9417800,
           "shares": 36500.0,
           "ratio": 7.5839
         }
@@ -2829,7 +3537,9 @@
         {
           "ticker": "9984",
           "name": "ソフトバンクグループ",
-          "ratio": 1.5328
+          "ratio": 1.5328,
+          "shares": 7600.0,
+          "traded_value": 51353200
         }
       ],
       "removed": [],
@@ -2838,6 +3548,8 @@
           "ticker": "6976",
           "name": "太陽誘電",
           "delta": 37.5,
+          "delta_shares": 1800.0,
+          "traded_value": 16383600,
           "shares": 6600.0,
           "ratio": 1.7931
         },
@@ -2845,6 +3557,8 @@
           "ticker": "4063",
           "name": "信越化学工業",
           "delta": 10.16,
+          "delta_shares": 1300.0,
+          "traded_value": 9144200,
           "shares": 14100.0,
           "ratio": 2.9603
         }
@@ -2854,6 +3568,8 @@
           "ticker": "7846",
           "name": "パイロットコーポレーション",
           "delta": -11.94,
+          "delta_shares": -800.0,
+          "traded_value": 3958400,
           "shares": 5900.0,
           "ratio": 0.8714
         },
@@ -2861,6 +3577,8 @@
           "ticker": "8053",
           "name": "住友商事",
           "delta": -11.4,
+          "delta_shares": -1300.0,
+          "traded_value": 9270300,
           "shares": 10100.0,
           "ratio": 2.1498
         }
@@ -2872,7 +3590,9 @@
       "removed": [
         {
           "ticker": "4046",
-          "name": "大阪ソーダ"
+          "name": "大阪ソーダ",
+          "shares": 900.0,
+          "traded_value": 1661400
         }
       ],
       "increased": [
@@ -2880,6 +3600,8 @@
           "ticker": "9984",
           "name": "ソフトバンクグループ",
           "delta": 47.37,
+          "delta_shares": 3600.0,
+          "traded_value": 25452000,
           "shares": 11200.0,
           "ratio": 2.3031
         },
@@ -2887,6 +3609,8 @@
           "ticker": "8306",
           "name": "三菱ＵＦＪフィナンシャル・グループ",
           "delta": 23.64,
+          "delta_shares": 3900.0,
+          "traded_value": 11957400,
           "shares": 20400.0,
           "ratio": 1.8192
         },
@@ -2894,6 +3618,8 @@
           "ticker": "5631",
           "name": "日本製鋼所",
           "delta": 6.8,
+          "delta_shares": 700.0,
+          "traded_value": 5522300,
           "shares": 11000.0,
           "ratio": 2.524
         },
@@ -2901,6 +3627,8 @@
           "ticker": "3064",
           "name": "ＭｏｎｏｔａＲＯ",
           "delta": 5.2,
+          "delta_shares": 3600.0,
+          "traded_value": 6849000,
           "shares": 72800.0,
           "ratio": 4.0284
         }
@@ -2910,6 +3638,8 @@
           "ticker": "5991",
           "name": "日本発條",
           "delta": -48.39,
+          "delta_shares": -1500.0,
+          "traded_value": 5125500,
           "shares": 1600.0,
           "ratio": 0.159
         },
@@ -2917,6 +3647,8 @@
           "ticker": "6750",
           "name": "エレコム",
           "delta": -29.13,
+          "delta_shares": -3000.0,
+          "traded_value": 5004000,
           "shares": 7300.0,
           "ratio": 0.3542
         },
@@ -2924,6 +3656,8 @@
           "ticker": "2001",
           "name": "ニップン",
           "delta": -26.42,
+          "delta_shares": -1400.0,
+          "traded_value": 3771600,
           "shares": 3900.0,
           "ratio": 0.3056
         },
@@ -2931,6 +3665,8 @@
           "ticker": "6504",
           "name": "富士電機",
           "delta": -16.0,
+          "delta_shares": -400.0,
+          "traded_value": 6840000,
           "shares": 2100.0,
           "ratio": 1.0445
         }
@@ -2945,6 +3681,8 @@
           "ticker": "9984",
           "name": "ソフトバンクグループ",
           "delta": 17.86,
+          "delta_shares": 2000.0,
+          "traded_value": 15682000,
           "shares": 13200.0,
           "ratio": 2.9957
         }
@@ -2954,6 +3692,8 @@
           "ticker": "7747",
           "name": "朝日インテック",
           "delta": -25.0,
+          "delta_shares": -3400.0,
+          "traded_value": 12484800,
           "shares": 10200.0,
           "ratio": 1.0841
         }
@@ -2965,7 +3705,9 @@
         {
           "ticker": "4061",
           "name": "デンカ",
-          "ratio": 0.2992
+          "ratio": 0.2992,
+          "shares": 2500.0,
+          "traded_value": 10010000
         }
       ],
       "removed": [],
@@ -2974,6 +3716,8 @@
           "ticker": "9984",
           "name": "ソフトバンクグループ",
           "delta": 6.82,
+          "delta_shares": 900.0,
+          "traded_value": 6544800,
           "shares": 14100.0,
           "ratio": 3.0645
         }
@@ -2983,6 +3727,8 @@
           "ticker": "4461",
           "name": "第一工業製薬",
           "delta": -73.81,
+          "delta_shares": -3100.0,
+          "traded_value": 32457000,
           "shares": 1100.0,
           "ratio": 0.3442
         },
@@ -2990,6 +3736,8 @@
           "ticker": "9735",
           "name": "セコム",
           "delta": -49.32,
+          "delta_shares": -7200.0,
+          "traded_value": 47433600,
           "shares": 7400.0,
           "ratio": 1.457
         },
@@ -2997,6 +3745,8 @@
           "ticker": "6750",
           "name": "エレコム",
           "delta": -28.77,
+          "delta_shares": -2100.0,
+          "traded_value": 3519600,
           "shares": 5200.0,
           "ratio": 0.2605
         },
@@ -3004,6 +3754,8 @@
           "ticker": "8053",
           "name": "住友商事",
           "delta": -27.72,
+          "delta_shares": -2800.0,
+          "traded_value": 20132000,
           "shares": 7300.0,
           "ratio": 1.5687
         },
@@ -3011,6 +3763,8 @@
           "ticker": "7747",
           "name": "朝日インテック",
           "delta": -6.86,
+          "delta_shares": -700.0,
+          "traded_value": 2584400,
           "shares": 9500.0,
           "ratio": 1.0483
         }
@@ -3032,6 +3786,8 @@
           "ticker": "6951",
           "name": "日本電子",
           "delta": 212.5,
+          "delta_shares": 1700.0,
+          "traded_value": 12093800,
           "shares": 2500.0,
           "ratio": 0.5008
         },
@@ -3039,6 +3795,8 @@
           "ticker": "4061",
           "name": "デンカ",
           "delta": 88.0,
+          "delta_shares": 2200.0,
+          "traded_value": 9849400,
           "shares": 4700.0,
           "ratio": 0.5925
         },
@@ -3046,6 +3804,8 @@
           "ticker": "4684",
           "name": "オービック",
           "delta": 24.36,
+          "delta_shares": 1900.0,
+          "traded_value": 7579100,
           "shares": 9700.0,
           "ratio": 1.0896
         },
@@ -3053,6 +3813,8 @@
           "ticker": "8306",
           "name": "三菱ＵＦＪフィナンシャル・グループ",
           "delta": 17.65,
+          "delta_shares": 3600.0,
+          "traded_value": 10796400,
           "shares": 24000.0,
           "ratio": 2.0268
         },
@@ -3060,6 +3822,8 @@
           "ticker": "8111",
           "name": "ゴールドウイン",
           "delta": 17.44,
+          "delta_shares": 3000.0,
+          "traded_value": 6330000,
           "shares": 20200.0,
           "ratio": 1.2002
         },
@@ -3067,6 +3831,8 @@
           "ticker": "9433",
           "name": "ＫＤＤＩ",
           "delta": 17.16,
+          "delta_shares": 2300.0,
+          "traded_value": 6298550,
           "shares": 15700.0,
           "ratio": 1.2107
         },
@@ -3074,6 +3840,8 @@
           "ticker": "5631",
           "name": "日本製鋼所",
           "delta": 12.73,
+          "delta_shares": 1400.0,
+          "traded_value": 10736600,
           "shares": 12400.0,
           "ratio": 2.6778
         },
@@ -3081,6 +3849,8 @@
           "ticker": "3064",
           "name": "ＭｏｎｏｔａＲＯ",
           "delta": 10.71,
+          "delta_shares": 7800.0,
+          "traded_value": 14734200,
           "shares": 80600.0,
           "ratio": 4.2873
         },
@@ -3088,6 +3858,8 @@
           "ticker": "6134",
           "name": "ＦＵＪＩ",
           "delta": 9.47,
+          "delta_shares": 900.0,
+          "traded_value": 7144200,
           "shares": 10400.0,
           "ratio": 2.3247
         },
@@ -3095,6 +3867,8 @@
           "ticker": "4063",
           "name": "信越化学工業",
           "delta": 8.51,
+          "delta_shares": 1200.0,
+          "traded_value": 9309600,
           "shares": 15300.0,
           "ratio": 3.3424
         },
@@ -3102,6 +3876,8 @@
           "ticker": "8766",
           "name": "東京海上ホールディングス",
           "delta": 5.84,
+          "delta_shares": 800.0,
+          "traded_value": 5688800,
           "shares": 14500.0,
           "ratio": 2.9035
         },
@@ -3109,6 +3885,8 @@
           "ticker": "6098",
           "name": "リクルートホールディングス",
           "delta": 2.24,
+          "delta_shares": 500.0,
+          "traded_value": 5285000,
           "shares": 22800.0,
           "ratio": 6.7862
         }
@@ -3118,6 +3896,8 @@
           "ticker": "6976",
           "name": "太陽誘電",
           "delta": -13.64,
+          "delta_shares": -900.0,
+          "traded_value": 13333500,
           "shares": 5700.0,
           "ratio": 2.3779
         },
@@ -3125,6 +3905,8 @@
           "ticker": "6981",
           "name": "村田製作所",
           "delta": -2.19,
+          "delta_shares": -800.0,
+          "traded_value": 7700000,
           "shares": 35700.0,
           "ratio": 9.6758
         }
@@ -3139,6 +3921,8 @@
           "ticker": "8001",
           "name": "伊藤忠商事",
           "delta": 712.5,
+          "delta_shares": 11400.0,
+          "traded_value": 21426300,
           "shares": 13000.0,
           "ratio": 0.6645
         },
@@ -3146,6 +3930,8 @@
           "ticker": "9697",
           "name": "カプコン",
           "delta": 555.56,
+          "delta_shares": 10000.0,
+          "traded_value": 30690000,
           "shares": 11800.0,
           "ratio": 0.9849
         },
@@ -3153,6 +3939,8 @@
           "ticker": "9766",
           "name": "コナミグループ",
           "delta": 200.0,
+          "delta_shares": 1200.0,
+          "traded_value": 23802000,
           "shares": 1800.0,
           "ratio": 0.971
         },
@@ -3160,6 +3948,8 @@
           "ticker": "4061",
           "name": "デンカ",
           "delta": 82.98,
+          "delta_shares": 3900.0,
+          "traded_value": 16181100,
           "shares": 8600.0,
           "ratio": 0.9704
         },
@@ -3167,6 +3957,8 @@
           "ticker": "4684",
           "name": "オービック",
           "delta": 50.52,
+          "delta_shares": 4900.0,
+          "traded_value": 20388900,
           "shares": 14600.0,
           "ratio": 1.6521
         },
@@ -3174,6 +3966,8 @@
           "ticker": "7550",
           "name": "ゼンショーホールディングス",
           "delta": 47.06,
+          "delta_shares": 800.0,
+          "traded_value": 6328800,
           "shares": 2500.0,
           "ratio": 0.5379
         },
@@ -3181,6 +3975,8 @@
           "ticker": "6134",
           "name": "ＦＵＪＩ",
           "delta": 17.31,
+          "delta_shares": 1800.0,
+          "traded_value": 14752800,
           "shares": 12200.0,
           "ratio": 2.7193
         },
@@ -3188,6 +3984,8 @@
           "ticker": "7532",
           "name": "パン・パシフィック・インターナショナルホールディングス",
           "delta": 16.61,
+          "delta_shares": 9400.0,
+          "traded_value": 7740900,
           "shares": 66000.0,
           "ratio": 1.4781
         },
@@ -3195,6 +3993,8 @@
           "ticker": "8766",
           "name": "東京海上ホールディングス",
           "delta": 6.9,
+          "delta_shares": 1000.0,
+          "traded_value": 7108000,
           "shares": 15500.0,
           "ratio": 2.9962
         },
@@ -3202,6 +4002,8 @@
           "ticker": "7203",
           "name": "トヨタ自動車",
           "delta": 5.04,
+          "delta_shares": 4600.0,
+          "traded_value": 13365300,
           "shares": 95900.0,
           "ratio": 7.5777
         },
@@ -3209,6 +4011,8 @@
           "ticker": "3064",
           "name": "ＭｏｎｏｔａＲＯ",
           "delta": 0.37,
+          "delta_shares": 300.0,
+          "traded_value": 577800,
           "shares": 80900.0,
           "ratio": 4.2374
         }
@@ -3218,6 +4022,8 @@
           "ticker": "6976",
           "name": "太陽誘電",
           "delta": -61.4,
+          "delta_shares": -3500.0,
+          "traded_value": 56210000,
           "shares": 2200.0,
           "ratio": 0.9609
         },
@@ -3225,6 +4031,8 @@
           "ticker": "6981",
           "name": "村田製作所",
           "delta": -6.16,
+          "delta_shares": -2200.0,
+          "traded_value": 23078000,
           "shares": 33500.0,
           "ratio": 9.5569
         }
@@ -3246,6 +4054,8 @@
           "ticker": "6857",
           "name": "アドバンテスト",
           "delta": 244.44,
+          "delta_shares": 2200.0,
+          "traded_value": 60852000,
           "shares": 3100.0,
           "ratio": 2.3003
         },
@@ -3253,6 +4063,8 @@
           "ticker": "6146",
           "name": "ディスコ",
           "delta": 20.0,
+          "delta_shares": 100.0,
+          "traded_value": 6871000,
           "shares": 600.0,
           "ratio": 1.1059
         },
@@ -3260,6 +4072,8 @@
           "ticker": "3891",
           "name": "ニッポン高度紙工業",
           "delta": 16.44,
+          "delta_shares": 1200.0,
+          "traded_value": 10152000,
           "shares": 8500.0,
           "ratio": 1.9291
         },
@@ -3267,6 +4081,8 @@
           "ticker": "9984",
           "name": "ソフトバンクグループ",
           "delta": 9.22,
+          "delta_shares": 1300.0,
+          "traded_value": 10809500,
           "shares": 15400.0,
           "ratio": 3.4352
         }
@@ -3276,6 +4092,8 @@
           "ticker": "9735",
           "name": "セコム",
           "delta": -51.35,
+          "delta_shares": -3800.0,
+          "traded_value": 24479600,
           "shares": 3600.0,
           "ratio": 0.6221
         },
@@ -3283,6 +4101,8 @@
           "ticker": "7747",
           "name": "朝日インテック",
           "delta": -45.26,
+          "delta_shares": -4300.0,
+          "traded_value": 15609000,
           "shares": 5200.0,
           "ratio": 0.5064
         },
@@ -3290,6 +4110,8 @@
           "ticker": "8053",
           "name": "住友商事",
           "delta": -24.66,
+          "delta_shares": -1800.0,
+          "traded_value": 12315600,
           "shares": 5500.0,
           "ratio": 1.0095
         }
@@ -3304,6 +4126,8 @@
           "ticker": "6361",
           "name": "荏原製作所",
           "delta": 683.33,
+          "delta_shares": 4100.0,
+          "traded_value": 22468000,
           "shares": 4700.0,
           "ratio": 0.7043
         },
@@ -3311,6 +4135,8 @@
           "ticker": "8035",
           "name": "東京エレクトロン",
           "delta": 100.0,
+          "delta_shares": 400.0,
+          "traded_value": 25464000,
           "shares": 800.0,
           "ratio": 1.3926
         },
@@ -3318,6 +4144,8 @@
           "ticker": "6857",
           "name": "アドバンテスト",
           "delta": 9.68,
+          "delta_shares": 300.0,
+          "traded_value": 8451000,
           "shares": 3400.0,
           "ratio": 2.619
         },
@@ -3325,6 +4153,8 @@
           "ticker": "9984",
           "name": "ソフトバンクグループ",
           "delta": 5.84,
+          "delta_shares": 900.0,
+          "traded_value": 6639300,
           "shares": 16300.0,
           "ratio": 3.288
         }
@@ -3334,6 +4164,8 @@
           "ticker": "7747",
           "name": "朝日インテック",
           "delta": -42.31,
+          "delta_shares": -2200.0,
+          "traded_value": 8254400,
           "shares": 3000.0,
           "ratio": 0.3078
         },
@@ -3341,6 +4173,8 @@
           "ticker": "7730",
           "name": "マニー",
           "delta": -38.8,
+          "delta_shares": -9700.0,
+          "traded_value": 16363900,
           "shares": 15300.0,
           "ratio": 0.7058
         },
@@ -3348,6 +4182,8 @@
           "ticker": "4461",
           "name": "第一工業製薬",
           "delta": -36.36,
+          "delta_shares": -400.0,
+          "traded_value": 4504000,
           "shares": 700.0,
           "ratio": 0.2155
         },
@@ -3355,6 +4191,8 @@
           "ticker": "6845",
           "name": "アズビル",
           "delta": -31.98,
+          "delta_shares": -6300.0,
+          "traded_value": 10376100,
           "shares": 13400.0,
           "ratio": 0.6035
         },
@@ -3362,6 +4200,8 @@
           "ticker": "4519",
           "name": "中外製薬",
           "delta": -22.22,
+          "delta_shares": -1000.0,
+          "traded_value": 7567000,
           "shares": 3500.0,
           "ratio": 0.7242
         },
@@ -3369,6 +4209,8 @@
           "ticker": "4022",
           "name": "ラサ工業",
           "delta": -16.51,
+          "delta_shares": -3600.0,
+          "traded_value": 8899200,
           "shares": 18200.0,
           "ratio": 1.2302
         }
@@ -3387,11 +4229,15 @@
       "removed": [
         {
           "ticker": "5803",
-          "name": "フジクラ"
+          "name": "フジクラ",
+          "shares": 600.0,
+          "traded_value": 2848200
         },
         {
           "ticker": "6976",
-          "name": "太陽誘電"
+          "name": "太陽誘電",
+          "shares": 2200.0,
+          "traded_value": 34870000
         }
       ],
       "increased": [
@@ -3399,6 +4245,8 @@
           "ticker": "4684",
           "name": "オービック",
           "delta": 12.33,
+          "delta_shares": 1800.0,
+          "traded_value": 7174800,
           "shares": 16400.0,
           "ratio": 1.9018
         }
@@ -3408,6 +4256,8 @@
           "ticker": "4022",
           "name": "ラサ工業",
           "delta": -32.97,
+          "delta_shares": -6000.0,
+          "traded_value": 12372000,
           "shares": 12200.0,
           "ratio": 0.7319
         },
@@ -3415,6 +4265,8 @@
           "ticker": "8306",
           "name": "三菱ＵＦＪフィナンシャル・グループ",
           "delta": -24.17,
+          "delta_shares": -5800.0,
+          "traded_value": 18374400,
           "shares": 18200.0,
           "ratio": 1.6774
         },
@@ -3422,6 +4274,8 @@
           "ticker": "6134",
           "name": "ＦＵＪＩ",
           "delta": -19.67,
+          "delta_shares": -2400.0,
+          "traded_value": 17188800,
           "shares": 9800.0,
           "ratio": 2.042
         },
@@ -3429,6 +4283,8 @@
           "ticker": "3891",
           "name": "ニッポン高度紙工業",
           "delta": -16.47,
+          "delta_shares": -1400.0,
+          "traded_value": 12656000,
           "shares": 7100.0,
           "ratio": 1.8673
         },
@@ -3436,6 +4292,8 @@
           "ticker": "7182",
           "name": "ゆうちょ銀行",
           "delta": -11.67,
+          "delta_shares": -3700.0,
+          "traded_value": 11566200,
           "shares": 28000.0,
           "ratio": 2.5465
         },
@@ -3443,6 +4301,8 @@
           "ticker": "6981",
           "name": "村田製作所",
           "delta": -6.27,
+          "delta_shares": -2100.0,
+          "traded_value": 18293100,
           "shares": 31400.0,
           "ratio": 7.9577
         }
@@ -3457,6 +4317,8 @@
           "ticker": "6361",
           "name": "荏原製作所",
           "delta": 31.91,
+          "delta_shares": 1500.0,
+          "traded_value": 7950000,
           "shares": 6200.0,
           "ratio": 0.9446
         }
@@ -3466,6 +4328,8 @@
           "ticker": "3891",
           "name": "ニッポン高度紙工業",
           "delta": -8.45,
+          "delta_shares": -600.0,
+          "traded_value": 6210000,
           "shares": 6500.0,
           "ratio": 1.9339
         },
@@ -3473,6 +4337,8 @@
           "ticker": "6981",
           "name": "村田製作所",
           "delta": -7.64,
+          "delta_shares": -2400.0,
+          "traded_value": 23260800,
           "shares": 29000.0,
           "ratio": 8.0795
         }
@@ -3487,6 +4353,8 @@
           "ticker": "9984",
           "name": "ソフトバンクグループ",
           "delta": 6.75,
+          "delta_shares": 1100.0,
+          "traded_value": 7107100,
           "shares": 17400.0,
           "ratio": 3.3025
         },
@@ -3494,6 +4362,8 @@
           "ticker": "3064",
           "name": "ＭｏｎｏｔａＲＯ",
           "delta": 4.7,
+          "delta_shares": 3800.0,
+          "traded_value": 7273200,
           "shares": 84700.0,
           "ratio": 4.7623
         },
@@ -3501,6 +4371,8 @@
           "ticker": "3891",
           "name": "ニッポン高度紙工業",
           "delta": 4.62,
+          "delta_shares": 300.0,
+          "traded_value": 2772000,
           "shares": 6800.0,
           "ratio": 1.8458
         },
@@ -3508,6 +4380,8 @@
           "ticker": "6981",
           "name": "村田製作所",
           "delta": 4.48,
+          "delta_shares": 1300.0,
+          "traded_value": 11245000,
           "shares": 30300.0,
           "ratio": 7.6994
         }
@@ -3517,6 +4391,8 @@
           "ticker": "4088",
           "name": "エア・ウォーター",
           "delta": -50.56,
+          "delta_shares": -4500.0,
+          "traded_value": 10980000,
           "shares": 4400.0,
           "ratio": 0.3154
         },
@@ -3524,6 +4400,8 @@
           "ticker": "9735",
           "name": "セコム",
           "delta": -38.89,
+          "delta_shares": -1400.0,
+          "traded_value": 9165800,
           "shares": 2200.0,
           "ratio": 0.4231
         },
@@ -3531,6 +4409,8 @@
           "ticker": "8035",
           "name": "東京エレクトロン",
           "delta": -12.5,
+          "delta_shares": -100.0,
+          "traded_value": 6183000,
           "shares": 700.0,
           "ratio": 1.2714
         },
@@ -3538,6 +4418,8 @@
           "ticker": "7182",
           "name": "ゆうちょ銀行",
           "delta": -11.79,
+          "delta_shares": -3300.0,
+          "traded_value": 10484100,
           "shares": 24700.0,
           "ratio": 2.3052
         },
@@ -3545,6 +4427,8 @@
           "ticker": "6134",
           "name": "ＦＵＪＩ",
           "delta": -10.2,
+          "delta_shares": -1000.0,
+          "traded_value": 7355000,
           "shares": 8800.0,
           "ratio": 1.9013
         }
@@ -3556,18 +4440,24 @@
         {
           "ticker": "6005",
           "name": "三浦工業",
-          "ratio": 0.1534
+          "ratio": 0.1534,
+          "shares": 1700.0,
+          "traded_value": 5298900
         },
         {
           "ticker": "6055",
           "name": "ジャパンマテリアル",
-          "ratio": 0.207
+          "ratio": 0.207,
+          "shares": 3300.0,
+          "traded_value": 7151100
         }
       ],
       "removed": [
         {
           "ticker": "6754",
-          "name": "アンリツ"
+          "name": "アンリツ",
+          "shares": 800.0,
+          "traded_value": 3067200
         }
       ],
       "increased": [
@@ -3575,6 +4465,8 @@
           "ticker": "6702",
           "name": "富士通",
           "delta": 572.73,
+          "delta_shares": 6300.0,
+          "traded_value": 21212100,
           "shares": 7400.0,
           "ratio": 0.7211
         },
@@ -3582,6 +4474,8 @@
           "ticker": "6501",
           "name": "日立製作所",
           "delta": 557.14,
+          "delta_shares": 3900.0,
+          "traded_value": 18154500,
           "shares": 4600.0,
           "ratio": 0.6197
         },
@@ -3589,6 +4483,8 @@
           "ticker": "6954",
           "name": "ファナック",
           "delta": 68.18,
+          "delta_shares": 1500.0,
+          "traded_value": 10167000,
           "shares": 3700.0,
           "ratio": 0.7258
         },
@@ -3596,6 +4492,8 @@
           "ticker": "4686",
           "name": "ジャストシステム",
           "delta": 40.91,
+          "delta_shares": 2700.0,
+          "traded_value": 10395000,
           "shares": 9300.0,
           "ratio": 1.0362
         },
@@ -3603,6 +4501,8 @@
           "ticker": "7832",
           "name": "バンダイナムコホールディングス",
           "delta": 21.67,
+          "delta_shares": 2600.0,
+          "traded_value": 9529000,
           "shares": 14600.0,
           "ratio": 1.5486
         },
@@ -3610,6 +4510,8 @@
           "ticker": "9766",
           "name": "コナミグループ",
           "delta": 16.67,
+          "delta_shares": 300.0,
+          "traded_value": 5770500,
           "shares": 2100.0,
           "ratio": 1.169
         },
@@ -3617,6 +4519,8 @@
           "ticker": "5631",
           "name": "日本製鋼所",
           "delta": 12.1,
+          "delta_shares": 1500.0,
+          "traded_value": 10671000,
           "shares": 13900.0,
           "ratio": 2.8618
         },
@@ -3624,6 +4528,8 @@
           "ticker": "4684",
           "name": "オービック",
           "delta": 9.76,
+          "delta_shares": 1600.0,
+          "traded_value": 6345600,
           "shares": 18000.0,
           "ratio": 2.066
         }
@@ -3633,6 +4539,8 @@
           "ticker": "6367",
           "name": "ダイキン工業",
           "delta": -71.43,
+          "delta_shares": -500.0,
+          "traded_value": 11535000,
           "shares": 200.0,
           "ratio": 0.1335
         },
@@ -3640,6 +4548,8 @@
           "ticker": "4022",
           "name": "ラサ工業",
           "delta": -68.03,
+          "delta_shares": -8300.0,
+          "traded_value": 15205600,
           "shares": 3900.0,
           "ratio": 0.2068
         },
@@ -3647,6 +4557,8 @@
           "ticker": "6134",
           "name": "ＦＵＪＩ",
           "delta": -12.5,
+          "delta_shares": -1100.0,
+          "traded_value": 8168600,
           "shares": 7700.0,
           "ratio": 1.6548
         }
@@ -3658,7 +4570,9 @@
         {
           "ticker": "1944",
           "name": "きんでん",
-          "ratio": 1.5147
+          "ratio": 1.5147,
+          "shares": 7900.0,
+          "traded_value": 53562000
         }
       ],
       "removed": [],
@@ -3667,6 +4581,8 @@
           "ticker": "6005",
           "name": "三浦工業",
           "delta": 100.0,
+          "delta_shares": 1700.0,
+          "traded_value": 5300600,
           "shares": 3400.0,
           "ratio": 0.2998
         },
@@ -3674,6 +4590,8 @@
           "ticker": "6055",
           "name": "ジャパンマテリアル",
           "delta": 42.42,
+          "delta_shares": 1400.0,
+          "traded_value": 3173800,
           "shares": 4700.0,
           "ratio": 0.3013
         },
@@ -3681,6 +4599,8 @@
           "ticker": "6501",
           "name": "日立製作所",
           "delta": 34.78,
+          "delta_shares": 1600.0,
+          "traded_value": 7451200,
           "shares": 6200.0,
           "ratio": 0.8165
         },
@@ -3688,6 +4608,8 @@
           "ticker": "6702",
           "name": "富士通",
           "delta": 18.92,
+          "delta_shares": 1400.0,
+          "traded_value": 4564000,
           "shares": 8800.0,
           "ratio": 0.8113
         },
@@ -3695,6 +4617,8 @@
           "ticker": "4686",
           "name": "ジャストシステム",
           "delta": 11.83,
+          "delta_shares": 1100.0,
+          "traded_value": 4174500,
           "shares": 10400.0,
           "ratio": 1.1162
         },
@@ -3702,6 +4626,8 @@
           "ticker": "6981",
           "name": "村田製作所",
           "delta": 4.29,
+          "delta_shares": 1300.0,
+          "traded_value": 11122800,
           "shares": 31600.0,
           "ratio": 7.646
         }
@@ -3711,6 +4637,8 @@
           "ticker": "6146",
           "name": "ディスコ",
           "delta": -33.33,
+          "delta_shares": -200.0,
+          "traded_value": 15980000,
           "shares": 400.0,
           "ratio": 0.9038
         },
@@ -3718,6 +4646,8 @@
           "ticker": "5802",
           "name": "住友電気工業",
           "delta": -19.35,
+          "delta_shares": -600.0,
+          "traded_value": 6582000,
           "shares": 2500.0,
           "ratio": 0.7756
         },
@@ -3725,6 +4655,8 @@
           "ticker": "6134",
           "name": "ＦＵＪＩ",
           "delta": -11.69,
+          "delta_shares": -900.0,
+          "traded_value": 6903900,
           "shares": 6800.0,
           "ratio": 1.4752
         }
@@ -3736,11 +4668,15 @@
       "removed": [
         {
           "ticker": "4088",
-          "name": "エア・ウォーター"
+          "name": "エア・ウォーター",
+          "shares": 4400.0,
+          "traded_value": 10740400
         },
         {
           "ticker": "5801",
-          "name": "古河電気工業"
+          "name": "古河電気工業",
+          "shares": 100.0,
+          "traded_value": 4209000
         }
       ],
       "increased": [
@@ -3748,6 +4684,8 @@
           "ticker": "4022",
           "name": "ラサ工業",
           "delta": 117.95,
+          "delta_shares": 4600.0,
+          "traded_value": 9982000,
           "shares": 8500.0,
           "ratio": 0.5069
         },
@@ -3755,6 +4693,8 @@
           "ticker": "6055",
           "name": "ジャパンマテリアル",
           "delta": 29.79,
+          "delta_shares": 1400.0,
+          "traded_value": 3458000,
           "shares": 6100.0,
           "ratio": 0.4141
         },
@@ -3762,6 +4702,8 @@
           "ticker": "6005",
           "name": "三浦工業",
           "delta": 29.41,
+          "delta_shares": 1000.0,
+          "traded_value": 3190000,
           "shares": 4400.0,
           "ratio": 0.3857
         },
@@ -3769,6 +4711,8 @@
           "ticker": "9433",
           "name": "ＫＤＤＩ",
           "delta": 21.66,
+          "delta_shares": 3400.0,
+          "traded_value": 9241200,
           "shares": 19100.0,
           "ratio": 1.4267
         },
@@ -3776,6 +4720,8 @@
           "ticker": "8015",
           "name": "豊田通商",
           "delta": 21.05,
+          "delta_shares": 800.0,
+          "traded_value": 5204000,
           "shares": 4600.0,
           "ratio": 0.8224
         },
@@ -3783,6 +4729,8 @@
           "ticker": "8001",
           "name": "伊藤忠商事",
           "delta": 20.0,
+          "delta_shares": 2600.0,
+          "traded_value": 4958200,
           "shares": 15600.0,
           "ratio": 0.8176
         },
@@ -3790,6 +4738,8 @@
           "ticker": "8053",
           "name": "住友商事",
           "delta": 18.18,
+          "delta_shares": 1000.0,
+          "traded_value": 6567000,
           "shares": 6500.0,
           "ratio": 1.1731
         },
@@ -3797,6 +4747,8 @@
           "ticker": "8830",
           "name": "住友不動産",
           "delta": 6.32,
+          "delta_shares": 600.0,
+          "traded_value": 2211000,
           "shares": 10100.0,
           "ratio": 1.0229
         },
@@ -3804,6 +4756,8 @@
           "ticker": "6758",
           "name": "ソニーグループ",
           "delta": 3.12,
+          "delta_shares": 1000.0,
+          "traded_value": 3320000,
           "shares": 33000.0,
           "ratio": 3.011
         }
@@ -3813,6 +4767,8 @@
           "ticker": "5802",
           "name": "住友電気工業",
           "delta": -60.0,
+          "delta_shares": -1500.0,
+          "traded_value": 17295000,
           "shares": 1000.0,
           "ratio": 0.3169
         },
@@ -3820,6 +4776,8 @@
           "ticker": "8035",
           "name": "東京エレクトロン",
           "delta": -42.86,
+          "delta_shares": -300.0,
+          "traded_value": 21828000,
           "shares": 400.0,
           "ratio": 0.7999
         },
@@ -3827,6 +4785,8 @@
           "ticker": "5991",
           "name": "日本発條",
           "delta": -37.5,
+          "delta_shares": -600.0,
+          "traded_value": 2253600,
           "shares": 1000.0,
           "ratio": 0.1032
         },
@@ -3834,6 +4794,8 @@
           "ticker": "3891",
           "name": "ニッポン高度紙工業",
           "delta": -11.76,
+          "delta_shares": -800.0,
+          "traded_value": 7016000,
           "shares": 6000.0,
           "ratio": 1.4461
         },
@@ -3841,6 +4803,8 @@
           "ticker": "6857",
           "name": "アドバンテスト",
           "delta": -8.82,
+          "delta_shares": -300.0,
+          "traded_value": 8826000,
           "shares": 3100.0,
           "ratio": 2.5065
         },
@@ -3848,6 +4812,8 @@
           "ticker": "6134",
           "name": "ＦＵＪＩ",
           "delta": -5.88,
+          "delta_shares": -400.0,
+          "traded_value": 3313200,
           "shares": 6400.0,
           "ratio": 1.4569
         }
@@ -3862,6 +4828,8 @@
           "ticker": "6055",
           "name": "ジャパンマテリアル",
           "delta": 11.48,
+          "delta_shares": 700.0,
+          "traded_value": 1677200,
           "shares": 6800.0,
           "ratio": 0.4516
         },
@@ -3869,6 +4837,8 @@
           "ticker": "7532",
           "name": "パン・パシフィック・インターナショナルホールディングス",
           "delta": 8.79,
+          "delta_shares": 5800.0,
+          "traded_value": 4840680,
           "shares": 71800.0,
           "ratio": 1.6611
         },
@@ -3876,6 +4846,8 @@
           "ticker": "3064",
           "name": "ＭｏｎｏｔａＲＯ",
           "delta": 1.77,
+          "delta_shares": 1500.0,
+          "traded_value": 2610000,
           "shares": 86200.0,
           "ratio": 4.1576
         }
@@ -3885,6 +4857,8 @@
           "ticker": "5802",
           "name": "住友電気工業",
           "delta": -30.0,
+          "delta_shares": -300.0,
+          "traded_value": 3696000,
           "shares": 700.0,
           "ratio": 0.2391
         },
@@ -3892,6 +4866,8 @@
           "ticker": "9983",
           "name": "ファーストリテイリング",
           "delta": -20.0,
+          "delta_shares": -100.0,
+          "traded_value": 8195000,
           "shares": 400.0,
           "ratio": 0.9086
         },
@@ -3899,6 +4875,8 @@
           "ticker": "6857",
           "name": "アドバンテスト",
           "delta": -19.35,
+          "delta_shares": -600.0,
+          "traded_value": 18204000,
           "shares": 2500.0,
           "ratio": 2.1025
         },
@@ -3906,6 +4884,8 @@
           "ticker": "3891",
           "name": "ニッポン高度紙工業",
           "delta": -6.67,
+          "delta_shares": -400.0,
+          "traded_value": 3568000,
           "shares": 5600.0,
           "ratio": 1.3846
         },
@@ -3913,6 +4893,8 @@
           "ticker": "9984",
           "name": "ソフトバンクグループ",
           "delta": -6.32,
+          "delta_shares": -1100.0,
+          "traded_value": 7812200,
           "shares": 16300.0,
           "ratio": 3.2089
         }
@@ -3927,6 +4909,8 @@
           "ticker": "1812",
           "name": "鹿島建設",
           "delta": 18.87,
+          "delta_shares": 1000.0,
+          "traded_value": 5920000,
           "shares": 6300.0,
           "ratio": 1.0331
         },
@@ -3934,6 +4918,8 @@
           "ticker": "6055",
           "name": "ジャパンマテリアル",
           "delta": 14.71,
+          "delta_shares": 1000.0,
+          "traded_value": 2361000,
           "shares": 7800.0,
           "ratio": 0.5101
         },
@@ -3941,6 +4927,8 @@
           "ticker": "8766",
           "name": "東京海上ホールディングス",
           "delta": 9.68,
+          "delta_shares": 1500.0,
+          "traded_value": 10878000,
           "shares": 17000.0,
           "ratio": 3.4149
         }
@@ -3950,6 +4938,8 @@
           "ticker": "8035",
           "name": "東京エレクトロン",
           "delta": -50.0,
+          "delta_shares": -200.0,
+          "traded_value": 14528000,
           "shares": 200.0,
           "ratio": 0.4024
         },
@@ -3957,6 +4947,8 @@
           "ticker": "9983",
           "name": "ファーストリテイリング",
           "delta": -50.0,
+          "delta_shares": -200.0,
+          "traded_value": 16580000,
           "shares": 200.0,
           "ratio": 0.4593
         },
@@ -3964,6 +4956,8 @@
           "ticker": "6857",
           "name": "アドバンテスト",
           "delta": -24.0,
+          "delta_shares": -600.0,
+          "traded_value": 18036000,
           "shares": 1900.0,
           "ratio": 1.582
         },
@@ -3971,6 +4965,8 @@
           "ticker": "3891",
           "name": "ニッポン高度紙工業",
           "delta": -5.36,
+          "delta_shares": -300.0,
+          "traded_value": 2994000,
           "shares": 5300.0,
           "ratio": 1.4651
         }
@@ -3985,6 +4981,8 @@
           "ticker": "6367",
           "name": "ダイキン工業",
           "delta": 450.0,
+          "delta_shares": 900.0,
+          "traded_value": 21415500,
           "shares": 1100.0,
           "ratio": 0.7005
         },
@@ -3992,6 +4990,8 @@
           "ticker": "6951",
           "name": "日本電子",
           "delta": 72.0,
+          "delta_shares": 1800.0,
+          "traded_value": 12587400,
           "shares": 4300.0,
           "ratio": 0.8047
         },
@@ -3999,6 +4999,8 @@
           "ticker": "7202",
           "name": "いすゞ自動車",
           "delta": 47.87,
+          "delta_shares": 4500.0,
+          "traded_value": 9857250,
           "shares": 13900.0,
           "ratio": 0.8149
         },
@@ -4006,6 +5008,8 @@
           "ticker": "8750",
           "name": "第一生命ホールディングス",
           "delta": 15.22,
+          "delta_shares": 5600.0,
+          "traded_value": 10194800,
           "shares": 42400.0,
           "ratio": 2.0658
         },
@@ -4013,6 +5017,8 @@
           "ticker": "7532",
           "name": "パン・パシフィック・インターナショナルホールディングス",
           "delta": 15.04,
+          "delta_shares": 10800.0,
+          "traded_value": 9021240,
           "shares": 82600.0,
           "ratio": 1.8465
         },
@@ -4020,6 +5026,8 @@
           "ticker": "3064",
           "name": "ＭｏｎｏｔａＲＯ",
           "delta": 4.29,
+          "delta_shares": 3700.0,
+          "traded_value": 6630400,
           "shares": 89900.0,
           "ratio": 4.3114
         }
@@ -4029,6 +5037,8 @@
           "ticker": "6981",
           "name": "村田製作所",
           "delta": -1.58,
+          "delta_shares": -500.0,
+          "traded_value": 5872500,
           "shares": 31100.0,
           "ratio": 9.7755
         }
@@ -4043,6 +5053,8 @@
           "ticker": "285A",
           "name": "キオクシアホールディングス",
           "delta": 100.0,
+          "delta_shares": 100.0,
+          "traded_value": 10860000,
           "shares": 200.0,
           "ratio": 0.5904
         },
@@ -4050,6 +5062,8 @@
           "ticker": "8015",
           "name": "豊田通商",
           "delta": 32.61,
+          "delta_shares": 1500.0,
+          "traded_value": 9286500,
           "shares": 6100.0,
           "ratio": 1.0265
         },
@@ -4057,6 +5071,8 @@
           "ticker": "6702",
           "name": "富士通",
           "delta": 21.59,
+          "delta_shares": 1900.0,
+          "traded_value": 6100900,
           "shares": 10700.0,
           "ratio": 0.9339
         },
@@ -4064,6 +5080,8 @@
           "ticker": "7532",
           "name": "パン・パシフィック・インターナショナルホールディングス",
           "delta": 11.99,
+          "delta_shares": 9900.0,
+          "traded_value": 8108100,
           "shares": 92500.0,
           "ratio": 2.0593
         },
@@ -4071,6 +5089,8 @@
           "ticker": "6758",
           "name": "ソニーグループ",
           "delta": 10.0,
+          "delta_shares": 3300.0,
+          "traded_value": 10362000,
           "shares": 36300.0,
           "ratio": 3.0983
         }
@@ -4080,6 +5100,8 @@
           "ticker": "6981",
           "name": "村田製作所",
           "delta": -17.36,
+          "delta_shares": -5400.0,
+          "traded_value": 63450000,
           "shares": 25700.0,
           "ratio": 8.2084
         },
@@ -4087,6 +5109,8 @@
           "ticker": "3891",
           "name": "ニッポン高度紙工業",
           "delta": -11.32,
+          "delta_shares": -600.0,
+          "traded_value": 6450000,
           "shares": 4700.0,
           "ratio": 1.3734
         }
@@ -4108,6 +5132,8 @@
           "ticker": "4403",
           "name": "日油",
           "delta": 294.44,
+          "delta_shares": 5300.0,
+          "traded_value": 13883350,
           "shares": 7100.0,
           "ratio": 0.5086
         },
@@ -4115,6 +5141,8 @@
           "ticker": "8015",
           "name": "豊田通商",
           "delta": 39.34,
+          "delta_shares": 2400.0,
+          "traded_value": 14712000,
           "shares": 8500.0,
           "ratio": 1.425
         },
@@ -4122,6 +5150,8 @@
           "ticker": "6951",
           "name": "日本電子",
           "delta": 20.93,
+          "delta_shares": 900.0,
+          "traded_value": 6273000,
           "shares": 5200.0,
           "ratio": 0.9912
         },
@@ -4129,6 +5159,8 @@
           "ticker": "6504",
           "name": "富士電機",
           "delta": 19.05,
+          "delta_shares": 400.0,
+          "traded_value": 5840000,
           "shares": 2500.0,
           "ratio": 0.9982
         },
@@ -4136,6 +5168,8 @@
           "ticker": "6758",
           "name": "ソニーグループ",
           "delta": 7.99,
+          "delta_shares": 2900.0,
+          "traded_value": 9161100,
           "shares": 39200.0,
           "ratio": 3.3867
         },
@@ -4143,6 +5177,8 @@
           "ticker": "3064",
           "name": "ＭｏｎｏｔａＲＯ",
           "delta": 6.23,
+          "delta_shares": 5600.0,
+          "traded_value": 9839200,
           "shares": 95500.0,
           "ratio": 4.5889
         }
@@ -4152,6 +5188,8 @@
           "ticker": "4061",
           "name": "デンカ",
           "delta": -20.93,
+          "delta_shares": -1800.0,
+          "traded_value": 7849800,
           "shares": 6800.0,
           "ratio": 0.811
         },
@@ -4159,6 +5197,8 @@
           "ticker": "3891",
           "name": "ニッポン高度紙工業",
           "delta": -14.89,
+          "delta_shares": -700.0,
+          "traded_value": 6713000,
           "shares": 4000.0,
           "ratio": 1.0491
         }
@@ -4173,6 +5213,8 @@
           "ticker": "6954",
           "name": "ファナック",
           "delta": 75.68,
+          "delta_shares": 2800.0,
+          "traded_value": 20613600,
           "shares": 6500.0,
           "ratio": 1.2988
         },
@@ -4180,6 +5222,8 @@
           "ticker": "285A",
           "name": "キオクシアホールディングス",
           "delta": 50.0,
+          "delta_shares": 100.0,
+          "traded_value": 9250000,
           "shares": 300.0,
           "ratio": 0.7532
         },
@@ -4187,6 +5231,8 @@
           "ticker": "8015",
           "name": "豊田通商",
           "delta": 14.12,
+          "delta_shares": 1200.0,
+          "traded_value": 7297200,
           "shares": 9700.0,
           "ratio": 1.6009
         },
@@ -4194,6 +5240,8 @@
           "ticker": "6504",
           "name": "富士電機",
           "delta": 8.0,
+          "delta_shares": 200.0,
+          "traded_value": 2938000,
           "shares": 2700.0,
           "ratio": 1.0765
         },
@@ -4201,6 +5249,8 @@
           "ticker": "8750",
           "name": "第一生命ホールディングス",
           "delta": 6.6,
+          "delta_shares": 2800.0,
+          "traded_value": 4838400,
           "shares": 45200.0,
           "ratio": 2.1199
         }
@@ -4210,6 +5260,8 @@
           "ticker": "7846",
           "name": "パイロットコーポレーション",
           "delta": -16.95,
+          "delta_shares": -1000.0,
+          "traded_value": 4990000,
           "shares": 4900.0,
           "ratio": 0.6636
         }
