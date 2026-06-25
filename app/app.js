@@ -167,21 +167,38 @@ function renderChangeGrid(date) {
   grid.innerHTML = `
     <div class="change-section tag-new">
       <h3>新規追加 (${change.new.length})</h3>
-      ${listItems(change.new, r => `<span class="ticker">${r.ticker}</span><span>${r.name}</span><span>${r.ratio.toFixed(2)}%</span>`)}
+      ${listItems(change.new, r => `<span class="ticker">${r.ticker}</span><span>${r.name}</span><span class="chg-shares">${fmtShares(r.shares)}</span><span class="chg-money">${fmtMoney(r.traded_value)}</span>`)}
     </div>
     <div class="change-section tag-remove">
       <h3>処分 (${change.removed.length})</h3>
-      ${listItems(change.removed, r => `<span class="ticker">${r.ticker}</span><span>${r.name}</span>`)}
+      ${listItems(change.removed, r => `<span class="ticker">${r.ticker}</span><span>${r.name}</span><span class="chg-shares">${fmtShares(r.shares)}</span><span class="chg-money">${fmtMoney(r.traded_value)}</span>`)}
     </div>
     <div class="change-section tag-up">
       <h3>買い増し (${change.increased.length})</h3>
-      ${listItems(change.increased, r => `<span class="ticker">${r.ticker}</span><span>${r.name}</span><span class="delta-pos">+${r.delta.toFixed(1)}%</span>`)}
+      ${listItems(change.increased, r => `<span class="ticker">${r.ticker}</span><span>${r.name}</span><span class="delta-pos">+${r.delta.toFixed(1)}%</span><span class="chg-shares">${fmtDeltaShares(r.delta_shares)}</span><span class="chg-money">${fmtMoney(r.traded_value)}</span>`)}
     </div>
     <div class="change-section tag-down">
       <h3>削減 (${change.decreased.length})</h3>
-      ${listItems(change.decreased, r => `<span class="ticker">${r.ticker}</span><span>${r.name}</span><span class="delta-neg">${r.delta.toFixed(1)}%</span>`)}
+      ${listItems(change.decreased, r => `<span class="ticker">${r.ticker}</span><span>${r.name}</span><span class="delta-neg">${r.delta.toFixed(1)}%</span><span class="chg-shares">${fmtDeltaShares(r.delta_shares)}</span><span class="chg-money">${fmtMoney(r.traded_value)}</span>`)}
     </div>
   `;
+}
+
+function fmtShares(n) {
+  if (n == null) return "—";
+  return `${Math.round(n).toLocaleString()}株`;
+}
+
+function fmtDeltaShares(n) {
+  if (n == null) return "—";
+  const sign = n > 0 ? "+" : "";
+  return `${sign}${Math.round(n).toLocaleString()}株`;
+}
+
+function fmtMoney(v) {
+  if (v == null) return "—";
+  if (Math.abs(v) >= 100_000_000) return `${(v / 100_000_000).toFixed(2)}億円`;
+  return `${(v / 1_000_000).toFixed(1)}百万円`;
 }
 
 function listItems(items, rowFn) {

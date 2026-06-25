@@ -181,11 +181,16 @@ def build():
             if prev_shares == 0:
                 continue
             shares_change_pct = (curr_shares - prev_shares) / prev_shares * 100
+            delta_shares = curr_shares - prev_shares
+            price = curr[ticker]["price"] or 0
+            traded_value = abs(delta_shares) * price
             if shares_change_pct > 0:
                 increased.append({
                     "ticker": ticker,
                     "name": curr[ticker]["name"],
                     "delta": round(shares_change_pct, 2),
+                    "delta_shares": delta_shares,
+                    "traded_value": round(traded_value),
                     "shares": curr_shares,
                     "ratio": round(curr[ticker]["ratio"], 4),
                 })
@@ -194,6 +199,8 @@ def build():
                     "ticker": ticker,
                     "name": curr[ticker]["name"],
                     "delta": round(shares_change_pct, 2),
+                    "delta_shares": delta_shares,
+                    "traded_value": round(traded_value),
                     "shares": curr_shares,
                     "ratio": round(curr[ticker]["ratio"], 4),
                 })
@@ -203,8 +210,12 @@ def build():
 
         changes.append({
             "date": d,
-            "new": [{"ticker": t, "name": curr[t]["name"], "ratio": round(curr[t]["ratio"], 4)} for t in new_tickers],
-            "removed": [{"ticker": t, "name": prev[t]["name"]} for t in removed_tickers],
+            "new": [{"ticker": t, "name": curr[t]["name"], "ratio": round(curr[t]["ratio"], 4),
+                     "shares": curr[t]["shares"] or 0,
+                     "traded_value": round((curr[t]["shares"] or 0) * (curr[t]["price"] or 0))} for t in new_tickers],
+            "removed": [{"ticker": t, "name": prev[t]["name"],
+                         "shares": prev[t]["shares"] or 0,
+                         "traded_value": round((prev[t]["shares"] or 0) * (prev[t]["price"] or 0))} for t in removed_tickers],
             "increased": increased,
             "decreased": decreased,
         })

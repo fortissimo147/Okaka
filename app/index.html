@@ -86,12 +86,21 @@
       padding: 4px 0;
       border-bottom: 1px solid #f0f0f0;
       display: flex;
-      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
     }
     .change-list li:last-child { border-bottom: none; }
-    .ticker { font-weight: 600; color: #555; min-width: 50px; }
-    .delta-pos { color: #1565c0; }
-    .delta-neg { color: #e65100; }
+    .change-list li > span:nth-child(2) {
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .ticker { font-weight: 600; color: #555; min-width: 50px; flex-shrink: 0; }
+    .delta-pos { color: #1565c0; flex-shrink: 0; }
+    .delta-neg { color: #e65100; flex-shrink: 0; }
+    .chg-shares { color: #888; min-width: 78px; text-align: right; white-space: nowrap; flex-shrink: 0; font-variant-numeric: tabular-nums; }
+    .chg-money { color: #333; min-width: 66px; text-align: right; white-space: nowrap; flex-shrink: 0; font-variant-numeric: tabular-nums; }
     .empty { color: #bbb; font-size: 0.8rem; font-style: italic; }
 
     /* グラフ */
