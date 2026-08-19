@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-20T08:00:13.884188+09:00",
+  "generated_at": "2026-08-20T08:09:18.673377+09:00",
   "dates": [
     "2026-03-06",
     "2026-03-27",
@@ -4973,15 +4973,6 @@
       ],
       "decreased": [
         {
-          "ticker": "9983",
-          "name": "ファーストリテイリング",
-          "delta": -50.0,
-          "delta_shares": -200.0,
-          "traded_value": 16580000,
-          "shares": 200.0,
-          "ratio": 0.4593
-        },
-        {
           "ticker": "8035",
           "name": "東京エレクトロン",
           "delta": -50.0,
@@ -4989,6 +4980,15 @@
           "traded_value": 14528000,
           "shares": 200.0,
           "ratio": 0.4024
+        },
+        {
+          "ticker": "9983",
+          "name": "ファーストリテイリング",
+          "delta": -50.0,
+          "delta_shares": -200.0,
+          "traded_value": 16580000,
+          "shares": 200.0,
+          "ratio": 0.4593
         },
         {
           "ticker": "6857",
@@ -5435,15 +5435,6 @@
       ],
       "increased": [
         {
-          "ticker": "8053",
-          "name": "住友商事",
-          "delta": 300.0,
-          "delta_shares": 19500.0,
-          "traded_value": 30229875,
-          "shares": 26000.0,
-          "ratio": 1.1
-        },
-        {
           "ticker": "5802",
           "name": "住友電気工業",
           "delta": 300.0,
@@ -5451,6 +5442,15 @@
           "traded_value": 6265875,
           "shares": 2800.0,
           "ratio": 0.228
+        },
+        {
+          "ticker": "8053",
+          "name": "住友商事",
+          "delta": 300.0,
+          "delta_shares": 19500.0,
+          "traded_value": 30229875,
+          "shares": 26000.0,
+          "ratio": 1.1
         },
         {
           "ticker": "7846",
