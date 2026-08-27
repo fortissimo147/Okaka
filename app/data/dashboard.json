@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-27T07:59:54.352475+09:00",
+  "generated_at": "2026-08-27T13:05:14.837617+09:00",
   "dates": [
     "2026-03-06",
     "2026-03-27",
@@ -5440,15 +5440,6 @@
       ],
       "increased": [
         {
-          "ticker": "8053",
-          "name": "住友商事",
-          "delta": 300.0,
-          "delta_shares": 19500.0,
-          "traded_value": 30229875,
-          "shares": 26000.0,
-          "ratio": 1.1
-        },
-        {
           "ticker": "5802",
           "name": "住友電気工業",
           "delta": 300.0,
@@ -5456,6 +5447,15 @@
           "traded_value": 6265875,
           "shares": 2800.0,
           "ratio": 0.228
+        },
+        {
+          "ticker": "8053",
+          "name": "住友商事",
+          "delta": 300.0,
+          "delta_shares": 19500.0,
+          "traded_value": 30229875,
+          "shares": 26000.0,
+          "ratio": 1.1
         },
         {
           "ticker": "7846",
@@ -8650,15 +8650,6 @@
           "ratio": 0.6461
         },
         {
-          "ticker": "9984",
-          "name": "ソフトバンクグループ",
-          "delta": -25.0,
-          "delta_shares": -3700.0,
-          "traded_value": 19103100,
-          "shares": 11100.0,
-          "ratio": 1.5136
-        },
-        {
           "ticker": "4684",
           "name": "オービック",
           "delta": -25.0,
@@ -8666,6 +8657,15 @@
           "traded_value": 12889800,
           "shares": 8100.0,
           "ratio": 1.0213
+        },
+        {
+          "ticker": "9984",
+          "name": "ソフトバンクグループ",
+          "delta": -25.0,
+          "delta_shares": -3700.0,
+          "traded_value": 19103100,
+          "shares": 11100.0,
+          "ratio": 1.5136
         },
         {
           "ticker": "4063",
