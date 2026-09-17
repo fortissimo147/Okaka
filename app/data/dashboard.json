@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-17T08:00:05.349023+09:00",
+  "generated_at": "2026-09-17T09:54:30.554090+09:00",
   "dates": [
     "2026-03-06",
     "2026-03-27",
@@ -4993,15 +4993,6 @@
       ],
       "decreased": [
         {
-          "ticker": "9983",
-          "name": "ファーストリテイリング",
-          "delta": -50.0,
-          "delta_shares": -200.0,
-          "traded_value": 16580000,
-          "shares": 200.0,
-          "ratio": 0.4593
-        },
-        {
           "ticker": "8035",
           "name": "東京エレクトロン",
           "delta": -50.0,
@@ -5009,6 +5000,15 @@
           "traded_value": 14528000,
           "shares": 200.0,
           "ratio": 0.4024
+        },
+        {
+          "ticker": "9983",
+          "name": "ファーストリテイリング",
+          "delta": -50.0,
+          "delta_shares": -200.0,
+          "traded_value": 16580000,
+          "shares": 200.0,
+          "ratio": 0.4593
         },
         {
           "ticker": "6857",
@@ -9281,15 +9281,6 @@
           "ratio": 1.3171
         },
         {
-          "ticker": "9983",
-          "name": "ファーストリテイリング",
-          "delta": 100.0,
-          "delta_shares": 100.0,
-          "traded_value": 6686000,
-          "shares": 200.0,
-          "ratio": 0.352
-        },
-        {
           "ticker": "6857",
           "name": "アドバンテスト",
           "delta": 100.0,
@@ -9297,6 +9288,15 @@
           "traded_value": 16420000,
           "shares": 1000.0,
           "ratio": 0.8644
+        },
+        {
+          "ticker": "9983",
+          "name": "ファーストリテイリング",
+          "delta": 100.0,
+          "delta_shares": 100.0,
+          "traded_value": 6686000,
+          "shares": 200.0,
+          "ratio": 0.352
         },
         {
           "ticker": "4666",
