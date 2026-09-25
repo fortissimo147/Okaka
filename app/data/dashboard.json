@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-25T08:00:25.267213+09:00",
+  "generated_at": "2026-09-25T09:55:46.454693+09:00",
   "dates": [
     "2026-03-06",
     "2026-03-27",
@@ -8668,15 +8668,6 @@
           "ratio": 0.6461
         },
         {
-          "ticker": "4684",
-          "name": "オービック",
-          "delta": -25.0,
-          "delta_shares": -2700.0,
-          "traded_value": 12889800,
-          "shares": 8100.0,
-          "ratio": 1.0213
-        },
-        {
           "ticker": "9984",
           "name": "ソフトバンクグループ",
           "delta": -25.0,
@@ -8684,6 +8675,15 @@
           "traded_value": 19103100,
           "shares": 11100.0,
           "ratio": 1.5136
+        },
+        {
+          "ticker": "4684",
+          "name": "オービック",
+          "delta": -25.0,
+          "delta_shares": -2700.0,
+          "traded_value": 12889800,
+          "shares": 8100.0,
+          "ratio": 1.0213
         },
         {
           "ticker": "4063",
@@ -9284,15 +9284,6 @@
           "ratio": 1.3171
         },
         {
-          "ticker": "6857",
-          "name": "アドバンテスト",
-          "delta": 100.0,
-          "delta_shares": 500.0,
-          "traded_value": 16420000,
-          "shares": 1000.0,
-          "ratio": 0.8644
-        },
-        {
           "ticker": "9983",
           "name": "ファーストリテイリング",
           "delta": 100.0,
@@ -9300,6 +9291,15 @@
           "traded_value": 6686000,
           "shares": 200.0,
           "ratio": 0.352
+        },
+        {
+          "ticker": "6857",
+          "name": "アドバンテスト",
+          "delta": 100.0,
+          "delta_shares": 500.0,
+          "traded_value": 16420000,
+          "shares": 1000.0,
+          "ratio": 0.8644
         },
         {
           "ticker": "4666",
