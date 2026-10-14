@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-14T08:00:09.541060+09:00",
+  "generated_at": "2026-10-14T10:26:19.767752+09:00",
   "dates": [
     "2026-03-06",
     "2026-03-27",
@@ -5008,15 +5008,6 @@
       ],
       "decreased": [
         {
-          "ticker": "8035",
-          "name": "東京エレクトロン",
-          "delta": -50.0,
-          "delta_shares": -200.0,
-          "traded_value": 14528000,
-          "shares": 200.0,
-          "ratio": 0.4024
-        },
-        {
           "ticker": "9983",
           "name": "ファーストリテイリング",
           "delta": -50.0,
@@ -5024,6 +5015,15 @@
           "traded_value": 16580000,
           "shares": 200.0,
           "ratio": 0.4593
+        },
+        {
+          "ticker": "8035",
+          "name": "東京エレクトロン",
+          "delta": -50.0,
+          "delta_shares": -200.0,
+          "traded_value": 14528000,
+          "shares": 200.0,
+          "ratio": 0.4024
         },
         {
           "ticker": "6857",
@@ -5470,15 +5470,6 @@
       ],
       "increased": [
         {
-          "ticker": "8053",
-          "name": "住友商事",
-          "delta": 300.0,
-          "delta_shares": 19500.0,
-          "traded_value": 30229875,
-          "shares": 26000.0,
-          "ratio": 1.1
-        },
-        {
           "ticker": "5802",
           "name": "住友電気工業",
           "delta": 300.0,
@@ -5486,6 +5477,15 @@
           "traded_value": 6265875,
           "shares": 2800.0,
           "ratio": 0.228
+        },
+        {
+          "ticker": "8053",
+          "name": "住友商事",
+          "delta": 300.0,
+          "delta_shares": 19500.0,
+          "traded_value": 30229875,
+          "shares": 26000.0,
+          "ratio": 1.1
         },
         {
           "ticker": "7846",
@@ -8680,15 +8680,6 @@
           "ratio": 0.6461
         },
         {
-          "ticker": "9984",
-          "name": "ソフトバンクグループ",
-          "delta": -25.0,
-          "delta_shares": -3700.0,
-          "traded_value": 19103100,
-          "shares": 11100.0,
-          "ratio": 1.5136
-        },
-        {
           "ticker": "4684",
           "name": "オービック",
           "delta": -25.0,
@@ -8696,6 +8687,15 @@
           "traded_value": 12889800,
           "shares": 8100.0,
           "ratio": 1.0213
+        },
+        {
+          "ticker": "9984",
+          "name": "ソフトバンクグループ",
+          "delta": -25.0,
+          "delta_shares": -3700.0,
+          "traded_value": 19103100,
+          "shares": 11100.0,
+          "ratio": 1.5136
         },
         {
           "ticker": "4063",
@@ -9296,15 +9296,6 @@
           "ratio": 1.3171
         },
         {
-          "ticker": "9983",
-          "name": "ファーストリテイリング",
-          "delta": 100.0,
-          "delta_shares": 100.0,
-          "traded_value": 6686000,
-          "shares": 200.0,
-          "ratio": 0.352
-        },
-        {
           "ticker": "6857",
           "name": "アドバンテスト",
           "delta": 100.0,
@@ -9312,6 +9303,15 @@
           "traded_value": 16420000,
           "shares": 1000.0,
           "ratio": 0.8644
+        },
+        {
+          "ticker": "9983",
+          "name": "ファーストリテイリング",
+          "delta": 100.0,
+          "delta_shares": 100.0,
+          "traded_value": 6686000,
+          "shares": 200.0,
+          "ratio": 0.352
         },
         {
           "ticker": "4666",
@@ -10907,15 +10907,6 @@
       ],
       "decreased": [
         {
-          "ticker": "9766",
-          "name": "コナミグループ",
-          "delta": -25.0,
-          "delta_shares": -100.0,
-          "traded_value": 2233000,
-          "shares": 300.0,
-          "ratio": 0.1634
-        },
-        {
           "ticker": "8015",
           "name": "豊田通商",
           "delta": -25.0,
@@ -10923,6 +10914,15 @@
           "traded_value": 7209000,
           "shares": 3000.0,
           "ratio": 0.5275
+        },
+        {
+          "ticker": "9766",
+          "name": "コナミグループ",
+          "delta": -25.0,
+          "delta_shares": -100.0,
+          "traded_value": 2233000,
+          "shares": 300.0,
+          "ratio": 0.1634
         },
         {
           "ticker": "8053",
