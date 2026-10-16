@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-16T08:00:02.781633+09:00",
+  "generated_at": "2026-10-16T09:49:32.288282+09:00",
   "dates": [
     "2026-03-06",
     "2026-03-27",
@@ -5010,15 +5010,6 @@
       ],
       "decreased": [
         {
-          "ticker": "9983",
-          "name": "ファーストリテイリング",
-          "delta": -50.0,
-          "delta_shares": -200.0,
-          "traded_value": 16580000,
-          "shares": 200.0,
-          "ratio": 0.4593
-        },
-        {
           "ticker": "8035",
           "name": "東京エレクトロン",
           "delta": -50.0,
@@ -5026,6 +5017,15 @@
           "traded_value": 14528000,
           "shares": 200.0,
           "ratio": 0.4024
+        },
+        {
+          "ticker": "9983",
+          "name": "ファーストリテイリング",
+          "delta": -50.0,
+          "delta_shares": -200.0,
+          "traded_value": 16580000,
+          "shares": 200.0,
+          "ratio": 0.4593
         },
         {
           "ticker": "6857",
@@ -8682,15 +8682,6 @@
           "ratio": 0.6461
         },
         {
-          "ticker": "4684",
-          "name": "オービック",
-          "delta": -25.0,
-          "delta_shares": -2700.0,
-          "traded_value": 12889800,
-          "shares": 8100.0,
-          "ratio": 1.0213
-        },
-        {
           "ticker": "9984",
           "name": "ソフトバンクグループ",
           "delta": -25.0,
@@ -8698,6 +8689,15 @@
           "traded_value": 19103100,
           "shares": 11100.0,
           "ratio": 1.5136
+        },
+        {
+          "ticker": "4684",
+          "name": "オービック",
+          "delta": -25.0,
+          "delta_shares": -2700.0,
+          "traded_value": 12889800,
+          "shares": 8100.0,
+          "ratio": 1.0213
         },
         {
           "ticker": "4063",
