@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-21T08:00:11.004636+09:00",
+  "generated_at": "2026-10-21T10:03:07.235187+09:00",
   "dates": [
     "2026-03-06",
     "2026-03-27",
@@ -8685,15 +8685,6 @@
           "ratio": 0.6461
         },
         {
-          "ticker": "9984",
-          "name": "ソフトバンクグループ",
-          "delta": -25.0,
-          "delta_shares": -3700.0,
-          "traded_value": 19103100,
-          "shares": 11100.0,
-          "ratio": 1.5136
-        },
-        {
           "ticker": "4684",
           "name": "オービック",
           "delta": -25.0,
@@ -8701,6 +8692,15 @@
           "traded_value": 12889800,
           "shares": 8100.0,
           "ratio": 1.0213
+        },
+        {
+          "ticker": "9984",
+          "name": "ソフトバンクグループ",
+          "delta": -25.0,
+          "delta_shares": -3700.0,
+          "traded_value": 19103100,
+          "shares": 11100.0,
+          "ratio": 1.5136
         },
         {
           "ticker": "4063",
@@ -11474,15 +11474,6 @@
           "ratio": 1.6084
         },
         {
-          "ticker": "6954",
-          "name": "ファナック",
-          "delta": 9.09,
-          "delta_shares": 1300.0,
-          "traded_value": 7783100,
-          "shares": 15600.0,
-          "ratio": 2.2991
-        },
-        {
           "ticker": "285A",
           "name": "キオクシアホールディングス",
           "delta": 9.09,
@@ -11490,6 +11481,15 @@
           "traded_value": 13375000,
           "shares": 12000.0,
           "ratio": 3.9509
+        },
+        {
+          "ticker": "6954",
+          "name": "ファナック",
+          "delta": 9.09,
+          "delta_shares": 1300.0,
+          "traded_value": 7783100,
+          "shares": 15600.0,
+          "ratio": 2.2991
         }
       ],
       "decreased": [
