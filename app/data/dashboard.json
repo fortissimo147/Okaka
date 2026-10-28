@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-28T08:00:08.340350+09:00",
+  "generated_at": "2026-10-28T10:48:45.821366+09:00",
   "dates": [
     "2026-03-06",
     "2026-03-27",
@@ -5480,15 +5480,6 @@
       ],
       "increased": [
         {
-          "ticker": "5802",
-          "name": "住友電気工業",
-          "delta": 300.0,
-          "delta_shares": 2100.0,
-          "traded_value": 6265875,
-          "shares": 2800.0,
-          "ratio": 0.228
-        },
-        {
           "ticker": "8053",
           "name": "住友商事",
           "delta": 300.0,
@@ -5496,6 +5487,15 @@
           "traded_value": 30229875,
           "shares": 26000.0,
           "ratio": 1.1
+        },
+        {
+          "ticker": "5802",
+          "name": "住友電気工業",
+          "delta": 300.0,
+          "delta_shares": 2100.0,
+          "traded_value": 6265875,
+          "shares": 2800.0,
+          "ratio": 0.228
         },
         {
           "ticker": "7846",
@@ -9306,15 +9306,6 @@
           "ratio": 1.3171
         },
         {
-          "ticker": "9983",
-          "name": "ファーストリテイリング",
-          "delta": 100.0,
-          "delta_shares": 100.0,
-          "traded_value": 6686000,
-          "shares": 200.0,
-          "ratio": 0.352
-        },
-        {
           "ticker": "6857",
           "name": "アドバンテスト",
           "delta": 100.0,
@@ -9322,6 +9313,15 @@
           "traded_value": 16420000,
           "shares": 1000.0,
           "ratio": 0.8644
+        },
+        {
+          "ticker": "9983",
+          "name": "ファーストリテイリング",
+          "delta": 100.0,
+          "delta_shares": 100.0,
+          "traded_value": 6686000,
+          "shares": 200.0,
+          "ratio": 0.352
         },
         {
           "ticker": "4666",
@@ -11479,15 +11479,6 @@
           "ratio": 1.6084
         },
         {
-          "ticker": "285A",
-          "name": "キオクシアホールディングス",
-          "delta": 9.09,
-          "delta_shares": 1000.0,
-          "traded_value": 13375000,
-          "shares": 12000.0,
-          "ratio": 3.9509
-        },
-        {
           "ticker": "6954",
           "name": "ファナック",
           "delta": 9.09,
@@ -11495,6 +11486,15 @@
           "traded_value": 7783100,
           "shares": 15600.0,
           "ratio": 2.2991
+        },
+        {
+          "ticker": "285A",
+          "name": "キオクシアホールディングス",
+          "delta": 9.09,
+          "delta_shares": 1000.0,
+          "traded_value": 13375000,
+          "shares": 12000.0,
+          "ratio": 3.9509
         }
       ],
       "decreased": [
