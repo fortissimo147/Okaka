@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-27T07:59:43.330614+09:00",
+  "generated_at": "2026-11-27T13:35:51.243247+09:00",
   "dates": [
     "2026-03-06",
     "2026-03-27",
@@ -5038,15 +5038,6 @@
       ],
       "decreased": [
         {
-          "ticker": "8035",
-          "name": "東京エレクトロン",
-          "delta": -50.0,
-          "delta_shares": -200.0,
-          "traded_value": 14528000,
-          "shares": 200.0,
-          "ratio": 0.4024
-        },
-        {
           "ticker": "9983",
           "name": "ファーストリテイリング",
           "delta": -50.0,
@@ -5054,6 +5045,15 @@
           "traded_value": 16580000,
           "shares": 200.0,
           "ratio": 0.4593
+        },
+        {
+          "ticker": "8035",
+          "name": "東京エレクトロン",
+          "delta": -50.0,
+          "delta_shares": -200.0,
+          "traded_value": 14528000,
+          "shares": 200.0,
+          "ratio": 0.4024
         },
         {
           "ticker": "6857",
@@ -8710,15 +8710,6 @@
           "ratio": 0.6461
         },
         {
-          "ticker": "4684",
-          "name": "オービック",
-          "delta": -25.0,
-          "delta_shares": -2700.0,
-          "traded_value": 12889800,
-          "shares": 8100.0,
-          "ratio": 1.0213
-        },
-        {
           "ticker": "9984",
           "name": "ソフトバンクグループ",
           "delta": -25.0,
@@ -8726,6 +8717,15 @@
           "traded_value": 19103100,
           "shares": 11100.0,
           "ratio": 1.5136
+        },
+        {
+          "ticker": "4684",
+          "name": "オービック",
+          "delta": -25.0,
+          "delta_shares": -2700.0,
+          "traded_value": 12889800,
+          "shares": 8100.0,
+          "ratio": 1.0213
         },
         {
           "ticker": "4063",
@@ -10937,15 +10937,6 @@
       ],
       "decreased": [
         {
-          "ticker": "9766",
-          "name": "コナミグループ",
-          "delta": -25.0,
-          "delta_shares": -100.0,
-          "traded_value": 2233000,
-          "shares": 300.0,
-          "ratio": 0.1634
-        },
-        {
           "ticker": "8015",
           "name": "豊田通商",
           "delta": -25.0,
@@ -10953,6 +10944,15 @@
           "traded_value": 7209000,
           "shares": 3000.0,
           "ratio": 0.5275
+        },
+        {
+          "ticker": "9766",
+          "name": "コナミグループ",
+          "delta": -25.0,
+          "delta_shares": -100.0,
+          "traded_value": 2233000,
+          "shares": 300.0,
+          "ratio": 0.1634
         },
         {
           "ticker": "8053",
